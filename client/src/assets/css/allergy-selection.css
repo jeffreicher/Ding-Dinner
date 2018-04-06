@@ -1,0 +1,15 @@
+.row .btn {
+    margin: 1vh;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+.bottom {
+    margin-top: 6vh;
+}

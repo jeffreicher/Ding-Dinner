@@ -1,0 +1,17 @@
+.button-column {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.button-column > div {
+    margin: 5%;
+}
+
+.grey {
+    background-color: grey;
+}
+
+.collection {
+    margin-top: 10vh;
+}

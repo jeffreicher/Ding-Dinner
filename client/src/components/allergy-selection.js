@@ -60,7 +60,7 @@ class AllergySelection extends Component {
                     <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
                     <Button title={'Sulfite'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sulfite')} />
                 </div>  
-                <div className="right bottom"><Link to='/register'>
+                <div className="right bottom"><Link to='/register-confirm'>
                 <Next style={'bottom'}/>
                 </Link></div>  
             </div>

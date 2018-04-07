@@ -1,0 +1,34 @@
+
+.regConfirmContainer {
+    height: 100vh;
+    width: 100vw;
+    font-size: 10vmin;
+    overflow: hidden;
+}
+
+.regConfirmButtonContainer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10%;
+}
+
+.regConfirmHeader {
+    margin: 10% 0;
+}
+
+.regConfirmSelectionArea {
+    font-size: .5em;
+}
+
+.regConfirmSelectionArea > * {
+    margin: 5%;
+}
+
+.regConfirmLabel {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.regConfirmFooter {
+    height: 10%;
+}

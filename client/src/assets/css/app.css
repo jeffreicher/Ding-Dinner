@@ -270,6 +270,17 @@ body {
     font-size: 2em;
 }
 
-.header {
+.filterHeader {
     font-family: 'Lobster', cursive;
+}
+
+.filterButtons {
+    font-family: 'Oxygen', sans-serif;
+}
+
+.button {
+    height: 52px;
+    line-height: 26px;
+    margin: 4% auto;
+    background-color: grey;
 }

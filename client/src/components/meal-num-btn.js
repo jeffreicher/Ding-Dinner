@@ -7,7 +7,7 @@ class MealNumButton extends Component {
     }
     render(){
         return (
-            <a className={`waves-effect waves-light btn ${this.props.style}`} onClick={this.setNumberOfMeals.bind(this)}>
+            <a className={`waves-effect waves-light btn filterButtons mealButton ${this.props.style}`} onClick={this.setNumberOfMeals.bind(this)}>
                 {this.props.title} <br/>
                 {this.props.descrip}
             </a>

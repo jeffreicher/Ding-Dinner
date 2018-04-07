@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import registerstorage from './register-storage';
 
 class RegisterHide extends Component{
     constructor(props){
@@ -16,6 +17,11 @@ class RegisterHide extends Component{
         }
     }
     goBack(e){
+        const stateCopy = {...this.state};
+        console.log(stateCopy);
+        registerstorage.email = stateCopy.emailValue;
+        registerstorage.password = stateCopy.passwordValue;
+        console.log(registerstorage);
         e.preventDefault();
         if(this.state.emailValue.length === 0 || this.state.passwordValue.length === 0 || this.state.confirmValue.length === 0){
             alert('put stuff in the dang fields');
@@ -23,8 +29,9 @@ class RegisterHide extends Component{
         } else if (this.state.passwordValue.length !== this.state.confirmValue.length){
             alert('match yer daggum passwords')
             return;
+        } else {
+            this.props.returnFX();
         }
-        this.props.returnFX();
     }
     emailChange(e){
         this.setState({
@@ -43,7 +50,7 @@ class RegisterHide extends Component{
     }
     render(){
         return (
-            <form onSubmit={this.goBack}>
+            <form>
                 <div>
                     <label>Email</label>
                     <input type='text' value={this.state.emailValue} onChange={this.emailChange}/>
@@ -56,7 +63,7 @@ class RegisterHide extends Component{
                     <label>Confirm Password</label>
                     <input type='password' value={this.state.confirmValue} onChange={this.confirmChange}/>
                 </div>
-                <button><Link to='/diet-selection'>Submit</Link></button>
+                <button onClick={this.goBack}><Link to=''>Submit</Link></button>
             </form>
         );
     }

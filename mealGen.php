@@ -146,37 +146,27 @@ for($x=0; $x<$count; $x++){
 }
 $finalcount = count($finalOutput);
 $instCount = count($output4);
+$ingrCount = count($output3);
 for($y=0; $y<$finalcount; $y++){
     $instructions=[];
+    $ingredients=[];
     $finalOutput[$y][]=$output[$y];
     $finalOutput[$y][]=$output2[$y];
-    $finalOutput[$y][]=$output3[$y];
+    for($z=0;$z<$ingrCount; $z++){
+        if($output3[$z]['recipe_id']===$recipeIDArray[$y]){
+            $ingredients[]=$output3[$z];
+        }
+    }
     for($z=0;$z<$instCount; $z++){
         if($output4[$z]['recipe_id']===$recipeIDArray[$y]){
             $instructions[]=$output4[$z];
         }
     }
+    $finalOutput[$y][]=$ingredients;
     $finalOutput[$y][]=$instructions;
     
 }
 $finalOutputEncoded = json_encode($finalOutput);
 print_r($finalOutputEncoded);
 
-// echo('ID:');
-// print_r($recipeIDArray);
-// ?><br><?php
-// echo('Title:');
-// print_r($recipeTitleArr);
-// ?><br><?php
-// echo('Image:');
-// print_r($imageURLArr);
-
-//things to print: 
-//choice num
-//recipe id
-//ingredients
-//steps
-//step num
-//nutrition
-//
 ?>

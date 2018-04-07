@@ -29,6 +29,7 @@ body {
     padding-top: 30%;
     margin: 0;
     font-size: 4rem;
+    font-family: 'Lobster', cursive;
 }
 
 .loginSlogan {
@@ -36,6 +37,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 1%;
+    font-family: 'Lobster', cursive;
 }
 
 .loginButtons {
@@ -45,8 +47,9 @@ body {
 
 .loginButton, .registerButton {
     font-size: 2rem;
-    width: 50%;
+    width: 53%;
     margin: 2%;
+    font-family: 'Oxygen', sans-serif;
 }
 
 .validationText, .checkmark {
@@ -265,4 +268,8 @@ body {
 .settingsButton{
     margin: 15%;
     font-size: 2em;
+}
+
+.header {
+    font-family: 'Lobster', cursive;
 }

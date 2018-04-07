@@ -40,13 +40,136 @@ forEach($allergens as $key => $value){
 $query = substr($query, 0, -4);
 $query .= " AND rd.$diet".'=1';
 $query .= " LIMIT 20";
-
+$output=[];
 $result = mysqli_query($conn, $query);
 while($row = mysqli_fetch_assoc($result)){
-    $result = json_encode($row);
+    $output[]=$row;
 }
 
-print_r($result);
+
+$recipeIDArray = [];
+$recipeTitleArr = [];
+$imageURLArr = [];
+
+$count = count($output);
+for($i = 0; $i<$count; $i++){
+    $recipeIDArray[]=$output[$i]['recipe_id'];
+    $recipeTitleArr[]=$output[$i]['title'];
+    $imageURLArr[]=$output[$i]['image'];
+};
+
+// $query2 = "SELECT Distinct n.recipe_id, n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, 
+//             n.servingPrice, inst.step_num, inst.step, ing.ingredient, ing.amount, ing.unit_type 
+//             FROM ingredients AS ing
+//             JOIN instructions AS inst
+//             ON ing.recipe_id=inst.recipe_id
+//             JOIN nutrition AS n
+//             ON ing.recipe_id=n.recipe_id WHERE ";
+// forEach($recipeIDArray as $value){
+//     $query2 .= "n.recipe_id" .'='. $value .' OR ';
+// }
+// $query2 = substr($query2, 0, -3);
+// $output2=[];
+// $result = mysqli_query($conn, $query2);
+// while($row = mysqli_fetch_assoc($result)){
+//     $output2[]=$row;
+// };
+
+
+$query2 = "SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, 
+            n.servingPrice, n.recipe_id
+            FROM nutrition AS n
+            WHERE ";
+forEach($recipeIDArray as $value){
+    $query2 .= "n.recipe_id" .'='. $value .' OR ';
+}
+$query2 = substr($query2, 0, -3);
+$output2=[];
+$result = mysqli_query($conn, $query2);
+while($row = mysqli_fetch_assoc($result)){
+    $output2[]=$row;
+};
+
+
+$query3 = "SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id
+            FROM ingredients AS ing 
+            WHERE ";
+forEach($recipeIDArray as $value){
+    $query3 .= "ing.recipe_id" .'='. $value .' OR ';
+}
+$query3 = substr($query3, 0, -3);
+$output3=[];
+$result = mysqli_query($conn, $query3);
+while($row = mysqli_fetch_assoc($result)){
+    $output3[]=$row;
+};
+
+
+$query4 = "SELECT inst.step_num, inst.step, inst.recipe_id
+            FROM instructions AS inst 
+            WHERE ";
+forEach($recipeIDArray as $value){
+    $query4 .= "inst.recipe_id" .'='. $value .' OR ';
+}
+$query4 = substr($query4, 0, -3);
+$output4=[];
+$result = mysqli_query($conn, $query4);
+while($row = mysqli_fetch_assoc($result)){
+    $output4[]=$row;
+};
+
+
+$outputEncoded = json_encode($output);
+$output2Encoded = json_encode($output2);
+$output3Encoded = json_encode($output3);
+$output4Encoded = json_encode($output4);
+// print_r($output);
+// ?><br><br><?php
+// print_r($output2);
+// ?><br><br><?php
+// print_r($output3);
+// ?><br><br><?php
+print_r($output4);
+?><br><br><?php
+// print_r($outputEncoded);
+// ?><br><br><?php
+// print_r($output2Encoded);
+// ?><br><br><?php
+// print_r($output3Encoded);
+// ?><br><br><?php
+// print_r($output4Encoded);
+
+
+$finalOutput = [];
+for($x=0; $x<$count; $x++){
+    $finalOutput[] = [];
+}
+$finalcount = count($finalOutput);
+$instCount = count($output4);
+for($y=0; $y<$finalcount; $y++){
+    $instructions=[];
+    $finalOutput[$y][]=$output[$y];
+    $finalOutput[$y][]=$output2[$y];
+    $finalOutput[$y][]=$output3[$y];
+    for($z=0;$z<$instCount; $z++){
+        if($output4[$z]['recipe_id']===$recipeIDArray[$y]){
+            $instructions[]=$output4[$z];
+        }
+    }
+    $finalOutput[$y][]=$instructions;
+    
+}
+$finalOutputEncoded = json_encode($finalOutput);
+print_r($finalOutputEncoded);
+
+// echo('ID:');
+// print_r($recipeIDArray);
+// ?><br><?php
+// echo('Title:');
+// print_r($recipeTitleArr);
+// ?><br><?php
+// echo('Image:');
+// print_r($imageURLArr);
 
 //things to print: 
 //choice num
@@ -56,92 +179,4 @@ print_r($result);
 //step num
 //nutrition
 //
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-//lookup recipes - burgers
-
-
-// require __DIR__ . '/vendor/autoload.php';
-// use RapidApi\RapidApiConnect;
-// $rapid = new RapidApiConnect('ding_5abd42cae4b084deb4eac1cd', '/connect/auth/ding_5abd42cae4b084deb4eac1cd');
-// Unirest\Request::verifyPeer(false);
-// $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?offset=0&diet=vegetarian&number=10&query=burger&excludeIngredients=coconut&type=main+course",
-//   array(
-//     "X-Mashape-Key" => "ctPBKJeb9MmshN8R3JwGbc9RxXhgp1lBAx0jsnYrEYZq29XdRS",
-//     "X-Mashape-Host" => 'spoonacular-recipe-food-nutrition-v1.p.mashape.com'
-//   )
-// );
-
-// $id = json_decode($response->raw_body)->results[0]->id;
-// ?>
-
-
-
-
-
-// <?php
-// //lookup recipes by ID
-// require __DIR__ . '/vendor/autoload.php';
-// // use RapidApi\RapidApiConnect;
-// $rapid = new RapidApiConnect('ding_5abd42cae4b084deb4eac1cd', '/connect/auth/ding_5abd42cae4b084deb4eac1cd');
-// Unirest\Request::verifyPeer(false);
-// // $id = '492923';
-// $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/".$id."/information?includeNutrition=true",
-//   array(
-//     "X-Mashape-Key" => "ctPBKJeb9MmshN8R3JwGbc9RxXhgp1lBAx0jsnYrEYZq29XdRS",
-//     "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-//   )
-// );
-// $returnedItems = json_decode($response->raw_body, true);
-
-// $name = $returnedItems['title'];
-// $picSrc = $returnedItems['image'];
-// $unparsedIngredients = $returnedItems['extendedIngredients'];
-// $ingredlength = count($unparsedIngredients);
-// $ingredientsArray=Array();
-// print($name);
-// print($picSrc);
-// print('Ingredients: ');
-// for($i = 0; $i<$ingredlength; $i++){
-  
-//   print($unparsedIngredients[$i]['amount']. $unparsedIngredients[$i]['unit'].' '. $unparsedIngredients[$i]['name']);
-//   ?><br><?php
-//   // $ingredientsArray[] = $unparsedIngredients[$i]['amount']. $unparsedIngredients[$i]['unit'].' '. $unparsedIngredients[$i]['name'];
-// }
-// $encoded = json_encode($ingredientsArray);
-
-// $unparsedSteps = $returnedItems['analyzedInstructions'][0]['steps'];
-// $stepsLength = count($unparsedSteps);
-// for($x=0; $x<$stepsLength; $x++){
-//   print('Step '.$unparsedSteps[$x]['number'].': '.$unparsedSteps[$x]['step']);
-//   ?><br><?php
-// }
-
-// ?><br><?php
-
-// //nutrition
-// $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/".$id."/nutritionWidget",
-//   array(
-//     "X-Mashape-Key" => "ctPBKJeb9MmshN8R3JwGbc9RxXhgp1lBAx0jsnYrEYZq29XdRS",
-//     "X-Mashape-Host" => "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-//   )
-// );
-
-// print_r($response->raw_body);
-
 ?>

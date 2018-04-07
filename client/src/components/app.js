@@ -12,6 +12,7 @@ import DietSettings from './diet-settings';
 import AllergySettings from './allergy-settings';
 import MealNumber from './meal_number';
 import MealNumberSettings from './meal-num-settings';
+import Register from './register-conf-dummy';
 import {
     BrowserRouter as Router,
     Route
@@ -38,6 +39,7 @@ class App extends Component{
                     <Route path="/diet-settings" component={DietSettings} />
                     <Route path="/allergy-settings" component={AllergySettings} />
                     <Route path="/meal-num-settings" component={MealNumberSettings} />
+                    <Route path="/register" component={Register} />
                 </div>
             </Router>
         );

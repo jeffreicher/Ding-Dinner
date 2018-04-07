@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import registerstorage from './register-storage';
 
 class RegisterHide extends Component{
@@ -13,7 +13,8 @@ class RegisterHide extends Component{
         this.state = {
             emailValue: '',
             passwordValue: '',
-            confirmValue: ''
+            confirmValue: '',
+            pageLink: false
         }
     }
     goBack(e){
@@ -30,7 +31,9 @@ class RegisterHide extends Component{
             alert('match yer daggum passwords')
             return;
         } else {
-            this.props.returnFX();
+            this.setState({
+                pageLink: true
+            })
         }
     }
     emailChange(e){
@@ -63,7 +66,7 @@ class RegisterHide extends Component{
                     <label>Confirm Password</label>
                     <input type='password' value={this.state.confirmValue} onChange={this.confirmChange}/>
                 </div>
-                <button onClick={this.goBack}><Link to=''>Submit</Link></button>
+                {!this.state.pageLink ? <Link to={''} onClick={this.goBack} className='btn red darken-3'>Submit</Link> : <Redirect push to={'/diet-selection'} onClick={this.goBack} className='btn green darken-2'>Submit</Redirect>}
             </form>
         );
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './header';
 import Button from './button';
 import Next from './next_button';
+import registerstorage from './register-storage';
 import '../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
 
@@ -24,6 +25,8 @@ class AllergySelection extends Component {
         if(!selected.includes(title)) {
             this.setState({
                 selected: [...selected, title]
+            },() => {
+                registerstorage.allergy = this.state.selected;
             });
         } else {
             let currentSelected = selected;
@@ -31,6 +34,8 @@ class AllergySelection extends Component {
             currentSelected.splice(itemLocation, 1);
             this.setState({
                 selected: currentSelected
+            },() => {
+                registerstorage.allergy = this.state.selected;
             });
         };
     };

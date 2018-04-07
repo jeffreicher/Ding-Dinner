@@ -27,7 +27,7 @@ class Button extends Component {
             <div>
                 <a onClick={this.props.selectedCheck.bind(null, this)} style={{backgroundColor: this.state.color}} className={`btn-desk waves-effect waves-light btn ${this.props.style}`}>
                 <div>
-                    <div className="title-container header">
+                    <div className="title-container filterButtons">
                        {this.props.title} 
                     </div>
                      <div>

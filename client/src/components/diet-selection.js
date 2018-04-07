@@ -46,7 +46,7 @@ class DietSelection extends Component {
 
         return (
         <div className="container">
-            <Header title={'What\'s Your Type?'}/>
+            <Header className="header" title={'What\'s Your Type?'}/>
             <div className="collection center-align">
                 <Button title={'None'} descrip={'Send It'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('None')} />  
                 <Button title={'Ketogenic'} descrip={'Coachella Bod Meal Plan'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />     

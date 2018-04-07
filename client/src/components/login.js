@@ -45,9 +45,9 @@ class Login extends Component{
                 <div className='loginButtons'>
                     {this.state.loginHide && <LoginHide returnFX={this.goBackLogin}/>}
                     {this.state.registerHide && <RegisterHide returnFX={this.goBackRegister}/>}
-                    {!this.state.loginHide && !this.state.registerHide && <button className="loginButton" onClick={this.loginClicked}>Login</button>}
+                    {!this.state.loginHide && !this.state.registerHide && <button className="loginButton btn-large black text-center" onClick={this.loginClicked}>Login</button>}
                     <br />
-                    {!this.state.loginHide && !this.state.registerHide && <button className="registerButton" onClick={this.registerClicked}>Register</button>}
+                    {!this.state.loginHide && !this.state.registerHide && <button className="registerButton btn-large black center" onClick={this.registerClicked}>Register</button>}
                 </div>
             </div>
         );

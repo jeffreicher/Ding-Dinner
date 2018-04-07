@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './header';
 import Button from './button';
 import Next from './next_button';
+import registerstorage from './register-storage';
 import '../assets/css/diet-selection.css';
 import {Link} from 'react-router-dom';
 
@@ -25,7 +26,9 @@ class DietSelection extends Component {
             this.setState({
                 selected: [buttonObject.props.title]
             });
-        } 
+        }
+        registerstorage.diet = this.state.selected;
+        console.log(registerstorage); 
         // else {
         //     debugger;
         //     //remove the item from the array and replace with new title

@@ -63,7 +63,7 @@ class RegisterHide extends Component{
                     <label>Confirm Password</label>
                     <input type='password' value={this.state.confirmValue} onChange={this.confirmChange}/>
                 </div>
-                <button onClick={this.goBack}><Link to=''>Submit</Link></button>
+                <button onClick={this.goBack}><Link to='/diet-selection'>Submit</Link></button>
             </form>
         );
     }

@@ -106,7 +106,7 @@ class LoginHide extends Component{
                     <input type='password' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={this.passwordFocused} onBlur={this.passwordBlurred}/>
                     {this.state.passwordFocused && <div style={this.state.passwordColor} className='validationText'>{this.state.passwordColor.color === 'green' && <div className='checkmark'>✓</div>}Must be at least 8 characters long</div>}
                 </div>
-        <button>{(this.state.dataValue) ? <Link to='/mymeals'>Submit</Link> : <Link to='/meal-num-settings'>Submit</Link>}</button>
+        <button>{(this.state.dataValue) ? <Link to='/mymeals'>Submit</Link> : <Link to='/meal-number'>Submit</Link>}</button>
             </form>
         );
     }

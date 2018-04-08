@@ -33,7 +33,7 @@ class MealNumberSettings extends Component {
                     <MealNumButton title={'7'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>   
                 </div>  
                 <div className="right bottom">
-                <Link to='/settings'><Next style={'bottom'} name='Done'/></Link>                  
+                <Link to='/mymeals'><Next style={'bottom'} name='Done'/></Link>                  
                 </div>  
             </div>
         );

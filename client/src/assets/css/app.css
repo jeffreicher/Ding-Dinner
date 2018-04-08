@@ -146,12 +146,14 @@ body {
     top: 0;
     left: 0;
     background-color: white;
+    font-family: 'Oxygen', cursive;
 }
 
 .detailsHeader {
     height: 10%;
     width: 100%;
     margin: 0;
+    padding-right: 26px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -160,6 +162,10 @@ body {
 
 .detailsHeader * {
     font-size: 2rem;
+}
+
+.detailsTime {
+    margin-bottom: 6%;
 }
 
 .detailsMainArea {
@@ -171,6 +177,7 @@ body {
 
 .detailsImg {
     width: 100%;
+    border: 1px solid black;
 }
 
 .detailsIngredientsHead, .detailsInstructionsHead, .detailsNutritionHead {

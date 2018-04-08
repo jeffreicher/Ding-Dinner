@@ -218,6 +218,7 @@ body {
     height: 10%;
     width: 100%;
     margin: 0;
+    padding-right: 26px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -275,7 +276,7 @@ body {
     font-size: 2em;
 }
 
-.filterHeader {
+.lobsterFont {
     font-family: 'Lobster', cursive;
 }
 

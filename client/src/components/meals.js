@@ -89,7 +89,7 @@ class Meals extends Component{
             <div className="mealsContainer">
                 <header className="mealsHeader">
                     <div className="mealsBack" onClick={this.context.router.history.goBack}><i className="fas fa-arrow-left iconcolor"></i></div>
-                    <div className="mealsLogo filterHeader">Ding</div>
+                    <div className="mealsLogo lobsterFont">Ding</div>
                     <div className="mealsAdd"><Link to='/meal-number'><i className="far fa-plus-square"></i></Link></div>
                 </header>
                 <main className="mealsMainArea">

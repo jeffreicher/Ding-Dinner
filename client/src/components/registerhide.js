@@ -19,22 +19,34 @@ class RegisterHide extends Component{
     }
     goBack(e){
         const stateCopy = {...this.state};
-        console.log(stateCopy);
+        const {emailValue, passwordValue, confirmValue} = this.state;
+        const emailValidification = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         registerstorage.email = stateCopy.emailValue;
         registerstorage.password = stateCopy.passwordValue;
-        console.log(registerstorage);
         e.preventDefault();
-        if(this.state.emailValue.length === 0 || this.state.passwordValue.length === 0 || this.state.confirmValue.length === 0){
-            alert('put stuff in the dang fields');
-            return;
-        } else if (this.state.passwordValue.length !== this.state.confirmValue.length){
-            alert('match yer daggum passwords')
-            return;
+
+        if(passwordValue.length < 8 || passwordValue.length > 32){
+            alert('Please input a password between 8 and 32 characters long');
+        } else if (passwordValue !== confirmValue){
+            alert('Please make sure your passwords fully match');
+        } else if (!emailValidification.test(emailValue)){
+            alert('Please enter a valid email address');
         } else {
             this.setState({
                 pageLink: true
-            })
+            });
         }
+        // if(this.state.emailValue.length === 0 || this.state.passwordValue.length === 0 || this.state.confirmValue.length === 0){
+        //     alert('put stuff in the dang fields');
+        //     return;
+        // } else if (this.state.passwordValue.length !== this.state.confirmValue.length){
+        //     alert('match yer daggum passwords')
+        //     return;
+        // } else {
+        //     this.setState({
+        //         pageLink: true
+        //     })
+        // }
     }
     emailChange(e){
         this.setState({

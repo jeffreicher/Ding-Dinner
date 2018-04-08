@@ -88,18 +88,20 @@ class Meals extends Component{
         return(
             <div className="mealsContainer">
                 <header className="mealsHeader">
-                    <div className="mealsBack" onClick={this.context.router.history.goBack}>Back</div>
-                    <div className="mealsLogo">Ding</div>
-                    <div className="mealsAdd"><Link to='/meal-number'>Add</Link></div>
+                    <div className="mealsBack" onClick={this.context.router.history.goBack}><i className="fas fa-arrow-left iconcolor"></i></div>
+                    <div className="mealsLogo filterHeader">Ding</div>
+                    <div className="mealsAdd"><Link to='/meal-number'><i className="far fa-plus-square"></i></Link></div>
                 </header>
                 <main className="mealsMainArea">
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}
                 </main>
                 <footer className="mealsFooter">
-                    <div className="mealsMyMeals"><Link to='/mymeals'>Meals</Link></div>
-                    <div className="mealsGroceries"><Link to='/grocery'>Groceries</Link></div>
-                    <div className="mealsSettings"><Link to='/settings'>Settings</Link></div>
+                    <div className="mealsMyMeals"><Link to='/mymeals'><i className="far fa-list-alt"></i></Link></div>
+                    <div className="mealsGroceries"><Link to='/grocery'><i className="fas fa-shopping-cart"></i></Link></div>
+                    <div className="mealsSettings"><Link to='/settings'><i className="fas fa-cogs"></i>
+
+</Link></div>
                 </footer>
             </div>
         )

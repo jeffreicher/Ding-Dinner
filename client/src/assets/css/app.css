@@ -74,6 +74,10 @@ body {
     background-color: lightblue;
 }
 
+.iconcolor {
+    color: rgb(38, 155, 233);
+}
+
 .mealsHeader * {
     font-size: 2rem;
 }
@@ -99,6 +103,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    border: 1px black solid;
 }
 
 .mealsText {
@@ -111,7 +116,7 @@ body {
 }
 
 .mealsCancel {
-    color: red;
+    color: rgb(187, 3, 3);
     position: absolute;
     top: 5%;
     right: 5%;
@@ -274,7 +279,7 @@ body {
     font-family: 'Lobster', cursive;
 }
 
-.filterButtons {
+.oxygenFont {
     font-family: 'Oxygen', sans-serif;
 }
 

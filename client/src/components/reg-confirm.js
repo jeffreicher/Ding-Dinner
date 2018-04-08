@@ -24,8 +24,8 @@ class RegisterConfirm extends Component{
                     <div>{registerstorage.allergy.join(', ') || 'None'}</div>
                 </div>
                 <div className='regConfirmButtonContainer'>
-                    <Link to='/'><button className='btn red darken-3'>Back to start</button></Link>
-                    <Link to='/'><button className='btn blue darken-2'>All set!</button></Link>
+                    <Link to='/' className='btn red darken-2'>Back to start</Link>
+                    <Link to='/meal-number' className='btn blue darken-2'>All set!</Link>
                 </div>
                 <div className='page-footer bottom blue darken-2 z-depth-1 regConfirmFooter'>
                 </div>

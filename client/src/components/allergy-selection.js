@@ -5,6 +5,7 @@ import Next from './next_button';
 import registerstorage from './register-storage';
 import '../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
+import LogoHeader from './logo-header';
 
 
 class AllergySelection extends Component {
@@ -48,7 +49,9 @@ class AllergySelection extends Component {
         const { handleSelected } = this;
         const { selected } = this.state;
         console.log(this.state.selected);
-        return (
+        return (  
+         <div>            
+             <LogoHeader />
             <div className="container">
                 <Header title={'Any Allergies?'} />
                 <div className="row">
@@ -68,7 +71,8 @@ class AllergySelection extends Component {
                 <div className="right bottom"><Link to='/register-confirm'>
                 <Next style={'bottom'}/>
                 </Link></div>  
-            </div>
+            </div>             
+         </div>
         );
     };
 };

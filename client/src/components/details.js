@@ -117,7 +117,7 @@ class Details extends Component{
                         <ol className='collection'>
                             {instrMap}
                         </ol>
-                        <button onClick={()=>complete(index)}>Complete</button>
+                        <button className="btn green darken-2" onClick={()=>complete(index)}>Complete</button>
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>
                         <ul className='collection'>

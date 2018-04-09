@@ -1,31 +1,72 @@
 <?php
 require('mysqli_conn.php');
-// $userID = $_POST['userID'];
-// $diets = $_POST['diet'];
+// $userID=$_SESSION['user_id'];
+$userID=2;
 
-// $count = $_POST['count'];
-// $dairy = $_POST['diary'];
-// $egg = $_POST['eggy'];
-// $gluten = $_POST['gluten'];
-// $peanut = $_POST['peanut'];
-// $seafood = $_POST['seafood'];
-// $sesame = $_POST['sesame'];
-// $shellfish = $_POST['shellfish'];
-// $soy = $_POST['soy'];
-// $tree_nut = $_POST['tree_nut'];
-// $wheat = $_POST['wheat'];
-$diet = 'vegetarian';
-$count = '1';
-$dairy = '1';
+$restrictions=[];
+$restrictionQuery = "SELECT ua.allergy_name, u.diet 
+        FROM `user-allergy` AS ua
+        JOIN `users` AS u 
+        ON u.ID=ua.user_id
+        WHERE `user_id`=$userID";
+
+$result = mysqli_query($conn, $restrictionQuery);
+while($row = mysqli_fetch_assoc($result)){
+    $restrictions[]=$row;
+}
+// print_r($restrictions);
+
+
+$dairy = '0';
 $egg = '0';
-$gluten = '1';
+$gluten = '0';
 $peanut = '0';
-$seafood = '1';
+$seafood = '0';
 $sesame = '0';
-$shellfish = '1';
+$shellfish = '0';
 $soy = '0';
-$tree_nut = '1';
+$tree_nut = '0';
 $wheat = '0';
+
+$count=count($restrictions);
+for($i=0;$i<$count;$i++){
+    $allergy=$restrictions[$i]['allergy_name'];
+    switch($allergy){
+        case 'dairy':
+            $dairy ='1';
+            break;
+        case 'egg':
+            $egg ='1';
+            break;
+        case 'gluten':
+            $gluten ='1';
+            break;
+        case 'peanut':
+            $peanut ='1';
+            break;
+        case 'seafood':
+            $seafood ='1';
+            break;
+        case 'sesame':
+            $sesame ='1';
+            break;
+        case 'shellfish':
+            $shellfish ='1';
+            break;
+        case 'soy':
+            $soy ='1';
+            break;
+        case 'tree nut':
+            $tree_nut ='1';
+            break;
+        case 'wheat':
+            $wheat ='1';
+            break;
+    }
+}
+
+$diet = $restrictions[0]['diet'];
+
 
 $allergens = ['dairy' => $dairy, 'egg'=>$egg, 'gluten'=>$gluten, 
             'peanut'=>$peanut, 'seafood'=>$seafood, 'sesame'=> $sesame, 
@@ -123,21 +164,6 @@ $outputEncoded = json_encode($output);
 $output2Encoded = json_encode($output2);
 $output3Encoded = json_encode($output3);
 $output4Encoded = json_encode($output4);
-// print_r($output);
-// ?><br><br><?php
-// print_r($output2);
-// ?><br><br><?php
-// print_r($output3);
-// ?><br><br><?php
-print_r($output4);
-?><br><br><?php
-// print_r($outputEncoded);
-// ?><br><br><?php
-// print_r($output2Encoded);
-// ?><br><br><?php
-// print_r($output3Encoded);
-// ?><br><br><?php
-// print_r($output4Encoded);
 
 
 $finalOutput = [];

@@ -4,6 +4,7 @@ import Details from './details';
 import mealdb from './meal-db';
 import mealschosen from './meals-chosen';
 import MealCreator from './meal-creator';
+import LogoHeader from './logo-header';
 
 class Meals extends Component{
     constructor(props){
@@ -84,11 +85,7 @@ class Meals extends Component{
 
         return(
             <div className="mealsContainer">
-                <header className="mealsHeader">
-                    <div className="mealsBack" onClick={this.props.history.goBack}><i className="fas fa-arrow-left iconcolor"></i></div>
-                    <div className="mealsLogo lobsterFont">Ding</div>
-                    <div className="mealsAdd"><Link to='/meal-number'><i className="far fa-plus-square"></i></Link></div>
-                </header>
+            <LogoHeader back={true} add={true}/>
                 <main className="mealsMainArea">
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}

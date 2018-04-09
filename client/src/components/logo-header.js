@@ -6,9 +6,9 @@ class LogoHeader extends Component {
         console.log(this.props);
         return (
             <header className="groceryHeader z-depth-2">
-                    {(this.props.back) ? <div className="groceryBack"><Link to='/mymeals'><i className="fas fa-arrow-left iconcolor"></i></Link></div> : ''}
+                    {(this.props.back) ? <div className="groceryBack"><Link to='/mymeals'><i style={{fontSize: `2rem`}} className="fas fa-arrow-left iconcolor"></i></Link></div> : ''}
                     <div className="groceryLogo lobsterFont">Ding</div>
-                    {(this.props.add) ? <div className="groceryAdd"><Link to='/meal-number'><i className="far fa-plus-square"></i></Link></div> : ''}
+                    {(this.props.add) ? <div className="groceryAdd"><Link to='/meal-number'><i style={{fontSize: `2rem`}} className="far fa-plus-square"></i></Link></div> : ''}
             </header>
         );
     };

@@ -12,7 +12,7 @@ class Button extends Component {
     componentWillReceiveProps(nextProps, prevState) {
         if (nextProps.determineSelected) {
             this.setState({
-                color: '#26a69a',
+                color: 'rgb(6, 101, 156)',
             });
         } else {
             this.setState({

@@ -86,7 +86,7 @@ class Details extends Component{
         const {name, image, ingredients, instructions, hide, index, complete} = this.props;
         
         const instrMap = instructions.map((item, index) => {
-            return <li className='collection-item' key={index}>{item.step}</li>
+            return <li className='collection-item' key={index}>{index+1}. {item.step}</li>
         })
 
         const ingrMap = ingredients.map((item, index) => {
@@ -114,9 +114,9 @@ class Details extends Component{
                         </ul>
                     </div>
                     <div className="detailsInstructionsList" style={this.state.instrList}>
-                        <ol className='collection'>
+                        <ul className='collection'>
                             {instrMap}
-                        </ol>
+                        </ul>
                         <button className="btn green darken-2" onClick={()=>complete(index)}>Complete</button>
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>

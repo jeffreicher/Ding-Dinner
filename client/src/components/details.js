@@ -97,14 +97,14 @@ class Details extends Component{
         return(
             <div className="detailsContainer">
                 <header className="detailsHeader">
-                    <div className="detailsBack" onClick={hide}>Back</div>
-                    <div className="detailsLogo">Ding</div>
+                    <div className="detailsBack" onClick={hide}><i className="fas fa-arrow-left iconcolor"></i></div>
+                    <div className="detailsLogo lobsterFont">Ding</div>
                     <div className="detailsAdd"></div>
                 </header>
                 <main className="detailsMainArea">
                     <img src={image} alt="" className="detailsImg" />
-                    <h1 className='detailsName'>{name}</h1>
-                    <h2 className='detailsTime'>Time Commitment: 30 minutes</h2>
+                    <h3 className='detailsName'>{name}</h3>
+                    <h5 className='detailsTime'>Time Commitment: 30 minutes</h5>
                     <div className={"detailsIngredientsHead " + this.state.ingrTarget} onClick={()=>this.headerClicked('ingr')} >Ingredients</div>
                     <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>
                     <div className={"detailsNutritionHead " + this.state.nutrTarget} onClick={()=>this.headerClicked('nutr')} >Nutrition</div>
@@ -126,9 +126,9 @@ class Details extends Component{
                     </div>
                 </main>
                 <footer className="detailsFooter">
-                    <div className="detailsMydetails" onClick={hide}>Meals</div>
-                    <div className="detailsGroceries"><Link to='/grocery'>Groceries</Link></div>
-                    <div className="detailsSettings"><Link to='/settings'>Settings</Link></div>
+                    <div className="detailsMydetails" onClick={hide}><i className="far fa-list-alt"></i></div>
+                    <div className="detailsGroceries"><Link to='/grocery'><i className="fas fa-shopping-cart"></i></Link></div>
+                    <div className="detailsSettings"><Link to='/settings'><i className="fas fa-cogs"></i></Link></div>
                 </footer>
             </div>
         )

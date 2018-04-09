@@ -12,7 +12,9 @@ class RegisterConfirm extends Component{
     render(){
         return (
             <div className='regConfirmContainer container'>
-                <LogoHeader />
+                <div className='nav-wrapper blue darken-2 z-depth-1'>
+                    <div className='brand-logo center white-text'>Ding</div>
+                </div>
                 <h3 className='center regConfirmHeader'>Confirm Choices</h3>
                 <div className='regConfirmSelectionArea center'>
                     <div className='regConfirmLabel'>Email Address</div>

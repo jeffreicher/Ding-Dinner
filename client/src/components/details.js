@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Footer from './footer';
 
 class Details extends Component{
     constructor(props){
@@ -125,11 +126,7 @@ class Details extends Component{
                         </ul>
                     </div>
                 </main>
-                <footer className="detailsFooter">
-                    <div className="detailsMydetails" onClick={hide}><i className="far fa-list-alt"></i></div>
-                    <div className="detailsGroceries"><Link to='/grocery'><i className="fas fa-shopping-cart"></i></Link></div>
-                    <div className="detailsSettings"><Link to='/settings'><i className="fas fa-cogs"></i></Link></div>
-                </footer>
+                <Footer />
             </div>
         )
     }

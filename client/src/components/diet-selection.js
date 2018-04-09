@@ -50,7 +50,7 @@ class DietSelection extends Component {
                 <LogoHeader />
                 <div className="container">
                     <Header title={'What\'s Your Type?'}/>
-                    <div className="collection center-align">
+                    <div className="center-align" style={{marginTop: `2vh`}}>
                         <Button title={'None'} descrip={'Send It'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('None')} />  
                         <Button title={'Ketogenic'} descrip={'Coachella Bod Meal Plan'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />     
                         <Button title={'Vegetarian'} descrip={'Lover Of Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegetarian')} />   

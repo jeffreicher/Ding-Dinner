@@ -14,9 +14,8 @@ $result = mysqli_query($conn, $restrictionQuery);
 while($row = mysqli_fetch_assoc($result)){
     $restrictions[]=$row;
 }
-// print_r($restrictions);
 
-
+//current issue is that database pulls only pull for the exact allergy restrictions, need to find a work around.
 $dairy = '0';
 $egg = '0';
 $gluten = '0';

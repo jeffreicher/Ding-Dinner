@@ -14,6 +14,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $diet = $_POST['diet'];
 
+
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
     echo 'Your email is invalid';
 } else {

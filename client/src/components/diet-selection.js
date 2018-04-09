@@ -57,7 +57,7 @@ class DietSelection extends Component {
                         <Button title={'Vegan'} descrip={'Veggie Fanatic'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegan')} />   
                         <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
                     </div>  
-                    <div className="right">
+                    <div className="right" style={{marginTop: `3vh`}}>
                     <Link to='/allergy-selection'><Next /></Link>                  
                     </div>     
                 </div>                

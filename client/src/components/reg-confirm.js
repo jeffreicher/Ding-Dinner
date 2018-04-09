@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../assets/css/reg-confirm.css'
 import {Link} from 'react-router-dom';
+import LogoHeader from './logo-header';
 
 class RegisterConfirm extends Component{
     constructor(props){
@@ -10,9 +11,7 @@ class RegisterConfirm extends Component{
     render(){
         return (
             <div className='regConfirmContainer container'>
-                <div className='nav-wrapper blue darken-2 z-depth-1'>
-                    <div className='brand-logo center white-text'>Ding</div>
-                </div>
+                <LogoHeader />
                 <h3 className='center regConfirmHeader'>Confirm Choices</h3>
                 <div className='regConfirmSelectionArea center'>
                     <div className='regConfirmLabel'>Email Address</div>

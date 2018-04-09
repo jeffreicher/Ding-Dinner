@@ -22,7 +22,6 @@ class Button extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <a onClick={this.props.selectedCheck.bind(null, this)} style={{backgroundColor: this.state.color}} className={`btn-desk waves-effect waves-light btn ${this.props.style}`}>

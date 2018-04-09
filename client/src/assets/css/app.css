@@ -283,6 +283,11 @@ body {
     font-size: 2em;
 }
 
+
+.collection {
+    overflow: visible;
+}
+
 .lobsterFont {
     font-family: 'Lobster', cursive;
 }

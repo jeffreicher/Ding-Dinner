@@ -84,7 +84,15 @@ class Details extends Component{
     render(){
 
         const {name, image, ingredients, instructions, hide, index, complete} = this.props;
-        console.log(this.props);
+        
+        const instrMap = instructions.map((item, index) => {
+            return <li className='collection-item' key={index}>{item.step}</li>
+        })
+
+        const ingrMap = ingredients.map((item, index) => {
+            console.log(item);
+            return <li className='collection-item' key={index}>{`${item.amount} ${item.unit_type} ${item.ingredient}`}</li>
+        })
 
         return(
             <div className="detailsContainer">
@@ -101,19 +109,19 @@ class Details extends Component{
                     <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>
                     <div className={"detailsNutritionHead " + this.state.nutrTarget} onClick={()=>this.headerClicked('nutr')} >Nutrition</div>
                     <div className="detailsIngredientsList" style={this.state.ingrList}>
-                        <ul>
-                            <li>{ingredients}</li>
+                        <ul className='collection'>
+                            {ingrMap}
                         </ul>
                     </div>
                     <div className="detailsInstructionsList" style={this.state.instrList}>
-                        <ul>
-                            <li>{instructions}</li>
-                        </ul>
-                        <button className="btn green darken-1" onClick={()=>complete(index)}>Complete</button>
+                        <ol className='collection'>
+                            {instrMap}
+                        </ol>
+                        <button onClick={()=>complete(index)}>Complete</button>
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>
-                        <ul>
-                            <li>WIP please don't sue</li>
+                        <ul className='collection'>
+                            <li className='collection-item'>WIP please don't sue</li>
                         </ul>
                     </div>
                 </main>

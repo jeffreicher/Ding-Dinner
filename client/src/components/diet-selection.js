@@ -28,7 +28,7 @@ class DietSelection extends Component {
                 selected: [buttonObject.props.title]
             });
         }
-        registerstorage.diet = this.state.selected;
+        registerstorage.diet = buttonObject.props.title;
         console.log(registerstorage); 
         // else {
         //     debugger;

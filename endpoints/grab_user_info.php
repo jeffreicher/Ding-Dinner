@@ -1,4 +1,6 @@
 <?php
+//Not a real endpoint. Was working on something.
+/*
 require_once 'mysql_connect.php';
 $_POST['id'] = "33";
 $user_id = intval($_POST['id']);
@@ -22,4 +24,4 @@ if (!preg_match('/^[0-9]+$/', $user_id)){
     var_export($ids);
     $stmt->close();
 }
-?>
+?>*/

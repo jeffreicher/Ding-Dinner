@@ -5,6 +5,7 @@ import mealdb from './meal-db';
 import mealschosen from './meals-chosen';
 import MealCreator from './meal-creator';
 import LogoHeader from './logo-header';
+import Footer from './footer';
 
 class Meals extends Component{
     constructor(props){
@@ -90,11 +91,7 @@ class Meals extends Component{
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}
                 </main>
-                <footer className="mealsFooter">
-                    <div className="mealsMyMeals"><Link to='/mymeals'><i className="far fa-list-alt"></i></Link></div>
-                    <div className="mealsGroceries"><Link to='/grocery'><i className="fas fa-shopping-cart"></i></Link></div>
-                    <div className="mealsSettings"><Link to='/settings'><i className="fas fa-cogs"></i></Link></div>
-                </footer>
+            <Footer />
             </div>
         )
     }

@@ -74,9 +74,6 @@ class Meals extends Component{
         mealschosen.push(mealdb[randomIndex]);
         mealdb.splice(randomIndex, 1);
     }
-    static contextTypes = {
-        router: () => true
-    }
     render(){
 
         const mealMap = this.state.meals.map((meal, index) => {
@@ -88,7 +85,7 @@ class Meals extends Component{
         return(
             <div className="mealsContainer">
                 <header className="mealsHeader">
-                    <div className="mealsBack" onClick={this.context.router.history.goBack}><i className="fas fa-arrow-left iconcolor"></i></div>
+                    <div className="mealsBack" onClick={this.props.history.goBack}><i className="fas fa-arrow-left iconcolor"></i></div>
                     <div className="mealsLogo lobsterFont">Ding</div>
                     <div className="mealsAdd"><Link to='/meal-number'><i className="far fa-plus-square"></i></Link></div>
                 </header>

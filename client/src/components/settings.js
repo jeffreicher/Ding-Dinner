@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import LogoHeader from './logo-header';
+import Footer from './footer';
 
 class Settings extends Component{
     constructor(props){
@@ -18,7 +19,8 @@ class Settings extends Component{
                 <button className='settingsButton'><Link to='meal-num-settings'>Add Meals</Link></button>
                 <br/>
                 <button className='settingsButton'><Link to='/'>Logout</Link></button>
-            </div>                
+            </div>
+            <Footer />                
             </div>
 
         )

@@ -52,8 +52,25 @@ body {
     font-family: 'Oxygen', sans-serif;
 }
 
-.validationText, .checkmark {
+.validationText1, .checkmark {
     display: inline-block;
+}
+
+.validationText1 {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 3px gray;
+    position: absolute;
+    bottom: -10%;
+    left: 0%;
+    z-index: 1;
+}
+
+.inputField {
+    position: relative;
 }
 
 .mealsContainer {

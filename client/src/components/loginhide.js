@@ -16,11 +16,14 @@ class LoginHide extends Component{
             passwordValue: '',
             emailFocused: false,
             passwordFocused: false,
-            emailColor: {
-                color: 'black'
+            emailCheck: {
+                textDecoration: 'none'
             },
-            passwordColor: {
-                color: 'black'
+            passwordLength: {
+                textDecoration: 'none'
+            },
+            passwordCharactrers: {
+                textDecoration: 'none'
             }
         }
     }
@@ -31,14 +34,14 @@ class LoginHide extends Component{
             emailValue: e.target.value
         }, () => {
             if(emailValidification.test(this.state.emailValue)){
-                const greenText = {textDecoration: 'line-through'};
+                const strikeThrough = {textDecoration: 'line-through'};
                 this.setState({
-                    emailColor: greenText
+                    emailCheck: strikeThrough
                 });
             } else {
-                const blackText = {textDecoration: 'none'};
+                const noStrike = {textDecoration: 'none'};
                 this.setState({
-                    emailColor: blackText
+                    emailCheck: noStrike
                 });
             }
         });
@@ -47,18 +50,37 @@ class LoginHide extends Component{
         this.setState({
             passwordValue: e.target.value
         }, () => {
-            if(this.state.passwordValue.length >= 8){
-                const greenText = {textDecoration: 'line-through'};
-                this.setState({
-                    passwordColor: greenText
-                });
-            } else {
-                const blackText = {textDecoration: 'none'};
-                this.setState({
-                    passwordColor: blackText
-                });
-            }
+            this.checkPWLength();
+            this.checkPWChars();
         });
+    }
+    checkPWLength(){
+        if(this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32){
+            const strikeThrough = {textDecoration: 'line-through'};
+            this.setState({
+                passwordLength: strikeThrough
+            });
+        } else {
+            const noStrike = {textDecoration: 'none'};
+            this.setState({
+                passwordLength: noStrike
+            });
+        }
+    }
+    checkPWChars(){
+        const passwordChars = /^[a-z0-9]+$/i;
+        console.log(this.state.passwordValue);
+        if (passwordChars.test(this.state.passwordValue)){
+            const strikeThrough = {textDecoration: 'line-through'};
+            this.setState({
+                passwordCharactrers: strikeThrough
+            });
+        } else {
+            const noStrike = {textDecoration: 'none'};
+            this.setState({
+                passwordCharactrers: noStrike
+            });
+        }
     }
     goBack(e){
         e.preventDefault();
@@ -91,22 +113,29 @@ class LoginHide extends Component{
         }
     }
     render(){
-        const greenText = {textDecoration: 'line-through'}
+        const strikeThrough = {textDecoration: 'line-through'}
         return (
             <form onSubmit={this.goBack} className='row'>
                 <div className='col s8 offset-s2 inputField'>
                     <label className='white-text'>Email</label>
                     <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
-                    {this.state.emailFocused && <div style={this.state.emailColor} className='validationText1'>{this.state.emailColor.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address</div>}
+                    {this.state.emailFocused && <div style={this.state.emailCheck} className='validationText1'>{this.state.emailCheck.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address</div>}
                 </div>
                 <div className='col s2' />
-                <div className='col s8 offset-s2'>
+                <div className='col s8 offset-s2 inputField'>
                     <label className='white-text'>Password</label>
                     <input type='password' className='white-text' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
-                    {this.state.passwordFocused && <div style={this.state.passwordColor} className='validationText'>{this.state.passwordColor.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be at least 8 characters long</div>}
+                    {this.state.passwordFocused && <div className='validationText1'>
+                        <div style={this.state.passwordLength} >
+                            {this.state.passwordLength.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
+                        </div>
+                        <div style={this.state.passwordCharactrers} >
+                            {this.state.passwordCharactrers.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers and letters
+                        </div>
+                    </div>}
                 </div>
                 <div className='col s2' />
-                {(this.state.dataValue) ? <Link to='/mymeals' className='btn center-align'>Submit</Link> : <Link to='/meal-number' className='btn center-align'>Submit</Link>}
+                <Link to='/mymeals' className='btn center-align'>Submit</Link>
             </form>
         );
     }

@@ -13,7 +13,8 @@ class DietSettings extends Component {
         super(props);
 
         this.state = {
-            selected: []
+            selected: [],
+            value: false
         };
 
         this.handleSelected = this.handleSelected.bind(this);
@@ -25,7 +26,8 @@ class DietSettings extends Component {
 
         if(!selected.includes(buttonObject.props.title)) {
             this.setState({
-                selected: [buttonObject.props.title]
+                selected: [buttonObject.props.title],
+                value: true
             });
         }
         newFilter.diet = buttonObject.props.title;
@@ -49,7 +51,7 @@ class DietSettings extends Component {
                         <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
                     </div>  
                     <div className="right" style={{marginTop: `3vh`}}>
-                    <Link to='/allergy-settings'><Next /></Link>                  
+                    {(this.state.value) ? <Link to='/allergy-selection'><Next /></Link> : console.log('error')}                   
                     </div>     
                 </div>                
             </div>

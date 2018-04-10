@@ -225,7 +225,7 @@ body {
 .groceryHeader {
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 1; 
     height: 10%;
     width: 100%;
     margin: 0;
@@ -240,7 +240,7 @@ body {
 }
 
 .groceryMainArea {
-    height: 80%;
+    height: 100%;
     width: 100%;
     margin: 0;
     overflow-y: scroll;

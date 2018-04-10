@@ -6,7 +6,6 @@ import registerstorage from './register-storage';
 import '../assets/css/diet-selection.css';
 import {Link} from 'react-router-dom';
 import LogoHeader from './logo-header';
-import ReactDOM from 'react-dom';
 
 class DietSelection extends Component {   
     constructor(props) {

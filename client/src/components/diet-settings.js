@@ -40,7 +40,7 @@ class DietSettings extends Component {
 
         return (
             <div>
-                <LogoHeader />
+                <LogoHeader back={true} location={'/settings'}/>
                 <div className="container">
                     <Header title={'What\'s Your Type?'}/>
                     <div className="center-align" style={{marginTop: `2vh`}}>
@@ -51,7 +51,7 @@ class DietSettings extends Component {
                         <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
                     </div>  
                     <div className="right" style={{marginTop: `3vh`}}>
-                    {(this.state.value) ? <Link to='/allergy-selection'><Next /></Link> : console.log('error')}                   
+                    {(this.state.value) ? <Link to='/allergy-settings'><Next /></Link> : console.log('error')}                   
                     </div>     
                 </div>                
             </div>

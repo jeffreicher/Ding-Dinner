@@ -26,7 +26,7 @@ class MealNumberSettings extends Component {
     render() {
         return (
             <div>
-                <LogoHeader />
+                <LogoHeader back={true} location={'/settings'}/>
                 <div className="container">
                     <Header title={'Amount Of Meals?'} />
                     <div className="button-column collection">

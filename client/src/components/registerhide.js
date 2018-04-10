@@ -162,7 +162,7 @@ class RegisterHide extends Component{
                         </div>}
                     </div>
                     <div className='col s2' />
-                    <Link to='/allergy-selection' className='btn center-align blue darken-2 waves-effect waves-light'>Register</Link>
+                    <Link to='/diet-selection' className='btn center-align blue darken-2 waves-effect waves-light'>Register</Link>
                 </form>
             </div>
         );

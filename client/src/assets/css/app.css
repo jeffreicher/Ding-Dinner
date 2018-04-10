@@ -280,6 +280,12 @@ body {
 .settingsButton{
     margin: 11.4%;
     font-size: 2em;
+    background-color: grey;
+    color: black;
+}
+
+.mainContainer {
+    height: 80%;
 }
 
 .collection {

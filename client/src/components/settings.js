@@ -12,12 +12,14 @@ class Settings extends Component{
         return (                      
             <div className='settingsContainer'>
                 <LogoHeader />
-                <h2 className='settingsHeader lobsterFont'>Settings</h2>
-                <button className='settingsButton oxygenFont'><Link to='/diet-settings'>Reset Filters</Link></button>
-                <br/>
-                <button className='settingsButton oxygenFont'><Link to='meal-num-settings'>Add Meals</Link></button>
-                <br/>
-                <button className='settingsButton oxygenFont'><Link to='/'>Logout</Link></button>
+                <div className="mainContainer">
+                    <h2 className='settingsHeader lobsterFont'>Settings</h2>
+                    <Link to='/diet-settings'className='settingsButton oxygenFont btn-large'>Reset Filters</Link>
+                    <br/>
+                    <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large'>Add Meals</Link>
+                    <br/>
+                    <Link to='/' className='settingsButton oxygenFont btn-large'>Logout</Link>                    
+                </div>
                 <Footer />  
             </div>      
         )

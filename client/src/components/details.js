@@ -98,7 +98,7 @@ class Details extends Component{
 
         return(
             <div className="detailsContainer">
-                <LogoHeader onClick={hide} back={true} add={true} />
+                <LogoHeader onClick={hide} back={true} />
                 <main className="detailsMainArea">
                     <img src={image} alt="" className="detailsImg" />
                     <h3 className='detailsName'>{name}</h3>

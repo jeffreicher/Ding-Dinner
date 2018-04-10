@@ -91,7 +91,7 @@ class Meals extends Component{
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}
                 </main>
-            <Footer />
+            <Footer currentPage='meals'/>
             </div>
         )
     }

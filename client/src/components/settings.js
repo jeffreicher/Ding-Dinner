@@ -18,7 +18,7 @@ class Settings extends Component{
                     <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large'>Add Meals</Link>
                     <Link to='/' className='settingsButton oxygenFont btn-large'>Logout</Link>                    
                 </div>
-                <Footer />  
+                <Footer currentPage='settings' />  
             </div>      
         )
     }

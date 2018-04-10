@@ -83,7 +83,7 @@ body {
 }
 
 .mealsMainArea {
-    height: 80%;
+    height: 100%;
     width: 100%;
     margin: 0;
     overflow-y: scroll;
@@ -170,7 +170,7 @@ body {
 }
 
 .detailsMainArea {
-    height: 80%;
+    height: 100%;
     width: 100%;
     margin: 0;
     overflow-y: scroll;
@@ -223,7 +223,6 @@ body {
 }
 
 .groceryHeader {
-    position: fixed;
     top: 0;
     z-index: 1; 
     height: 10%;
@@ -240,7 +239,9 @@ body {
 }
 
 .groceryMainArea {
-    height: 100%;
+    position: absolute;
+    top: 10vh;
+    height: 80%;
     width: 100%;
     margin: 0;
     overflow-y: scroll;

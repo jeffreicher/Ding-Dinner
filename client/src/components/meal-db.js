@@ -19,7 +19,7 @@ export default [
                     ],
         mealInstr: [
                         {"step_num":"1","step":"roll dough","recipe_id":"123"},
-                        {"step_num":"2","step":"cover with cheese","recipe_id":"123"},
+                        {"step_num":"2","step":"cover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheesecover with cheese","recipe_id":"123"},
                         {"step_num":"3","step":"make pizza","recipe_id":"123"}
                     ]
     },

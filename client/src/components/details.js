@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Footer from './footer';
+import LogoHeader from './logo-header';
 
 class Details extends Component{
     constructor(props){
@@ -97,11 +98,7 @@ class Details extends Component{
 
         return(
             <div className="detailsContainer">
-                <header className="detailsHeader">
-                    <div className="detailsBack" onClick={hide}><i className="fas fa-arrow-left iconcolor"></i></div>
-                    <div className="detailsLogo lobsterFont">Ding</div>
-                    <div className="detailsAdd"></div>
-                </header>
+                <LogoHeader onClick={hide} back={true} add={true} />
                 <main className="detailsMainArea">
                     <img src={image} alt="" className="detailsImg" />
                     <h3 className='detailsName'>{name}</h3>

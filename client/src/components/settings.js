@@ -15,9 +15,7 @@ class Settings extends Component{
                 <div className="mainContainer">
                     <h2 className='settingsHeader lobsterFont'>Settings</h2>
                     <Link to='/diet-settings'className='settingsButton oxygenFont btn-large'>Reset Filters</Link>
-                    <br/>
                     <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large'>Add Meals</Link>
-                    <br/>
                     <Link to='/' className='settingsButton oxygenFont btn-large'>Logout</Link>                    
                 </div>
                 <Footer />  

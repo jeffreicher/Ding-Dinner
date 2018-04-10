@@ -211,7 +211,7 @@ body {
 }
 
 .detailsIngredientsHead, .detailsInstructionsHead, .detailsNutritionHead {
-    width: 33%;
+    width: 33.3%;
     font-size: 1.5rem;
     float: left;
     box-sizing: border-box;
@@ -368,4 +368,8 @@ body {
 .phonePls > * {
     text-align: center;
     width: 100%;
+}
+
+.completeButton {
+    margin-bottom: 2vh;
 }

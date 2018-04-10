@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 class LogoHeader extends Component {
     render() {
-        console.log(this.props);
         return (
             <header className="groceryHeader z-depth-2">
                     {(this.props.back) ? <div className="groceryBack" onClick={this.props.onClick}><Link to='/mymeals'><i style={{fontSize: `2rem`}} className="fas fa-arrow-left iconcolor"></i></Link></div> : ''}

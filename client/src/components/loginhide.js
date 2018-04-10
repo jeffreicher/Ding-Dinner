@@ -5,10 +5,8 @@ class LoginHide extends Component{
     constructor(props){
         super(props);
 
-        this.emailBlurred = this.emailBlurred.bind(this);
-        this.emailFocused = this.emailFocused.bind(this);
-        this.passwordBlurred = this.passwordBlurred.bind(this);
-        this.passwordFocused = this.passwordFocused.bind(this);
+        this.fieldFocused = this.fieldFocused.bind(this);
+        this.fieldBlurred = this.fieldBlurred.bind(this);
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.goBack = this.goBack.bind(this);
@@ -70,29 +68,27 @@ class LoginHide extends Component{
         }
         this.props.returnFX();
     }
-    emailFocused(){
-        this.setState({
-            emailFocused: true
-        });
-        console.log('working');
+    fieldFocused(targetField){
+        if (targetField === 'email'){
+            this.setState({
+                emailFocused: true
+            });
+        } else if (targetField === 'password'){
+            this.setState({
+                passwordFocused: true
+            });
+        }
     }
-    passwordFocused(){
-        this.setState({
-            passwordFocused: true
-        });
-        console.log('working');
-    }
-    emailBlurred(){
-        // this.setState({
-        //     emailFocused: !this.state.emailFocused
-        // });
-        console.log('also good');
-    }
-    passwordBlurred(){
-        // this.setState({
-        //     emailFocused: !this.state.emailFocused
-        // });
-        console.log('also good');
+    fieldBlurred(targetField){
+        if (targetField === 'email'){
+            this.setState({
+                emailFocused: false
+            });
+        } else if (targetField === 'password'){
+            this.setState({
+                passwordFocused: false
+            });
+        }
     }
     render(){
         const greenText = {color: 'green'}
@@ -100,12 +96,12 @@ class LoginHide extends Component{
             <form onSubmit={this.goBack}>
                 <div>
                     <label>Email</label>
-                    <input type='text' value={this.state.emailValue} onChange={this.emailChange} onFocus={this.emailFocused} onBlur={this.emailBlurred}/>
+                    <input type='text' className='loginField' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
                     {this.state.emailFocused && <div style={this.state.emailColor} className='validationText'>{this.state.emailColor.color === 'green' && <div className='checkmark'>✓</div>}Must be valid email address</div>}
                 </div>
                 <div>
                     <label>Password</label>
-                    <input type='password' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={this.passwordFocused} onBlur={this.passwordBlurred}/>
+                    <input type='password' className='loginField' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
                     {this.state.passwordFocused && <div style={this.state.passwordColor} className='validationText'>{this.state.passwordColor.color === 'green' && <div className='checkmark'>✓</div>}Must be at least 8 characters long</div>}
                 </div>
         <button>{(this.state.dataValue) ? <Link to='/mymeals'>Submit</Link> : <Link to='/meal-number'>Submit</Link>}</button>

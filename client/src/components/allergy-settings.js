@@ -46,7 +46,7 @@ class AllergySettings extends Component {
         const { selected } = this.state;
         return (  
          <div>            
-             <LogoHeader back={true} position={'/diet-settings'}/>
+             <LogoHeader back={true} location={'/diet-settings'}/>
             <div className="container">
                 <Header title={'Any Allergies?'} />
                 <div className="row">

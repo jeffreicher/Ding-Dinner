@@ -26,7 +26,7 @@ class MealNumber extends Component {
             <div>
                 <LogoHeader />
                 <div className="container">
-                    <Header title={'Amount Of Meals?'} />
+                    <Header title={'How Many Recipes?'} />
                     <div className="button-column collection">
                         <MealNumButton title={'1'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>  
                         <MealNumButton title={'3'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>

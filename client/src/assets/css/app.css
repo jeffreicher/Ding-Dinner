@@ -272,20 +272,22 @@ body {
 }
 
 .settingsHeader{
-    font-size: 3em;
-    margin: 0;
-    padding: 10% 0;
+    margin: 1.14rem 0 .912rem 0;
 }
 
 .settingsButton{
-    margin: 11.4%;
+    margin: 8%;
     font-size: 2em;
     background-color: grey;
     color: black;
 }
 
+.settingsButton:first-of-type {
+    margin-top: 8vh;
+}
+
 .mainContainer {
-    height: 80%;
+    height: 77.5%;
 }
 
 .collection {
@@ -305,4 +307,8 @@ body {
     line-height: 26px;
     margin: 4% auto;
     background-color: grey;
+}
+
+.empty {
+    width: 5vw;
 }

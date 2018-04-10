@@ -7,7 +7,6 @@ import '../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
 import LogoHeader from './logo-header';
 
-
 class AllergySelection extends Component {
     constructor(props) {
         super(props); 

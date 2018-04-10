@@ -13,9 +13,9 @@ class Grocery extends Component{
     render(){
         return (
             <div className="groceryContainer Oxygen">
-            <LogoHeader />
+            <LogoHeader back={true} />
             <main className="groceryMainArea">
-                <h3 className="groceryHead card-panel lobsterFont">Grocery List</h3>
+                <h4 className="groceryHead card-panel lobsterFont z-depth-2">Grocery List</h4>
                 <div className="groceryList">
                 <h4 className="grocerySection lobsterFont">Beans</h4>
                 <div className="groceryItem">

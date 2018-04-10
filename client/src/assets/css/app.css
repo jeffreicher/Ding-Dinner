@@ -223,6 +223,9 @@ body {
 }
 
 .groceryHeader {
+    position: fixed;
+    top: 0;
+    z-index: 1;
     height: 10%;
     width: 100%;
     margin: 0;
@@ -253,7 +256,8 @@ body {
     display: inline-block;
 }
 
-.groceryFooter {
+.groceryFooter, .mealsFooter {
+    position: fixed;
     height: 10%;
     width: 100%;
     margin: 0;
@@ -262,6 +266,10 @@ body {
     justify-content: space-around;
     align-items: center;
     font-size: 2rem;
+}
+
+.mealsFooter {
+    bottom: 0;
 }
 
 .settingsContainer{

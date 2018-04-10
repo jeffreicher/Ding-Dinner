@@ -86,12 +86,12 @@ class Meals extends Component{
 
         return(
             <div className="mealsContainer">
-            <LogoHeader back={true} add={true}/>
+            <LogoHeader add={true}/>
                 <main className="mealsMainArea">
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}
                 </main>
-            <Footer />
+            <Footer currentPage='meals'/>
             </div>
         )
     }

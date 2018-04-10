@@ -9,20 +9,17 @@ class Settings extends Component{
 
     }
     render(){
-        return (
-            <div>
-            <LogoHeader />
+        return (                      
             <div className='settingsContainer'>
-                <h2 className='settingsHeader'>Settings</h2>
-                <button className='settingsButton'><Link to='/diet-settings'>Reset Filters</Link></button>
-                <br/>
-                <button className='settingsButton'><Link to='meal-num-settings'>Add Meals</Link></button>
-                <br/>
-                <button className='settingsButton'><Link to='/'>Logout</Link></button>
-            </div>
-            <Footer />                
-            </div>
-
+                <LogoHeader />
+                <div className="mainContainer container">
+                    <h4 className='card-panel settingsHeader lobsterFont z-depth-2'>Settings</h4>
+                    <Link to='/diet-settings'className='settingsButton oxygenFont btn-large'>Reset Filters</Link>
+                    <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large'>Add Meals</Link>
+                    <Link to='/' className='settingsButton oxygenFont btn-large'>Logout</Link>                    
+                </div>
+                <Footer currentPage='settings' />  
+            </div>      
         )
     }
 }

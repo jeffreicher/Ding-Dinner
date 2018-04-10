@@ -52,8 +52,25 @@ body {
     font-family: 'Oxygen', sans-serif;
 }
 
-.validationText, .checkmark {
+.validationText1, .checkmark {
     display: inline-block;
+}
+
+.validationText1 {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 3px gray;
+    position: absolute;
+    bottom: -10%;
+    left: 0%;
+    z-index: 1;
+}
+
+.inputField {
+    position: relative;
 }
 
 .mealsContainer {
@@ -133,6 +150,7 @@ body {
     justify-content: space-around;
     align-items: center;
     font-size: 2rem;
+    box-shadow: 0 -4px 5px 0 rgba(0,0,0,0.14), 0 -1px 10px 0 rgba(0,0,0,0.12), 0 -2px 4px -1px rgba(0,0,0,0.3);
 }
 
 .detailsContainer {
@@ -269,20 +287,26 @@ body {
     height: 100%;
     width: 100%;
     text-align: center;
-    background-color: lightblue;
 }
 
 .settingsHeader{
-    font-size: 3em;
-    margin: 0;
-    padding: 10% 0;
+    margin: 1.14rem 0 .912rem 0;
 }
 
 .settingsButton{
-    margin: 15%;
+    margin: 8%;
     font-size: 2em;
+    background-color: grey;
+    color: black;
 }
 
+.settingsButton:first-of-type {
+    margin-top: 8vh;
+}
+
+.mainContainer {
+    height: 77.5%;
+}
 
 .collection {
     overflow: visible;
@@ -301,4 +325,8 @@ body {
     line-height: 26px;
     margin: 4% auto;
     background-color: grey;
+}
+
+.empty {
+    width: 5vw;
 }

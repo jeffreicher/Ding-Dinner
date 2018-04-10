@@ -275,6 +275,10 @@ body {
     text-align: left;
 }
 
+.groceryItem {
+    margin: 5%;
+}
+
 .groceryCheck, .groceryName {
     display: inline-block;
 }

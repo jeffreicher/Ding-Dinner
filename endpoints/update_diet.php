@@ -77,6 +77,7 @@ if ($allergyCount > 0){
         if($stmt->affected_rows === 0) exit('No rows updated');
         $stmt->close();
     }
+    echo 'Success!';
 }
 
 ?>

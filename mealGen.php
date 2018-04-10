@@ -8,7 +8,7 @@ if(!is_numeric($userID)){
 }
 
 /**Get the allergy and dietary restrictions for the user */
-
+//Need to sanitize userID prior to making the query call
 $restrictions=[];
 $restrictionQuery = "SELECT ua.allergy_name, u.diet 
         FROM `user-allergy` AS ua

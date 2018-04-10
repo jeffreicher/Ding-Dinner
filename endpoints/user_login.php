@@ -30,7 +30,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 }
             }
         } else {
-            echo "invalid username/password Combination";
+            echo "invalid username/password combination";
         }
         $stmt->close();
     } 

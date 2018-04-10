@@ -1,11 +1,20 @@
 <?php
 require_once 'mysql_connect.php';
-$_POST['email'] = "mkane4@something.com";
-$_POST['password'] = "password";
+$_POST['email'] = "mkane7@something.com";
+$_POST['password'] = "something";
 $_POST['diet'] = "vegan";
 
 $_POST['allergies'][] = 'peanut';
 $_POST['allergies'][] = 'tree nut';
+$_POST['allergies'][] = 'dairy';
+$_POST['allergies'][] = 'egg';
+$_POST['allergies'][] = 'soy';
+$_POST['allergies'][] = 'sesame';
+$_POST['allergies'][] = 'gluten';
+$_POST['allergies'][] = 'wheat';
+$_POST['allergies'][] = 'shellfish';
+$_POST['allergies'][] = 'seafood';
+
 
 
 
@@ -80,7 +89,9 @@ if ($user_id === 0){
             $stmt->execute();
             if($stmt->affected_rows === 0) exit('No rows updated');
             $stmt->close();
+            
         }
+        echo 'added';
     }
 }
 ?>

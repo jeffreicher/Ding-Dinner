@@ -8,10 +8,10 @@ if(!is_numeric($userID)){
 };
 
 /**Get all the current meals for the user */
+//Need to sanitize userID prior to making the query call
 $recipeIDList=[];
 $output=[];
 $query = "SELECT recipe_id, title FROM `user_choices` WHERE `user_id`=$userID";
-
 $result = mysqli_query($conn, $query);
 while($row = mysqli_fetch_assoc($result)){
     $row['title']=addslashes($row['title']);

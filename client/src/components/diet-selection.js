@@ -7,25 +7,26 @@ import '../assets/css/diet-selection.css';
 import {Link} from 'react-router-dom';
 import LogoHeader from './logo-header';
 
-
 class DietSelection extends Component {   
     constructor(props) {
         super(props);
 
         this.state = {
-            selected: []
+            selected: [],
+            value: false
         };
 
         this.handleSelected = this.handleSelected.bind(this);
     };
-    
+
     handleSelected(buttonObject) {
         console.log("This is the thing", buttonObject);  
         const { selected } = this.state;
 
         if(!selected.includes(buttonObject.props.title)) {
             this.setState({
-                selected: [buttonObject.props.title]
+                selected: [buttonObject.props.title],
+                value: true
             });
         }
         registerstorage.diet = buttonObject.props.title;
@@ -58,7 +59,7 @@ class DietSelection extends Component {
                         <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
                     </div>  
                     <div className="right" style={{marginTop: `3vh`}}>
-                    <Link to='/allergy-selection'><Next /></Link>                  
+                    {(this.state.value) ? <Link to='/allergy-selection'><Next /></Link> : console.log('error')}               
                     </div>     
                 </div>                
             </div>

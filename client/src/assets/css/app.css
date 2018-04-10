@@ -52,8 +52,25 @@ body {
     font-family: 'Oxygen', sans-serif;
 }
 
-.validationText, .checkmark {
+.validationText1, .checkmark {
     display: inline-block;
+}
+
+.validationText1 {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 3px gray;
+    position: absolute;
+    bottom: -10%;
+    left: 0%;
+    z-index: 1;
+}
+
+.inputField {
+    position: relative;
 }
 
 .mealsContainer {
@@ -134,6 +151,7 @@ body {
     justify-content: space-around;
     align-items: center;
     font-size: 2rem;
+    box-shadow: 0 -4px 5px 0 rgba(0,0,0,0.14), 0 -1px 10px 0 rgba(0,0,0,0.12), 0 -2px 4px -1px rgba(0,0,0,0.3);
 }
 
 .detailsContainer {

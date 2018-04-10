@@ -83,7 +83,7 @@ class Grocery extends Component{
                 </div>
                 </div>
             </main>
-            <Footer />
+            <Footer currentPage='grocery' />
             </div>
         );
     };

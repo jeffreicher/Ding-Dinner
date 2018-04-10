@@ -2,35 +2,58 @@ import React, { Component } from 'react';
 import Header from './header';
 import Button from './button';
 import Next from './next_button';
+import newFilter from './new-filter-storage';
 import '../assets/css/diet-selection.css';
 import {Link} from 'react-router-dom';
+import LogoHeader from './logo-header';
 
-//add method that adds class to add button color when clicked 
 
-class DietSettings extends Component {
+class DietSettings extends Component {   
     constructor(props) {
         super(props);
 
         this.state = {
-            selections: []
+            selected: []
+        };
+
+        this.handleSelected = this.handleSelected.bind(this);
+    };
+    
+    handleSelected(buttonObject) {
+        console.log("This is the thing", buttonObject);  
+        const { selected } = this.state;
+
+        if(!selected.includes(buttonObject.props.title)) {
+            this.setState({
+                selected: [buttonObject.props.title]
+            });
         }
-    }
+        newFilter.diet = buttonObject.props.title;
+        console.log(newFilter); 
+    };
+
     render() {
+        const { handleSelected } = this;
+        console.log(this.state.selected);
+
         return (
-        <div className="container">
-            <Header title={'What\'s Your Type?'}/>
-            <div className="collection center-align">
-                <Button title={'Paleo'} descrip={'Live Like Your Ancestors'} style={'button'} />  
-                <Button title={'Low Carb'} descrip={'Coachella Bod Meal Plan'} style={'button'} />     
-                <Button title={'Vegetarian'} descrip={'Straight Veggies'} style={'button'} />   
-                <Button title={'Carnivore'} descrip={'Meat Is Life'} style={'button'} />   
-                <Button title={'Pescatarian'} descrip={'Fish N Greens'} style={'button'} />
-            </div>  
-            <div className="right">
-                <Link to='/allergy-settings'><Next /></Link>                  
-            </div>     
-        </div>
-        );
+            <div>
+                <LogoHeader />
+                <div className="container">
+                    <Header title={'What\'s Your Type?'}/>
+                    <div className="center-align" style={{marginTop: `2vh`}}>
+                        <Button title={'None'} descrip={'Send It'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('None')} />  
+                        <Button title={'Ketogenic'} descrip={'Coachella Bod Meal Plan'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />     
+                        <Button title={'Vegetarian'} descrip={'Lover Of Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegetarian')} />   
+                        <Button title={'Vegan'} descrip={'Veggie Fanatic'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegan')} />   
+                        <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
+                    </div>  
+                    <div className="right" style={{marginTop: `3vh`}}>
+                    <Link to='/allergy-settings'><Next /></Link>                  
+                    </div>     
+                </div>                
+            </div>
+        );  
     };
 };
 

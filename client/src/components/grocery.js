@@ -13,7 +13,7 @@ class Grocery extends Component{
     render(){
         return (
             <div className="groceryContainer Oxygen">
-            <LogoHeader back={true} style={{position: 'fixed'}}/>
+            <LogoHeader style={{position: 'fixed'}}/>
             <main className="groceryMainArea" >
                 <h4 className="groceryHead card-panel lobsterFont z-depth-2">Grocery List</h4>
                 <div className="groceryList">

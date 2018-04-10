@@ -98,7 +98,7 @@ class Details extends Component{
 
         return(
             <div className="detailsContainer">
-                <LogoHeader onClick={hide} back={true} />
+                <LogoHeader onClick={hide} back={true} style={{position: 'fixed'}}/>
                 <main className="detailsMainArea">
                     <img src={image} alt="" className="detailsImg" />
                     <h3 className='detailsName'>{name}</h3>

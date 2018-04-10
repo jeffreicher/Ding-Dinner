@@ -98,7 +98,7 @@ class Details extends Component{
 
         return(
             <div className="detailsContainer">
-                <LogoHeader onClick={hide} back={true} />
+                <LogoHeader onClick={hide} back={true} style={{position: 'fixed'}}/>
                 <main className="detailsMainArea">
                     <img src={image} alt="" className="detailsImg" />
                     <h3 className='detailsName'>{name}</h3>
@@ -115,7 +115,7 @@ class Details extends Component{
                         <ul className='collection'>
                             {instrMap}
                         </ul>
-                        <button className="btn green darken-2" onClick={()=>complete(index)}>Complete</button>
+                        <button className="completeButton btn green darken-2" onClick={()=>complete(index)}>Complete</button>
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>
                         <ul className='collection'>

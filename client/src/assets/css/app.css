@@ -105,10 +105,16 @@ body {
 }
 
 .mealsMainArea {
-    height: 100%;
+    position: absolute;
+    top: 10vh;
+    height: 80%;
     width: 100%;
     margin: 0;
     overflow-y: scroll;
+}
+
+.mealsMainArea > .mealsItem:first-of-type {
+    margin-top: 2px;
 }
 
 .mealsItem {
@@ -205,7 +211,7 @@ body {
 }
 
 .detailsIngredientsHead, .detailsInstructionsHead, .detailsNutritionHead {
-    width: 33%;
+    width: 33.3%;
     font-size: 1.5rem;
     float: left;
     box-sizing: border-box;
@@ -362,4 +368,8 @@ body {
 .phonePls > * {
     text-align: center;
     width: 100%;
+}
+
+.completeButton {
+    margin-bottom: 2vh;
 }

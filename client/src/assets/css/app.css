@@ -100,10 +100,16 @@ body {
 }
 
 .mealsMainArea {
-    height: 100%;
+    position: absolute;
+    top: 10vh;
+    height: 80%;
     width: 100%;
     margin: 0;
     overflow-y: scroll;
+}
+
+.mealsMainArea > .mealsItem:first-of-type {
+    margin-top: 2px;
 }
 
 .mealsItem {

@@ -84,9 +84,10 @@ class Meals extends Component{
 
         const {name, image, ingredients, instructions} = this.state.mealDetail;
 
+
         return(
             <div className="mealsContainer">
-            <LogoHeader add={true}/>
+            <LogoHeader add={true} style={{position: 'fixed'}}/>
                 <main className="mealsMainArea">
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}

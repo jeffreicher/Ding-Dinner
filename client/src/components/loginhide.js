@@ -31,12 +31,12 @@ class LoginHide extends Component{
             emailValue: e.target.value
         }, () => {
             if(emailValidification.test(this.state.emailValue)){
-                const greenText = {color: 'green'};
+                const greenText = {textDecoration: 'line-through'};
                 this.setState({
                     emailColor: greenText
                 });
             } else {
-                const blackText = {color: 'black'};
+                const blackText = {textDecoration: 'none'};
                 this.setState({
                     emailColor: blackText
                 });
@@ -48,12 +48,12 @@ class LoginHide extends Component{
             passwordValue: e.target.value
         }, () => {
             if(this.state.passwordValue.length >= 8){
-                const greenText = {color: 'green'};
+                const greenText = {textDecoration: 'line-through'};
                 this.setState({
                     passwordColor: greenText
                 });
             } else {
-                const blackText = {color: 'black'};
+                const blackText = {textDecoration: 'none'};
                 this.setState({
                     passwordColor: blackText
                 });
@@ -91,20 +91,22 @@ class LoginHide extends Component{
         }
     }
     render(){
-        const greenText = {color: 'green'}
+        const greenText = {textDecoration: 'line-through'}
         return (
-            <form onSubmit={this.goBack}>
-                <div>
-                    <label>Email</label>
-                    <input type='text' className='loginField' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
-                    {this.state.emailFocused && <div style={this.state.emailColor} className='validationText'>{this.state.emailColor.color === 'green' && <div className='checkmark'>✓</div>}Must be valid email address</div>}
+            <form onSubmit={this.goBack} className='row'>
+                <div className='col s8 offset-s2 inputField'>
+                    <label className='white-text'>Email</label>
+                    <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
+                    {this.state.emailFocused && <div style={this.state.emailColor} className='validationText1'>{this.state.emailColor.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address</div>}
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input type='password' className='loginField' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
-                    {this.state.passwordFocused && <div style={this.state.passwordColor} className='validationText'>{this.state.passwordColor.color === 'green' && <div className='checkmark'>✓</div>}Must be at least 8 characters long</div>}
+                <div className='col s2' />
+                <div className='col s8 offset-s2'>
+                    <label className='white-text'>Password</label>
+                    <input type='password' className='white-text' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
+                    {this.state.passwordFocused && <div style={this.state.passwordColor} className='validationText'>{this.state.passwordColor.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be at least 8 characters long</div>}
                 </div>
-        <button>{(this.state.dataValue) ? <Link to='/mymeals'>Submit</Link> : <Link to='/meal-number'>Submit</Link>}</button>
+                <div className='col s2' />
+                {(this.state.dataValue) ? <Link to='/mymeals' className='btn center-align'>Submit</Link> : <Link to='/meal-number' className='btn center-align'>Submit</Link>}
             </form>
         );
     }

@@ -1,7 +1,13 @@
 <?php
 require('mysqli_conn.php');
-// $userID=$_SESSION['user_id'];
+// $userID=(int)$_SESSION['user_id'];
 $userID=2;
+if(!is_numeric($userID)){
+    print 'Invalid user ID';
+    exit;
+}
+
+/**Get the allergy and dietary restrictions for the user */
 
 $restrictions=[];
 $restrictionQuery = "SELECT ua.allergy_name, u.diet 
@@ -14,8 +20,6 @@ $result = mysqli_query($conn, $restrictionQuery);
 while($row = mysqli_fetch_assoc($result)){
     $restrictions[]=$row;
 }
-// print_r($restrictions);
-
 
 $dairy = '0';
 $egg = '0';
@@ -67,6 +71,8 @@ for($i=0;$i<$count;$i++){
 
 $diet = $restrictions[0]['diet'];
 
+/**Get recipes from database that meet the dietary restrictions found in the previous section*/
+
 
 $allergens = ['dairy' => $dairy, 'egg'=>$egg, 'gluten'=>$gluten, 
             'peanut'=>$peanut, 'seafood'=>$seafood, 'sesame'=> $sesame, 
@@ -76,7 +82,9 @@ $query = "SELECT ra.recipe_id, rd.title, rd.image  FROM `recipe-allergy` AS ra J
 
 
 forEach($allergens as $key => $value){
-    $query .= "ra.$key" .'='. $value .' AND ';
+    if($value === '1'){
+        $query .= "ra.$key" .'='. $value .' AND ';
+    };
 };
 $query = substr($query, 0, -4);
 $query .= " AND rd.$diet".'=1';
@@ -84,19 +92,22 @@ $query .= " LIMIT 20";
 $output=[];
 $result = mysqli_query($conn, $query);
 while($row = mysqli_fetch_assoc($result)){
+    $row['title']=addslashes($row['title']);
+    $row['image']=addslashes($row['image']);
+    $recipeID = $row['recipe_id'];
+    if(!is_numeric($recipeID)){
+        print 'Invalid recipe ID';
+        exit;
+    };
+    
     $output[]=$row;
 }
 
-
 $recipeIDArray = [];
-$recipeTitleArr = [];
-$imageURLArr = [];
 
 $count = count($output);
 for($i = 0; $i<$count; $i++){
     $recipeIDArray[]=$output[$i]['recipe_id'];
-    $recipeTitleArr[]=$output[$i]['title'];
-    $imageURLArr[]=$output[$i]['image'];
 };
 
 // $query2 = "SELECT Distinct n.recipe_id, n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, 
@@ -116,6 +127,7 @@ for($i = 0; $i<$count; $i++){
 //     $output2[]=$row;
 // };
 
+/**Get the nutrition information for the user's meals */
 
 $query2 = "SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, 
             n.servingPrice, n.recipe_id
@@ -128,9 +140,23 @@ $query2 = substr($query2, 0, -3);
 $output2=[];
 $result = mysqli_query($conn, $query2);
 while($row = mysqli_fetch_assoc($result)){
+    $row['calories']=addslashes($row['calories']);
+    $row['protein']=addslashes($row['protein']);
+    $row['sugar']=addslashes($row['sugar']);
+    $row['carbs']=addslashes($row['carbs']);
+    $row['fat']=addslashes($row['fat']);
+    $row['sodium']=addslashes($row['sodium']);
+    $row['servingSize']=addslashes($row['servingSize']);
+    $row['servingPrice']=addslashes($row['servingPrice']);
+    $recipeID = $row['recipe_id'];
+    if(!is_numeric($recipeID)){
+        print 'Invalid recipe ID';
+        exit;
+    };
     $output2[]=$row;
 };
 
+/**Get the ingredients for the user's meals */
 
 $query3 = "SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id
             FROM ingredients AS ing 
@@ -142,9 +168,19 @@ $query3 = substr($query3, 0, -3);
 $output3=[];
 $result = mysqli_query($conn, $query3);
 while($row = mysqli_fetch_assoc($result)){
+    $row['ingredient']=addslashes($row['ingredient']);
+    $row['amount']=addslashes($row['amount']);
+    $row['unit_type']=addslashes($row['unit_type']);
+    $recipeID = $row['recipe_id'];
+    if(!is_numeric($recipeID)){
+        print 'Invalid recipe ID';
+        exit;
+    };
+    
     $output3[]=$row;
 };
 
+/**Get the cooking instructions for the user's meals */
 
 $query4 = "SELECT inst.step_num, inst.step, inst.recipe_id
             FROM instructions AS inst 
@@ -156,15 +192,18 @@ $query4 = substr($query4, 0, -3);
 $output4=[];
 $result = mysqli_query($conn, $query4);
 while($row = mysqli_fetch_assoc($result)){
+    $row['step_num']=addslashes($row['step_num']);
+    $row['step']=addslashes($row['step']);
+    $recipeID = $row['recipe_id'];
+    if(!is_numeric($recipeID)){
+        print 'Invalid recipe ID';
+        exit;
+    };
+    
     $output4[]=$row;
 };
 
-
-$outputEncoded = json_encode($output);
-$output2Encoded = json_encode($output2);
-$output3Encoded = json_encode($output3);
-$output4Encoded = json_encode($output4);
-
+/**Package all the info in a legible JSON object */
 
 $finalOutput = [];
 for($x=0; $x<$count; $x++){

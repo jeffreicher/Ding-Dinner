@@ -225,7 +225,6 @@ body {
     height: 10%;
     width: 100%;
     margin: 0;
-    /* padding-right: 26px; */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -271,7 +270,7 @@ body {
     text-align: center;
 }
 
-.settingsHeader{
+.settingsHeader, .groceryHead{
     margin: 1.14rem 0 .912rem 0;
 }
 

@@ -105,8 +105,6 @@ body {
 }
 
 .mealsMainArea {
-    position: absolute;
-    top: 10vh;
     height: 80%;
     width: 100%;
     margin: 0;
@@ -199,9 +197,11 @@ body {
 }
 
 .detailsMainArea {
-    height: 100%;
+    height: 80%;
     width: 100%;
     margin: 0;
+    position: absolute;
+    top: 10%;
     overflow-y: scroll;
 }
 

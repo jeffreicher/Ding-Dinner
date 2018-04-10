@@ -15,3 +15,8 @@
 .collection {
     margin-top: 10vh;
 }
+
+.mealButton {
+    display: flex;
+    align-items: center;
+}

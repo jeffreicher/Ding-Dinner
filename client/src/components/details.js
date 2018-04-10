@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Footer from './footer';
+import LogoHeader from './logo-header';
 
 class Details extends Component{
     constructor(props){
@@ -86,7 +88,7 @@ class Details extends Component{
         const {name, image, ingredients, instructions, hide, index, complete} = this.props;
         
         const instrMap = instructions.map((item, index) => {
-            return <li className='collection-item' key={index}>{item.step}</li>
+            return <li className='collection-item' key={index}>{index+1}. {item.step}</li>
         })
 
         const ingrMap = ingredients.map((item, index) => {
@@ -96,15 +98,11 @@ class Details extends Component{
 
         return(
             <div className="detailsContainer">
-                <header className="detailsHeader">
-                    <div className="detailsBack" onClick={hide}>Back</div>
-                    <div className="detailsLogo">Ding</div>
-                    <div className="detailsAdd"></div>
-                </header>
+                <LogoHeader onClick={hide} back={true} />
                 <main className="detailsMainArea">
                     <img src={image} alt="" className="detailsImg" />
-                    <h1 className='detailsName'>{name}</h1>
-                    <h2 className='detailsTime'>Time Commitment: 30 minutes</h2>
+                    <h3 className='detailsName'>{name}</h3>
+                    <h5 className='detailsTime'>Time Commitment: 30 minutes</h5>
                     <div className={"detailsIngredientsHead " + this.state.ingrTarget} onClick={()=>this.headerClicked('ingr')} >Ingredients</div>
                     <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>
                     <div className={"detailsNutritionHead " + this.state.nutrTarget} onClick={()=>this.headerClicked('nutr')} >Nutrition</div>
@@ -114,10 +112,10 @@ class Details extends Component{
                         </ul>
                     </div>
                     <div className="detailsInstructionsList" style={this.state.instrList}>
-                        <ol className='collection'>
+                        <ul className='collection'>
                             {instrMap}
-                        </ol>
-                        <button onClick={()=>complete(index)}>Complete</button>
+                        </ul>
+                        <button className="btn green darken-2" onClick={()=>complete(index)}>Complete</button>
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>
                         <ul className='collection'>
@@ -125,11 +123,7 @@ class Details extends Component{
                         </ul>
                     </div>
                 </main>
-                <footer className="detailsFooter">
-                    <div className="detailsMydetails" onClick={hide}>Meals</div>
-                    <div className="detailsGroceries"><Link to='/grocery'>Groceries</Link></div>
-                    <div className="detailsSettings"><Link to='/settings'>Settings</Link></div>
-                </footer>
+                <Footer />
             </div>
         )
     }

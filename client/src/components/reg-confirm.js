@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import registerstorage from './register-storage';
 import '../assets/css/reg-confirm.css'
 import {Link} from 'react-router-dom';
+import LogoHeader from './logo-header';
 
 class RegisterConfirm extends Component{
     constructor(props){

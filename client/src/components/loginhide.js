@@ -22,7 +22,7 @@ class LoginHide extends Component{
             passwordLength: {
                 textDecoration: 'none'
             },
-            passwordCharactrers: {
+            passwordCharacters: {
                 textDecoration: 'none'
             }
         }
@@ -69,16 +69,15 @@ class LoginHide extends Component{
     }
     checkPWChars(){
         const passwordChars = /^[a-z0-9]+$/i;
-        console.log(this.state.passwordValue);
         if (passwordChars.test(this.state.passwordValue)){
             const strikeThrough = {textDecoration: 'line-through'};
             this.setState({
-                passwordCharactrers: strikeThrough
+                passwordCharacters: strikeThrough
             });
         } else {
             const noStrike = {textDecoration: 'none'};
             this.setState({
-                passwordCharactrers: noStrike
+                passwordCharacters: noStrike
             });
         }
     }
@@ -115,28 +114,32 @@ class LoginHide extends Component{
     render(){
         const strikeThrough = {textDecoration: 'line-through'}
         return (
-            <form onSubmit={this.goBack} className='row'>
-                <div className='col s8 offset-s2 inputField'>
-                    <label className='white-text'>Email</label>
-                    <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
-                    {this.state.emailFocused && <div style={this.state.emailCheck} className='validationText1'>{this.state.emailCheck.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address</div>}
-                </div>
-                <div className='col s2' />
-                <div className='col s8 offset-s2 inputField'>
-                    <label className='white-text'>Password</label>
-                    <input type='password' className='white-text' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
-                    {this.state.passwordFocused && <div className='validationText1'>
-                        <div style={this.state.passwordLength} >
-                            {this.state.passwordLength.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
-                        </div>
-                        <div style={this.state.passwordCharactrers} >
-                            {this.state.passwordCharactrers.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers and letters
-                        </div>
-                    </div>}
-                </div>
-                <div className='col s2' />
-                <Link to='/mymeals' className='btn center-align'>Submit</Link>
-            </form>
+            <div>
+                <form onSubmit={this.goBack} className='row'>
+                    <div className='col s8 offset-s2 inputField'>
+                        <label className='white-text'>Email</label>
+                        <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
+                        {this.state.emailFocused && <div style={this.state.emailCheck} className='validationText1'>
+                            {this.state.emailCheck.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address
+                        </div>}
+                    </div>
+                    <div className='col s2' />
+                    <div className='col s8 offset-s2 inputField'>
+                        <label className='white-text'>Password</label>
+                        <input type='password' className='white-text' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
+                        {this.state.passwordFocused && <div className='validationText2'>
+                            <div style={this.state.passwordLength} >
+                                {this.state.passwordLength.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
+                            </div>
+                            <div style={this.state.passwordCharacters} >
+                                {this.state.passwordCharacters.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers and letters
+                            </div>
+                        </div>}
+                    </div>
+                    <div className='col s2' />
+                    <Link to='/mymeals' className='btn center-align blue darken-2 waves-effect waves-light'>Login</Link>
+                </form>
+            </div>
         );
     }
 }

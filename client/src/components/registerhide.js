@@ -9,77 +9,162 @@ class RegisterHide extends Component{
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.confirmChange = this.confirmChange.bind(this);
-        this.goBack = this.goBack.bind(this);
         this.state = {
             emailValue: '',
             passwordValue: '',
             confirmValue: '',
-            pageLink: false
+            emailFocused: false,
+            passwordFocused: false,
+            confirmFocused: false,
+            emailCheck: {
+                textDecoration: 'none'
+            },
+            passwordLength: {
+                textDecoration: 'none'
+            },
+            passwordCharacters: {
+                textDecoration: 'none'
+            },
+            confirmMatches: {
+                textDecoration: 'none'
+            }
         }
-    }
-    goBack(e){
-        const stateCopy = {...this.state};
-        const {emailValue, passwordValue, confirmValue} = this.state;
-        const emailValidification = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        registerstorage.email = stateCopy.emailValue;
-        registerstorage.password = stateCopy.passwordValue;
-        e.preventDefault();
-
-        if(passwordValue.length < 8 || passwordValue.length > 32){
-            alert('Please input a password between 8 and 32 characters long');
-        } else if (passwordValue !== confirmValue){
-            alert('Please make sure your passwords fully match');
-        } else if (!emailValidification.test(emailValue)){
-            alert('Please enter a valid email address');
-        } else {
-            this.setState({
-                pageLink: true
-            });
-        }
-        // if(this.state.emailValue.length === 0 || this.state.passwordValue.length === 0 || this.state.confirmValue.length === 0){
-        //     alert('put stuff in the dang fields');
-        //     return;
-        // } else if (this.state.passwordValue.length !== this.state.confirmValue.length){
-        //     alert('match yer daggum passwords')
-        //     return;
-        // } else {
-        //     this.setState({
-        //         pageLink: true
-        //     })
-        // }
     }
     emailChange(e){
+        const emailValidification = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
         this.setState({
             emailValue: e.target.value
-        })
+        }, () => {
+            if(emailValidification.test(this.state.emailValue)){
+                const strikeThrough = {textDecoration: 'line-through'};
+                this.setState({
+                    emailCheck: strikeThrough
+                });
+            } else {
+                const noStrike = {textDecoration: 'none'};
+                this.setState({
+                    emailCheck: noStrike
+                });
+            }
+        });
     }
     passwordChange(e){
         this.setState({
             passwordValue: e.target.value
-        })
+        }, () => {
+            this.checkPWLength();
+            this.checkPWChars();
+        });
+    }
+    checkPWLength(){
+        if(this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32){
+            const strikeThrough = {textDecoration: 'line-through'};
+            this.setState({
+                passwordLength: strikeThrough
+            });
+        } else {
+            const noStrike = {textDecoration: 'none'};
+            this.setState({
+                passwordLength: noStrike
+            });
+        }
+    }
+    checkPWChars(){
+        const passwordChars = /^[a-z0-9]+$/i;
+        if (passwordChars.test(this.state.passwordValue)){
+            const strikeThrough = {textDecoration: 'line-through'};
+            this.setState({
+                passwordCharacters: strikeThrough
+            });
+        } else {
+            const noStrike = {textDecoration: 'none'};
+            this.setState({
+                passwordCharacters: noStrike
+            });
+        }
     }
     confirmChange(e){
-        this.setState({
-            confirmValue: e.target.value
-        })
+        if (e.target.value === this.state.passwordValue){
+            this.setState({
+                confirmValue: e.target.value,
+                confirmMatches: {textDecoration: 'line-through'}
+            });
+        } else {
+            this.setState({
+                confirmValue: e.target.value,
+                confirmMatches: {textDecoration: 'none'}
+            });
+        }
+    }
+    fieldFocused(targetField){
+        if (targetField === 'email'){
+            this.setState({
+                emailFocused: true
+            });
+        } else if (targetField === 'password'){
+            this.setState({
+                passwordFocused: true
+            });
+        } else if (targetField === 'confirm'){
+            this.setState({
+                confirmFocused: true
+            });
+        }
+    }
+    fieldBlurred(targetField){
+        if (targetField === 'email'){
+            this.setState({
+                emailFocused: false
+            });
+        } else if (targetField === 'password'){
+            this.setState({
+                passwordFocused: false
+            });
+        } else if (targetField === 'confirm'){
+            this.setState({
+                confirmFocused: false
+            });
+        }
     }
     render(){
         return (
-            <form>
-                <div>
-                    <label>Email</label>
-                    <input type='text' value={this.state.emailValue} onChange={this.emailChange}/>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type='password' value={this.state.passwordValue} onChange={this.passwordChange}/>
-                </div>
-                <div>
-                    <label>Confirm Password</label>
-                    <input type='password' value={this.state.confirmValue} onChange={this.confirmChange}/>
-                </div>
-                {!this.state.pageLink ? <Link to={''} onClick={this.goBack} className='btn red darken-3'>Submit</Link> : <Redirect push to={'/diet-selection'} onClick={this.goBack} className='btn green darken-2'>Submit</Redirect>}
-            </form>
+            <div>
+                <form onSubmit={this.goBack} className='row'>
+                    <div className='col s8 offset-s2 inputField'>
+                        <label className='white-text'>Email</label>
+                        <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
+                        {this.state.emailFocused && <div style={this.state.emailCheck} className='validationText1'>
+                            {this.state.emailCheck.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address
+                        </div>}
+                    </div>
+                    <div className='col s2' />
+                    <div className='col s8 offset-s2 inputField'>
+                        <label className='white-text'>Password</label>
+                        <input type='password' className='white-text' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
+                        {this.state.passwordFocused && <div className='validationText2'>
+                            <div style={this.state.passwordLength} >
+                                {this.state.passwordLength.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
+                            </div>
+                            <div style={this.state.passwordCharacters} >
+                                {this.state.passwordCharacters.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers and letters
+                            </div>
+                        </div>}
+                    </div>
+                    <div className='col s2' />
+                    <div className='col s8 offset-s2 inputField'>
+                        <label className='white-text'>Confirm Password</label>
+                        <input type='password' className='white-text' value={this.state.confirmValue} onChange={this.confirmChange} onFocus={()=>this.fieldFocused('confirm')} onBlur={()=>this.fieldBlurred('confirm')}/>
+                        {this.state.confirmFocused && <div className='validationText1'>
+                            <div style={this.state.confirmMatches} >
+                                {this.state.confirmMatches.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must match current password
+                            </div>
+                        </div>}
+                    </div>
+                    <div className='col s2' />
+                    <Link to='/allergy-selection' className='btn center-align blue darken-2 waves-effect waves-light'>Register</Link>
+                </form>
+            </div>
         );
     }
 }

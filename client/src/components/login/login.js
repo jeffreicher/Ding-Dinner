@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import LoginHide from './loginhide';
 import RegisterHide from './registerhide';
+import '../../assets/css/login.css';
 
 class Login extends Component{
     constructor(props){

@@ -28,7 +28,11 @@ function allergyCheck($allergies){
     for($i = 0; $i < $count; $i++){
         $key = array_search($allergies[$i], ALLERGIES);
         if($key !== false){
-            $verified_allergies[] = ALLERGIES[$key];
+            //Make sure that the item isn't already in the list. Checking for duplicates.
+            $testCurrentList = array_search($allergies[$i], $verified_allergies);
+            if($testCurrentList === false){
+                $verified_allergies[] = ALLERGIES[$key];
+            }
         }
     }
     return $verified_allergies;

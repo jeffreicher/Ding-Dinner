@@ -40,18 +40,18 @@ if (!dietCheck($_POST['diet'])){
     die('We do not support that diet');
 }
 
-//Prepared statement to create user
+//Prepared statement for INSERT query
 $diet = $_POST['diet'];
 if(!($stmt = $myconn->prepare("INSERT INTO `users`(`email`, `password`, `diet`) VALUES (?, ?, ?)"))){
     die("Prepare failed: (" . $myconn->errno . ") " . $myconn->error);
 } 
 
-//Binding parameters to create user
+//Binding parameters for INSERT query
 if(!$stmt->bind_param('sss', $email, $password, $diet)){
     die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
 }
 
-//Execute the statement
+//Execute the INSERT query statement
 if(!$stmt->execute()){
     die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
 }

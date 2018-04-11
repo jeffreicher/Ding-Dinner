@@ -9,6 +9,8 @@ $_POST['allergies'][] = 'dairy';
 $_POST['allergies'][] = 'egg';
 $_POST['allergies'][] = 'seafood';
 
+//Store allergies and diets in their own file so that you can use it later.
+
 //Retrieve diet and user_id. This might be a $_SESSION['user_id'] later
 $diet = $_POST['diet'];
 $user_id = $_POST['user_id'];
@@ -32,42 +34,8 @@ $stmt->close();
 
 
 //Retrieve allergies and build new array out of matching types.
-$allergyCount = count($_POST['allergies']);
-
-if ($allergyCount > 0){
-    for($count = 0; $count < $allergyCount; $count++){
-        switch ($_POST['allergies']["$count"]){
-            case 'dairy':
-                $userAllergies[] = 'dairy';
-                break;
-            case 'egg':
-                $userAllergies[] = 'egg';
-                break;
-            case 'gluten':
-                $userAllergies[] = 'gluten';
-                break;
-            case 'peanut':
-                $userAllergies[] = 'peanut';
-                break;
-            case 'seafood':
-                $userAllergies[] = 'seafood';
-                break;
-            case 'sesame':
-                $userAllergies[] = 'sesame';
-                break;
-            case 'shellfish':
-                $userAllergies[] = 'shellfish';
-                break;
-            case 'soy':
-                $userAllergies[] = 'soy';
-                break;
-            case 'tree nut':
-                $userAllergies[] = 'tree nut';
-                break;
-            case 'wheat':
-                $userAllergies[] = 'wheat';
-        }
-    }
+if(isset($_POST['allergies'])){
+    $userAllergies = allergyCheck($_POST['allergies']);
     $acceptedAllergyCount = count($userAllergies);
 
     for($countAccepted = 0; $countAccepted < $acceptedAllergyCount; $countAccepted++){

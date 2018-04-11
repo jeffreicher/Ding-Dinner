@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import Footer from './footer';
-import LogoHeader from './logo-header';
+import Footer from '../general/footer';
+import LogoHeader from '../general/logo-header';
 
 class Details extends Component{
     constructor(props){

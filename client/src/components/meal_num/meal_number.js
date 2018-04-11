@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Header from './header';
+import Header from '../general/header';
 import MealNumButton from './meal-num-btn';
-import Next from './next_button';
-import '../assets/css/mealNumber.css';
+import Next from '../general/next_button';
+import '../../assets/css/mealNumber.css';
 import {Link} from 'react-router-dom';
-import mealdb from './meal-db';
-import mealschosen from './meals-chosen';
-import LogoHeader from './logo-header';
+import mealdb from '../info_storage/meal-db';
+import mealschosen from '../info_storage/meals-chosen';
+import LogoHeader from '../general/logo-header';
 
 class MealNumber extends Component {
 

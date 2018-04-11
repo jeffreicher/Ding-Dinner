@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Link, Route} from 'react-router-dom';
-import Settings from './settings';
-import LogoHeader from './logo-header';
-import Footer from './footer';
+import Settings from '../settings/settings';
+import LogoHeader from '../general/logo-header';
+import Footer from '../general/footer';
 
 class Grocery extends Component{
     constructor(props){

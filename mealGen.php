@@ -20,6 +20,7 @@ $result = mysqli_query($conn, $restrictionQuery);
 while($row = mysqli_fetch_assoc($result)){
     $restrictions[]=$row;
 }
+// print_r($restrictions);
 
 $dairy = '0';
 $egg = '0';
@@ -88,12 +89,15 @@ forEach($allergens as $key => $value){
 };
 $query = substr($query, 0, -4);
 $query .= " AND rd.$diet".'=1';
-$query .= " LIMIT 20";
+$query .= " LIMIT 21";
+
 $output=[];
 $result = mysqli_query($conn, $query);
+
 while($row = mysqli_fetch_assoc($result)){
     $row['title']=addslashes($row['title']);
     $row['image']=addslashes($row['image']);
+
     $recipeID = $row['recipe_id'];
     if(!is_numeric($recipeID)){
         print 'Invalid recipe ID';
@@ -137,6 +141,7 @@ forEach($recipeIDArray as $value){
     $query2 .= "n.recipe_id" .'='. $value .' OR ';
 }
 $query2 = substr($query2, 0, -3);
+$query2 .= " LIMIT 21";
 $output2=[];
 $result = mysqli_query($conn, $query2);
 while($row = mysqli_fetch_assoc($result)){
@@ -165,6 +170,7 @@ forEach($recipeIDArray as $value){
     $query3 .= "ing.recipe_id" .'='. $value .' OR ';
 }
 $query3 = substr($query3, 0, -3);
+$query3 .= " LIMIT 21";
 $output3=[];
 $result = mysqli_query($conn, $query3);
 while($row = mysqli_fetch_assoc($result)){
@@ -189,6 +195,7 @@ forEach($recipeIDArray as $value){
     $query4 .= "inst.recipe_id" .'='. $value .' OR ';
 }
 $query4 = substr($query4, 0, -3);
+$query4 .= " LIMIT 21";
 $output4=[];
 $result = mysqli_query($conn, $query4);
 while($row = mysqli_fetch_assoc($result)){
@@ -217,6 +224,7 @@ for($y=0; $y<$finalcount; $y++){
     $ingredients=[];
     $finalOutput[$y][]=$output[$y];
     $finalOutput[$y][]=$output2[$y];
+    // echo($output2[$y]);
     for($z=0;$z<$ingrCount; $z++){
         if($output3[$z]['recipe_id']===$recipeIDArray[$y]){
             $ingredients[]=$output3[$z];

@@ -7,75 +7,11 @@ body {
     font-size: 0;
 }
 
-.containerThing {
+.mainContentContainer {
     height: 100vh;
     width: 100vw;
     margin: 0;
     overflow: hidden;
-}
-
-.loginContainer {
-    height: 100%;
-    width: 100%;
-    background-color: lightblue;
-    margin: 0;
-}
-
-.loginContainer *  {
-    font-size: 1rem;
-}
-
-.loginLogo {
-    text-align: center;
-    padding-top: 30%;
-    margin: 0;
-    font-size: 4rem;
-    font-family: 'Lobster', cursive;
-}
-
-.loginSlogan {
-    font-size: 2rem;
-    text-align: center;
-    margin: 0;
-    padding: 1%;
-    font-family: 'Lobster', cursive;
-}
-
-.loginButtons {
-    margin-top: 30%;
-    text-align: center;
-}
-
-.loginButton, .registerButton {
-    font-size: 2rem;
-    width: 53%;
-    margin: 2%;
-    font-family: 'Oxygen', sans-serif;
-}
-
-.validationText1, .checkmark {
-    display: inline-block;
-}
-
-.validationText1, .validationText2 {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 5px;
-    border: 1px solid lightgrey;
-    box-sizing: border-box;
-    box-shadow: 2px 2px 3px gray;
-    position: absolute;
-    bottom: -10%;
-    left: 0%;
-    z-index: 10;
-}
-
-.validationText2 {
-    bottom: -35%;
-}
-
-.inputField {
-    position: relative;
 }
 
 .mealsContainer {
@@ -233,65 +169,6 @@ body {
 }
 
 .detailsFooter {
-    height: 10%;
-    width: 100%;
-    margin: 0;
-    background-color: lightblue;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 2rem;
-}
-
-.groceryContainer {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    text-align: center;
-    font-size: 1rem;
-}
-
-.groceryHeader {
-    top: 0;
-    z-index: 1; 
-    height: 10%;
-    width: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: lightblue;
-}
-
-.groceryHeader * {
-    font-size: 3rem;
-}
-
-.groceryMainArea {
-    position: absolute;
-    top: 10vh;
-    height: 80%;
-    width: 100%;
-    margin: 0;
-    overflow-y: scroll;
-    padding: 0 5%;
-    box-sizing: border-box;
-}
-
-.groceryList {
-    text-align: left;
-}
-
-.groceryItem {
-    margin: 5%;
-}
-
-.groceryCheck, .groceryName {
-    display: inline-block;
-}
-
-.groceryFooter, .mealsFooter {
-    position: fixed;
     height: 10%;
     width: 100%;
     margin: 0;

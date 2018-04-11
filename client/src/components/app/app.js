@@ -27,7 +27,7 @@ class App extends Component{
     render(){
         return (
             <Router>
-                <div className='containerThing container'>
+                <div className='mainContentContainer'>
                     <div className='hide-on-small-only phonePls valign-wrapper'><div>This content best viewed on mobile</div></div>
                     <Route exact path='/' component={Login} />
                     <Route path='/mymeals' component={Meals} />

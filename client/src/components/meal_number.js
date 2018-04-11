@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Header from './header';
 import MealNumButton from './meal-num-btn';
 import Next from './next_button';
@@ -20,8 +21,17 @@ class MealNumber extends Component {
             mealdb.splice(randomIndex,1);
         }
     }
+    getRecipes(){
+        console.log('wew');
+        axios.get('http://localhost:80/c1.18_FoodTinder/loginMealGrab.php').then((resp)=>{
+            console.log('We did it', resp);
+        })
+    }
 
     render() {
+
+        this.getRecipes();
+
         return (
             <div>
                 <LogoHeader />
@@ -34,7 +44,7 @@ class MealNumber extends Component {
                         <MealNumButton title={'7'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>   
                     </div>  
                     <div className="right" style={{marginTop: `2.2vh`}}>
-                    <Link to='/mymeals'><Next style={'bottom'}/></Link>                  
+                        <Next style={'bottom'}/>                 
                     </div>  
                 </div>                
             </div>

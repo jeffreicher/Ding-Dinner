@@ -1,5 +1,6 @@
 <?php
 require_once 'mysql_connect.php';
+require_once 'helper_functions.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
@@ -9,7 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Si
 
 //Test variables for diet update
 $_POST['user_id'] = 9;
-$_POST['diet'] = "ketogenic";
+$_POST['diet'] = "vegan";
 
 //Test variables for allergy update'
 $_POST['allergies'][] = 'dairy';
@@ -19,12 +20,12 @@ $_POST['allergies'][] = 'seafood';
 //Store allergies and diets in their own file so that you can use it later.
 
 //Retrieve diet and user_id. This might be a $_SESSION['user_id'] later
-$diet = $_POST['diet'];
 $user_id = $_POST['user_id'];
 
-if ($diet !== 'vegan' && $diet !== 'vegetarian' && $diet !== 'normal' && $diet !== 'ketogenic'){
-    echo 'We do not support that diet';
+if (!dietCheck($_POST['diet'])){
+    die('We do not support that diet');
 } else {
+    $diet = $_POST['diet'];
     $stmt = $myconn->prepare("UPDATE `users` SET `diet` = ? WHERE `id` = ?");
     $stmt->bind_param('si', $diet, $user_id);
     $stmt->execute();

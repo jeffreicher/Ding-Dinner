@@ -4,11 +4,11 @@ require_once 'helper_functions.php';
 
 $_POST['email'] = "machop@something.com";
 
-header("Access-Control-Allow-Origin: *");
+/*Iheader("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, 
-    X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
+    X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");*/
 
 $_POST['email'] = "mkane7@something.com";
 $_POST['password'] = "something";

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Header from './header';
-import Button from './button';
-import Next from './next_button';
-import newFilter from './new-filter-storage';
-import '../assets/css/allergy-selection.css';
+import Header from '../general/header';
+import Button from '../general/button';
+import Next from '../general/next_button';
+import newFilter from '../info_storage/new-filter-storage';
+import '../../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
-import LogoHeader from './logo-header';
+import LogoHeader from '../general/logo-header';
 
 
 class AllergySettings extends Component {
@@ -46,7 +46,7 @@ class AllergySettings extends Component {
         const { selected } = this.state;
         return (  
          <div>            
-             <LogoHeader />
+             <LogoHeader back={true} location={'/diet-settings'}/>
             <div className="container">
                 <Header title={'Any Allergies?'} />
                 <div className="row">

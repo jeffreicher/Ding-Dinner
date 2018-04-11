@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Header from './header';
-import Button from './button';
-import Next from './next_button';
-import registerstorage from './register-storage';
-import '../assets/css/allergy-selection.css';
+import Header from '../general/header';
+import Button from '../general/button';
+import Next from '../general/next_button';
+import registerstorage from '../info_storage/register-storage';
+import '../../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
-import LogoHeader from './logo-header';
+import LogoHeader from '../general/logo-header';
 
 class AllergySelection extends Component {
     constructor(props) {
@@ -41,20 +41,15 @@ class AllergySelection extends Component {
     };
 
     render() {
-        // const titles = ['Gluten','Dairy','Tree Nut', 'Peanuts', 'Shellfish', 'Soy', 'Egg', 'Wheat', 'Sesame', 'Seafood', 'Sulfite'];
-        // const mapped = titles.map((item, index) => (
-        //     <Button key={index} title={item} selectedCheck={ handleSelected } determineSelected={ selected.includes({item}) } />     
-        // ));
         const { handleSelected } = this;
         const { selected } = this.state;
         console.log(this.state.selected);
         return (  
          <div>            
-             <LogoHeader />
+             <LogoHeader back={true} location={'/diet-selection'} />
             <div className="container">
                 <Header title={'Any Allergies?'} />
                 <div className="row">
-                {/* {mapped} */}
                     <Button title={'Gluten'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Gluten')} />  
                     <Button title={'Dairy'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Dairy')} />     
                     <Button title={'Tree Nut'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Tree Nut')} />   

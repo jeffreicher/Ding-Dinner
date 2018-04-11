@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Details from './details';
-import mealdb from './meal-db';
-import mealschosen from './meals-chosen';
+import mealdb from '../info_storage/meal-db';
+import mealschosen from '../info_storage/meals-chosen';
 import MealCreator from './meal-creator';
-import LogoHeader from './logo-header';
-import Footer from './footer';
+import LogoHeader from '../general/logo-header';
+import Footer from '../general/footer';
 
 class Meals extends Component{
     constructor(props){
@@ -87,7 +87,7 @@ class Meals extends Component{
 
         return(
             <div className="mealsContainer">
-            <LogoHeader add={true} style={{position: 'fixed'}}/>
+            <LogoHeader add={true}/>
                 <main className="mealsMainArea">
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}

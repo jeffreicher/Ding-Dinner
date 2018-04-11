@@ -1,13 +1,13 @@
-import beans from '../assets/images/beans.jpg'
-import burger from '../assets/images/burger.jpg'
-import curry from '../assets/images/curry.jpg'
-import donuts from '../assets/images/donuts.jpg'
-import fruit from '../assets/images/fruit.jpg'
-import mcdonalds from '../assets/images/mcdonalds.jpg'
-import pancake from '../assets/images/pancake.jpg'
-import pasta from '../assets/images/pasta.jpg'
-import tacos from '../assets/images/tacos.jpg'
-import tart from '../assets/images/tart.jpg'
+import beans from '../../assets/images/beans.jpg'
+import burger from '../../assets/images/burger.jpg'
+import curry from '../../assets/images/curry.jpg'
+import donuts from '../../assets/images/donuts.jpg'
+import fruit from '../../assets/images/fruit.jpg'
+import mcdonalds from '../../assets/images/mcdonalds.jpg'
+import pancake from '../../assets/images/pancake.jpg'
+import pasta from '../../assets/images/pasta.jpg'
+import tacos from '../../assets/images/tacos.jpg'
+import tart from '../../assets/images/tart.jpg'
 
 export default [
     {

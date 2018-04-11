@@ -1,5 +1,12 @@
 <?php
 require_once 'mysql_connect.php';
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true ");
+header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
+header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, 
+    X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
+
 $_POST['user_id'] = 9;
 $_POST['recipe_ids'] = [547899, 525527];
 

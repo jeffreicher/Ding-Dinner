@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import registerstorage from './register-storage';
-import '../assets/css/reg-confirm.css'
+import registerstorage from '../info_storage/register-storage';
+import '../../assets/css/reg-confirm.css'
 import {Link} from 'react-router-dom';
-import LogoHeader from './logo-header';
+import LogoHeader from '../general/logo-header';
 
 class RegisterConfirm extends Component{
     constructor(props){

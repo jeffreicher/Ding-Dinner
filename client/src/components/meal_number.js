@@ -23,7 +23,7 @@ class MealNumber extends Component {
     }
     getRecipes(){
         console.log('wew');
-        axios.get('http://localhost:80/c1.18_FoodTinder/loginMealGrab.php').then((resp)=>{
+        axios.get('http://localhost:80/c1.18_FoodTinder/mealGen.php').then((resp)=>{
             console.log('We did it', resp);
         })
     }

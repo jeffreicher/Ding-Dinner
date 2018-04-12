@@ -81,7 +81,7 @@ $count = count($output);
 for($i = 0; $i<$count; $i++){
     $recipeIDArray[]=$output[$i]['recipe_id'];
 };
-print_r($recipeIDArray);
+// print_r($recipeIDArray);
 // $query2 = "SELECT Distinct n.recipe_id, n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, 
 //             n.servingPrice, inst.step_num, inst.step, ing.ingredient, ing.amount, ing.unit_type 
 //             FROM ingredients AS ing
@@ -191,7 +191,7 @@ for($r=0; $r<$ingredientsCount; $r++){
         $output3[]=$row;
     };
 }
-?><br><?php
+
 // print_r($output3);
 
 /**Get the cooking instructions for the user's meals */
@@ -234,7 +234,7 @@ for($r=0; $r<$instructionsCount; $r++){
         $output4[]=$row;
     };
 }
-?><br><?php
+
 // print_r($output4);
 /**Package all the info in a legible JSON object */
 
@@ -246,13 +246,7 @@ for($x=0; $x<$count; $x++){
 $finalcount = count($finalOutput);
 $instCount = count($output4);
 $ingrCount = count($output3);
-echo($ingrCount);
-?><br><br><?php
-echo($instCount);
-// echo($finalcount);
-?><br><?php
-// echo(count($output));
-?><br><?php                                 //output2 - nutrition
+                                //output2 - nutrition
                                             //output3 - ingredients
                                             //output4 - instructions
 // echo(count($output2));
@@ -269,7 +263,7 @@ for($y=0; $y<$finalcount; $y++){
         if($output3[$z]['recipe_id']==$recipeIDArray[$y]){
             
             $ingredients[]=$output3[$z];
-            echo("im in here");
+            // echo("im in here");
             // print_r($output3[$z]);
         }
     }

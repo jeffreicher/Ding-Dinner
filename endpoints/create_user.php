@@ -5,30 +5,11 @@ require_once 'helper_functions.php';
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
-header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, 
-    X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
+header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
+//Make PHP understand the Axios call
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
-
-//print_r($request_data);
-
-
-// $_POST['email'] = "mkane36@something.com";
-// $_POST['password'] = "something";
-// $_POST['diet'] = "vegan";
-
-// $_POST['allergies'][] = 'peanut';
-// $_POST['allergies'][] = 'tree nut';
-// $_POST['allergies'][] = 'dairy';
-// $_POST['allergies'][] = 'egg';
-// $_POST['allergies'][] = 'soy';
-// $_POST['allergies'][] = 'sesame';
-// $_POST['allergies'][] = 'gluten';
-// $_POST['allergies'][] = 'wheat';
-// $_POST['allergies'][] = 'shellfish';
-// $_POST['allergies'][] = 'seafood';
-
 
 //Validate Email
 if (!($email = filter_var($request_data['email'], FILTER_VALIDATE_EMAIL))){

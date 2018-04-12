@@ -29,7 +29,7 @@ class DietSelection extends Component {
                 value: true
             });
         }
-        registerstorage.diet = buttonObject.props.title;
+        registerstorage.diet = buttonObject.props.title.toLowerCase();
         console.log(registerstorage); 
         // else {
         //     debugger;
@@ -44,7 +44,6 @@ class DietSelection extends Component {
 
     render() {
         const { handleSelected } = this;
-        console.log(this.state.selected);
 
         return (
             <div>
@@ -59,7 +58,7 @@ class DietSelection extends Component {
                         <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
                     </div>  
                     <div className="right" style={{marginTop: `3vh`}}>
-                    {(this.state.value) ? <Link to='/allergy-selection'><Next /></Link> : console.log('error')}               
+                    {(this.state.value) && <Link to='/allergy-selection'><Next /></Link>}
                     </div>     
                 </div>                
             </div>

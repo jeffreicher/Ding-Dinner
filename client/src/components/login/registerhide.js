@@ -48,6 +48,7 @@ class RegisterHide extends Component{
                 });
             }
         });
+        registerstorage.email = e.target.value;
     }
     passwordChange(e){
         this.setState({
@@ -56,6 +57,7 @@ class RegisterHide extends Component{
             this.checkPWLength();
             this.checkPWChars();
         });
+        registerstorage.password = e.target.value;
     }
     checkPWLength(){
         if(this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32){

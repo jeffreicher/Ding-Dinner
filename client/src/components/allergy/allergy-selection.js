@@ -18,6 +18,13 @@ class AllergySelection extends Component {
         this.handleSelected = this.handleSelected.bind(this);
     };
 
+    formatStorage(){
+        for(var i=0; i<registerstorage.allergy.length; i++){
+            registerstorage.allergy[i] = registerstorage.allergy[i].toLowerCase();
+        }
+        console.log(registerstorage.allergy);
+    }
+
     handleSelected(buttonObject) {
         const { selected } = this.state;
         const { title } = buttonObject.props;
@@ -26,7 +33,8 @@ class AllergySelection extends Component {
             this.setState({
                 selected: [...selected, title]
             },() => {
-                registerstorage.allergy = this.state.selected;
+                registerstorage.allergy = [...this.state.selected];
+                this.formatStorage();
             });
         } else {
             let currentSelected = selected;
@@ -35,7 +43,8 @@ class AllergySelection extends Component {
             this.setState({
                 selected: currentSelected
             },() => {
-                registerstorage.allergy = this.state.selected;
+                registerstorage.allergy = [...this.state.selected];
+                this.formatStorage();
             });
         };
     };
@@ -43,7 +52,7 @@ class AllergySelection extends Component {
     render() {
         const { handleSelected } = this;
         const { selected } = this.state;
-        console.log(this.state.selected);
+        console.log('Selected', this.state.selected);
         return (  
          <div>            
              <LogoHeader back={true} location={'/diet-selection'} />

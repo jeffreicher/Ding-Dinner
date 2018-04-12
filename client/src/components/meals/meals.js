@@ -17,7 +17,7 @@ class Meals extends Component{
         this.state = {
             meals: mealschosen,
             showDetails: false,
-            confirmingMeals: this.determineMealConfirmation.bind(this),
+            confirmingMeals: false,
             mealDetail: {
                 name: '',
                 image: '',
@@ -53,13 +53,26 @@ class Meals extends Component{
     }
 
     determineMealConfirmation(){
+        console.log(this.props);
         if (!this.props.location.state){
-            return false
+            this.setState({
+                confirmingMeals: false
+            });
         }
         const {confirmingMeals} = this.props.location.state;
-        return confirmingMeals;
+        this.setState({
+            confirmingMeals: confirmingMeals
+        });
     }
-
+    componentWillMount(){
+        this.determineMealConfirmation();
+    }
+    closeMealConfirm(){
+        console.log('doin it');
+        this.setState({
+            confirmingMeals: false
+        });
+    }
     mealClicked(number, ingredients, instructions, name, image){
         console.log(number);
         const newMealInfo = {
@@ -114,7 +127,7 @@ class Meals extends Component{
             <div className="mealsContainer">
             <LogoHeader add={true}/>
                 <main className="mealsMainArea">
-                    {this.state.confirmingMeals() && <MealConfirm confirming={this.state.confirmingMeals()} />}
+                    {this.state.confirmingMeals && <MealConfirm confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}
                 </main>

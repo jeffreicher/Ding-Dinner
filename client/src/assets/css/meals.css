@@ -31,7 +31,7 @@
     margin-top: 2px;
 }
 
-.mealsItem {
+.mealsItem, .mealConfirmContainer {
     height: 20%;
     width: 100%;
     position: relative;
@@ -161,4 +161,28 @@
 
 .mealsFooter {
     bottom: 0;
+}
+
+.mealsMainArea .mealConfirmContainer {
+    margin: 0;
+}
+
+.confirmTextArea {
+    margin-top: 8%;
+}
+
+.confirmHead {
+    font-size: 1.4rem;
+    font-weight: bolder;
+}
+
+.confirmButton {
+    width: 70%;
+    height: 50%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.confirmCheck {
+    margin-top: 12%;
 }

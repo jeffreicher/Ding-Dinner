@@ -5,6 +5,7 @@ import Details from './details';
 import mealdb from '../info_storage/meal-db';
 import mealschosen from '../info_storage/meals-chosen';
 import MealCreator from './meal-creator';
+import MealConfirm from './mealconfirm';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 
@@ -15,6 +16,7 @@ class Meals extends Component{
         this.state = {
             meals: mealschosen,
             showDetails: false,
+            confirmingMeals: this.determineMealConfirmation.bind(this),
             mealDetail: {
                 name: '',
                 image: '',
@@ -33,9 +35,14 @@ class Meals extends Component{
             ]
         }
     }
-    createMealElements(){
-        console.log('hey');
+    determineMealConfirmation(){
+        if (!this.props.location.state){
+            return false
+        }
+        const {confirmingMeals} = this.props.location.state;
+        return confirmingMeals;
     }
+
     mealClicked(number, ingredients, instructions, name, image){
         console.log(number);
         const newMealInfo = {
@@ -90,6 +97,7 @@ class Meals extends Component{
             <div className="mealsContainer">
             <LogoHeader add={true}/>
                 <main className="mealsMainArea">
+                    {this.state.confirmingMeals() && <MealConfirm confirming={this.state.confirmingMeals()} />}
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}
                 </main>

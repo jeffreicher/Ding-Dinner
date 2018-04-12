@@ -1,24 +1,28 @@
 <?php
-require_once 'mysql_connect.php';
+require_once 'mysqli_connect.php';
 
-/*header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, 
-    X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");*/
+    X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
-$_POST['user_id'] = 33;
-$_POST['recipe_ids'] = [547899, 525527];
+//Make PHP understand the Axios call
+$entityBody = file_get_contents('php://input');
+$request_data = json_decode($entityBody, true);
 
-$recipe_count = count($_POST['recipe_ids']);
+/*$_POST['user_id'] = 33;
+$_POST['recipe_ids'] = [547899, 525527];*/
+
+$recipe_count = count($request_data['recipe_ids']);
 
 //Test to see if the $user_id is an integer
-if(!is_int($_POST['user_id'])){
+if(!is_int($request_data['user_id'])){
     die('User ID is invalid');
 }
 
 //First we will do a SELECT query to see if the user exists in our user table
-$user_id = $_POST['user_id'];
+$user_id = $request_data['user_id'];
 
 //Prepare statement for the SELECT query
 if(!($stmt = $myconn->prepare("SELECT `status` FROM `users` WHERE `id` = ?"))){
@@ -83,7 +87,7 @@ if($stmt->num_rows > 0) {
         }
 
         for ($loop_count = 0; $loop_count < $recipe_count; $loop_count++){
-            $testRecipeID = $_POST['recipe_ids'][$loop_count];
+            $testRecipeID = $request_data['recipe_ids'][$loop_count];
         
             //Execute the SELECT statement
             if(!$stmt->execute()){

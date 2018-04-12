@@ -1,5 +1,5 @@
 <?php
-require_once 'mysql_connect.php';
+require_once 'mysqli_connect.php';
 require_once 'helper_functions.php';
 
 /*header("Access-Control-Allow-Origin: *");
@@ -7,6 +7,10 @@ header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, 
     X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");*/
+
+//Make PHP understand the Axios call
+$entityBody = file_get_contents('php://input');
+$request_data = json_decode($entityBody, true);
 
 //Test variables for diet update
 $_POST['user_id'] = 44;
@@ -18,18 +22,18 @@ $_POST['allergies'][] = 'sesame';
 $_POST['allergies'][] = 'soy';
 
 //Check if user ID is a valid integer. This might be a $_SESSION['user_id'] later
-if(!is_int($_POST['user_id'])){
+if(!is_int($request_data['user_id'])){
     die('User ID is invalid');
 }
 
 //Check to see if diet is valid prior to checking if user is valid.
-if (!dietCheck($_POST['diet'])){
+if (!dietCheck($request_data['diet'])){
     die('We do not support that diet');
 }
 
 //First we will do a SELECT query to see if the user exists in our user table
-$user_id = $_POST['user_id'];
-$diet = $_POST['diet'];
+$user_id = $request_data['user_id'];
+$diet = $request_data['diet'];
 
 //Prepare statement for the SELECT query
 if(!($stmt = $myconn->prepare("SELECT `status` FROM `users` WHERE `id` = ?"))){
@@ -93,8 +97,8 @@ if($stmt->num_rows > 0) {
         $stmt->close();
 
         //Check to see if allergies are set and call our allergyCheck function from helper_functions.
-        if(isset($_POST['allergies'])){
-            $userAllergies = allergyCheck($_POST['allergies']);
+        if(isset($request_data['allergies'])){
+            $userAllergies = allergyCheck($request_data['allergies']);
             $acceptedAllergyCount = count($userAllergies);
 
             //Prepare and bind the INSERT query outside of the for loop

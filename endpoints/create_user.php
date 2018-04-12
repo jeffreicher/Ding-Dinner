@@ -70,7 +70,7 @@ if(isset($_POST['allergies'])){
         
     
     //Prepare statement to insert allergy rows into user-allergy table
-    if(!($stmt = $myconn->prepare("INSERT INTO `allergy`(`allergy`,`user_id`) VALUES (?, ?)"))){
+    if(!($stmt = $myconn->prepare("INSERT INTO `user-allergy`(`allergy_name`,`user_id`) VALUES (?, ?)"))){
         die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
     }
     //Bind parameters for allergy and user id to be added to user-allergy table

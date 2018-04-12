@@ -16,7 +16,7 @@ define('ALLERGIES', array(
 //Constant for Diety choices that will be used in the dietCheck function.
 define('DIETS', array(
     'vegan',
-    'normal',
+    'none',
     'vegetarian',
     'ketogenic'
 ));

@@ -11,43 +11,43 @@ header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Si
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
-print_r($request_data);
+//print_r($request_data);
 
 
-/*$_POST['email'] = "mkane36@something.com";
-$_POST['password'] = "something";
-$_POST['diet'] = "vegan";
+// $_POST['email'] = "mkane36@something.com";
+// $_POST['password'] = "something";
+// $_POST['diet'] = "vegan";
 
-$_POST['allergies'][] = 'peanut';
-$_POST['allergies'][] = 'tree nut';
-$_POST['allergies'][] = 'dairy';
-$_POST['allergies'][] = 'egg';
-$_POST['allergies'][] = 'soy';
-$_POST['allergies'][] = 'sesame';
-$_POST['allergies'][] = 'gluten';
-$_POST['allergies'][] = 'wheat';
-$_POST['allergies'][] = 'shellfish';
-$_POST['allergies'][] = 'seafood';
+// $_POST['allergies'][] = 'peanut';
+// $_POST['allergies'][] = 'tree nut';
+// $_POST['allergies'][] = 'dairy';
+// $_POST['allergies'][] = 'egg';
+// $_POST['allergies'][] = 'soy';
+// $_POST['allergies'][] = 'sesame';
+// $_POST['allergies'][] = 'gluten';
+// $_POST['allergies'][] = 'wheat';
+// $_POST['allergies'][] = 'shellfish';
+// $_POST['allergies'][] = 'seafood';
 
 
 //Validate Email
-if (!($email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))){
+if (!($email = filter_var($request_data['email'], FILTER_VALIDATE_EMAIL))){
     die('Your email is invalid');
 }
 
 //Validate Password
-if (!preg_match('/^[a-zA-Z0-9]{8,32}$/', $_POST['password'])){
+if (!preg_match('/^[a-zA-Z0-9]{8,32}$/', $request_data['password'])){
     die('Password is not corect');
 }
 
-$password = $_POST['password'];      
+$password = $request_data['password'];      
 //use dietCheck function from helper_functions.php to ensure the diet is correct.
-if (!dietCheck($_POST['diet'])){
+if (!dietCheck($request_data['diet'])){
     die('We do not support that diet');
 }
 
 //Prepared statement for INSERT query
-$diet = $_POST['diet'];
+$diet = $request_data['diet'];
 if(!($stmt = $myconn->prepare("INSERT INTO `users`(`email`, `password`, `diet`) VALUES (?, ?, ?)"))){
     die("Prepare failed: (" . $myconn->errno . ") " . $myconn->error);
 } 
@@ -69,8 +69,8 @@ $user_id = $stmt->insert_id;
 $stmt->close();
 
 //Checks to see if has allergies and if they do uses allergyCheck function to build a new array out of verified allergies.
-if(isset($_POST['allergies'])){
-    $userAllergies = allergyCheck($_POST['allergies']);
+if(isset($request_data['allergies'])){
+    $userAllergies = allergyCheck($request_data['allergies']);
     $acceptedAllergyCount = count($userAllergies);
 
         
@@ -96,5 +96,5 @@ if(isset($_POST['allergies'])){
     $stmt->close();
     echo 'Success';
 }
-*/
+
 ?>

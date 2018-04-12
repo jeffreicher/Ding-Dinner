@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import LogoHeader from './logo-header';
-import Footer from './footer';
+import '../../assets/css/settings.css';
+import LogoHeader from '../general/logo-header';
+import Footer from '../general/footer';
 
 class Settings extends Component{
     constructor(props){

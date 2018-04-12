@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Header from './header';
+import axios from 'axios';
+import Header from '../general/header';
 import MealNumButton from './meal-num-btn';
-import Next from './next_button';
-import '../assets/css/mealNumber.css';
+import Next from '../general/next_button';
+import '../../assets/css/mealNumber.css';
 import {Link} from 'react-router-dom';
-import mealdb from './meal-db';
-import mealschosen from './meals-chosen';
-import LogoHeader from './logo-header';
+import mealdb from '../info_storage/meal-db';
+import mealschosen from '../info_storage/meals-chosen';
+import LogoHeader from '../general/logo-header';
 
 class MealNumber extends Component {
 
@@ -20,8 +21,27 @@ class MealNumber extends Component {
             mealdb.splice(randomIndex,1);
         }
     }
+    getRecipes(){
+        console.log('wew');
+        axios({
+            url: 'http://localhost:80/c1.18_FoodTinder/endpoints/create_user.php',
+            
+        }).then((resp)=>{
+            console.log('We did it famalam', resp);
+        });
+        // {
+        //     email: 'jeff@jeff.jeff',
+        //     password: 'jeffrocks',
+        //     diet: 'none',
+        //     allergies: ['peanut', 'wheat', 'rocks']
+        // }
+        //'jeff@jeff.jeff', 'jeffrocks', 'none', ['peanut', 'wheat', 'rocks']
+    }
 
     render() {
+
+        this.getRecipes();
+
         return (
             <div>
                 <LogoHeader />
@@ -34,7 +54,7 @@ class MealNumber extends Component {
                         <MealNumButton title={'7'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>   
                     </div>  
                     <div className="right" style={{marginTop: `2.2vh`}}>
-                    <Link to='/mymeals'><Next style={'bottom'}/></Link>                  
+                        <Next style={'bottom'}/>                 
                     </div>  
                 </div>                
             </div>

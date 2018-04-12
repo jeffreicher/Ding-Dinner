@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import '../../assets/css/meals.css'
 import Details from './details';
-import mealdb from './meal-db';
-import mealschosen from './meals-chosen';
+import mealdb from '../info_storage/meal-db';
+import mealschosen from '../info_storage/meals-chosen';
 import MealCreator from './meal-creator';
-import LogoHeader from './logo-header';
-import Footer from './footer';
+import LogoHeader from '../general/logo-header';
+import Footer from '../general/footer';
 
 class Meals extends Component{
     constructor(props){

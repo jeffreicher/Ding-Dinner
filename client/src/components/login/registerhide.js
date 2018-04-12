@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import registerstorage from './register-storage';
+import registerstorage from '../info_storage/register-storage';
 
 class RegisterHide extends Component{
     constructor(props){

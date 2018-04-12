@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import 'materialize-css/dist/css/materialize.min.css'
-import '../assets/css/app.css';
-import Login from './login';
-import Meals from './meals';
-import Details from './details';
-import Grocery from './grocery';
-import Settings from './settings';
-import DietSelection from './diet-selection';
-import AllergySelection from './allergy-selection';
-import DietSettings from './diet-settings';
-import AllergySettings from './allergy-settings';
-import MealNumber from './meal_number';
-import MealNumberSettings from './meal-num-settings';
-import RegisterConfirm from './reg-confirm';
+import '../../assets/css/app.css';
+import Login from '../login/login';
+import Meals from '../meals/meals';
+import Details from '../meals/details';
+import Grocery from '../grocery/grocery';
+import Settings from '../settings/settings';
+import DietSelection from '../diet/diet-selection';
+import AllergySelection from '../allergy/allergy-selection';
+import DietSettings from '../settings/diet-settings';
+import AllergySettings from '../settings/allergy-settings';
+import MealNumber from '../meal_num/meal_number';
+import MealNumberSettings from '../settings/meal-num-settings';
+import RegisterConfirm from '../reg_confirm/reg-confirm';
 import {
     BrowserRouter as Router,
     Route
@@ -27,7 +27,7 @@ class App extends Component{
     render(){
         return (
             <Router>
-                <div className='containerThing container'>
+                <div className='mainContentContainer'>
                     <div className='hide-on-small-only phonePls valign-wrapper'><div>This content best viewed on mobile</div></div>
                     <Route exact path='/' component={Login} />
                     <Route path='/mymeals' component={Meals} />

@@ -1,4 +1,5 @@
 
+/endpoints/mysqli_connect.php
 /endpoints/mysql_connect.php
 
 .idea

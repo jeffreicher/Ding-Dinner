@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import Header from './header';
-import Button from './button';
-import Next from './next_button';
-import registerstorage from './register-storage';
-import '../assets/css/allergy-selection.css';
+import Header from '../general/header';
+import Button from '../general/button';
+import Next from '../general/next_button';
+import newFilter from '../info_storage/new-filter-storage';
+import '../../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
-import LogoHeader from './logo-header';
+import LogoHeader from '../general/logo-header';
 
-class AllergySelection extends Component {
+
+class AllergySettings extends Component {
     constructor(props) {
         super(props); 
 
@@ -26,7 +27,7 @@ class AllergySelection extends Component {
             this.setState({
                 selected: [...selected, title]
             },() => {
-                registerstorage.allergy = this.state.selected;
+                newFilter.allergy = this.state.selected;
             });
         } else {
             let currentSelected = selected;
@@ -35,18 +36,17 @@ class AllergySelection extends Component {
             this.setState({
                 selected: currentSelected
             },() => {
-                registerstorage.allergy = this.state.selected;
+                newFilter.allergy = this.state.selected;
             });
         };
     };
 
-    render() {
+    render() {   
         const { handleSelected } = this;
         const { selected } = this.state;
-        console.log(this.state.selected);
         return (  
          <div>            
-             <LogoHeader back={true} location={'/diet-selection'} />
+             <LogoHeader back={true} location={'/diet-settings'}/>
             <div className="container">
                 <Header title={'Any Allergies?'} />
                 <div className="row">
@@ -60,9 +60,8 @@ class AllergySelection extends Component {
                     <Button title={'Wheat'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Wheat')} />
                     <Button title={'Sesame'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sesame')} />
                     <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
-                    <Button title={'Sulfite'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sulfite')} />
                 </div>  
-                <div className="right" style={{marginTop: `4vh`}}><Link to='/register-confirm'>
+                <div className="right" style={{marginTop: `4vh`}}><Link to='/mymeals'>
                 <Next style={'bottom'}/>
                 </Link></div>  
             </div>             
@@ -71,4 +70,4 @@ class AllergySelection extends Component {
     };
 };
 
-export default AllergySelection;
+export default AllergySettings;

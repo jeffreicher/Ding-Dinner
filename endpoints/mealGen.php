@@ -121,7 +121,7 @@ forEach($recipeIDArray as $value){
     $nutritionResult[] =$stmt -> get_result();
     
 }
-print_r($nutritionResult);
+// print_r($nutritionResult);
 // $query2 = substr($query2, 0, -3);
 // $query2 .= " LIMIT 21";
 $output2=[];
@@ -143,7 +143,7 @@ for($r=0; $r<$nutritionCount; $r++){
             exit;
         };
         $output2[]=$row;
-        echo("Adding row to output2: 2@r=$r\n");
+        // echo("Adding row to output2: 2@r=$r\n");
     };
 }
 
@@ -171,6 +171,7 @@ forEach($recipeIDArray as $value){
     }
     $ingredientsResult[] =$stmt -> get_result();
 }
+// print_r($ingredientsResult);
 // $query3 = substr($query3, 0, -3);
 // $query3 .= " LIMIT 21";
 $output3=[];
@@ -182,14 +183,16 @@ for($r=0; $r<$ingredientsCount; $r++){
         $row['amount']=addslashes($row['amount']);
         $row['unit_type']=addslashes($row['unit_type']);
         $recipeID = $row['recipe_id'];
-        if(!is_numeric($recipeID)){
-            print 'Invalid recipe ID';
-            exit;
-        };
+        // if(!is_numeric($recipeID)){
+        //     print 'Invalid recipe ID';
+        //     exit;
+        // };
         
         $output3[]=$row;
     };
 }
+?><br><?php
+// print_r($output3);
 
 /**Get the cooking instructions for the user's meals */
 
@@ -223,15 +226,16 @@ for($r=0; $r<$instructionsCount; $r++){
         $row['step_num']=addslashes($row['step_num']);
         $row['step']=addslashes($row['step']);
         $recipeID = $row['recipe_id'];
-        if(!is_numeric($recipeID)){
-            print 'Invalid recipe ID';
-            exit;
-        };
+        // if(!is_numeric($recipeID)){
+        //     print 'Invalid recipe ID';
+        //     exit;
+        // };
         
         $output4[]=$row;
     };
 }
-
+?><br><?php
+// print_r($output4);
 /**Package all the info in a legible JSON object */
 
 $finalOutput = [];
@@ -242,27 +246,43 @@ for($x=0; $x<$count; $x++){
 $finalcount = count($finalOutput);
 $instCount = count($output4);
 $ingrCount = count($output3);
-echo($finalcount);
+echo($ingrCount);
+?><br><br><?php
+echo($instCount);
+// echo($finalcount);
 ?><br><?php
-echo(count($output));
-?><br><?php
-echo(count($output2));
+// echo(count($output));
+?><br><?php                                 //output2 - nutrition
+                                            //output3 - ingredients
+                                            //output4 - instructions
+// echo(count($output2));
 for($y=0; $y<$finalcount; $y++){
     $instructions=[];
     $ingredients=[];
-    $finalOutput[$y][]=$output[$y];
-    $finalOutput[$y][]=$output2[$y];
+    $finalOutput[$y][]=$output[$y]; //recipe id, title, image
+    $finalOutput[$y][]=$output2[$y]; //nutrition
     // echo($output2[$y]);
     for($z=0;$z<$ingrCount; $z++){
-        if($output3[$z]['recipe_id']===$recipeIDArray[$y]){
+        // echo($recipeIDArray[$y]);
+        // print_r($output3[$z]);
+        // return;
+        if($output3[$z]['recipe_id']==$recipeIDArray[$y]){
+            
             $ingredients[]=$output3[$z];
+            echo("im in here");
+            // print_r($output3[$z]);
         }
     }
+
     for($z=0;$z<$instCount; $z++){
-        if($output4[$z]['recipe_id']===$recipeIDArray[$y]){
+        if($output4[$z]['recipe_id']==$recipeIDArray[$y]){
             $instructions[]=$output4[$z];
+            // print_r($output4[0]);
         }
     }
+    // print_r($instructions);
+
+    // print_r($ingredients);
     $finalOutput[$y][]=$ingredients;
     $finalOutput[$y][]=$instructions;
     

@@ -13,13 +13,13 @@ $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
 //Test variables for diet update
-$_POST['user_id'] = 44;
+/*$_POST['user_id'] = 44;
 $_POST['diet'] = "ketogenic";
 
 //Test variables for allergy update'
 $_POST['allergies'][] = 'soy';
 $_POST['allergies'][] = 'sesame';
-$_POST['allergies'][] = 'soy';
+$_POST['allergies'][] = 'soy';*/
 
 //Check if user ID is a valid integer. This might be a $_SESSION['user_id'] later
 if(!is_int($request_data['user_id'])){

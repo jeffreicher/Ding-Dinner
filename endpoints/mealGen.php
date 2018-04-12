@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('mysqli_conn.php');
 // $userID=(int)$_SESSION['user_id'];
 $userID=2;

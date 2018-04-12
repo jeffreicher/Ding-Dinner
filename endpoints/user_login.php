@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'mysqli_connect.php';
 
 /*header("Access-Control-Allow-Origin: *");
@@ -11,8 +12,8 @@ header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Si
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
-$_POST['email'] = "mkane3@something.com";
-$_POST['password'] = "password";
+/*$_POST['email'] = "mkane3@something.com";
+$_POST['password'] = "password";*/
 
 
 //Validate Email

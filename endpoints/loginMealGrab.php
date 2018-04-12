@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require('mysqli_conn.php');
 
 header("Access-Control-Allow-Origin: *");

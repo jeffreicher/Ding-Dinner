@@ -23,9 +23,19 @@ class MealNumber extends Component {
     }
     getRecipes(){
         console.log('wew');
-        axios.get('http://localhost:80/c1.18_FoodTinder/mealGen.php').then((resp)=>{
-            console.log('We did it', resp);
-        })
+        axios({
+            url: 'http://localhost:80/c1.18_FoodTinder/endpoints/create_user.php',
+            
+        }).then((resp)=>{
+            console.log('We did it famalam', resp);
+        });
+        // {
+        //     email: 'jeff@jeff.jeff',
+        //     password: 'jeffrocks',
+        //     diet: 'none',
+        //     allergies: ['peanut', 'wheat', 'rocks']
+        // }
+        //'jeff@jeff.jeff', 'jeffrocks', 'none', ['peanut', 'wheat', 'rocks']
     }
 
     render() {

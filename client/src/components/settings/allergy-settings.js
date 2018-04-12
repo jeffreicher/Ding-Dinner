@@ -60,7 +60,6 @@ class AllergySettings extends Component {
                     <Button title={'Wheat'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Wheat')} />
                     <Button title={'Sesame'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sesame')} />
                     <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
-                    <Button title={'Sulfite'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sulfite')} />
                 </div>  
                 <div className="right" style={{marginTop: `4vh`}}><Link to='/mymeals'>
                 <Next style={'bottom'}/>

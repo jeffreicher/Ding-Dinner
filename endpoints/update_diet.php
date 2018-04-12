@@ -71,7 +71,7 @@ if($stmt->num_rows > 0) {
         }
 
         //Check to see if there was an error with the update
-        if($stmt->affected_rows === -1) die('Error');
+        if($stmt->affected_rows === -1) die('Diet update error');
         $stmt->close();
 
 
@@ -116,11 +116,13 @@ if($stmt->num_rows > 0) {
                 }
                 
                 //Check to see if any rows updated and exit otherwise
-                if($stmt->affected_rows === 0) die('No rows updated');
+                if($stmt->affected_rows === 0) die('Allergy row did not get added');
             }
-            echo 'Success!';
+            echo 'Success';
         }
     }
+} else {
+    echo 'Not a valid user';
 }
 
 ?>

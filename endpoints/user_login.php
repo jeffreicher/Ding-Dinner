@@ -44,17 +44,17 @@ $stmt->bind_result($user_id, $username, $status);
 if($stmt->num_rows > 0) {
     if($stmt->fetch()){
         if($status === 'banned'){
-            echo "you have been banned";
+            echo "You have been banned";
         } else {
             $_SESSION['logged'] = 1;
             $_SESSION['user_id'] = $user_id;
             $_SESSION['username'] = $username;
-            echo 'Success!';
+            echo 'Success';
             exit();
         }
     }
 } else {
-    echo "invalid username/password combination";
+    echo "Invalid username/password combination";
 }
 $stmt->close();
 $myconn->close();

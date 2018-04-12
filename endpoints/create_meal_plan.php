@@ -101,10 +101,10 @@ if($stmt->num_rows > 0) {
                 die('recipe ID is not in the database');
             }                                      
         }
-        echo "Success!";
+        echo 'Success';
     }      
 } else {
-    die("Invalid user ID");
+    die('Not a valid user');
 }
 
 ?>

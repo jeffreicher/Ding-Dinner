@@ -57,7 +57,7 @@ if(!$stmt->execute()){
 }
 
 //Test to see if we succesfully added the user
-if($stmt->affected_rows === 0) die('No rows updated');
+if($stmt->affected_rows === 0) die('User was not successfully added');
 //Grab users id
 $user_id = $stmt->insert_id;
 $stmt->close();
@@ -88,7 +88,7 @@ if(isset($_POST['allergies'])){
         if($stmt->affected_rows === 0) die('No rows updated');
     }
     $stmt->close();
-    echo 'added';
+    echo 'Success';
 }
 
 ?>

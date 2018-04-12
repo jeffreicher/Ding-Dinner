@@ -15,116 +15,154 @@ if(!is_numeric($userID)){
 };
 
 /**Get all the current meals for the user */
-//Need to sanitize userID prior to making the query call
 $recipeIDList=[];
-$output=[];
-$query = "SELECT recipe_id, title FROM `user_choices` WHERE `user_id`=$userID";
-$result = mysqli_query($conn, $query);
-while($row = mysqli_fetch_assoc($result)){
+$allergyOutput=[];
+
+if (!($stmt = $conn->prepare("SELECT recipe_id, title FROM `user_choices` WHERE `user_id`= ? "))) {
+    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+}
+if (!$stmt->bind_param("i", $userID)) {
+    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+if (!$stmt->execute()) {
+    echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+$allergyResult = $stmt -> get_result();
+while($row = mysqli_fetch_assoc($allergyResult)){
     $row['title']=addslashes($row['title']);
     $recipeID = $row['recipe_id'];
     if(!is_numeric($recipeID)){
         print 'Invalid recipe ID';
         exit;
     };
-    $output[]=$row;
+    $allergyOutput[]=$row;
 }
 
-$count = count($output);
-for($i = 0; $i<$count; $i++){
-    $recipeIDList[]=$output[$i]['recipe_id'];
+
+$allergyCount = count($allergyOutput);
+for($i = 0; $i<$allergyCount; $i++){
+    $recipeIDList[]=$allergyOutput[$i]['recipe_id'];
 };
 
 /**Get the nutrition information for the user's meals */
 
-$query2 = "SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, 
-            n.servingPrice, n.recipe_id
-            FROM nutrition AS n
-            WHERE ";
-forEach($recipeIDList as $value){
-    $query2 .= "n.recipe_id" .'='. $value .' OR ';
+if (!($stmt = $conn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, n.servingPrice, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = ?"))) {
+    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 }
-$query2 = substr($query2, 0, -3);
-$output2=[];
-$result = mysqli_query($conn, $query2);
-while($row = mysqli_fetch_assoc($result)){
-    $row['calories']=addslashes($row['calories']);
-    $row['protein']=addslashes($row['protein']);
-    $row['sugar']=addslashes($row['sugar']);
-    $row['carbs']=addslashes($row['carbs']);
-    $row['fat']=addslashes($row['fat']);
-    $row['sodium']=addslashes($row['sodium']);
-    $row['servingSize']=addslashes($row['servingSize']);
-    $row['servingPrice']=addslashes($row['servingPrice']);
-    $recipeID = $row['recipe_id'];
-    if(!is_numeric($recipeID)){
-        print 'Invalid recipe ID';
-        exit;
-    };
-    
-    $output2[]=$row;
-};
+if (!$stmt->bind_param("i", $value)) {
+    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+}
 
+$nutritionResult =[];
+forEach($recipeIDList as $value){
+    if (!$stmt->execute()) {
+        echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+    }
+    $nutritionResult[] =$stmt -> get_result();
+    
+}
+
+$output2=[];
+$nutritionCount = count($nutritionResult);
+for($r=0; $r<$nutritionCount; $r++){
+    while($row = mysqli_fetch_assoc($nutritionResult[$r])){
+        $row['calories']=addslashes($row['calories']);
+        $row['protein']=addslashes($row['protein']);
+        $row['sugar']=addslashes($row['sugar']);
+        $row['carbs']=addslashes($row['carbs']);
+        $row['fat']=addslashes($row['fat']);
+        $row['sodium']=addslashes($row['sodium']);
+        $row['servingSize']=addslashes($row['servingSize']);
+        $row['servingPrice']=addslashes($row['servingPrice']);
+        $recipeID = $row['recipe_id'];
+        if(!is_numeric($recipeID)){
+            print 'Invalid recipe ID';
+            exit;
+        };
+        $output2[]=$row;
+    };
+}
 /**Get the ingredients for the user's meals */
 
-$query3 = "SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id
-            FROM ingredients AS ing 
-            WHERE ";
-forEach($recipeIDList as $value){
-    $query3 .= "ing.recipe_id" .'='. $value .' OR ';
+if (!($stmt = $conn->prepare("SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id FROM ingredients AS ing WHERE ing.recipe_id = ?"))) {
+    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 }
-$query3 = substr($query3, 0, -3);
+if (!$stmt->bind_param("i", $value)) {
+    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+
+$ingredientsResult =[];
+forEach($recipeIDList as $value){
+    if (!$stmt->execute()) {
+        echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+    }
+    $ingredientsResult[] =$stmt -> get_result();
+}
+
 $output3=[];
-$result = mysqli_query($conn, $query3);
-while($row = mysqli_fetch_assoc($result)){
-    $row['ingredient']=addslashes($row['ingredient']);
-    $row['amount']=addslashes($row['amount']);
-    $row['unit_type']=addslashes($row['unit_type']);
-    $recipeID = $row['recipe_id'];
-    if(!is_numeric($recipeID)){
-        print 'Invalid recipe ID';
-        exit;
+
+$ingredientsCount = count($ingredientsResult);
+for($r=0; $r<$ingredientsCount; $r++){
+    while($row = mysqli_fetch_assoc($ingredientsResult[$r])){
+        $row['ingredient']=addslashes($row['ingredient']);
+        $row['amount']=addslashes($row['amount']);
+        $row['unit_type']=addslashes($row['unit_type']);
+        $recipeID = $row['recipe_id'];
+        // if(!is_numeric($recipeID)){
+        //     print 'Invalid recipe ID';
+        //     exit;
+        // };
+        
+        $output3[]=$row;
     };
-    
-    $output3[]=$row;
-};
+}
 
 /**Get the cooking instructions for the user's meals */
 
-$query4 = "SELECT inst.step_num, inst.step, inst.recipe_id
-            FROM instructions AS inst 
-            WHERE ";
-forEach($recipeIDList as $value){
-    $query4 .= "inst.recipe_id" .'='. $value .' OR ';
+if (!($stmt = $conn->prepare("SELECT inst.step_num, inst.step, inst.recipe_id FROM instructions AS inst WHERE inst.recipe_id = ?"))) {
+    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 }
-$query4 = substr($query4, 0, -3);
+if (!$stmt->bind_param("i", $value)) {
+    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+
+$instructionsResult =[];
+forEach($recipeIDList as $value){
+    if (!$stmt->execute()) {
+        echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+    }
+    $instructionsResult[] =$stmt -> get_result();
+}
+
 $output4=[];
-$result = mysqli_query($conn, $query4);
-while($row = mysqli_fetch_assoc($result)){
-    $row['step_num']=addslashes($row['step_num']);
-    $row['step']=addslashes($row['step']);
-    $recipeID = $row['recipe_id'];
-    if(!is_numeric($recipeID)){
-        print 'Invalid recipe ID';
-        exit;
+
+$instructionsCount = count($instructionsResult);
+for($r=0; $r<$instructionsCount; $r++){
+    while($row = mysqli_fetch_assoc($instructionsResult[$r])){
+        $row['step_num']=addslashes($row['step_num']);
+        $row['step']=addslashes($row['step']);
+        $recipeID = $row['recipe_id'];
+        // if(!is_numeric($recipeID)){
+        //     print 'Invalid recipe ID';
+        //     exit;
+        // };        
+        $output4[]=$row;
     };
-    
-    $output4[]=$row;
-};
+}
 
 /**Package all the info in a legible JSON object */
-
+$count = count($allergyOutput);
 $finalOutput = [];
 for($x=0; $x<$count; $x++){
     $finalOutput[] = [];
 }
-$finalcount = count($finalOutput);
+$finalCount = count($finalOutput);
 $instCount = count($output4);
 $ingrCount = count($output3);
-for($y=0; $y<$finalcount; $y++){
+for($y=0; $y<$finalCount; $y++){
     $instructions=[];
     $ingredients=[];
-    $finalOutput[$y][]=$output[$y];
+    $finalOutput[$y][]=$allergyOutput[$y];
     $finalOutput[$y][]=$output2[$y];
     for($z=0;$z<$ingrCount; $z++){
         if($output3[$z]['recipe_id']===$recipeIDList[$y]){
@@ -138,9 +176,8 @@ for($y=0; $y<$finalcount; $y++){
     }
     $finalOutput[$y][]=$ingredients;
     $finalOutput[$y][]=$instructions;
-    
 }
 $finalOutputEncoded = json_encode($finalOutput);
 print_r($finalOutputEncoded);
-//woo
+
 ?>

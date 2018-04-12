@@ -28,6 +28,7 @@ class MealNumber extends Component {
             mealdb.splice(randomIndex,1);
         }
     }
+    
     getRecipes(){
         console.log('wew');
         this.setState({

@@ -12,7 +12,7 @@ class RegisterConfirm extends Component{
     }
     sendAcctToServer(){
         axios({
-            url: 'http://localhost:80/c1.18_FoodTinder/endpoints/create_user.php',
+            url: 'http://localhost:80/frontend/Ding-FINAL/endpoints/create_user.php',
             method: 'post',
             data: {
                     email: registerstorage.email,

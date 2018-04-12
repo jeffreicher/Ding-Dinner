@@ -96,9 +96,9 @@ if($stmt->num_rows > 0) {
             if($stmt->num_rows > 0){
                 //Execute the INSERT statement
                 $stmtAdd->execute();
-                if($stmtAdd->affected_rows === 0) die('No rows updated');
+                if($stmtAdd->affected_rows === 0) die('Meal plan row failed to add');
             } else {
-                die('recipe ID is not in the database');
+                die('Recipe ID is not in the database');
             }                                      
         }
         echo 'Success';

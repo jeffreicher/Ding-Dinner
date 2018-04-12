@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import '../../assets/css/meals.css'
 import Details from './details';
 import mealdb from '../info_storage/meal-db';
 import mealschosen from '../info_storage/meals-chosen';

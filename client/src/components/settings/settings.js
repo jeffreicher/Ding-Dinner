@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import '../../assets/css/settings.css';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 

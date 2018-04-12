@@ -8,6 +8,7 @@ import MealCreator from './meal-creator';
 import MealConfirm from './mealconfirm';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
+import axios from 'axios';
 
 class Meals extends Component{
     constructor(props){
@@ -35,6 +36,22 @@ class Meals extends Component{
             ]
         }
     }
+
+    componentDidMount() {
+        console.log('pulling meals');
+        axios({
+            url: 'http://localhost:80/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((resp) => {
+            console.log('WE GOT USER MEALS', resp);
+        }).catch((err) => {
+            console.log(err);
+        });     
+    }
+
     determineMealConfirmation(){
         console.log(this.props);
         if (!this.props.location.state){

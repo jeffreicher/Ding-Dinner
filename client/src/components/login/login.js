@@ -39,12 +39,13 @@ class Login extends Component{
         });
     }
     render(){
+        console.log('HISTORY:', this.props.history);
         return (
             <div className="loginContainer">
                 <h2 className='loginLogo'>Ding</h2>
                 <h4 className='loginSlogan'>Dinner is served</h4>
                 <div className='loginButtons'>
-                    {this.state.loginHide && <LoginHide returnFX={this.goBackLogin}/>}
+                    {this.state.loginHide && <LoginHide history={this.props.history} returnFX={this.goBackLogin}/>}
                     {this.state.registerHide && <RegisterHide returnFX={this.goBackRegister}/>}
                     {!this.state.loginHide && !this.state.registerHide && <button className="loginButton btn-large black" onClick={this.loginClicked}>Login</button>}
                     <br />

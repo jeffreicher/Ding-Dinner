@@ -33,6 +33,16 @@ class Meals extends Component{
             ]
         }
     }
+
+    // componentDidMount() {
+    //     console.log('meal pulled');
+    //     axios.get('http://localhost:80/frontend/Ding-FINAL/endpoints/loginMealGrab.php').then((resp)=> {
+    //         console.log('Need meal info', resp);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     }); 
+    // }
+
     createMealElements(){
         console.log('hey');
     }

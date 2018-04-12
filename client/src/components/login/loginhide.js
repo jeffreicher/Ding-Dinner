@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import axios from 'axios';
+
 
 class LoginHide extends Component{
     constructor(props){
@@ -27,6 +29,30 @@ class LoginHide extends Component{
             }
         }
     }
+
+    //use thisprops.history.push to redirect user to the meals page inside then promise
+    //use componentdidmount to call axios request to load the correct user meal 
+
+    confirmUserInfo() {
+            console.log('confirmation initiated');
+            axios({
+                url: 'http://localhost:80/frontend/Ding-FINAL/endpoints/user_login.php',
+                method: 'post',
+                data: {
+                        email: this.state.emailValue,
+                        password: this.state.passwordValue
+                    },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then((resp) => {
+                console.log('WE GOT USER AUTH', resp);
+                this.props.history.push('/mymeals');
+            }).catch((err) => {
+                console.log(err);
+            });     
+    }
+
     emailChange(e){
         const emailValidification = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -112,7 +138,7 @@ class LoginHide extends Component{
         }
     }
     render(){
-        const strikeThrough = {textDecoration: 'line-through'}
+        const strikeThrough = {textDecoration: 'line-through'} 
         return (
             <div>
                 <form onSubmit={this.goBack} className='row'>
@@ -137,7 +163,8 @@ class LoginHide extends Component{
                         </div>}
                     </div>
                     <div className='col s2' />
-                    <Link to='/mymeals' className='btn center-align blue darken-2 waves-effect waves-light'>Login</Link>
+                    <button to='/mymeals' className='btn center-align blue darken-2 waves-effect waves-light' onClick={this.confirmUserInfo.bind(this)}>Login</button>
+                    {/* {this.state.userInfoValue && <Redirect path to="/mymeals"/>} */}
                 </form>
             </div>
         );

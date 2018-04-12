@@ -25,16 +25,20 @@ class MealNumber extends Component {
         console.log('wew');
         axios({
             url: 'http://localhost:80/c1.18_FoodTinder/endpoints/create_user.php',
-            
+            method: 'post',
+            data: {
+                    email: 'jeff@jeff.jeff',
+                    password: 'jeffrocks',
+                    diet: 'none',
+                    allergies: ['peanut', 'wheat', 'rocks']
+                },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then((resp)=>{
             console.log('We did it famalam', resp);
         });
-        // {
-        //     email: 'jeff@jeff.jeff',
-        //     password: 'jeffrocks',
-        //     diet: 'none',
-        //     allergies: ['peanut', 'wheat', 'rocks']
-        // }
+        
         //'jeff@jeff.jeff', 'jeffrocks', 'none', ['peanut', 'wheat', 'rocks']
     }
 

@@ -9,7 +9,7 @@ if(!is_numeric($userID)){
 }
 
 /**Get the allergy and dietary restrictions for the user */
-//Need to sanitize userID prior to making the query call
+
 $restrictions=[];
 if (!($stmt = $conn->prepare("SELECT ua.allergy_name, u.diet FROM `user-allergy` AS ua JOIN `users` AS u ON u.ID = ua.user_id WHERE `user_id`= ? "))) {
     echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
@@ -42,13 +42,7 @@ $diet = $restrictions[0]['diet'];
 
 /**Get recipes from database that meet the dietary restrictions found in the previous section*/
 
-
-// $allergens = ['dairy' => $dairy, 'egg'=>$egg, 'gluten'=>$gluten, 
-//             'peanut'=>$peanut, 'seafood'=>$seafood, 'sesame'=> $sesame, 
-//             'shellfish'=>$shellfish, 'soy'=>$soy, 'tree_nut'=>$tree_nut, 'wheat'=>$wheat ];
-
 $query = "SELECT ra.recipe_id, rd.title, rd.image  FROM `recipe-allergy` AS ra JOIN `recipe-diet` AS rd ON ra.recipe_id = rd.recipe_id WHERE ";
-
 
 forEach($allergens as $key => $value){
     if($value === '1'){
@@ -74,7 +68,6 @@ while($row = mysqli_fetch_assoc($result)){
     
     $output[]=$row;
 }
-// print_r($output);
 
 $recipeIDArray = [];
 
@@ -82,37 +75,15 @@ $count = count($output);
 for($i = 0; $i<$count; $i++){
     $recipeIDArray[]=$output[$i]['recipe_id'];
 };
-print_r($recipeIDArray);
-// $query2 = "SELECT Distinct n.recipe_id, n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, 
-//             n.servingPrice, inst.step_num, inst.step, ing.ingredient, ing.amount, ing.unit_type 
-//             FROM ingredients AS ing
-//             JOIN instructions AS inst
-//             ON ing.recipe_id=inst.recipe_id
-//             JOIN nutrition AS n
-//             ON ing.recipe_id=n.recipe_id WHERE ";
-// forEach($recipeIDArray as $value){
-//     $query2 .= "n.recipe_id" .'='. $value .' OR ';
-// }
-// $query2 = substr($query2, 0, -3);
-// $output2=[];
-// $result = mysqli_query($conn, $query2);
-// while($row = mysqli_fetch_assoc($result)){
-//     $output2[]=$row;
-// };
 
 /**Get the nutrition information for the user's meals */
 
-// $query2 = "SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, 
-//             n.servingPrice, n.recipe_id
-//             FROM nutrition AS n
-//             WHERE ";
-
-if (!($stmt = $conn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, n.servingPrice, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = 547899"))) {
+if (!($stmt = $conn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, n.servingPrice, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = ?"))) {
     echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 }
-// if (!$stmt->bind_param("i", $value)) {
-//     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
-// }
+if (!$stmt->bind_param("i", $value)) {
+    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+}
 
 $nutritionResult =[];
 forEach($recipeIDArray as $value){
@@ -120,13 +91,9 @@ forEach($recipeIDArray as $value){
         echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
     }
     $nutritionResult[] =$stmt -> get_result();
-    
 }
-// print_r($nutritionResult);
-// $query2 = substr($query2, 0, -3);
-// $query2 .= " LIMIT 21";
+
 $output2=[];
-// $result = mysqli_query($conn, $query2);
 $nutritionCount = count($nutritionResult);
 for($r=0; $r<$nutritionCount; $r++){
     while($row = mysqli_fetch_assoc($nutritionResult[$r])){
@@ -144,20 +111,11 @@ for($r=0; $r<$nutritionCount; $r++){
             exit;
         };
         $output2[]=$row;
-        // echo("Adding row to output2: 2@r=$r\n");
     };
 }
 
-
-
 /**Get the ingredients for the user's meals */
 
-// $query3 = "SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id
-//             FROM ingredients AS ing 
-//             WHERE ";
-// forEach($recipeIDArray as $value){
-//     $query3 .= "ing.recipe_id" .'='. $value .' OR ';
-// }
 if (!($stmt = $conn->prepare("SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id FROM ingredients AS ing WHERE ing.recipe_id = ?"))) {
     echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 }
@@ -172,11 +130,9 @@ forEach($recipeIDArray as $value){
     }
     $ingredientsResult[] =$stmt -> get_result();
 }
-// print_r($ingredientsResult);
-// $query3 = substr($query3, 0, -3);
-// $query3 .= " LIMIT 21";
+
 $output3=[];
-// print_r($ingredientsResult);
+
 $ingredientsCount = count($ingredientsResult);
 for($r=0; $r<$ingredientsCount; $r++){
     while($row = mysqli_fetch_assoc($ingredientsResult[$r])){
@@ -192,17 +148,9 @@ for($r=0; $r<$ingredientsCount; $r++){
         $output3[]=$row;
     };
 }
-?><br><?php
-// print_r($output3);
 
 /**Get the cooking instructions for the user's meals */
 
-$query4 = "SELECT inst.step_num, inst.step, inst.recipe_id
-            FROM instructions AS inst 
-            WHERE ";
-forEach($recipeIDArray as $value){
-    $query4 .= "inst.recipe_id" .'='. $value .' OR ';
-}
 if (!($stmt = $conn->prepare("SELECT inst.step_num, inst.step, inst.recipe_id FROM instructions AS inst WHERE inst.recipe_id = ?"))) {
     echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 }
@@ -217,10 +165,9 @@ forEach($recipeIDArray as $value){
     }
     $instructionsResult[] =$stmt -> get_result();
 }
-// $query4 = substr($query4, 0, -3);
-// $query4 .= " LIMIT 21";
+
 $output4=[];
-// $result = mysqli_query($conn, $query4);
+
 $instructionsCount = count($instructionsResult);
 for($r=0; $r<$instructionsCount; $r++){
     while($row = mysqli_fetch_assoc($instructionsResult[$r])){
@@ -230,13 +177,12 @@ for($r=0; $r<$instructionsCount; $r++){
         // if(!is_numeric($recipeID)){
         //     print 'Invalid recipe ID';
         //     exit;
-        // };
-        
+        // };        
         $output4[]=$row;
     };
 }
-?><br><?php
-// print_r($output4);
+
+
 /**Package all the info in a legible JSON object */
 
 $finalOutput = [];
@@ -244,49 +190,31 @@ $finalOutput = [];
 for($x=0; $x<$count; $x++){
     $finalOutput[] = [];
 }
+
 $finalcount = count($finalOutput);
 $instCount = count($output4);
 $ingrCount = count($output3);
-echo($ingrCount);
-?><br><br><?php
-echo($instCount);
-// echo($finalcount);
-?><br><?php
-// echo(count($output));
-?><br><?php                                 //output2 - nutrition
-                                            //output3 - ingredients
-                                            //output4 - instructions
-// echo(count($output2));
+
 for($y=0; $y<$finalcount; $y++){
     $instructions=[];
     $ingredients=[];
     $finalOutput[$y][]=$output[$y]; //recipe id, title, image
     $finalOutput[$y][]=$output2[$y]; //nutrition
-    // echo($output2[$y]);
+
     for($z=0;$z<$ingrCount; $z++){
-        // echo($recipeIDArray[$y]);
-        // print_r($output3[$z]);
-        // return;
         if($output3[$z]['recipe_id']==$recipeIDArray[$y]){
-            
             $ingredients[]=$output3[$z];
-            echo("im in here");
-            // print_r($output3[$z]);
         }
     }
 
     for($z=0;$z<$instCount; $z++){
         if($output4[$z]['recipe_id']==$recipeIDArray[$y]){
             $instructions[]=$output4[$z];
-            // print_r($output4[0]);
+
         }
     }
-    // print_r($instructions);
-
-    // print_r($ingredients);
     $finalOutput[$y][]=$ingredients;
-    $finalOutput[$y][]=$instructions;
-    
+    $finalOutput[$y][]=$instructions; 
 }
 $finalOutputEncoded = json_encode($finalOutput);
 print_r($finalOutputEncoded);

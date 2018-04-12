@@ -51,7 +51,7 @@ class MealNumber extends Component {
                         <MealNumButton title={'7'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>   
                     </div>  
                     <div className="right" style={{marginTop: `2.2vh`}}>
-                        <button onClick={this.getRecipes.bind(this)} />          
+                        <Next onclick={this.getRecipes.bind(this)} />          
                     </div>
                     {this.state.confirmingMeals && <Redirect path to={{pathname: '/mymeals', state: {confirmingMeals: true}}} />}
                 </div>                

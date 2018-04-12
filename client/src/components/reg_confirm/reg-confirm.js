@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import registerstorage from '../info_storage/register-storage';
 import '../../assets/css/reg-confirm.css'
 import {Link} from 'react-router-dom';
@@ -14,10 +15,10 @@ class RegisterConfirm extends Component{
             url: 'http://localhost:80/c1.18_FoodTinder/endpoints/create_user.php',
             method: 'post',
             data: {
-                    email: 'jeff@jeff.jeff',
-                    password: 'jeffrocks',
-                    diet: 'none',
-                    allergies: ['peanut', 'wheat', 'rocks']
+                    email: registerstorage.email,
+                    password: registerstorage.password,
+                    diet: registerstorage.diet,
+                    allergies: registerstorage.allergy
                 },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -44,7 +45,7 @@ class RegisterConfirm extends Component{
                 </div>
                 <div className='regConfirmButtonContainer'>
                     <Link to='/' className='btn red darken-2'>Back to start</Link>
-                    <Link to='/meal-number' className='btn blue darken-2' onClick={this.sendAcctToServer.bind(this)}>All set!</Link>
+                    <button className='btn blue darken-2' onClick={this.sendAcctToServer.bind(this)}>All set!</button>
                 </div>
                 <div className='page-footer bottom blue darken-2 z-depth-1 regConfirmFooter'>
                 </div>

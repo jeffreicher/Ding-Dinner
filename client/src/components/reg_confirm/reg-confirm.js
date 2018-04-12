@@ -11,8 +11,12 @@ class RegisterConfirm extends Component{
 
     }
     sendAcctToServer(){
+        registerstorage.diet = registerstorage.diet.toLowerCase();
+        for (let i=0; i<registerstorage.allergy.length; i++){
+            registerstorage.allergy[i] = registerstorage.allergy[i].toLowerCase();
+        }
         axios({
-            url: 'http://localhost:80/frontend/Ding-FINAL/endpoints/create_user.php',
+            url: 'http://localhost:80/C1.18_FoodTinder/endpoints/create_user.php',
             method: 'post',
             data: {
                     email: registerstorage.email,

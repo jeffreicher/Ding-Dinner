@@ -142,7 +142,7 @@ class RegisterHide extends Component {
     serverEmailVerify(e) {
         e.preventDefault();
         axios({
-            url: 'http://localhost:80/C1.18_FoodTinder/endpoints/email_check.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
             method: 'post',
             data: {
                     email: registerstorage.email,

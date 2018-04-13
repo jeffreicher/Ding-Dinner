@@ -13,10 +13,12 @@ class LoginHide extends Component {
         this.passwordChange = this.passwordChange.bind(this);
         this.goBack = this.goBack.bind(this);
 
+        //store session in local storage
+
         this.state = {
             dataValue: '',
-            emailValue: '',
-            passwordValue: '',
+            emailValue: 'jeff@jeff.jeff',
+            passwordValue: 'jeffrocks',
             emailFocused: false,
             passwordFocused: false,
             emailCheck: {
@@ -37,20 +39,19 @@ class LoginHide extends Component {
     confirmUserInfo() {
             console.log('confirmation initiated');
             axios({
-                url: 'http://localhost:80/C1.18_FoodTinder/endpoints/user_login.php',
+                url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
                 method: 'post',
                 data: {
                         email: this.state.emailValue,
                         password: this.state.passwordValue
-                    },
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
+                    }
             }).then((resp) => {
                 console.log('WE GOT USER AUTH', resp);
-                if(resp.data === 'Success'){
-                    this.props.history.push('/mymeals');
+
+                if(resp.data.success){
+                    localStorage.ding_sessionID = resp.data.session_id;
                 }
+                this.props.history.push('/mymeals');
             }).catch((err) => {
                 console.log(err);
             });     

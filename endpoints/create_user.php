@@ -75,7 +75,11 @@ if(isset($request_data['allergies'])){
         if($stmt->affected_rows === 0) die('No rows updated');
     }
     $stmt->close();
+    $_SESSION['logged'] = 1;
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['username'] = $email;
     echo 'Success';
+
 }
 
 ?>

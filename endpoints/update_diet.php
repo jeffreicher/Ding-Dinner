@@ -32,7 +32,7 @@ if (!dietCheck($request_data['diet'])){
 }
 
 //First we will do a SELECT query to see if the user exists in our user table
-$user_id = $request_data['user_id'];
+$user_id = $_SESSION['user_id'];
 $diet = $request_data['diet'];
 
 //Prepare statement for the SELECT query

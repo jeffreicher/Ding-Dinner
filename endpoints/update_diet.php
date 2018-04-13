@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'mysqli_connect.php';
 require_once 'helper_functions.php';
 
@@ -21,7 +22,7 @@ $_POST['allergies'][] = 'sesame';
 $_POST['allergies'][] = 'soy';*/
 
 //Check if user ID is a valid integer. This might be a $_SESSION['user_id'] later
-if(!is_int($request_data['user_id'])){
+if(!is_int($_SESSION['user_id'])){
     die('User ID is invalid');
 }
 
@@ -31,7 +32,7 @@ if (!dietCheck($request_data['diet'])){
 }
 
 //First we will do a SELECT query to see if the user exists in our user table
-$user_id = $request_data['user_id'];
+$user_id = $_SESSION['user_id'];
 $diet = $request_data['diet'];
 
 //Prepare statement for the SELECT query

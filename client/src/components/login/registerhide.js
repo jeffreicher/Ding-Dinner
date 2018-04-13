@@ -153,6 +153,9 @@ class RegisterHide extends Component {
             }
         }).then((resp) => {
             console.log('Email verify: ', resp);
+            if (resp.data === 'email available'){
+                this.props.history.push('/diet-selection');
+            }
         }).catch((err) => {
             console.log('Error: ', err);
         });

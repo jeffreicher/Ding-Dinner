@@ -5,7 +5,7 @@ $request_data = json_decode($entityBody, true);
 
 session_id($request_data['session_ID']);
 session_start();
-require('mysqli_connect.php');
+require('../mysqli_connect.php');
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
@@ -19,6 +19,33 @@ if(!is_numeric($userID)){
     exit();
 };
 
+$recipeIDList=[];
+$currentMealsOutput=[];
 
+if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, uc.flag FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
+    echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
+}
+if (!$stmt->bind_param("i", $userID)) {
+    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+if (!$stmt->execute()) {
+    echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+$currentMealsResult = $stmt -> get_result();
+while($row = mysqli_fetch_assoc($currentMealsResult)){
+    $row['title']=addslashes($row['title']);
+    $row['image']=addslashes($row['image']);
+    if(!is_numeric($row['flag'])){
+        print 'Invalid recipe ID from database';
+        exit();
+    };
+    if(!is_numeric($row['recipe_id'])){
+        print 'Invalid recipe ID from database';
+        exit();
+    };
+    $currentMealsOutput[]=$row;
+}
+$currentMealsEncoded = json_encode($currentMealsOutput);
+print_r($currentMealsEncoded);
 
 ?>

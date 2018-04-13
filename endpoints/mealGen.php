@@ -1,8 +1,8 @@
 <?php
 session_start();
 require('mysqli_connect.php');
-// $userID=(int)$_SESSION['user_id'];
-$userID=2;
+$userID=(int)$_SESSION['user_id'];
+// $userID=2;
 if(!is_numeric($userID)){
     print 'Invalid user ID';
     exit;

@@ -40,12 +40,12 @@ class Meals extends Component {
     componentDidMount() {
         console.log('pulling meals');
         axios({
-            url: 'http://localhost:80/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then((resp) => {
+                url:'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
+                method: 'post',
+                data: {
+                    session_ID: localStorage.ding_sessionID
+                }
+            }).then((resp) => {
             console.log('WE GOT USER MEALS', resp);
         }).catch((err) => {
             console.log(err);

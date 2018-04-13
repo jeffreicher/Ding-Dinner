@@ -39,7 +39,6 @@ class Login extends Component{
         });
     }
     render(){
-        console.log('HISTORY:', this.props.history);
         return (
             <div className="loginContainer">
                 <h2 className='loginLogo'>Ding</h2>

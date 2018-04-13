@@ -23,6 +23,7 @@ class Meals extends Component {
                 image: '',
                 ingredients: '',
                 instructions: '',
+                nutrition: '',
                 index: ''
             },
             completeMeals: [
@@ -48,7 +49,7 @@ class Meals extends Component {
                     session_ID: localStorage.ding_sessionID
                 }
             }).then((resp) => {
-            console.log('WE GOT USER MEALS', resp);
+            console.log('Login meals works: ', resp);
         }).catch((err) => {
             console.log(err);
         });     
@@ -78,12 +79,13 @@ class Meals extends Component {
         });
     };
 
-    mealClicked(number, ingredients, instructions, name, image) {
+    mealClicked(number, mealInfo) {
         const newMealInfo = {
-            name: name,
-            image: image,
-            ingredients: ingredients,
-            instructions: instructions,
+            name: mealInfo[0].title,
+            image: mealInfo[0].image,
+            ingredients: mealInfo[2],
+            instructions: mealInfo[3],
+            nutrition: mealInfo[1],
             index: number
         };
         this.setState({
@@ -126,10 +128,10 @@ class Meals extends Component {
     render() {
 
         const mealMap = this.state.meals.map((meal, index) => {
-            return <MealCreator imgSrc={meal.imgSrc} mealName={meal.mealName} key={index} number={index} ingredients={meal.mealIngr} instructions={meal.mealInstr} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} completion={this.state.completeMeals[index]} deleteable={this.state.confirmingMeals}/>
+            return <MealCreator mealInfo={meal} key={index} number={index} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} completion={this.state.completeMeals[index]} deleteable={this.state.confirmingMeals}/>
         });
 
-        const {name, image, ingredients, instructions} = this.state.mealDetail;
+        const {mealDetail} = this.state;
 
 
         return(
@@ -138,7 +140,7 @@ class Meals extends Component {
                 <main className="mealsMainArea">
                     {this.state.confirmingMeals && <MealConfirm confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                     {mealMap}
-                    {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
+                    {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
                 </main>
                 <Footer currentPage='meals'/>
             </div>

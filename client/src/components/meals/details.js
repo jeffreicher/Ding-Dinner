@@ -91,22 +91,26 @@ class Details extends Component {
 
         console.log(this.props);
 
-        const {name, image, ingredients, instructions, hide, index, complete} = this.props;
+        const {mealInfo, hide, index, complete} = this.props;
         
-        const instrMap = instructions.map((item, index) => {
-            return <li className='collection-item' key={index}>{index+1}. {item.step}</li>
+        const instrMap = mealInfo.instructions.map((item, index) => {
+            return <li className='collection-item' key={index}>{index+1}. {mealInfo.instructions[index].step}</li>
         });
 
-        const ingrMap = ingredients.map((item, index) => {
-            return <li className='collection-item' key={index}>{`${item.amount} ${item.unit_type} ${item.ingredient}`}</li>
+        const ingrMap = mealInfo.ingredients.map((item, index) => {
+            return <li className='collection-item' key={index}>{`${mealInfo.ingredients[index].amount} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>
         });
+
+        // const nutrMap = mealInfo[1].map((item, index) => {
+        //     return <li className='collection-item' key={index}>{index+1}. {mealInfo[3].step}</li>
+        // });
 
         return(
             <div className="detailsContainer">
                 <LogoHeader onClick={hide} back={true} style={{position: 'fixed'}}/>
                 <main className="detailsMainArea">
-                    <img src={image} alt="" className="detailsImg" />
-                    <h3 className='detailsName'>{name}</h3>
+                    <img src={mealInfo.image} alt="" className="detailsImg" />
+                    <h3 className='detailsName'>{mealInfo.name}</h3>
                     <h5 className='detailsTime'>Time Commitment: 30 minutes</h5>
                     <div className={"detailsIngredientsHead " + this.state.ingrTarget} onClick={()=>this.headerClicked('ingr')} >Ingredients</div>
                     <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>

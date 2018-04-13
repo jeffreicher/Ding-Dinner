@@ -13,10 +13,11 @@ header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
+//Constant used for updating users meal plan status to true after meal plan has been generated
 define('TRUTHY', 1);
-$truthy = 1;
 
-$_SESSION['user_id'] = 27;
+//This is test filler data. It needs to be commented ou when using the code.
+$_SESSION['user_id'] = 13;
 $request_data['recipe_ids'] = [13774, 36725];
 
 $recipe_count = count($request_data['recipe_ids']);

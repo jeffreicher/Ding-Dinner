@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'mysqli_connect.php';
 require_once 'helper_functions.php';
 
@@ -79,7 +80,6 @@ if(isset($request_data['allergies'])){
     $_SESSION['user_id'] = $user_id;
     $_SESSION['username'] = $email;
     echo 'Success';
-
 }
 
 ?>

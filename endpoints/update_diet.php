@@ -21,7 +21,7 @@ $_POST['allergies'][] = 'sesame';
 $_POST['allergies'][] = 'soy';*/
 
 //Check if user ID is a valid integer. This might be a $_SESSION['user_id'] later
-if(!is_int($request_data['user_id'])){
+if(!is_int($_SESSION['user_id'])){
     die('User ID is invalid');
 }
 

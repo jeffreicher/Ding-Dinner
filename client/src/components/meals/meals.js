@@ -58,6 +58,7 @@ class Meals extends Component{
             this.setState({
                 confirmingMeals: false
             });
+            return;
         }
         const {confirmingMeals} = this.props.location.state;
         this.setState({
@@ -117,7 +118,7 @@ class Meals extends Component{
     render(){
 
         const mealMap = this.state.meals.map((meal, index) => {
-            return <MealCreator imgSrc={meal.imgSrc} mealName={meal.mealName} key={index} number={index} ingredients={meal.mealIngr} instructions={meal.mealInstr} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} completion={this.state.completeMeals[index]}/>
+            return <MealCreator imgSrc={meal.imgSrc} mealName={meal.mealName} key={index} number={index} ingredients={meal.mealIngr} instructions={meal.mealInstr} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} completion={this.state.completeMeals[index]} deleteable={this.state.confirmingMeals}/>
         });
 
         const {name, image, ingredients, instructions} = this.state.mealDetail;

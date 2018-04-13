@@ -29,7 +29,7 @@ class DietSelection extends Component {
                 value: true
             });
         }
-        registerstorage.diet = buttonObject.props.title.toLowerCase();
+        registerstorage.diet = buttonObject.props.title;
         console.log(registerstorage); 
         // else {
         //     debugger;

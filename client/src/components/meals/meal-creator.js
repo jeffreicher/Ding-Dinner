@@ -13,7 +13,7 @@ class MealCreator extends Component {
             <div className="mealsItem" onClick={()=>onclick(number, ingredients, instructions, mealName, imgSrc)} style={this.props.completion} >
                 <img src={imgSrc} alt="" className="mealsImg" />
                 <div className="mealsText oxygenFont">{mealName}</div>
-                <div className="mealsCancel" onClick={(e)=>deleteItem(e, number)}><i className="fas fa-trash-alt"></i></div>
+                {this.props.deleteable && <div className="mealsCancel" onClick={(e)=>deleteItem(e, number)}><i className="fas fa-trash-alt"></i></div>}
             </div>
         )
     }

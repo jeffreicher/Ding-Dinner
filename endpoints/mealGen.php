@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('mysqli_conn.php');
+require('mysqli_connect.php');
 // $userID=(int)$_SESSION['user_id'];
 $userID=2;
 if(!is_numeric($userID)){
@@ -11,8 +11,8 @@ if(!is_numeric($userID)){
 /**Get the allergy and dietary restrictions for the user */
 
 $restrictions=[];
-if (!($stmt = $conn->prepare("SELECT ua.allergy_name, u.diet FROM `user-allergy` AS ua JOIN `users` AS u ON u.ID = ua.user_id WHERE `user_id`= ? "))) {
-    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+if (!($stmt = $myconn->prepare("SELECT ua.allergy_name, u.diet FROM `user-allergy` AS ua JOIN `users` AS u ON u.ID = ua.user_id WHERE `user_id`= ? "))) {
+    echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
 if (!$stmt->bind_param("i", $userID)) {
     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -54,7 +54,7 @@ $query .= " AND rd.$diet".'=1';
 $query .= " LIMIT 21";
 
 $output=[];
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($myconn, $query);
 
 while($row = mysqli_fetch_assoc($result)){
     $row['title']=addslashes($row['title']);
@@ -78,8 +78,8 @@ for($i = 0; $i<$count; $i++){
 
 /**Get the nutrition information for the user's meals */
 
-if (!($stmt = $conn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, n.servingPrice, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = ?"))) {
-    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+if (!($stmt = $myconn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, n.servingPrice, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = ?"))) {
+    echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
 if (!$stmt->bind_param("i", $value)) {
     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -116,8 +116,8 @@ for($r=0; $r<$nutritionCount; $r++){
 
 /**Get the ingredients for the user's meals */
 
-if (!($stmt = $conn->prepare("SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id FROM ingredients AS ing WHERE ing.recipe_id = ?"))) {
-    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+if (!($stmt = $myconn->prepare("SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id FROM ingredients AS ing WHERE ing.recipe_id = ?"))) {
+    echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
 if (!$stmt->bind_param("i", $value)) {
     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -151,8 +151,8 @@ for($r=0; $r<$ingredientsCount; $r++){
 
 /**Get the cooking instructions for the user's meals */
 
-if (!($stmt = $conn->prepare("SELECT inst.step_num, inst.step, inst.recipe_id FROM instructions AS inst WHERE inst.recipe_id = ?"))) {
-    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+if (!($stmt = $myconn->prepare("SELECT inst.step_num, inst.step, inst.recipe_id FROM instructions AS inst WHERE inst.recipe_id = ?"))) {
+    echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
 if (!$stmt->bind_param("i", $value)) {
     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;

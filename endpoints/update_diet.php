@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'mysqli_connect.php';
 require_once 'helper_functions.php';
 

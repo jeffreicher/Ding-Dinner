@@ -30,7 +30,18 @@ class MealNumber extends Component {
     };
     
     getRecipes() {
-        console.log('wew');
+        console.log('wew', localStorage.ding_sessionID);
+        axios({
+            url: 'http://localhost:8080/c1.18_FoodTinder/endpoints/mealGen.php',
+            method: 'post',
+            data: {
+                session_ID: localStorage.ding_sessionID
+            }
+        }).then((resp) => {
+            console.log('Meal gen response: ', resp);
+        }).catch((err) => {
+            console.log('Meal gen error: ', err);
+        });
         this.setState({
             confirmingMeals: true
         });

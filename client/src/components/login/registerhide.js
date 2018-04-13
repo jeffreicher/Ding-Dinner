@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import registerstorage from '../info_storage/register-storage';
+import axios from 'axios';
 
 class RegisterHide extends Component{
     constructor(props){
@@ -129,6 +130,24 @@ class RegisterHide extends Component{
             });
         }
     }
+    serverEmailVerify(e){
+        e.preventDefault();
+        axios({
+            url: 'http://localhost:80/C1.18_FoodTinder/endpoints/email_check.php',
+            method: 'post',
+            data: {
+                    email: registerstorage.email,
+                    password: registerstorage.password,
+                },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((resp) => {
+            console.log('Email verify: ', resp);
+        }).catch((err) => {
+            console.log('Error: ', err);
+        });
+    }
     render(){
         return (
             <div>
@@ -164,7 +183,7 @@ class RegisterHide extends Component{
                         </div>}
                     </div>
                     <div className='col s2' />
-                    <Link to='/diet-selection' className='btn center-align blue darken-2 waves-effect waves-light'>Register</Link>
+                    <button onClick={(e) => this.serverEmailVerify(e)} className='btn center-align blue darken-2 waves-effect waves-light'>Register</button>
                 </form>
             </div>
         );

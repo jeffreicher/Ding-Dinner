@@ -46,7 +46,7 @@ class Login extends Component{
                 <h4 className='loginSlogan'>Dinner is served</h4>
                 <div className='loginButtons'>
                     {this.state.loginHide && <LoginHide history={this.props.history} returnFX={this.goBackLogin}/>}
-                    {this.state.registerHide && <RegisterHide returnFX={this.goBackRegister}/>}
+                    {this.state.registerHide && <RegisterHide history={this.props.history} returnFX={this.goBackRegister}/>}
                     {!this.state.loginHide && !this.state.registerHide && <button className="loginButton btn-large black" onClick={this.loginClicked}>Login</button>}
                     <br />
                     {!this.state.loginHide && !this.state.registerHide && <button className="registerButton btn-large black" onClick={this.registerClicked}>Register</button>}

@@ -40,8 +40,8 @@ class Meals extends Component {
     componentDidMount() {
         console.log('pulling meals');
         axios({
-                url:'http://localhost:8080/C1.18_FoodTinder/endpoints/loginMealGrab.php',
-                method: 'post',
+            url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
+            method: 'post',
                 data: {
                     session_ID: localStorage.ding_sessionID
                 }

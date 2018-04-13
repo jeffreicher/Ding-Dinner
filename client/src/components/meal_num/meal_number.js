@@ -32,7 +32,7 @@ class MealNumber extends Component {
     getRecipes() {
         console.log('wew', localStorage.ding_sessionID);
         axios({
-            url: 'http://localhost:8080/c1.18_FoodTinder/endpoints/mealGen.php',
+            url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
             method: 'post',
             data: {
                 session_ID: localStorage.ding_sessionID

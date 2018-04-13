@@ -11,8 +11,8 @@ header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
-// $userID=$_SESSION['user_id'];
-$userID=13;
+$userID=$_SESSION['user_id'];
+// $userID=13;
 if(!is_numeric($userID)){
     print 'Invalid user ID';
     exit;
@@ -60,12 +60,16 @@ forEach($allergens as $key => $value){
     };
 };
 $query = substr($query, 0, -4);
-$query .= " AND rd.$diet".'=1';
+if($diet !== 'none'){
+    $query .= " AND rd.$diet".'=1';
+}
+
 $query .= " LIMIT 21";
+// print($query);
 
 $output=[];
 $result = mysqli_query($myconn, $query);
-print_r($result);
+// print_r($result);
 while($row = mysqli_fetch_assoc($result)){
     $row['title']=addslashes($row['title']);
     $row['image']=addslashes($row['image']);

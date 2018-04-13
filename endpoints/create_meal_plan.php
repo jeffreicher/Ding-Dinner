@@ -76,7 +76,7 @@ if($stmt->num_rows > 0) {
         }
 
         //Prepare statement for the INSERT query into recipes
-        if(!($stmtAdd = $myconn->prepare("INSERT INTO `user_choices`(`user_id`, `choice_num`, `recipe_id`) VALUES (?, ?, ?)"))){
+        if(!($stmtAdd = $myconn->prepare("INSERT INTO `user_choices`(`user_id`, `choice_num`, `recipe_id`, `title`) VALUES (?, ?, ?)"))){
             die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
         }
         

@@ -48,7 +48,7 @@ class DietSettings extends Component {
                         <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
                     </div>  
                     <div className="right" style={{marginTop: `3vh`}}>
-                        {(this.state.value) ? <Link to='/allergy-settings'><Next /></Link> : console.log('error')}                   
+                        {(this.state.value) && <Link to='/allergy-settings'><Next /></Link> }                   
                     </div>     
                 </div>                
             </div>

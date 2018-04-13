@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Header from '../general/header';
 import Button from '../general/button';
 import Next from '../general/next_button';
@@ -41,6 +42,27 @@ class AllergySettings extends Component {
         };
     };
 
+    sendFiltersToServer() {
+        newFilter.diet = newFilter.diet.toLowerCase();
+        for (let i=0; i<newFilter.allergy.length; i++){
+            newFilter.allergy[i] = newFilter.allergy[i].toLowerCase();
+        };
+        axios({
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
+            method: 'post',
+            data: {
+
+                    diet: newFilter.diet,
+                    allergies: newFilter.allergy
+                },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((resp)=>{
+            console.log('We did it famalam', resp);
+        });
+    };
+
     render() {   
         const { handleSelected } = this;
         const { selected } = this.state;
@@ -62,9 +84,9 @@ class AllergySettings extends Component {
                     <Button title={'Sesame'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sesame')} />
                     <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
                 </div>  
-                <Link className="right" style={{marginTop: `4vh`}}to='/mymeals'>
-                    <Next style={'bottom'}/>
-                </Link>
+                <div className="right" style={{marginTop: `4vh`}}>
+                    <Next style={'bottom'} onclick={this.sendFiltersToServer.bind(this)}/>
+                </div>
             </div>             
          </div>
         );

@@ -14,7 +14,8 @@ class MealNumber extends Component {
         super(props);
 
         this.state = {
-            confirmingMeals: false
+            confirmingMeals: false,
+            numOfMeals: 0
         };
     };
 
@@ -27,10 +28,19 @@ class MealNumber extends Component {
             mealschosen.push(mealdb[randomIndex]);
             mealdb.splice(randomIndex,1);
         }
+        this.setState({
+            confirmingMeals: true
+        });
     };
+
+    storeNumChoice(num){
+        this.setState({
+            numOfMeals: num
+        });
+    }
     
     getRecipes() {
-        console.log('wew', localStorage.ding_sessionID);
+        console.log('Session ID: ', localStorage.ding_sessionID);
         axios({
             // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/mealGen.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
@@ -41,11 +51,12 @@ class MealNumber extends Component {
             }
         }).then((resp) => {
             console.log('Meal gen response: ', resp);
+            for (var i=0; i<resp.data.length; i++){
+                mealdb.push(resp.data[i]);
+            }
+            this.setNumberOfMeals(this.state.numOfMeals);
         }).catch((err) => {
             console.log('Meal gen error: ', err);
-        });
-        this.setState({
-            confirmingMeals: true
         });
     };
 
@@ -57,10 +68,10 @@ class MealNumber extends Component {
                 <div className="container">
                     <Header title={'How Many Recipes?'} />
                     <div className="button-column collection">
-                        <MealNumButton title={'1'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>  
-                        <MealNumButton title={'3'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>
-                        <MealNumButton title={'5'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>   
-                        <MealNumButton title={'7'} style={'button'} mealnumclick={this.setNumberOfMeals.bind(this)}/>   
+                        <MealNumButton title={'1'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>  
+                        <MealNumButton title={'3'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>
+                        <MealNumButton title={'5'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>   
+                        <MealNumButton title={'7'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>   
                     </div>  
                     <div className="right" style={{marginTop: `2.2vh`}}>
                         <Next onclick={this.getRecipes.bind(this)} />          

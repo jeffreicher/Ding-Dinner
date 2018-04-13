@@ -18,13 +18,13 @@ import {
     Route
 } from 'react-router-dom';
 
-class App extends Component{
-    constructor(props){
+class App extends Component {
+    constructor(props) {
         super(props);
+        
+    };
 
-
-    }
-    render(){
+    render() {
         return (
             <Router>
                 <div className='mainContentContainer'>
@@ -44,8 +44,8 @@ class App extends Component{
                 </div>
             </Router>
         );
-    }
-}
+    };
+};
 
 
 export default App;

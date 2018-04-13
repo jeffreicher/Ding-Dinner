@@ -4,12 +4,13 @@ import '../../assets/css/settings.css';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 
-class Settings extends Component{
-    constructor(props){
+class Settings extends Component {
+    constructor(props) {
         super(props);
 
-    }
-    render(){
+    };
+
+    render() {
         return (                      
             <div className='settingsContainer'>
                 <LogoHeader />
@@ -21,8 +22,8 @@ class Settings extends Component{
                 </div>
                 <Footer currentPage='settings' />  
             </div>      
-        )
-    }
-}
+        );
+    };
+};
 
 export default Settings;

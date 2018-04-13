@@ -3,13 +3,14 @@ import {Link, Redirect} from 'react-router-dom';
 import registerstorage from '../info_storage/register-storage';
 import axios from 'axios';
 
-class RegisterHide extends Component{
-    constructor(props){
+class RegisterHide extends Component {
+    constructor(props) {
         super(props);
 
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.confirmChange = this.confirmChange.bind(this);
+
         this.state = {
             emailValue: '',
             passwordValue: '',
@@ -29,9 +30,10 @@ class RegisterHide extends Component{
             confirmMatches: {
                 textDecoration: 'none'
             }
-        }
-    }
-    emailChange(e){
+        };
+    };
+
+    emailChange(e) {
         const emailValidification = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         this.setState({
@@ -50,8 +52,9 @@ class RegisterHide extends Component{
             }
         });
         registerstorage.email = e.target.value;
-    }
-    passwordChange(e){
+    };
+
+    passwordChange(e) {
         this.setState({
             passwordValue: e.target.value
         }, () => {
@@ -59,8 +62,9 @@ class RegisterHide extends Component{
             this.checkPWChars();
         });
         registerstorage.password = e.target.value;
-    }
-    checkPWLength(){
+    }; 
+
+    checkPWLength() {
         if(this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32){
             const strikeThrough = {textDecoration: 'line-through'};
             this.setState({
@@ -72,8 +76,9 @@ class RegisterHide extends Component{
                 passwordLength: noStrike
             });
         }
-    }
-    checkPWChars(){
+    };
+
+    checkPWChars() {
         const passwordChars = /^[a-z0-9]+$/i;
         if (passwordChars.test(this.state.passwordValue)){
             const strikeThrough = {textDecoration: 'line-through'};
@@ -86,8 +91,9 @@ class RegisterHide extends Component{
                 passwordCharacters: noStrike
             });
         }
-    }
-    confirmChange(e){
+    };
+
+    confirmChange(e) {
         if (e.target.value === this.state.passwordValue){
             this.setState({
                 confirmValue: e.target.value,
@@ -99,8 +105,9 @@ class RegisterHide extends Component{
                 confirmMatches: {textDecoration: 'none'}
             });
         }
-    }
-    fieldFocused(targetField){
+    };
+
+    fieldFocused(targetField) {
         if (targetField === 'email'){
             this.setState({
                 emailFocused: true
@@ -114,8 +121,9 @@ class RegisterHide extends Component{
                 confirmFocused: true
             });
         }
-    }
-    fieldBlurred(targetField){
+    };
+
+    fieldBlurred(targetField) {
         if (targetField === 'email'){
             this.setState({
                 emailFocused: false
@@ -129,8 +137,9 @@ class RegisterHide extends Component{
                 confirmFocused: false
             });
         }
-    }
-    serverEmailVerify(e){
+    };
+
+    serverEmailVerify(e) {
         e.preventDefault();
         axios({
             url: 'http://localhost:80/C1.18_FoodTinder/endpoints/email_check.php',
@@ -150,8 +159,9 @@ class RegisterHide extends Component{
         }).catch((err) => {
             console.log('Error: ', err);
         });
-    }
-    render(){
+    };
+
+    render() {
         return (
             <div>
                 <form onSubmit={this.goBack} className='row'>
@@ -190,7 +200,7 @@ class RegisterHide extends Component{
                 </form>
             </div>
         );
-    }
-}
+    };
+};
 
 export default RegisterHide;

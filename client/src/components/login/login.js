@@ -4,41 +4,47 @@ import RegisterHide from './registerhide';
 import '../../assets/css/login.css';
 
 class Login extends Component{
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.loginClicked = this.loginClicked.bind(this);
         this.goBackLogin = this.goBackLogin.bind(this);
         this.registerClicked = this.registerClicked.bind(this);
         this.goBackRegister = this.goBackRegister.bind(this);
+
         this.state = {
             loginHide: false,
             registerHide: false
-        }
-    }
-    loginClicked(e){
+        };
+    };
+
+    loginClicked(e) {
         e.preventDefault();
         this.setState({
             loginHide: !this.state.loginHide
         });
-    }
-    registerClicked(e){
+    };
+
+    registerClicked(e) {
         e.preventDefault();
         this.setState({
             registerHide: !this.state.registerHide
         });
-    }
-    goBackLogin(){
+    };
+
+    goBackLogin() {
         this.setState({
             loginHide: !this.state.loginHide
         });
-    }
-    goBackRegister(){
+    };
+
+    goBackRegister() {
         this.setState({
             registerHide: !this.state.registerHide
         });
-    }
-    render(){
+    };
+
+    render() {
         return (
             <div className="loginContainer">
                 <h2 className='loginLogo'>Ding</h2>
@@ -52,7 +58,7 @@ class Login extends Component{
                 </div>
             </div>
         );
-    }
+    };
 };
 
 export default Login;

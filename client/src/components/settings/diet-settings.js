@@ -12,16 +12,15 @@ class DietSettings extends Component {
     constructor(props) {
         super(props);
 
+        this.handleSelected = this.handleSelected.bind(this);
+
         this.state = {
             selected: [],
             value: false
         };
-
-        this.handleSelected = this.handleSelected.bind(this);
     };
     
     handleSelected(buttonObject) {
-        console.log("This is the thing", buttonObject);  
         const { selected } = this.state;
 
         if(!selected.includes(buttonObject.props.title)) {
@@ -31,12 +30,10 @@ class DietSettings extends Component {
             });
         }
         newFilter.diet = buttonObject.props.title;
-        console.log(newFilter); 
     };
 
     render() {
         const { handleSelected } = this;
-        console.log(this.state.selected);
 
         return (
             <div>
@@ -51,7 +48,7 @@ class DietSettings extends Component {
                         <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
                     </div>  
                     <div className="right" style={{marginTop: `3vh`}}>
-                    {(this.state.value) ? <Link to='/allergy-settings'><Next /></Link> : console.log('error')}                   
+                        {(this.state.value) ? <Link to='/allergy-settings'><Next /></Link> : console.log('error')}                   
                     </div>     
                 </div>                
             </div>

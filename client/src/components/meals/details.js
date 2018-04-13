@@ -3,9 +3,11 @@ import {Link} from 'react-router-dom';
 import Footer from '../general/footer';
 import LogoHeader from '../general/logo-header';
 
-class Details extends Component{
-    constructor(props){
+class Details extends Component {
+    constructor(props) {
         super(props);
+        
+        this.headerClicked = this.headerClicked.bind(this);
 
         this.state = {
             recipeComplete: false,
@@ -21,10 +23,10 @@ class Details extends Component{
             nutrList: {
                 display: 'none'
             }
-        }
-        this.headerClicked = this.headerClicked.bind(this);
-    }
-    headerClicked(target){
+        };        
+    };
+
+    headerClicked(target) {
         let selectedSection= {};
         switch (target){
             case 'ingr':
@@ -41,7 +43,7 @@ class Details extends Component{
                     nutrList: {
                         display: 'none'
                     }
-                }
+                };
                 break;
             case 'instr':
                 selectedSection = {
@@ -75,26 +77,27 @@ class Details extends Component{
                     }
                 };
                 break;
-        }
+        };
         this.setState({
             ...selectedSection
         });
-    }
-    recipeComplete(){
+    };
+
+    recipeComplete() {
       
     }
-    render(){
+
+    render() {
 
         const {name, image, ingredients, instructions, hide, index, complete} = this.props;
         
         const instrMap = instructions.map((item, index) => {
             return <li className='collection-item' key={index}>{index+1}. {item.step}</li>
-        })
+        });
 
         const ingrMap = ingredients.map((item, index) => {
-            console.log(item);
             return <li className='collection-item' key={index}>{`${item.amount} ${item.unit_type} ${item.ingredient}`}</li>
-        })
+        });
 
         return(
             <div className="detailsContainer">
@@ -125,8 +128,8 @@ class Details extends Component{
                 </main>
                 <Footer />
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 export default Details;

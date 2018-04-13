@@ -10,8 +10,8 @@ import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import axios from 'axios';
 
-class Meals extends Component{
-    constructor(props){
+class Meals extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -34,8 +34,8 @@ class Meals extends Component{
                 {filter: 'grayscale(0%)'},
                 {filter: 'grayscale(0%)'}
             ]
-        }
-    }
+        };
+    };
 
     componentDidMount() {
         console.log('pulling meals');
@@ -50,9 +50,9 @@ class Meals extends Component{
         }).catch((err) => {
             console.log(err);
         });     
-    }
+    };
 
-    determineMealConfirmation(){
+    determineMealConfirmation() {
         console.log(this.props);
         if (!this.props.location.state){
             this.setState({
@@ -64,35 +64,38 @@ class Meals extends Component{
         this.setState({
             confirmingMeals: confirmingMeals
         });
-    }
-    componentWillMount(){
+    };
+
+    componentWillMount() {
         this.determineMealConfirmation();
-    }
-    closeMealConfirm(){
-        console.log('doin it');
+    };
+
+    closeMealConfirm() {
         this.setState({
             confirmingMeals: false
         });
-    }
-    mealClicked(number, ingredients, instructions, name, image){
-        console.log(number);
+    };
+
+    mealClicked(number, ingredients, instructions, name, image) {
         const newMealInfo = {
             name: name,
             image: image,
             ingredients: ingredients,
             instructions: instructions,
             index: number
-        }
+        };
         this.setState({
             mealDetail: newMealInfo,
             showDetails: true
         });
-    }
+    };
+
     hideDetails(){
         this.setState({
             showDetails: false
         });
-    }
+    };
+
     removeMeal(event, index){
         event.stopPropagation();
         let {meals} = this.state;
@@ -101,21 +104,24 @@ class Meals extends Component{
             meals: meals
         })
         this.addSubstituteMeal();
-    }
-    completeMeal(index){
+    };
+
+    completeMeal(index) {
         let compMeals = [...this.state.completeMeals];
         compMeals[index] = {filter: 'grayscale(100%)'};
         this.setState({
             completeMeals: compMeals,
             showDetails: false
         });
-    }
-    addSubstituteMeal(){
+    };
+
+    addSubstituteMeal() {
         let randomIndex = Math.floor(Math.random() * mealdb.length);
         mealschosen.push(mealdb[randomIndex]);
         mealdb.splice(randomIndex, 1);
-    }
-    render(){
+    };
+
+    render() {
 
         const mealMap = this.state.meals.map((meal, index) => {
             return <MealCreator imgSrc={meal.imgSrc} mealName={meal.mealName} key={index} number={index} ingredients={meal.mealIngr} instructions={meal.mealInstr} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} completion={this.state.completeMeals[index]} deleteable={this.state.confirmingMeals}/>
@@ -126,16 +132,16 @@ class Meals extends Component{
 
         return(
             <div className="mealsContainer">
-            <LogoHeader add={true}/>
+                <LogoHeader add={true}/>
                 <main className="mealsMainArea">
                     {this.state.confirmingMeals && <MealConfirm confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                     {mealMap}
                     {this.state.showDetails && <Details name={name} image={image} ingredients={ingredients} instructions={instructions} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} />}
                 </main>
-            <Footer currentPage='meals'/>
+                <Footer currentPage='meals'/>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 export default Meals;

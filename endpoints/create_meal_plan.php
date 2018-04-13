@@ -1,27 +1,33 @@
 <?php
 require_once 'mysqli_connect.php';
 
+//Make PHP understand the Axios call
+$entityBody = file_get_contents('php://input');
+$request_data = json_decode($entityBody, true);
+
+session_id($request_data['session_ID']);
+session_start();
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
-//Make PHP understand the Axios call
-$entityBody = file_get_contents('php://input');
-$request_data = json_decode($entityBody, true);
+define('TRUTHY', 1);
+$truthy = 1;
 
-/*$_POST['user_id'] = 33;
-$_POST['recipe_ids'] = [547899, 525527];*/
+$_SESSION['user_id'] = 27;
+$request_data['recipe_ids'] = [13774, 36725];
 
 $recipe_count = count($request_data['recipe_ids']);
 
 //Test to see if the $user_id is an integer
-if(!is_int($request_data['user_id'])){
+if(!is_int($_SESSION['user_id'])){
     die('User ID is invalid');
 }
 
 //First we will do a SELECT query to see if the user exists in our user table
-$user_id = $request_data['user_id'];
+$user_id = $_SESSION['user_id'];
 
 //Prepare statement for the SELECT query
 if(!($stmt = $myconn->prepare("SELECT `status` FROM `users` WHERE `id` = ?"))){
@@ -66,7 +72,7 @@ if($stmt->num_rows > 0) {
 
         //Test the recipes to be added to see if they exist in our database, if they do add them to the meal plan.
         //Prepare statement for the SELECT statement that will happen in the loop.
-        if(!($stmt = $myconn->prepare("SELECT `recipe_id` FROM `recipe_allergy` WHERE `recipe_id` = ?"))){
+        if(!($stmt = $myconn->prepare("SELECT `recipe_id` FROM `recipe-allergy` WHERE `recipe_id` = ?"))){
             die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
         }
 
@@ -76,7 +82,7 @@ if($stmt->num_rows > 0) {
         }
 
         //Prepare statement for the INSERT query into recipes
-        if(!($stmtAdd = $myconn->prepare("INSERT INTO `user_choices`(`user_id`, `choice_num`, `recipe_id`, `title`) VALUES (?, ?, ?)"))){
+        if(!($stmtAdd = $myconn->prepare("INSERT INTO `user_choices`(`user_id`, `choice_num`, `recipe_id`) VALUES (?, ?, ?)"))){
             die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
         }
         
@@ -102,10 +108,21 @@ if($stmt->num_rows > 0) {
                 if($stmtAdd->affected_rows === 0) die('Meal plan row failed to add');
             } else {
                 die('Recipe ID is not in the database');
-            }                                      
+            }                   
+        }
+        if(!($stmtUpdate = $myconn->prepare("UPDATE `users` SET `meal_plan` = ? WHERE `id` = ?"))){
+            die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
+        }
+
+        if(!$stmtUpdate->bind_param('ii', $truthy, $user_id)){
+            die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
+        }
+
+        if(!$stmtUpdate->execute()){
+            die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
         }
         echo 'Success';
-    }      
+    }
 } else {
     die('Not a valid user');
 }

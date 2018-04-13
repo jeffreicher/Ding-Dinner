@@ -59,13 +59,14 @@ if($stmt->num_rows > 0) {
             $_SESSION['username'] = $username;
             $output['success'] = true;
             $output['session_id'] = session_id();
+            $encoded = json_encode($output);
+            print($encoded);
             // exit();
         }
     }
 } else {
     $output['error'] = 'incorrect username or password'; 
 }
-$encoded = json_encode($output);
-print($encoded);
+
 $stmt->close();
 $myconn->close();

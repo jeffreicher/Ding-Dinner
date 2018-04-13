@@ -79,7 +79,10 @@ if(isset($request_data['allergies'])){
     $_SESSION['logged'] = 1;
     $_SESSION['user_id'] = $user_id;
     $_SESSION['username'] = $email;
-    echo 'Success';
+    $output['success'] = true;
+    $output['session_id'] = session_id();
+    $encoded = json_encode($output);
+    print($encoded);
 }
 
 ?>

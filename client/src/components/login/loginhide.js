@@ -37,7 +37,7 @@ class LoginHide extends Component {
     confirmUserInfo() {
             console.log('confirmation initiated');
             axios({
-                url: 'http://localhost:80/frontend/Ding-FINAL/endpoints/user_login.php',
+                url: 'http://localhost:80/C1.18_FoodTinder/endpoints/user_login.php',
                 method: 'post',
                 data: {
                         email: this.state.emailValue,
@@ -48,7 +48,9 @@ class LoginHide extends Component {
                 }
             }).then((resp) => {
                 console.log('WE GOT USER AUTH', resp);
-                this.props.history.push('/mymeals');
+                if(resp.data === 'Success'){
+                    this.props.history.push('/mymeals');
+                }
             }).catch((err) => {
                 console.log(err);
             });     

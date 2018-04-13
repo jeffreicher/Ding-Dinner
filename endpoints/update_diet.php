@@ -80,7 +80,7 @@ if($stmt->num_rows > 0) {
 
         //Delete old allergy list
         //Prepare statement for the DELETE query
-        if(!($stmt = $myconn->prepare("DELETE FROM `allergy` WHERE `user_id` = ?"))){
+        if(!($stmt = $myconn->prepare("DELETE FROM `user-allergy` WHERE `user_id` = ?"))){
             die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
         }
 
@@ -102,7 +102,7 @@ if($stmt->num_rows > 0) {
 
             //Prepare and bind the INSERT query outside of the for loop
             //Prepare statement for the INSERT query
-            if(!($stmt = $myconn->prepare("INSERT INTO `allergy`(`allergy`,`user_id`) VALUES (?, ?)"))){
+            if(!($stmt = $myconn->prepare("INSERT INTO `user-allergy`(`allergy_name`,`user_id`) VALUES (?, ?)"))){
                 die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
             }
             //Bind statement for the INSERT query

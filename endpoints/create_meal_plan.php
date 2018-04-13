@@ -66,7 +66,7 @@ if($stmt->num_rows > 0) {
 
         //Test the recipes to be added to see if they exist in our database, if they do add them to the meal plan.
         //Prepare statement for the SELECT statement that will happen in the loop.
-        if(!($stmt = $myconn->prepare("SELECT `recipe_id` FROM `recipe_database` WHERE `recipe_id` = ?"))){
+        if(!($stmt = $myconn->prepare("SELECT `recipe_id` FROM `recipe_allergy` WHERE `recipe_id` = ?"))){
             die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
         }
 
@@ -76,7 +76,7 @@ if($stmt->num_rows > 0) {
         }
 
         //Prepare statement for the INSERT query into recipes
-        if(!($stmtAdd = $myconn->prepare("INSERT INTO `user_choices`(`user_id`,`choice_num`, `recipe_id`) VALUES (?, ?, ?)"))){
+        if(!($stmtAdd = $myconn->prepare("INSERT INTO `user_choices`(`user_id`, `choice_num`, `recipe_id`) VALUES (?, ?, ?)"))){
             die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
         }
         

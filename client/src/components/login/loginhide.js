@@ -3,8 +3,8 @@ import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 
-class LoginHide extends Component{
-    constructor(props){
+class LoginHide extends Component {
+    constructor(props) {
         super(props);
 
         this.fieldFocused = this.fieldFocused.bind(this);
@@ -12,6 +12,7 @@ class LoginHide extends Component{
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.goBack = this.goBack.bind(this);
+
         this.state = {
             dataValue: '',
             emailValue: '',
@@ -27,8 +28,8 @@ class LoginHide extends Component{
             passwordCharacters: {
                 textDecoration: 'none'
             }
-        }
-    }
+        };
+    };
 
     //use thisprops.history.push to redirect user to the meals page inside then promise
     //use componentdidmount to call axios request to load the correct user meal 
@@ -51,9 +52,9 @@ class LoginHide extends Component{
             }).catch((err) => {
                 console.log(err);
             });     
-    }
+    };
 
-    emailChange(e){
+    emailChange(e) {
         const emailValidification = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         this.setState({
@@ -71,16 +72,18 @@ class LoginHide extends Component{
                 });
             }
         });
-    }
-    passwordChange(e){
+    };
+
+    passwordChange(e) {
         this.setState({
             passwordValue: e.target.value
         }, () => {
             this.checkPWLength();
             this.checkPWChars();
         });
-    }
-    checkPWLength(){
+    };
+
+    checkPWLength() {
         if(this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32){
             const strikeThrough = {textDecoration: 'line-through'};
             this.setState({
@@ -92,8 +95,9 @@ class LoginHide extends Component{
                 passwordLength: noStrike
             });
         }
-    }
-    checkPWChars(){
+    };
+
+    checkPWChars() {
         const passwordChars = /^[a-z0-9]+$/i;
         if (passwordChars.test(this.state.passwordValue)){
             const strikeThrough = {textDecoration: 'line-through'};
@@ -106,16 +110,18 @@ class LoginHide extends Component{
                 passwordCharacters: noStrike
             });
         }
-    }
-    goBack(e){
+    };
+
+    goBack(e) {
         e.preventDefault();
         if(this.state.emailValue.length === 0 || this.state.passwordValue.length === 0){
             alert('put stuff in the dang fields');
             return;
         }
         this.props.returnFX();
-    }
-    fieldFocused(targetField){
+    };
+
+    fieldFocused(targetField) {
         if (targetField === 'email'){
             this.setState({
                 emailFocused: true
@@ -125,8 +131,9 @@ class LoginHide extends Component{
                 passwordFocused: true
             });
         }
-    }
-    fieldBlurred(targetField){
+    };
+
+    fieldBlurred(targetField) {
         if (targetField === 'email'){
             this.setState({
                 emailFocused: false
@@ -136,9 +143,11 @@ class LoginHide extends Component{
                 passwordFocused: false
             });
         }
-    }
-    render(){
-        const strikeThrough = {textDecoration: 'line-through'} 
+    };
+
+    render() {
+        const strikeThrough = {textDecoration: 'line-through'}; 
+
         return (
             <div>
                 <form onSubmit={this.goBack} className='row'>
@@ -164,11 +173,10 @@ class LoginHide extends Component{
                     </div>
                     <div className='col s2' />
                     <button to='/mymeals' className='btn center-align blue darken-2 waves-effect waves-light' onClick={this.confirmUserInfo.bind(this)}>Login</button>
-                    {/* {this.state.userInfoValue && <Redirect path to="/mymeals"/>} */}
                 </form>
             </div>
         );
-    }
-}
+    };
+};
 
 export default LoginHide;

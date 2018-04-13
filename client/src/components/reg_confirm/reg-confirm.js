@@ -5,16 +5,17 @@ import '../../assets/css/reg-confirm.css'
 import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
 
-class RegisterConfirm extends Component{
-    constructor(props){
+class RegisterConfirm extends Component {
+    constructor(props) {
         super(props);
 
-    }
-    sendAcctToServer(){
+    };
+
+    sendAcctToServer() {
         registerstorage.diet = registerstorage.diet.toLowerCase();
         for (let i=0; i<registerstorage.allergy.length; i++){
             registerstorage.allergy[i] = registerstorage.allergy[i].toLowerCase();
-        }
+        };
         axios({
             url: 'http://localhost:80/C1.18_FoodTinder/endpoints/create_user.php',
             method: 'post',
@@ -31,11 +32,11 @@ class RegisterConfirm extends Component{
             console.log('We did it famalam', resp);
             if(resp.data === 'Success'){
                 this.props.history.push('/meal-number');
-            }
+            };
         });
-    }
+    };
 
-    render(){
+    render() {
         return (
             <div className='regConfirmContainer container'>
                 <div className='nav-wrapper blue darken-2 z-depth-1'>
@@ -57,8 +58,8 @@ class RegisterConfirm extends Component{
                 <div className='page-footer bottom blue darken-2 z-depth-1 regConfirmFooter'>
                 </div>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 export default RegisterConfirm;

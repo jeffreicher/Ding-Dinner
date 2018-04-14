@@ -48,7 +48,7 @@ $diet = $restrictions[0]['diet'];
 
 /**Get recipes from database that meet the dietary restrictions found in the previous section*/
 
-$recipeQuery = "SELECT ra.recipe_id, rd.title, rd.image  FROM `recipe-allergy` AS ra JOIN `recipe-diet` AS rd ON ra.recipe_id = rd.recipe_id WHERE ";
+$recipeQuery = "SELECT ra.recipe_id, rd.title, rd.image, rd.readyInMinutes  FROM `recipe-allergy` AS ra JOIN `recipe-diet` AS rd ON ra.recipe_id = rd.recipe_id WHERE ";
 
 forEach($allergens as $key => $value){
     if($value === '1'){
@@ -67,6 +67,10 @@ $result = mysqli_query($myconn, $recipeQuery);
 while($row = mysqli_fetch_assoc($result)){
     $row['title']=addslashes($row['title']);
     $row['image']=addslashes($row['image']);
+    if(!is_numeric($row['readyInMinutes'])){
+        print 'Invalid readyInMinutes from database';
+        exit();
+    };
     if(!is_numeric($row['recipe_id'])){
         print 'Invalid recipe ID from database';
         exit();

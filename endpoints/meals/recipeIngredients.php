@@ -1,4 +1,7 @@
 <?php
+$entityBody = file_get_contents('php://input');
+$request_data = json_decode($entityBody, true);
+
 /**Get the ingredients for the user's meals */
 
 header("Access-Control-Allow-Origin: *");
@@ -6,8 +9,10 @@ header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
+
+
 require('../mysqli_connect.php');
-$recipeID = $_POST['recipe_id'];
+$recipeID = $request_data['recipe_id'];
 // $recipeID = 558826;
 print($recipeID);
 

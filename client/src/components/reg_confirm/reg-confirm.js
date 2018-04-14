@@ -17,13 +17,13 @@ class RegisterConfirm extends Component {
             registerstorage.allergy[i] = registerstorage.allergy[i].toLowerCase();
         };
         axios({
-            url: 'http://localhost:80/C1.18_FoodTinder/endpoints/create_user.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
                     password: registerstorage.password,
                     diet: registerstorage.diet,
-                    allergies: registerstorage.allergy
+                    allergies: registerstorage.allergy,
                 },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

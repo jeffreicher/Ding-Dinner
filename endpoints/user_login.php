@@ -29,7 +29,7 @@ if (!preg_match('/^[a-zA-Z0-9]{8,32}$/', $request_data['password'])){
 $password = $request_data['password']; 
 
 //Prepared statement to SELECT user with matching email and password
-if(!($stmt = $myconn->prepare("SELECT `id`, `email`, `status` FROM `users` WHERE `email` = ? AND `password` = ? LIMIT 1"))){
+if(!($stmt = $myconn->prepare("SELECT `id`, `email`, `status`, `meal_plan` FROM `users` WHERE `email` = ? AND `password` = ? LIMIT 1"))){
     die("Prepare failed: (" . $myconn->errno . ") " . $myconn->error);
 }
 
@@ -45,7 +45,7 @@ if(!$stmt->execute()){
 $stmt->store_result();
 
 //Bind results to variables
-$stmt->bind_result($user_id, $username, $status);
+$stmt->bind_result($user_id, $username, $status, $meal_plan);
 $output = [
     'success' => false
 ];
@@ -57,6 +57,7 @@ if($stmt->num_rows > 0) {
             $_SESSION['logged'] = 1;
             $_SESSION['user_id'] = $user_id;
             $_SESSION['username'] = $username;
+            $output['meal_plan'] = $meal_plan;
             $output['success'] = true;
             $output['session_id'] = session_id();
             $encoded = json_encode($output);

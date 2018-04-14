@@ -115,7 +115,7 @@ if($stmt->num_rows > 0) {
             for($countAccepted = 0; $countAccepted < $acceptedAllergyCount; $countAccepted++){
                 $currentAllergy = $userAllergies[$countAccepted];
 
-                //Execute the prepared INSER query
+                //Execute the prepared INSERT query
                 if(!$stmt->execute()){
                     die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
                 }

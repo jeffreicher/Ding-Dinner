@@ -5,20 +5,22 @@ require_once 'mysqli_connect.php';
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
+//Start the sessions
 session_id($request_data['session_ID']);
 session_start();
 
+//Headers used for local development
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 //Constant used for updating users meal plan status to true after meal plan has been generated
-define('TRUTHY', 1);
+$truthy = 1;
 
-//This is test filler data. It needs to be commented ou when using the code.
-$_SESSION['user_id'] = 13;
-$request_data['recipe_ids'] = [13774, 36725];
+//This is test filler data. It needs to be commented out when using the code.
+// $_SESSION['user_id'] = 31;
+// $request_data['recipe_ids'] = [36725, 13774];
 
 $recipe_count = count($request_data['recipe_ids']);
 
@@ -54,7 +56,7 @@ if($stmt->num_rows > 0) {
             die("You have been banned");
         }
 
-        //Prepare statement to delete any possible allergy rows currently in the table. We will rebuild after.
+        //Prepare statement to delete any possible meal rows currently in the table. We will rebuild after.
         if(!($stmt = $myconn->prepare("DELETE FROM `user_choices` WHERE `user_id` = ?"))){
             die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
         }

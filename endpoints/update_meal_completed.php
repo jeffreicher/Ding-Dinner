@@ -5,6 +5,7 @@ require_once 'mysqli_connect.php';
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
+//Start the sessions
 session_id($request_data['session_ID']);
 session_start();
 
@@ -15,9 +16,9 @@ header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 //Data for Testing
-/*$_SESSION['user_id'] = 27;
-$request_data['completed'] = 0;
-$request_data['recipe_id'] = 13774;*/
+// $_SESSION['user_id'] = 31;
+// $request_data['completed'] = 1;
+// $request_data['recipe_id'] = 13774;
 
 //Check if user ID is a valid integer. This might be a $_SESSION['user_id'] later
 if(!is_int($_SESSION['user_id'])){

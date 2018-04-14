@@ -1,20 +1,23 @@
 <?php
-
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Credentials: true ");
-header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
-header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
-
+//Sessions initialization
 session_start();
+
+//Require database connection
 require_once 'mysqli_connect.php';
 
 //Make PHP understand the Axios call
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
-/*$_POST['email'] = "mkane3@something.com";
-$_POST['password'] = "password";*/
+//Headers for local development
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true ");
+header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
+header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
+//Test Data
+// $request_data['email'] = "jeff@jeff.jeff";
+// $request_data['password'] = "jeffrocks";
 
 //Validate Email
 if (!($email = filter_var($request_data['email'], FILTER_VALIDATE_EMAIL))){
@@ -46,9 +49,6 @@ $stmt->store_result();
 
 //Bind results to variables
 $stmt->bind_result($user_id, $username, $status, $meal_plan);
-$output = [
-    'success' => false
-];
 if($stmt->num_rows > 0) {
     if($stmt->fetch()){
         if($status === 'banned'){
@@ -62,11 +62,10 @@ if($stmt->num_rows > 0) {
             $output['session_id'] = session_id();
             $encoded = json_encode($output);
             print($encoded);
-            // exit();
         }
     }
 } else {
-    $output['error'] = 'incorrect username or password'; 
+    echo 'Invalid username/password combination';
 }
 
 $stmt->close();

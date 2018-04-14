@@ -4,6 +4,7 @@ $request_data = json_decode($entityBody, true);
 
 session_id($request_data['session_ID']);
 session_start();
+
 require('mysqli_connect.php');
 
 header("Access-Control-Allow-Origin: *");

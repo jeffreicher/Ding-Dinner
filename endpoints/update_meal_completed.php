@@ -47,7 +47,7 @@ if(!$stmt->execute()){
 }
 
 //Check to see if there was an error with the update
-if($stmt->affected_rows === -1) die('Diet update error');
+if($stmt->affected_rows === -1) die('Error with updating row');
 $stmt->close();
 echo 'Success';
 

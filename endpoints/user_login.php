@@ -1,20 +1,23 @@
 <?php
-
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Credentials: true ");
-header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
-header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
-
+//Sessions initialization
 session_start();
+
+//Require database connection
 require_once 'mysqli_connect.php';
 
 //Make PHP understand the Axios call
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
-/*$_POST['email'] = "mkane3@something.com";
-$_POST['password'] = "password";*/
+//Headers for local development
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true ");
+header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
+header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
+//Test Data
+// $request_data['email'] = "jeff@jeff.jeff";
+// $request_data['password'] = "jeffrocks";
 
 //Validate Email
 if (!($email = filter_var($request_data['email'], FILTER_VALIDATE_EMAIL))){
@@ -29,7 +32,7 @@ if (!preg_match('/^[a-zA-Z0-9]{8,32}$/', $request_data['password'])){
 $password = $request_data['password']; 
 
 //Prepared statement to SELECT user with matching email and password
-if(!($stmt = $myconn->prepare("SELECT `id`, `email`, `status` FROM `users` WHERE `email` = ? AND `password` = ? LIMIT 1"))){
+if(!($stmt = $myconn->prepare("SELECT `id`, `email`, `status`, `meal_plan` FROM `users` WHERE `email` = ? AND `password` = ? LIMIT 1"))){
     die("Prepare failed: (" . $myconn->errno . ") " . $myconn->error);
 }
 
@@ -45,10 +48,7 @@ if(!$stmt->execute()){
 $stmt->store_result();
 
 //Bind results to variables
-$stmt->bind_result($user_id, $username, $status);
-$output = [
-    'success' => false
-];
+$stmt->bind_result($user_id, $username, $status, $meal_plan);
 if($stmt->num_rows > 0) {
     if($stmt->fetch()){
         if($status === 'banned'){
@@ -57,15 +57,16 @@ if($stmt->num_rows > 0) {
             $_SESSION['logged'] = 1;
             $_SESSION['user_id'] = $user_id;
             $_SESSION['username'] = $username;
+            $output['meal_plan'] = $meal_plan;
             $output['success'] = true;
             $output['session_id'] = session_id();
-            // exit();
+            $encoded = json_encode($output);
+            print($encoded);
         }
     }
 } else {
-    $output['error'] = 'incorrect username or password'; 
+    echo 'Invalid username/password combination';
 }
-$encoded = json_encode($output);
-print($encoded);
+
 $stmt->close();
 $myconn->close();

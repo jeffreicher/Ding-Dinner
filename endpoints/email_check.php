@@ -1,7 +1,7 @@
 <?php
-session_start();
 require_once 'mysqli_connect.php';
 
+//Header files for local development
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
@@ -10,6 +10,9 @@ header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Si
 //Make PHP understand the Axios call
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
+
+//Test email
+$request_data['email'] = 'jeff2@jeff.jeff';
 
 //Validate Email
 if (!($email = filter_var($request_data['email'], FILTER_VALIDATE_EMAIL))){

@@ -1,16 +1,25 @@
 <?php
+//Start the sessions
 session_start();
+
 require_once 'mysqli_connect.php';
 require_once 'helper_functions.php';
 
+//Make PHP understand the Axios call
+$entityBody = file_get_contents('php://input');
+$request_data = json_decode($entityBody, true);
+
+//Headers for local development
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
-//Make PHP understand the Axios call
-$entityBody = file_get_contents('php://input');
-$request_data = json_decode($entityBody, true);
+//Test Data
+// $request_data['email'] = 'mjk@email.com';
+// $request_data['password'] = 'password';
+// $request_data['diet'] = 'none';
+// $request_data['allergies'] = ['soy', 'sesame', 'strawberries', 'dandylions', 'dairy'];
 
 //Validate Email
 if (!($email = filter_var($request_data['email'], FILTER_VALIDATE_EMAIL))){
@@ -79,7 +88,11 @@ if(isset($request_data['allergies'])){
     $_SESSION['logged'] = 1;
     $_SESSION['user_id'] = $user_id;
     $_SESSION['username'] = $email;
-    echo 'Success';
+    $_SESSION['meal_plan'] = 0;
+    $output['success'] = true;
+    $output['session_id'] = session_id();
+    $encoded = json_encode($output);
+    print($encoded);
 }
 
 ?>

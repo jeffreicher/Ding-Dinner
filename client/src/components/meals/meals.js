@@ -71,6 +71,18 @@ class Meals extends Component {
 
     componentWillMount() {
         this.determineMealConfirmation();
+        axios({
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
+            method: 'post',
+            data: {
+                'session_ID': localStorage.ding_sessionID
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then( resp => {
+            console.log('All Meal Ingrs: ', resp)
+        })
     };
 
     closeMealConfirm() {
@@ -82,7 +94,7 @@ class Meals extends Component {
     mealClicked(number, mealInfo) {
         console.log('Infos: ', mealInfo);
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeInstructions.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeIngredients.php',
             method: 'post',
             data: {
                 'recipe_id': mealInfo.recipe_id,

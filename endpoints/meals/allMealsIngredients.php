@@ -19,10 +19,10 @@ if(!is_numeric($userID)){
     exit();
 };
 
-$recipeIDList=[];
-$currentMealsOutput=[];
+// $recipeIDList=[];
+$allIngredientsOutput=[];
 
-if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, uc.completed FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
+if (!($stmt = $myconn->prepare("SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id FROM `user_choices` AS uc JOIN `ingredients` AS ing ON uc.recipe_id = ing.recipe_id WHERE `user_id`= ? "))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
 if (!$stmt->bind_param("i", $userID)) {
@@ -31,21 +31,18 @@ if (!$stmt->bind_param("i", $userID)) {
 if (!$stmt->execute()) {
     echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 }
-$currentMealsResult = $stmt -> get_result();
-while($row = mysqli_fetch_assoc($currentMealsResult)){
-    $row['title']=addslashes($row['title']);
-    $row['image']=addslashes($row['image']);
-    if(!is_numeric($row['completed'])){
-        print 'Invalid completed flag from database';
-        exit();
-    };
+$allIngredientsResult = $stmt -> get_result();
+while($row = mysqli_fetch_assoc($allIngredientsResult)){
+    $row['ingredient']=addslashes($row['ingredient']);
+    $row['amount']=addslashes($row['amount']);
+    $row['unit_type']=addslashes($row['unit_type']);
     if(!is_numeric($row['recipe_id'])){
         print 'Invalid recipe ID from database';
         exit();
     };
-    $currentMealsOutput[]=$row;
+    $allIngredientsOutput[]=$row;
 }
-$currentMealsEncoded = json_encode($currentMealsOutput);
-print_r($currentMealsEncoded);
+$allIngredientsEncoded = json_encode($allIngredientsOutput);
+print_r($allIngredientsEncoded);
 
 ?>

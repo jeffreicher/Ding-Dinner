@@ -1,4 +1,6 @@
-<?php 
+<?php
+$entityBody = file_get_contents('php://input');
+$request_data = json_decode($entityBody, true);
 /**Get the nutrition information for the user's meals */
 
 header("Access-Control-Allow-Origin: *");
@@ -7,8 +9,8 @@ header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 require('../mysqli_connect.php');
-// $recipeID = $_POST['recipe_id'];
-$recipeID = 558826;
+$recipeID = $request_data['recipe_id'];
+// $recipeID = 558826;
 
 if (!($stmt = $myconn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, n.servingPrice, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = ?"))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;

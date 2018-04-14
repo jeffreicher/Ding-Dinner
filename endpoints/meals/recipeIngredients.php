@@ -14,7 +14,6 @@ header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Si
 require('../mysqli_connect.php');
 $recipeID = $request_data['recipe_id'];
 // $recipeID = 558826;
-print($recipeID);
 
 if (!($stmt = $myconn->prepare("SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id FROM ingredients AS ing WHERE ing.recipe_id = ?"))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;

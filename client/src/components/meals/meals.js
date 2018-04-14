@@ -22,8 +22,7 @@ class Meals extends Component {
                 name: '',
                 image: '',
                 ingredients: '',
-                instructions: '',
-                nutrition: '',
+                recipe_id: '',
                 index: ''
             },
             completeMeals: [
@@ -38,25 +37,7 @@ class Meals extends Component {
         };
     };
 
-    componentDidMount() {
-        console.log('pulling meals');
-        axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
-            // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
-            method: 'post',
-            data: {
-                session_ID: localStorage.ding_sessionID
-            }
-            }).then((resp) => {
-            console.log('Login meals works: ', resp);
-        }).catch((err) => {
-            console.log(err);
-        });     
-    };
-
     determineMealConfirmation() {
-        console.log(this.props);
         if (!this.props.location.state){
             this.setState({
                 confirmingMeals: false
@@ -82,17 +63,42 @@ class Meals extends Component {
             }
         }).then( resp => {
             console.log('All Meal Ingrs: ', resp)
-        })
+        });
     };
 
     closeMealConfirm() {
+        const selectedMeals = [];
+        for (var i=0; i<mealschosen.length; i++){
+            selectedMeals.push(mealschosen[i].recipe_id);
+        }
+        axios({
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_meal_plan.php',
+            method: 'post',
+            data: {
+                'recipe_ids': selectedMeals,
+                'session_ID': localStorage.ding_sessionID
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then( resp => {
+            console.log('Confirming new meal plan: ', resp)
+        });
         this.setState({
             confirmingMeals: false
         });
     };
 
     mealClicked(number, mealInfo) {
-        console.log('Infos: ', mealInfo);
+        console.log('Clicked meal: ', mealInfo);
+        const mealDetail = {
+            name: mealInfo.title,
+            image: mealInfo.image,
+            ingredients: '',
+            recipe_id: mealInfo.recipe_id,
+            index: number
+        }
+        const that = this;
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeIngredients.php',
             method: 'post',
@@ -104,11 +110,14 @@ class Meals extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            console.log('Ingr: ', resp)
-        })
-        // this.setState({
-        //     showDetails: true
-        // });
+            console.log('Ingr: ', resp);
+            mealDetail.ingredients = resp.data;
+            that.setState({
+                showDetails: true,
+                mealDetail: mealDetail
+            });
+        });
+        
     };
 
     hideDetails(){
@@ -127,7 +136,21 @@ class Meals extends Component {
         this.addSubstituteMeal();
     };
 
-    completeMeal(index) {
+    completeMeal(index, recipe_id) {
+        axios({
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_meal_completed.php',
+            method: 'post',
+            data: {
+                'recipe_id': recipe_id,
+                'session_ID': localStorage.ding_sessionID,
+                completed: 1
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then( resp => {
+            console.log('Complete meal: ', resp);
+        })
         let compMeals = [...this.state.completeMeals];
         compMeals[index] = {filter: 'grayscale(100%)'};
         this.setState({

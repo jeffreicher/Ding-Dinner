@@ -30,7 +30,7 @@ class RegisterConfirm extends Component {
             }
         }).then((resp)=>{
             console.log('We did it famalam', resp);
-            if(resp.data === 'Success'){
+            if(resp.data.success === true){
                 this.props.history.push('/meal-number');
             };
         });

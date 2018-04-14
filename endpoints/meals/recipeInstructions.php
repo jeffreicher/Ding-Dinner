@@ -1,9 +1,14 @@
 <?php
 /**Get the cooking instructions for the user's meals */
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true ");
+header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
+header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
+
 require('../mysqli_connect.php');
-// $recipeID = $_POST['recipe_id'];
-$recipeID = 558826;
+$recipeID = $_POST['recipe_id'];
+// $recipeID = 558826;
 
 if (!($stmt = $myconn->prepare("SELECT inst.step_num, inst.step, inst.recipe_id FROM instructions AS inst WHERE inst.recipe_id = ?"))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;

@@ -48,12 +48,13 @@ class AllergySettings extends Component {
             newFilter.allergy[i] = newFilter.allergy[i].toLowerCase();
         };
         axios({
-            url: 'http://localhost:8080/dingLFZ/endpoints/update_diet.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
             method: 'post',
             data: {
 
                     diet: newFilter.diet,
-                    allergies: newFilter.allergy
+                    allergies: newFilter.allergy,
+                    session_ID: localStorage.ding_sessionID
                 },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

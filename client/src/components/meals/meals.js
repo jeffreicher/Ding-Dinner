@@ -43,11 +43,11 @@ class Meals extends Component {
         axios({
             // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/loginMealGrab.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
             method: 'post',
-                data: {
-                    session_ID: localStorage.ding_sessionID
-                }
+            data: {
+                session_ID: localStorage.ding_sessionID
+            }
             }).then((resp) => {
             console.log('Login meals works: ', resp);
         }).catch((err) => {
@@ -80,18 +80,23 @@ class Meals extends Component {
     };
 
     mealClicked(number, mealInfo) {
-        const newMealInfo = {
-            name: mealInfo[0].title,
-            image: mealInfo[0].image,
-            ingredients: mealInfo[2],
-            instructions: mealInfo[3],
-            nutrition: mealInfo[1],
-            index: number
-        };
-        this.setState({
-            mealDetail: newMealInfo,
-            showDetails: true
-        });
+        console.log('Infos: ', mealInfo);
+        axios({
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeInstructions.php',
+            method: 'post',
+            data: {
+                'recipe_id': mealInfo.recipe_id,
+                'session_ID': localStorage.ding_sessionID
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then( resp => {
+            console.log('Ingr: ', resp)
+        })
+        // this.setState({
+        //     showDetails: true
+        // });
     };
 
     hideDetails(){

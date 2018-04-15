@@ -10,8 +10,6 @@ class MealCreator extends Component {
     render() {
         const {mealInfo, number, deleteItem, onclick, completion} = this.props;
 
-        console.log('Single meal info: ', mealInfo);
-
         return (
             <div className="mealsItem" onClick={()=>onclick(number, mealInfo)} style={this.props.completion} >
                 <img src={mealInfo.image} alt="" className="mealsImg" />

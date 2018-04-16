@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import LoginHide from './loginhide';
 import RegisterHide from './registerhide';
+import dingLogo from '../../assets/images/dingLogoOrangeShadow.png'
 import '../../assets/css/login.css';
 
 class Login extends Component{
@@ -47,14 +48,14 @@ class Login extends Component{
     render() {
         return (
             <div className="loginContainer">
-                <h2 className='loginLogo'>Ding</h2>
+                <img className='loginLogo' src={dingLogo} />
                 <h4 className='loginSlogan'>Dinner is served</h4>
                 <div className='loginButtons'>
                     {this.state.loginHide && <LoginHide history={this.props.history} returnFX={this.goBackLogin}/>}
                     {this.state.registerHide && <RegisterHide history={this.props.history} returnFX={this.goBackRegister}/>}
-                    {!this.state.loginHide && !this.state.registerHide && <button className="loginButton btn-large black" onClick={this.loginClicked}>Login</button>}
+                    {!this.state.loginHide && !this.state.registerHide && <button className="loginButton btn-large orange darken-4" onClick={this.loginClicked}>Login</button>}
                     <br />
-                    {!this.state.loginHide && !this.state.registerHide && <button className="registerButton btn-large black" onClick={this.registerClicked}>Register</button>}
+                    {!this.state.loginHide && !this.state.registerHide && <button className="registerButton btn-large orange darken-4" onClick={this.registerClicked}>Register</button>}
                 </div>
             </div>
         );

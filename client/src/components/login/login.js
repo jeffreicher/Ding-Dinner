@@ -49,7 +49,7 @@ class Login extends Component{
         return (
             <div className="loginContainer">
                 <img className='loginLogo' src={dingLogo} />
-                <h4 className='loginSlogan'>Dinner is served</h4>
+                <h4 className='loginSlogan'>dinner is served</h4>
                 <div className='loginButtons'>
                     {this.state.loginHide && <LoginHide history={this.props.history} returnFX={this.goBackLogin}/>}
                     {this.state.registerHide && <RegisterHide history={this.props.history} returnFX={this.goBackRegister}/>}

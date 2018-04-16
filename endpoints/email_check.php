@@ -12,7 +12,7 @@ $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
 //Test email
-$request_data['email'] = 'jeff2@jeff.jeff';
+//$request_data['email'] = 'jeff2@jeff.jeff';
 
 //Validate Email
 if (!($email = filter_var($request_data['email'], FILTER_VALIDATE_EMAIL))){

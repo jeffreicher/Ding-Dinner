@@ -2,6 +2,14 @@
     margin-top: 2%;
 }
 
+.dietContainer {
+    height: 100vh;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 @media only screen and (min-width: 992px) {
     .collection {
         display: flex;

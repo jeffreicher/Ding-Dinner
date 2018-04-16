@@ -4,6 +4,11 @@
     margin: 0;
     text-align: center;
     font-size: 1rem;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
 }
 
 .mainArea {

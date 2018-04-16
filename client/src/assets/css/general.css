@@ -3,7 +3,6 @@
     height: 10%;
     width: 100%;
     margin: 0;
-    background-color: lightblue;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -20,10 +19,13 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: lightblue;
     position: relative;
 }
 
 .headerBar * {
     font-size: 3rem;
+}
+
+.headerLogo {
+    height: 70%;
 }

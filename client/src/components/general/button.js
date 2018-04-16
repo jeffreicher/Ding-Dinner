@@ -5,18 +5,18 @@ class Button extends Component {
         super(props);
 
         this.state = {
-            color: 'grey'
+            color: 'grey darken-3'
         };
     };
 
     componentWillReceiveProps(nextProps, prevState) {
         if (nextProps.determineSelected) {
             this.setState({
-                color: 'rgb(6, 101, 156)',
+                color: 'teal',
             });
         } else {
             this.setState({
-                color: 'gray',
+                color: 'grey darken-3',
             });
         };   
     };
@@ -24,7 +24,7 @@ class Button extends Component {
     render() {
         return (
             <div>
-                <a onClick={this.props.selectedCheck.bind(null, this)} style={{backgroundColor: this.state.color}} className={`btn-desk waves-effect waves-light btn z-depth-2 ${this.props.style}`}>
+                <a onClick={this.props.selectedCheck.bind(null, this)} style={{backgroundColor: this.state.color}} className={`btn-desk btn-large waves-effect waves-light btn z-depth-2 ${this.state.color} ${this.props.style}`}>
                 <div>
                     <div className="title-container oxygenFont">
                        {this.props.title} 

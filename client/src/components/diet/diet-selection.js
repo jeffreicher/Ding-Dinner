@@ -35,7 +35,7 @@ class DietSelection extends Component {
         const { handleSelected } = this;
 
         return (
-            <div>
+            <div className='dietContainer'>
                 <LogoHeader />
                 <div className="container">
                     <Header title={'What\'s Your Type?'}/>

@@ -57,7 +57,7 @@ forEach($allergens as $key => $value){
 };
 $recipeQuery = substr($recipeQuery, 0, -4);
 if($diet !== 'none'){
-    $query .= " AND rd.$diet".'=1';
+    $recipeQuery .= " AND rd.$diet".'=1';
 }
 
 $recipeQuery .= " LIMIT 21";

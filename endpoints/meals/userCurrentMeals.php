@@ -22,7 +22,7 @@ if(!is_numeric($userID)){
 $recipeIDList=[];
 $currentMealsOutput=[];
 
-if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, uc.completed FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
+if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, rd.readyInMinutes, uc.completed FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
 if (!$stmt->bind_param("i", $userID)) {

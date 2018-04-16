@@ -114,9 +114,6 @@ class Details extends Component {
                 this.generateNutrition(resp, selectedSection);
             };
         });
-        // this.setState({
-        //     ...selectedSection
-        // });
     };
 
     generateIngredients(info, selectedSection){
@@ -193,9 +190,6 @@ class Details extends Component {
                         {!this.props.hidecomplete && <button className="completeButton btn green darken-2" onClick={()=>complete(index, mealInfo.recipe_id)}>Complete</button>}
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>
-                        {/* <ul className='collection'>
-                            <li className='collection-item'>WIP please don't sue</li>
-                        </ul> */}
                         {nutrMap}
                     </div>
                 </main>

@@ -8,7 +8,14 @@ class Settings extends Component {
     constructor(props) {
         super(props);
 
+        this.logoutClicked = this.logoutClicked.bind(this);
+
     };
+
+    logoutClicked(){
+        localStorage.removeItem('ding_sessionID');
+        this.props.history.push('/');
+    }
 
     render() {
         return (                      
@@ -18,7 +25,7 @@ class Settings extends Component {
                     <h4 className='card-panel settingsHeader lobsterFont z-depth-2'>Settings</h4>
                     <Link to='/diet-settings'className='settingsButton oxygenFont btn-large'>Reset Filters</Link>
                     <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large'>Add Meals</Link>
-                    <Link to='/' className='settingsButton oxygenFont btn-large'>Logout</Link>                    
+                    <div className='settingsButton oxygenFont btn-large' onClick={this.logoutClicked}>Logout</div>                    
                 </div>
                 <Footer currentPage='settings' />  
             </div>      

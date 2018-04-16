@@ -13,7 +13,6 @@ class LoginHide extends Component {
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.goBack = this.goBack.bind(this);
-        this.retrieveUserMeals = this.retrieveUserMeals.bind(this);
 
         //store session in local storage
 
@@ -54,32 +53,12 @@ class LoginHide extends Component {
 
                 if(resp.data.success){
                     localStorage.ding_sessionID = resp.data.session_id;
-                    this.retrieveUserMeals();
+                    this.props.history.push('/mymeals');
                 }
             }).catch((err) => {
                 console.log(err);
             });     
     };
-
-    retrieveUserMeals(){
-        axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
-            // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
-            method: 'post',
-            data: {
-                session_ID: localStorage.ding_sessionID
-            }
-            }).then((resp) => {
-            console.log('Login meals works: ', resp);
-            for (let i=0; i<resp.data.length; i++){
-                mealschosen.push(resp.data[i]);
-            }
-            this.props.history.push('/mymeals');
-        }).catch((err) => {
-            console.log(err);
-        });  
-    }
 
     emailChange(e) {
         const emailValidification = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import '../../assets/css/meals.css'
 import Details from './details';
 import mealdb from '../info_storage/meal-db';
@@ -14,13 +14,13 @@ class Meals extends Component {
     constructor(props) {
         super(props);
 
-        this.regenListOnComplete = this.regenListOnComplete.bind(this);
-        this.regenListSuccess = this.regenListSuccess.bind(this);
+        this.retrieveUserMeals = this.retrieveUserMeals.bind(this);
 
         this.state = {
-            meals: mealschosen,
+            meals: null,
             showDetails: false,
             confirmingMeals: false,
+            compelteRedirect: false,
             mealDetail: {
                 name: '',
                 image: '',
@@ -55,7 +55,33 @@ class Meals extends Component {
 
     componentWillMount() {
         this.determineMealConfirmation();
+        this.retrieveUserMeals();
     };
+
+    retrieveUserMeals(){
+        if (!this.state.confirmingMeals){
+            axios({
+                // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
+                // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
+                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
+                method: 'post',
+                data: {
+                    session_ID: localStorage.ding_sessionID
+                }
+                }).then((resp) => {
+                console.log('Login meals works: ', resp);
+                console.log('History: ',this.props.history);
+                for (let i=0; i<resp.data.length; i++){
+                    mealschosen.push(resp.data[i]);
+                };
+                this.setState({
+                    meals: mealschosen
+                });
+            }).catch((err) => {
+                console.log(err);
+            });  
+        }
+    }
 
     closeMealConfirm() {
         const selectedMeals = [];
@@ -74,10 +100,11 @@ class Meals extends Component {
             }
         }).then( resp => {
             console.log('Confirming new meal plan: ', resp)
+            this.setState({
+                confirmingMeals: false
+            })
         });
-        this.setState({
-            confirmingMeals: false
-        });
+        
     };
 
     mealClicked(number, mealInfo) {
@@ -108,7 +135,6 @@ class Meals extends Component {
                 mealDetail: mealDetail
             });
         });
-        
     };
 
     hideDetails(){
@@ -170,44 +196,14 @@ class Meals extends Component {
             }
         }).then( resp => {
             console.log('Complete meal: ', resp);
-            this.regenListOnComplete(resp);
+            this.setState({
+                showDetails: false,
+                completeRedirect: true
+            });
+            //this.props.history.push('/mymeals');
         })
-        let compMeals = [...this.state.completeMeals];
-        compMeals[index] = {filter: 'grayscale(100%)'};
-        console.log('Completed time props',this.props);
-        this.setState({
-            completeMeals: compMeals,
-            showDetails: false
-        });
+        
     };
-
-    regenListOnComplete(){
-        while (mealschosen.length){
-            mealschosen.pop();
-        }
-        axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
-            // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
-            method: 'post',
-            data: {
-                session_ID: localStorage.ding_sessionID
-            }
-            }).then((resp) => {
-                this.regenListSuccess(resp);
-            }).catch((err) => {
-                console.log(err);
-        });
-    }
-
-    regenListSuccess(resp){
-        for (let i=0; i<resp.data.length; i++){
-            mealschosen.push(resp.data[i]);
-        }
-        that.setState({
-            meals: mealschosen
-        })
-    }
 
     addSubstituteMeal(index) {
         let randomIndex = Math.floor(Math.random() * mealdb.length);
@@ -220,12 +216,11 @@ class Meals extends Component {
 
     render() {
 
-        const mealMap = this.state.meals.map((meal, index) => {
-            return <MealCreator mealInfo={meal} key={index} number={index} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} completion={this.state.completeMeals[index]} deleteable={this.state.confirmingMeals}/>
-        });
+        let mealMap = '';
 
+        this.state.meals ? mealMap = this.state.meals.map((meal, index) => {return <MealCreator mealInfo={meal} key={index} number={index} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} completion={this.state.completeMeals[index]} deleteable={this.state.confirmingMeals}/>}) : '';
+        
         const {mealDetail} = this.state;
-
 
         return(
             <div className="mealsContainer">
@@ -234,6 +229,7 @@ class Meals extends Component {
                     {this.state.confirmingMeals && <MealConfirm confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                     {mealMap}
                     {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
+                    {this.state.completeRedirect && <Redirect path to='/mymeals' />}
                 </main>
                 <Footer currentPage='meals'/>
             </div>

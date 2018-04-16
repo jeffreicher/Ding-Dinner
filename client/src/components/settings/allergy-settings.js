@@ -61,6 +61,7 @@ class AllergySettings extends Component {
             }
         }).then((resp)=>{
             console.log('We did it famalam', resp);
+            this.props.history.push('/settings');
         });
     };
 

@@ -1,5 +1,4 @@
 export default function convertUnit(meals){
-    debugger;
     const ingredientArr=[];
     const quantityArr=[];
     const unitArr=[];
@@ -112,7 +111,7 @@ console.log(unitArr);
                 break;
         }
     }
-    /*return*/ addLikeUnits(ingredientArr, quantityArr, unitArr);
+    return addLikeUnits(ingredientArr, quantityArr, unitArr);
     function addLikeUnits(ingredients, quantities, unitOfMeasurement){
         var sumOfTsp = {};
         var sumOfOz = {};

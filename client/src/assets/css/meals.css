@@ -4,6 +4,11 @@
     margin: 0;
     text-align: center;
     font-size: 1rem;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
 }
 
 .mealsHeader {
@@ -88,8 +93,12 @@
     z-index: 10;
     top: 0;
     left: 0;
-    background-color: white;
     font-family: 'Oxygen', cursive;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
 }
 
 .detailsHeader {

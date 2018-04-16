@@ -4,6 +4,7 @@ import registerstorage from '../info_storage/register-storage';
 import '../../assets/css/reg-confirm.css'
 import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
+import Footer from '../general/footer';
 
 class RegisterConfirm extends Component {
     constructor(props) {
@@ -39,9 +40,7 @@ class RegisterConfirm extends Component {
     render() {
         return (
             <div className='regConfirmContainer container'>
-                <div className='nav-wrapper blue darken-2 z-depth-1'>
-                    <div className='brand-logo center white-text'>Ding</div>
-                </div>
+                <LogoHeader />
                 <h3 className='center regConfirmHeader'>Confirm Choices</h3>
                 <div className='regConfirmSelectionArea center'>
                     <div className='regConfirmLabel'>Email Address</div>
@@ -52,10 +51,8 @@ class RegisterConfirm extends Component {
                     <div>{registerstorage.allergy.join(', ') || 'None'}</div>
                 </div>
                 <div className='regConfirmButtonContainer'>
-                    <Link to='/' className='btn red darken-2'>Back to start</Link>
-                    <button className='btn blue darken-2' onClick={this.sendAcctToServer.bind(this)}>All set!</button>
-                </div>
-                <div className='page-footer bottom blue darken-2 z-depth-1 regConfirmFooter'>
+                    <Link to='/' className='btn btn-large teal'>Back to start</Link>
+                    <button className='btn btn-large orange darken-4' onClick={this.sendAcctToServer.bind(this)}>All set!</button>
                 </div>
             </div>
         );

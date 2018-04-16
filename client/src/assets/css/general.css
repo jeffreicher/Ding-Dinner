@@ -3,7 +3,6 @@
     height: 10%;
     width: 100%;
     margin: 0;
-    background-color: #e65100;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -20,7 +19,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #e65100;
     position: relative;
 }
 

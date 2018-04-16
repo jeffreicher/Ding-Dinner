@@ -63,7 +63,7 @@ class MealNumber extends Component {
     render() {
 
         return (
-            <div>
+            <div className='mealNumContainer'>
                 <LogoHeader />
                 <div className="container">
                     <Header title={'How Many Recipes?'} />

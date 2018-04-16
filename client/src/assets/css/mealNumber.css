@@ -20,3 +20,12 @@
     display: flex;
     align-items: center;
 }
+
+.mealNumContainer {
+    height: 100vh;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+}

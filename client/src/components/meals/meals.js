@@ -14,6 +14,9 @@ class Meals extends Component {
     constructor(props) {
         super(props);
 
+        this.regenListOnComplete = this.regenListOnComplete.bind(this);
+        this.regenListSuccess = this.regenListSuccess.bind(this);
+
         this.state = {
             meals: mealschosen,
             showDetails: false,
@@ -52,18 +55,6 @@ class Meals extends Component {
 
     componentWillMount() {
         this.determineMealConfirmation();
-        axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
-            method: 'post',
-            data: {
-                'session_ID': localStorage.ding_sessionID
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then( resp => {
-            console.log('All Meal Ingrs: ', resp)
-        });
     };
 
     closeMealConfirm() {
@@ -128,13 +119,42 @@ class Meals extends Component {
 
     removeMeal(event, index){
         event.stopPropagation();
+        if (mealdb.length === 0){
+            this.addMealsToStorage(index);
+            return;
+        }
         let {meals} = this.state;
         meals.splice(index, 1);
         this.setState({
             meals: meals
-        })
-        this.addSubstituteMeal();
+        });
+        this.addSubstituteMeal(index);
     };
+
+    addMealsToStorage(index){
+        axios({
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/mealGen.php',
+            // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
+            method: 'post',
+            data: {
+                session_ID: localStorage.ding_sessionID
+            }
+        }).then((resp) => {
+            console.log('Meal gen response: ', resp);
+            for (var i=0; i<resp.data.length; i++){
+                mealdb.push(resp.data[i]);
+            }
+            let {meals} = this.state;
+            meals.splice(index, 1);
+            this.setState({
+                meals: meals
+            });
+            this.addSubstituteMeal(index);
+        }).catch((err) => {
+            console.log('Meal gen error: ', err);
+        });
+    }
 
     completeMeal(index, recipe_id) {
         axios({
@@ -150,19 +170,52 @@ class Meals extends Component {
             }
         }).then( resp => {
             console.log('Complete meal: ', resp);
+            this.regenListOnComplete(resp);
         })
         let compMeals = [...this.state.completeMeals];
         compMeals[index] = {filter: 'grayscale(100%)'};
+        console.log('Completed time props',this.props);
         this.setState({
             completeMeals: compMeals,
             showDetails: false
         });
     };
 
-    addSubstituteMeal() {
+    regenListOnComplete(){
+        while (mealschosen.length){
+            mealschosen.pop();
+        }
+        axios({
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
+            // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
+            method: 'post',
+            data: {
+                session_ID: localStorage.ding_sessionID
+            }
+            }).then((resp) => {
+                this.regenListSuccess(resp);
+            }).catch((err) => {
+                console.log(err);
+        });
+    }
+
+    regenListSuccess(resp){
+        for (let i=0; i<resp.data.length; i++){
+            mealschosen.push(resp.data[i]);
+        }
+        that.setState({
+            meals: mealschosen
+        })
+    }
+
+    addSubstituteMeal(index) {
         let randomIndex = Math.floor(Math.random() * mealdb.length);
-        mealschosen.push(mealdb[randomIndex]);
+        mealschosen.splice(index, 0, (mealdb[randomIndex]));
         mealdb.splice(randomIndex, 1);
+        this.setState({
+            meals: mealschosen
+        })
     };
 
     render() {

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 import Footer from '../general/footer';
 import LogoHeader from '../general/logo-header';
 
@@ -8,6 +9,9 @@ class Details extends Component {
         super(props);
         
         this.headerClicked = this.headerClicked.bind(this);
+        this.generateIngredients = this.generateIngredients.bind(this);
+        this.generateInstructions = this.generateInstructions.bind(this);
+        this.generateNutrition = this.generateNutrition.bind(this);
 
         this.state = {
             recipeComplete: false,
@@ -22,12 +26,21 @@ class Details extends Component {
             },
             nutrList: {
                 display: 'none'
-            }
+            },
+            ingrInfo: '',
+            instrInfo: '',
+            nutrInfo: ''
         };        
     };
 
+    componentWillMount(){
+        console.log('Detail side mounting: ', this.props.mealInfo);
+        this.generateIngredients(this.props.mealInfo.ingredients);
+    }
+
     headerClicked(target) {
         let selectedSection= {};
+        let axiosTarget = '';
         switch (target){
             case 'ingr':
                 selectedSection = {
@@ -44,6 +57,7 @@ class Details extends Component {
                         display: 'none'
                     }
                 };
+                axiosTarget = 'recipeIngredients';
                 break;
             case 'instr':
                 selectedSection = {
@@ -60,6 +74,7 @@ class Details extends Component {
                         display: 'none'
                     }
                 };
+                axiosTarget = 'recipeInstructions';
                 break;
             case 'nutr':
                 selectedSection = {
@@ -76,34 +91,82 @@ class Details extends Component {
                         display: 'inline'
                     }
                 };
+                axiosTarget = 'recipeNutrition';
                 break;
         };
-        this.setState({
-            ...selectedSection
+        axios({
+            url: `http://localhost:8080/C1.18_FoodTinder/endpoints/meals/${axiosTarget}.php`,
+            method: 'post',
+            data: {
+                'recipe_id': this.props.mealInfo.recipe_id,
+                'session_ID': localStorage.ding_sessionID
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then( resp => {
+            console.log('Details list area: ', resp);
+            if (axiosTarget === 'recipeIngredients'){
+                this.generateIngredients(resp, selectedSection);
+            } else if (axiosTarget === 'recipeInstructions'){
+                this.generateInstructions(resp, selectedSection);
+            } else if (axiosTarget === 'recipeNutrition'){
+                this.generateNutrition(resp, selectedSection);
+            };
         });
     };
 
-    recipeComplete() {
-      
+    generateIngredients(info, selectedSection){
+        this.setState({
+            ingrInfo: info.data,
+            ...selectedSection
+        });
+    }
+
+    generateInstructions(info, selectedSection){
+        console.log(info.data);
+        this.setState({
+            instrInfo: info.data,
+            ...selectedSection
+        });
+    }
+
+    generateNutrition(info, selectedSection){
+        this.setState({
+            nutrInfo: info.data[0],
+            ...selectedSection
+        });
     }
 
     render() {
 
-        console.log(this.props);
+        console.log('Detail props: ', this.props);
 
         const {mealInfo, hide, index, complete} = this.props;
+
+        console.log('Meal info is: ', mealInfo.ingredients);
+
+        let instrMap = '';
         
-        const instrMap = mealInfo.instructions.map((item, index) => {
-            return <li className='collection-item' key={index}>{index+1}. {mealInfo.instructions[index].step}</li>
-        });
+        this.state.instrInfo !== '' ? instrMap = this.state.instrInfo.map((item, index) => {return <li className='collection-item' key={index}>{index+1}. {item.step}</li>}) : instrMap = '';
 
-        const ingrMap = mealInfo.ingredients.map((item, index) => {
-            return <li className='collection-item' key={index}>{`${mealInfo.ingredients[index].amount} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>
-        });
+        let ingrMap = '';
 
-        // const nutrMap = mealInfo[1].map((item, index) => {
-        //     return <li className='collection-item' key={index}>{index+1}. {mealInfo[3].step}</li>
-        // });
+        this.state.ingrInfo !== '' ? ingrMap = mealInfo.ingredients.map((item, index) => {return <li className='collection-item' key={index}>{`${mealInfo.ingredients[index].amount} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>}) : ingrMap = '';
+        
+        let nutrMap = '';
+
+        this.state.nutrInfo !== '' ? nutrMap = 
+        <ul className='collection'>
+            <li className='collection-item'>Calories: {this.state.nutrInfo.calories}</li>
+            <li className='collection-item'>Protein: {this.state.nutrInfo.protein}</li>
+            <li className='collection-item'>Sugar: {this.state.nutrInfo.sugar}</li>
+            <li className='collection-item'>Carbohydrates: {this.state.nutrInfo.carbs}</li>
+            <li className='collection-item'>Fat: {this.state.nutrInfo.fat}</li>
+            <li className='collection-item'>Sodium: {this.state.nutrInfo.sodium}</li>
+        </ul>
+        :
+        nutrMap = '';
 
         return(
             <div className="detailsContainer">
@@ -124,12 +187,10 @@ class Details extends Component {
                         <ul className='collection'>
                             {instrMap}
                         </ul>
-                        {!this.props.hidecomplete && <button className="completeButton btn green darken-2" onClick={()=>complete(index)}>Complete</button>}
+                        {!this.props.hidecomplete && <button className="completeButton btn green darken-2" onClick={()=>complete(index, mealInfo.recipe_id)}>Complete</button>}
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>
-                        <ul className='collection'>
-                            <li className='collection-item'>WIP please don't sue</li>
-                        </ul>
+                        {nutrMap}
                     </div>
                 </main>
                 <Footer />

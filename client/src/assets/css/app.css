@@ -7,6 +7,11 @@ body {
     font-size: 0;
 }
 
+.btn-large {
+    text-transform: lowercase;
+    border-radius: 10px;
+}
+
 .mainContentContainer {
     height: 100vh;
     width: 100vw;

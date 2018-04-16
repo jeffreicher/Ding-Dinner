@@ -1,15 +1,40 @@
 import React, {Component} from 'react';
 import {Link, Route} from 'react-router-dom';
+import axios from 'axios';
 import Settings from '../settings/settings';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import '../../assets/css/grocery.css';
+import unitConversion from './unitConversion';
 
 class Grocery extends Component {
     constructor(props){
         super(props);
 
+        this.convertAndPrint.bind(this);
+
     };
+
+    componentDidMount(){
+        axios({
+                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
+                method: 'post',
+                data: {
+                    'session_ID': localStorage.ding_sessionID
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then( resp => {
+                console.log('All Meal Ingrs: ', resp);
+                this.convertAndPrint(resp);
+            });
+    }
+
+    convertAndPrint(resp){
+        const jeff =  unitConversion(resp.data);
+        console.log(jeff);
+    }
     
     render() {
         return (

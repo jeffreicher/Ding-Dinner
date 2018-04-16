@@ -8,14 +8,16 @@ class MealCreator extends Component {
     };
 
     render() {
-        const {mealInfo, number, deleteItem, onclick, completion} = this.props;
+        const {mealInfo, number, deleteItem, onclick} = this.props;
 
-        console.log('Single meal info: ', mealInfo);
+        let completeStyle = '';
+
+        this.props.mealInfo.completed ?  completeStyle = {'filter': 'grayscale(100%)'} :  completeStyle = {'filter': 'grayscale(0%)'}
 
         return (
-            <div className="mealsItem" onClick={()=>onclick(number, mealInfo)} style={this.props.completion} >
-                <img src={mealInfo[0].image} alt="" className="mealsImg" />
-                <div className="mealsText oxygenFont">{mealInfo[0].title}</div>
+            <div className="mealsItem" onClick={()=>onclick(number, mealInfo)} style={completeStyle} >
+                <img src={mealInfo.image} alt="" className="mealsImg" />
+                <div className="mealsText oxygenFont">{mealInfo.title}</div>
                 {this.props.deleteable && <div className="mealsCancel" onClick={(e)=>deleteItem(e, number)}><i className="fas fa-trash-alt"></i></div>}
             </div>
         );

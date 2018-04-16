@@ -1,20 +1,26 @@
+@font-face {
+    font-family: 'La Belle Aurore';
+    src: local('La Belle Aurore'), url(../fonts/LaBelleAurore.ttf) format('ttf');
+}
+
 .loginContainer {
     height: 100%;
     width: 100%;
-    background-color: lightblue;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0;
 }
 
 .loginContainer *  {
     font-size: 1rem;
+    color: white;
 }
 
 .loginLogo {
-    text-align: center;
     padding-top: 30%;
-    margin: 0;
-    font-size: 4rem;
-    font-family: 'Lobster', cursive;
+    display: block;
+    margin: 0 auto;
 }
 
 .loginSlogan {
@@ -22,7 +28,7 @@
     text-align: center;
     margin: 0;
     padding: 1%;
-    font-family: 'Lobster', cursive;
+    font-family: 'La Belle Aurore';
 }
 
 .loginButtons {

@@ -25,6 +25,10 @@ class App extends Component {
         
     };
 
+    componentWillUnmount(){
+        localStorage.removeItem(ding_sessionID);
+    }
+
     render() {
         return (
             <Router>

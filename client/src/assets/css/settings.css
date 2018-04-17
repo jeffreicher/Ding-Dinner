@@ -22,3 +22,19 @@
 .settingsButton:first-of-type {
     margin-top: 8vh;
 }
+
+.dietSettingsContainer {
+    height: 100vh;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.allergySettingsContainer {
+    height: 100vh;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

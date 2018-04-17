@@ -40,25 +40,42 @@ class Meals extends Component {
     };
 
     determineMealConfirmation() {
+        debugger;
         if (!this.props.location.state){
             this.setState({
                 confirmingMeals: false
+            }, () => {
+                this.retrieveUserMeals();
             });
             return;
         }
-        const {confirmingMeals} = this.props.location.state;
-        this.setState({
-            confirmingMeals: confirmingMeals,
-            meals: mealschosen
-        });
+        // const {confirmingMeals} = this.props.location.state;
+        if (this.props.location.state.confirmingMeals === true){
+            this.setState({
+                confirmingMeals: true,
+                meals: mealschosen
+            }, () => {
+                this.retrieveUserMeals();
+            });
+        } else {
+            this.setState({
+                confirmingMeals: false,
+                meals: mealschosen
+            }, () => {
+                this.retrieveUserMeals();
+            });
+        }
     };
 
     componentWillMount() {
+        while (mealschosen.length){
+            mealschosen.pop();
+        };
         this.determineMealConfirmation();
-        this.retrieveUserMeals();
     };
 
     retrieveUserMeals(){
+        debugger;
         if (!this.props.location.state){
             axios({
                 // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',

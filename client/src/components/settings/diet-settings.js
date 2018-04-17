@@ -36,7 +36,7 @@ class DietSettings extends Component {
         const { handleSelected } = this;
 
         return (
-            <div>
+            <div class='dietSettingsContainer'>
                 <LogoHeader back={true} location={'/settings'}/>
                 <div className="container">
                     <Header title={'What\'s Your Type?'}/>

@@ -11,8 +11,6 @@ class Grocery extends Component {
     constructor(props){
         super(props);
 
-        this.convertAndPrint.bind(this);
-
     };
 
     componentDidMount(){
@@ -27,13 +25,7 @@ class Grocery extends Component {
                 }
             }).then( resp => {
                 console.log('All Meal Ingrs: ', resp);
-                this.convertAndPrint(resp);
             });
-    }
-
-    convertAndPrint(resp){
-        const jeff =  unitConversion(resp.data);
-        console.log(jeff);
     }
     
     render() {

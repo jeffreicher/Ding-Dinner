@@ -40,7 +40,6 @@ class Meals extends Component {
     };
 
     determineMealConfirmation() {
-        debugger;
         if (!this.props.location.state){
             this.setState({
                 confirmingMeals: false
@@ -68,14 +67,10 @@ class Meals extends Component {
     };
 
     componentWillMount() {
-        while (mealschosen.length){
-            mealschosen.pop();
-        };
         this.determineMealConfirmation();
     };
 
     retrieveUserMeals(){
-        debugger;
         if (!this.props.location.state){
             axios({
                 // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
@@ -97,28 +92,7 @@ class Meals extends Component {
             }).catch((err) => {
                 console.log(err);
             });  
-        } else if (!this.props.location.state.confirmingMeals && !this.state.confirmingMeals){
-            axios({
-                // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
-                // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
-                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
-                method: 'post',
-                data: {
-                    session_ID: localStorage.ding_sessionID
-                }
-                }).then((resp) => {
-                console.log('Login meals works: ', resp);
-                console.log('History: ',this.props.history);
-                for (let i=0; i<resp.data.length; i++){
-                    mealschosen.push(resp.data[i]);
-                };
-                this.setState({
-                    meals: mealschosen
-                });
-            }).catch((err) => {
-                console.log(err);
-            });  
-        }
+        };
     }
 
     closeMealConfirm() {

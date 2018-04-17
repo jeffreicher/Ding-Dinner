@@ -21,10 +21,10 @@ class MealNumber extends Component {
 
     setNumberOfMeals(num) {
         debugger;
-        while (mealschosen.length){
+        while (mealschosen.length) {
             mealschosen.pop();
-        }
-        for (var i= 0; i< num; i++){
+        };
+        for (var i= 0; i < num; i++){
             let randomIndex = Math.floor(Math.random() * mealdb.length);
             mealschosen.push(mealdb[randomIndex]);
             mealdb.splice(randomIndex,1);
@@ -50,13 +50,13 @@ class MealNumber extends Component {
             data: {
                 session_ID: localStorage.ding_sessionID
             }
-        }).then((resp) => {
+        }).then( resp => {
             console.log('Meal gen response: ', resp);
-            for (var i=0; i<resp.data.length; i++){
+            for (var i=0; i < resp.data.length; i++){
                 mealdb.push(resp.data[i]);
             }
             this.setNumberOfMeals(this.state.numOfMeals);
-        }).catch((err) => {
+        }).catch( err => {
             console.log('Meal gen error: ', err);
         });
     };

@@ -22,9 +22,15 @@ class Button extends Component {
     };
 
     render() {
+
+        const buttonStyle = {
+            boxShadow: '6px 6px 4px 0 rgba(255, 255, 255, 0.14), 0 1px 10px 0 rgba(255, 255, 255, 0.12), 0 2px 4px -1px rgba(255, 255, 255, .5)',
+            backgroundColor: this.state.color
+        }
+
         return (
             <div>
-                <a onClick={this.props.selectedCheck.bind(null, this)} style={{backgroundColor: this.state.color}} className={`btn-desk btn-large waves-effect waves-light btn z-depth-2 ${this.state.color} ${this.props.style}`}>
+                <a onClick={this.props.selectedCheck.bind(null, this)} style={buttonStyle} className={`btn-desk btn-large waves-effect waves-light btn z-depth-2 ${this.state.color} ${this.props.style}`}>
                 <div>
                     <div className="title-container oxygenFont">
                        {this.props.title} 

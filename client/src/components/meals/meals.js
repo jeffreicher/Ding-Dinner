@@ -43,19 +43,31 @@ class Meals extends Component {
         if (!this.props.location.state){
             this.setState({
                 confirmingMeals: false
+            }, () => {
+                this.retrieveUserMeals();
             });
             return;
         }
-        const {confirmingMeals} = this.props.location.state;
-        this.setState({
-            confirmingMeals: confirmingMeals,
-            meals: mealschosen
-        });
+        // const {confirmingMeals} = this.props.location.state;
+        if (this.props.location.state.confirmingMeals === true){
+            this.setState({
+                confirmingMeals: true,
+                meals: mealschosen
+            }, () => {
+                this.retrieveUserMeals();
+            });
+        } else {
+            this.setState({
+                confirmingMeals: false,
+                meals: mealschosen
+            }, () => {
+                this.retrieveUserMeals();
+            });
+        }
     };
 
     componentWillMount() {
         this.determineMealConfirmation();
-        this.retrieveUserMeals();
     };
 
     retrieveUserMeals(){
@@ -80,28 +92,7 @@ class Meals extends Component {
             }).catch((err) => {
                 console.log(err);
             });  
-        } else if (!this.props.location.state.confirmingMeals && !this.state.confirmingMeals){
-            axios({
-                // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
-                // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
-                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
-                method: 'post',
-                data: {
-                    session_ID: localStorage.ding_sessionID
-                }
-                }).then((resp) => {
-                console.log('Login meals works: ', resp);
-                console.log('History: ',this.props.history);
-                for (let i=0; i<resp.data.length; i++){
-                    mealschosen.push(resp.data[i]);
-                };
-                this.setState({
-                    meals: mealschosen
-                });
-            }).catch((err) => {
-                console.log(err);
-            });  
-        }
+        };
     }
 
     closeMealConfirm() {

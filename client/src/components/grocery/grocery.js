@@ -40,15 +40,11 @@ class Grocery extends Component {
         const teaspoonKeys = Object.keys(teaspoons);
         const miscKeys = Object.keys(misc);
 
-<<<<<<< HEAD
         while(grocerystorage.length){
             grocerystorage.pop();
         }
 
         for (let i=0; i< ounceKeys.length; i++){
-=======
-        for (let i=0; i < ounceKeys.length; i++) {
->>>>>>> 22a987fa6fcff858bc79ad7d1e6be0e7832ab376
             const key = ounceKeys[i];
             grocerystorage.push(`${ounces[key]} ${key}`);
         };

@@ -30,8 +30,6 @@ while($row = mysqli_fetch_assoc($nutritionResult)){
     $row['carbs']=addslashes($row['carbs']);
     $row['fat']=addslashes($row['fat']);
     $row['sodium']=addslashes($row['sodium']);
-    $row['servingSize']=addslashes($row['servingSize']);
-    $row['servingPrice']=addslashes($row['servingPrice']);
     if(!is_numeric($row['recipe_id'])){
         print 'Invalid recipe ID from database';
         exit();

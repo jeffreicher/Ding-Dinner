@@ -126,6 +126,7 @@ class Meals extends Component {
             image: mealInfo.image,
             ingredients: '',
             recipe_id: mealInfo.recipe_id,
+            readyInMinutes: mealInfo.readyInMinutes,
             index: number
         }
         const that = this;

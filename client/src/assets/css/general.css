@@ -1,4 +1,5 @@
 .footer {
+    background-color: rgba(40, 40, 40, .9);
     position: fixed;
     height: 10%;
     width: 100%;
@@ -12,6 +13,7 @@
 }
 
 .headerBar {
+    background-color: rgba(40, 40, 40, .9);
     top: 0;
     z-index: 1; 
     height: 10%;
@@ -29,4 +31,12 @@
 
 .headerLogo {
     height: 70%;
+}
+
+.footerDefault {
+    color: #e65100;
+}
+
+.footerSelected {
+    color: white;
 }

@@ -23,9 +23,9 @@ class Settings extends Component {
                 <LogoHeader />
                 <div className="mainContainer container">
                     <h4 className='card-panel settingsHeader lobsterFont z-depth-2'>Settings</h4>
-                    <Link to='/diet-settings'className='settingsButton oxygenFont btn-large'>Reset Filters</Link>
-                    <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large'>Add Meals</Link>
-                    <div className='settingsButton oxygenFont btn-large' onClick={this.logoutClicked}>Logout</div>                    
+                    <Link to='/diet-settings'className='settingsButton oxygenFont btn-large btn  grey darken-4'>Reset Filters</Link>
+                    <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large btn  grey darken-4'>Add Meals</Link>
+                    <div className='settingsButton oxygenFont btn btn-large grey darken-4' onClick={this.logoutClicked}>Logout</div>                    
                 </div>
                 <Footer currentPage='settings' />  
             </div>      

@@ -67,7 +67,7 @@ class MealNumber extends Component {
                 <LogoHeader />
                 <div className="container">
                     <Header title={'How Many Recipes?'} />
-                    <div className="button-column collection">
+                    <div className="button-column collection" style={{border: 'none'}}>
                         <MealNumButton title={'1'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>  
                         <MealNumButton title={'3'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>
                         <MealNumButton title={'5'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>   

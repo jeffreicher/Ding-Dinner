@@ -20,7 +20,6 @@ class Meals extends Component {
             meals: null,
             showDetails: false,
             confirmingMeals: false,
-            compelteRedirect: false,
             mealDetail: {
                 name: '',
                 image: '',
@@ -49,7 +48,8 @@ class Meals extends Component {
         }
         const {confirmingMeals} = this.props.location.state;
         this.setState({
-            confirmingMeals: confirmingMeals
+            confirmingMeals: confirmingMeals,
+            meals: mealschosen
         });
     };
 
@@ -59,7 +59,28 @@ class Meals extends Component {
     };
 
     retrieveUserMeals(){
-        if (!this.state.confirmingMeals){
+        if (!this.props.location.state){
+            axios({
+                // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
+                // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
+                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
+                method: 'post',
+                data: {
+                    session_ID: localStorage.ding_sessionID
+                }
+                }).then((resp) => {
+                console.log('Login meals works: ', resp);
+                console.log('History: ',this.props.history);
+                for (let i=0; i<resp.data.length; i++){
+                    mealschosen.push(resp.data[i]);
+                };
+                this.setState({
+                    meals: mealschosen
+                });
+            }).catch((err) => {
+                console.log(err);
+            });  
+        } else if (!this.props.location.state.confirmingMeals && !this.state.confirmingMeals){
             axios({
                 // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
                 // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
@@ -175,8 +196,9 @@ class Meals extends Component {
             meals.splice(index, 1);
             this.setState({
                 meals: meals
-            });
-            this.addSubstituteMeal(index);
+            }), () => {
+                this.addSubstituteMeal(index);
+            };
         }).catch((err) => {
             console.log('Meal gen error: ', err);
         });
@@ -198,12 +220,18 @@ class Meals extends Component {
             console.log('Complete meal: ', resp);
             this.setState({
                 showDetails: false,
-                completeRedirect: true
             });
-            //this.props.history.push('/mymeals');
-        })
-        
+            //window.location.reload();
+            this.reloadMeals();
+        });
     };
+
+    reloadMeals(){
+        while(mealschosen.length){
+            mealschosen.pop();
+        }
+        this.retrieveUserMeals();
+    }
 
     addSubstituteMeal(index) {
         let randomIndex = Math.floor(Math.random() * mealdb.length);
@@ -229,7 +257,6 @@ class Meals extends Component {
                     {mealMap}
                     {this.state.confirmingMeals && <MealConfirm confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                     {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
-                    {this.state.completeRedirect && <Redirect path to='/mymeals' />}
                 </main>
                 <Footer currentPage='meals'/>
             </div>

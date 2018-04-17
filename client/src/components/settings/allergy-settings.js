@@ -47,11 +47,11 @@ class AllergySettings extends Component {
         for (let i=0; i<newFilter.allergy.length; i++){
             newFilter.allergy[i] = newFilter.allergy[i].toLowerCase();
         };
+        console.log(newFilter);
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
             method: 'post',
             data: {
-
                     diet: newFilter.diet,
                     allergies: newFilter.allergy,
                     session_ID: localStorage.ding_sessionID

@@ -42,10 +42,9 @@ class DietSettings extends Component {
                     <Header title={'What\'s Your Type?'}/>
                     <div className="center-align" style={{marginTop: `2vh`}}>
                         <Button title={'None'} descrip={'Send It'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('None')} />  
-                        <Button title={'Ketogenic'} descrip={'Coachella Bod Meal Plan'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />     
                         <Button title={'Vegetarian'} descrip={'Lover Of Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegetarian')} />   
-                        <Button title={'Vegan'} descrip={'Veggie Fanatic'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegan')} />   
-                        <Button title={'Pescatarian'} descrip={'Fish N\' Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Pescatarian')} />
+                        <Button title={'Vegan'} descrip={'Veggie Fanatic'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegan')} />
+                        <Button title={'Ketogenic'} descrip={'Coachella Bod Meal Plan'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />        
                     </div>  
                     <div className="right" style={{marginTop: `3vh`}}>
                         {(this.state.value) && <Link to='/allergy-settings'><Next /></Link> }                   

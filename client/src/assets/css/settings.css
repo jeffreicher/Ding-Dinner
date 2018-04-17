@@ -3,6 +3,10 @@
     height: 100%;
     width: 100%;
     text-align: center;
+    background-image: url('../../assets/images/dingBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .settingsHeader, .groceryHead{
@@ -12,8 +16,7 @@
 .settingsButton{
     margin: 8%;
     font-size: 1.5em;
-    background-color: grey;
-    color: black;
+    color: white;
 }
 
 .settingsButton:first-of-type {

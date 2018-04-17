@@ -8,17 +8,17 @@ import Footer from '../general/footer';
 import '../../assets/css/grocery.css';
 
 class Grocery extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.renderGroceryList = this.renderGroceryList.bind(this);
 
         this.state = {
                 listOfIngredients: []
-        }
+        };
     };
 
-    componentDidMount(){
+    componentDidMount() {
         axios({
                 url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
                 method: 'post',
@@ -31,34 +31,34 @@ class Grocery extends Component {
             }).then( resp => {
                 this.renderGroceryList(resp);
             });
-    }
+    };
 
-    renderGroceryList(resp){
+    renderGroceryList(resp) {
         const {ounces, teaspoons, misc} = resp.data;
 
         const ounceKeys = Object.keys(ounces);
         const teaspoonKeys = Object.keys(teaspoons);
         const miscKeys = Object.keys(misc);
 
-        for (let i=0; i< ounceKeys.length; i++){
+        for (let i=0; i < ounceKeys.length; i++) {
             const key = ounceKeys[i];
             grocerystorage.push(`${ounces[key]} ${key}`);
-        }
+        };
 
-        for (let i=0; i< teaspoonKeys.length; i++){
+        for (let i=0; i < teaspoonKeys.length; i++) {
             const key = teaspoonKeys[i];
             grocerystorage.push(`${teaspoons[key]} ${key}`);
-        }
+        };
         
-        for (let i=0; i< miscKeys.length; i++){
+        for (let i=0; i < miscKeys.length; i++) {
             const key = miscKeys[i];
             grocerystorage.push(`${misc[key]} ${key}`);
-        }
+        };
 
         this.setState({
             listOfIngredients: grocerystorage
-        })
-    }
+        });
+    };
     
     render() {
 
@@ -77,7 +77,7 @@ class Grocery extends Component {
             <div className="groceryContainer Oxygen">
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
-                        <h4 className="head card-panel lobsterFont z-depth-2"> List</h4>
+                        <h4 className="head card-panel lobsterFont z-depth-2">List</h4>
                         <div className="list">
                             {listMap}
                         </div>

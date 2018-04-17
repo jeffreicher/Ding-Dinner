@@ -4,7 +4,7 @@ import RegisterHide from './registerhide';
 import dingLogo from '../../assets/images/dingLogoOrangeShadow.png'
 import '../../assets/css/login.css';
 
-class Login extends Component{
+class Login extends Component {
     constructor(props) {
         super(props);
 

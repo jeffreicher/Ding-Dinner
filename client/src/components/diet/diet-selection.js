@@ -11,12 +11,12 @@ class DietSelection extends Component {
     constructor(props) {
         super(props);
 
+        this.handleSelected = this.handleSelected.bind(this);
+
         this.state = {
             selected: [],
             value: false
         };
-
-        this.handleSelected = this.handleSelected.bind(this);
     };
 
     handleSelected(buttonObject) {

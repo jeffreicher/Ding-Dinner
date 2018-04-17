@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class MealConfirm extends Component{
+class MealConfirm extends Component {
 
     render() {
         return (
@@ -13,8 +13,7 @@ class MealConfirm extends Component{
                     <div className='btn green confirmButton left-align valign-wrapper' onClick={this.props.closeconfirm}>
                         <i className='material-icons confirmCheck' style={{fontSize: '3rem'}}>check</i>
                     </div>
-                </div>
-                
+                </div>                
             </div>
         );
     };

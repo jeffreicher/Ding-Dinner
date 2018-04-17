@@ -14,7 +14,7 @@ class RegisterConfirm extends Component {
 
     sendAcctToServer() {
         registerstorage.diet = registerstorage.diet.toLowerCase();
-        for (let i=0; i<registerstorage.allergy.length; i++){
+        for (let i=0; i<registerstorage.allergy.length; i++) {
             registerstorage.allergy[i] = registerstorage.allergy[i].toLowerCase();
         };
         axios({
@@ -29,9 +29,9 @@ class RegisterConfirm extends Component {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then((resp)=>{
+        }).then( resp => {
             console.log('We did it famalam', resp);
-            if(resp.data.success === true){
+            if(resp.data.success === true) {
                 this.props.history.push('/meal-number');
             };
         });

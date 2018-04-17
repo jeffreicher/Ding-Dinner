@@ -33,15 +33,15 @@ class Details extends Component {
         };        
     };
 
-    componentWillMount(){
+    componentWillMount() {
         console.log('Detail side mounting: ', this.props.mealInfo);
         this.generateIngredients(this.props.mealInfo.ingredients);
-    }
+    };
 
     headerClicked(target) {
         let selectedSection= {};
         let axiosTarget = '';
-        switch (target){
+        switch (target) {
             case 'ingr':
                 selectedSection = {
                     ingrTarget: 'detailsSelectedList',
@@ -148,11 +148,11 @@ class Details extends Component {
 
         let instrMap = '';
         
-        this.state.instrInfo !== '' ? instrMap = this.state.instrInfo.map((item, index) => {return <li className='collection-item detailsListItem' key={index}>{index+1}. {item.step}</li>}) : instrMap = '';
+        this.state.instrInfo !== '' ? instrMap = this.state.instrInfo.map((item, index) => {return <li className='collection-item detailsListItem' key={index}> {index+1}. {item.step}</li>}) : instrMap = '';
 
         let ingrMap = '';
 
-        this.state.ingrInfo !== '' ? ingrMap = mealInfo.ingredients.map((item, index) => {return <li className='collection-item detailsListItem' key={index}>{`${mealInfo.ingredients[index].amount} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>}) : ingrMap = '';
+        this.state.ingrInfo !== '' ? ingrMap = mealInfo.ingredients.map((item, index) => {return <li className='collection-item detailsListItem' key={index}> {`${mealInfo.ingredients[index].amount} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>}) : ingrMap = '';
         
         let nutrMap = '';
 

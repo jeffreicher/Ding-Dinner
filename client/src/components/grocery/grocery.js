@@ -8,17 +8,17 @@ import Footer from '../general/footer';
 import '../../assets/css/grocery.css';
 
 class Grocery extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.renderGroceryList = this.renderGroceryList.bind(this);
 
         this.state = {
                 listOfIngredients: []
-        }
+        };
     };
 
-    componentDidMount(){
+    componentDidMount() {
         axios({
                 url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
                 method: 'post',
@@ -31,38 +31,42 @@ class Grocery extends Component {
             }).then( resp => {
                 this.renderGroceryList(resp);
             });
-    }
+    };
 
-    renderGroceryList(resp){
+    renderGroceryList(resp) {
         const {ounces, teaspoons, misc} = resp.data;
 
         const ounceKeys = Object.keys(ounces);
         const teaspoonKeys = Object.keys(teaspoons);
         const miscKeys = Object.keys(misc);
 
+<<<<<<< HEAD
         while(grocerystorage.length){
             grocerystorage.pop();
         }
 
         for (let i=0; i< ounceKeys.length; i++){
+=======
+        for (let i=0; i < ounceKeys.length; i++) {
+>>>>>>> 22a987fa6fcff858bc79ad7d1e6be0e7832ab376
             const key = ounceKeys[i];
             grocerystorage.push(`${ounces[key]} ${key}`);
-        }
+        };
 
-        for (let i=0; i< teaspoonKeys.length; i++){
+        for (let i=0; i < teaspoonKeys.length; i++) {
             const key = teaspoonKeys[i];
             grocerystorage.push(`${teaspoons[key]} ${key}`);
-        }
+        };
         
-        for (let i=0; i< miscKeys.length; i++){
+        for (let i=0; i < miscKeys.length; i++) {
             const key = miscKeys[i];
             grocerystorage.push(`${misc[key]} ${key}`);
-        }
+        };
 
         this.setState({
             listOfIngredients: grocerystorage
-        })
-    }
+        });
+    };
     
     render() {
 

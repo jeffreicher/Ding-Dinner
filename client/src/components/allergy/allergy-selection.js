@@ -11,11 +11,11 @@ class AllergySelection extends Component {
     constructor(props) {
         super(props); 
 
+        this.handleSelected = this.handleSelected.bind(this);
+
         this.state = {
             selected: []
         };
-
-        this.handleSelected = this.handleSelected.bind(this);
     };
 
     handleSelected(buttonObject) {

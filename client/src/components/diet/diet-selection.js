@@ -11,24 +11,25 @@ class DietSelection extends Component {
     constructor(props) {
         super(props);
 
+        this.handleSelected = this.handleSelected.bind(this);
+
         this.state = {
             selected: [],
             value: false
         };
-
-        this.handleSelected = this.handleSelected.bind(this);
     };
 
     handleSelected(buttonObject) {
         const { selected } = this.state;
+        const { title } = buttonObject.props;
 
-        if(!selected.includes(buttonObject.props.title)) {
+        if(!selected.includes(title)) {
             this.setState({
-                selected: [buttonObject.props.title],
+                selected: [title],
                 value: true
             });
         };
-        registerstorage.diet = buttonObject.props.title;
+        registerstorage.diet = title;
     };
 
     render() {

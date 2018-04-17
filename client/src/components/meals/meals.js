@@ -70,8 +70,8 @@ class Meals extends Component {
         this.determineMealConfirmation();
     };
 
-    retrieveUserMeals(){
-        if (!this.props.location.state){
+    retrieveUserMeals() {
+        if (!this.props.location.state) {
             axios({
                 // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
                 // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
@@ -93,13 +93,13 @@ class Meals extends Component {
                 console.log(err);
             });  
         };
-    }
+    };
 
     closeMealConfirm() {
         const selectedMeals = [];
-        for (var i=0; i<mealschosen.length; i++){
+        for (var i=0; i<mealschosen.length; i++) {
             selectedMeals.push(mealschosen[i].recipe_id);
-        }
+        };
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_meal_plan.php',
             method: 'post',
@@ -114,9 +114,8 @@ class Meals extends Component {
             console.log('Confirming new meal plan: ', resp)
             this.setState({
                 confirmingMeals: false
-            })
-        });
-        
+            });
+        });        
     };
 
     mealClicked(number, mealInfo) {
@@ -128,7 +127,7 @@ class Meals extends Component {
             recipe_id: mealInfo.recipe_id,
             readyInMinutes: mealInfo.readyInMinutes,
             index: number
-        }
+        };
         const that = this;
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeIngredients.php',
@@ -150,18 +149,18 @@ class Meals extends Component {
         });
     };
 
-    hideDetails(){
+    hideDetails() {
         this.setState({
             showDetails: false
         });
     };
 
-    removeMeal(event, index){
+    removeMeal(event, index) {
         event.stopPropagation();
-        if (mealdb.length === 0){
+        if (mealdb.length === 0) {
             this.addMealsToStorage(index);
             return;
-        }
+        };
         let {meals} = this.state;
         meals.splice(index, 1);
         this.setState({
@@ -170,7 +169,7 @@ class Meals extends Component {
         this.addSubstituteMeal(index);
     };
 
-    addMealsToStorage(index){
+    addMealsToStorage(index) {
         axios({
             // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/mealGen.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
@@ -179,11 +178,11 @@ class Meals extends Component {
             data: {
                 session_ID: localStorage.ding_sessionID
             }
-        }).then((resp) => {
+        }).then( resp => {
             console.log('Meal gen response: ', resp);
-            for (var i=0; i<resp.data.length; i++){
+            for (var i=0; i<resp.data.length; i++) {
                 mealdb.push(resp.data[i]);
-            }
+            };
             let {meals} = this.state;
             meals.splice(index, 1);
             this.setState({
@@ -194,7 +193,7 @@ class Meals extends Component {
         }).catch((err) => {
             console.log('Meal gen error: ', err);
         });
-    }
+    };
 
     completeMeal(index, recipe_id) {
         axios({
@@ -218,12 +217,12 @@ class Meals extends Component {
         });
     };
 
-    reloadMeals(){
-        while(mealschosen.length){
+    reloadMeals() {
+        while(mealschosen.length) {
             mealschosen.pop();
-        }
+        };
         this.retrieveUserMeals();
-    }
+    };
 
     addSubstituteMeal(index) {
         let randomIndex = Math.floor(Math.random() * mealdb.length);
@@ -231,7 +230,7 @@ class Meals extends Component {
         mealdb.splice(randomIndex, 1);
         this.setState({
             meals: mealschosen
-        })
+        });
     };
 
     componentWillUnmount(){

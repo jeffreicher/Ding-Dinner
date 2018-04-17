@@ -39,7 +39,7 @@ class RegisterHide extends Component {
         this.setState({
             emailValue: e.target.value
         }, () => {
-            if(emailValidification.test(this.state.emailValue)){
+            if(emailValidification.test(this.state.emailValue)) {
                 const strikeThrough = {textDecoration: 'line-through'};
                 this.setState({
                     emailCheck: strikeThrough
@@ -49,7 +49,7 @@ class RegisterHide extends Component {
                 this.setState({
                     emailCheck: noStrike
                 });
-            }
+            };
         });
         registerstorage.email = e.target.value;
     };
@@ -65,7 +65,7 @@ class RegisterHide extends Component {
     }; 
 
     checkPWLength() {
-        if(this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32){
+        if(this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32) {
             const strikeThrough = {textDecoration: 'line-through'};
             this.setState({
                 passwordLength: strikeThrough
@@ -75,12 +75,12 @@ class RegisterHide extends Component {
             this.setState({
                 passwordLength: noStrike
             });
-        }
+        };
     };
 
     checkPWChars() {
         const passwordChars = /^[a-z0-9]+$/i;
-        if (passwordChars.test(this.state.passwordValue)){
+        if (passwordChars.test(this.state.passwordValue)) {
             const strikeThrough = {textDecoration: 'line-through'};
             this.setState({
                 passwordCharacters: strikeThrough
@@ -90,11 +90,11 @@ class RegisterHide extends Component {
             this.setState({
                 passwordCharacters: noStrike
             });
-        }
+        };
     };
 
     confirmChange(e) {
-        if (e.target.value === this.state.passwordValue){
+        if (e.target.value === this.state.passwordValue) {
             this.setState({
                 confirmValue: e.target.value,
                 confirmMatches: {textDecoration: 'line-through'}
@@ -104,39 +104,39 @@ class RegisterHide extends Component {
                 confirmValue: e.target.value,
                 confirmMatches: {textDecoration: 'none'}
             });
-        }
+        };
     };
 
     fieldFocused(targetField) {
-        if (targetField === 'email'){
+        if (targetField === 'email') {
             this.setState({
                 emailFocused: true
             });
-        } else if (targetField === 'password'){
+        } else if (targetField === 'password') {
             this.setState({
                 passwordFocused: true
             });
-        } else if (targetField === 'confirm'){
+        } else if (targetField === 'confirm') {
             this.setState({
                 confirmFocused: true
             });
-        }
+        };
     };
 
     fieldBlurred(targetField) {
-        if (targetField === 'email'){
+        if (targetField === 'email') {
             this.setState({
                 emailFocused: false
             });
-        } else if (targetField === 'password'){
+        } else if (targetField === 'password') {
             this.setState({
                 passwordFocused: false
             });
-        } else if (targetField === 'confirm'){
+        } else if (targetField === 'confirm') {
             this.setState({
                 confirmFocused: false
             });
-        }
+        };
     };
 
     serverEmailVerify(e) {
@@ -153,9 +153,9 @@ class RegisterHide extends Component {
             }
         }).then((resp) => {
             console.log('Email verify: ', resp);
-            if (resp.data === 'email available'){
+            if (resp.data === 'email available') {
                 this.props.history.push('/diet-selection');
-            }
+            };
         }).catch((err) => {
             console.log('Error: ', err);
         });

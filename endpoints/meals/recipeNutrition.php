@@ -12,7 +12,7 @@ require('../mysqli_connect.php');
 $recipeID = $request_data['recipe_id'];
 // $recipeID = 558826;
 
-if (!($stmt = $myconn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.servingSize, n.servingPrice, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = ?"))) {
+if (!($stmt = $myconn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = ?"))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
 if (!$stmt->bind_param("i", $recipeID)) {

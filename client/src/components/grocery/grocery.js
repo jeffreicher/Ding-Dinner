@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
 import {Link, Route} from 'react-router-dom';
 import axios from 'axios';
+import grocerystorage from '../info_storage/grocery-storage';
 import Settings from '../settings/settings';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import '../../assets/css/grocery.css';
-import unitConversion from './unitConversion';
 
 class Grocery extends Component {
     constructor(props){
         super(props);
 
+        this.renderGroceryList = this.renderGroceryList.bind(this);
+
+        this.state = {
+                listOfIngredients: []
+        }
     };
 
     componentDidMount(){
@@ -24,18 +29,77 @@ class Grocery extends Component {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then( resp => {
-                console.log('All Meal Ingrs: ', resp);
+                this.renderGroceryList(resp);
             });
+    }
+
+    renderGroceryList(resp){
+        // ounces teaspoons misc
+        // const resultingArrayFromMap = Object.keys(someObj).map((key, index) => {
+		// 	console.group('Loop Output:');
+		// 	console.log('Key:', key);
+		// 	console.log('Value:', someObj[key]);
+		// 	console.groupEnd();
+                // });
+        const {ounces, teaspoons, misc} = resp.data;
+
+        const ounceKeys = Object.keys(ounces);
+        const teaspoonKeys = Object.keys(teaspoons);
+        const miscKeys = Object.keys(misc);
+
+        for (let i=0; i< ounceKeys.length; i++){
+            const key = ounceKeys[i];
+            grocerystorage.push(`${ounces[key]} ${key}`);
+        }
+
+        for (let i=0; i< teaspoonKeys.length; i++){
+            const key = teaspoonKeys[i];
+            grocerystorage.push(`${teaspoons[key]} ${key}`);
+        }
+        
+        for (let i=0; i< miscKeys.length; i++){
+            const key = miscKeys[i];
+            grocerystorage.push(`${misc[key]} ${key}`);
+        }
+
+        this.setState({
+            listOfIngredients: grocerystorage
+        })
+
+		// const ouncesMap = Object.keys(resp.data.teaspoons).map((key, index) => {
+		// 	<div className='item'>
+		// 		<input type='checkbox' className='check filled-in' id={`ounces${index}`} key={index} />
+		// 		<label className='name oxygenFont' htmlFor={`ounces${index}`}>{resp.data.ounces[key]} {key}</label>
+        //     </div>
+        //     console.log('Item key: ',key);
+        //     console.log('Item value: ',resp.data.teaspoons[key]);
+		// });
+		// this.setState({
+		// 	ouncesRender: ouncesMap
+		// });
     }
     
     render() {
+
+        console.log(this.state.listOfIngredients);
+
+        const listMap = (this.state.listOfIngredients).map((item, index) => {
+            return (
+                <div className='item'>
+                    <input type='checkbox' className='check filled-in' id={index} key={index} />
+                    <label className='name oxygenFont' htmlFor={index}>{item}</label>
+                </div>
+            );
+		});
+
         return (
             <div className="groceryContainer Oxygen">
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
                         <h4 className="head card-panel lobsterFont z-depth-2"> List</h4>
                         <div className="list">
-                                <div className="item">
+							{listMap}
+                                {/* <div className="item">
                                         <input type='checkbox' className='check filled-in' id='item1' />
                                         <label className='name oxygenFont' htmlFor='item1'>14oz beans</label>
                                 </div>
@@ -106,7 +170,7 @@ class Grocery extends Component {
                                 <div className="item">
                                         <input type='checkbox' className='check filled-in' id='item18' />
                                         <label className='name oxygenFont' htmlFor='item18'>14oz beans</label>
-                                </div>
+                                </div> */}
                         </div>
                 </main>
                 <Footer currentPage='grocery' />

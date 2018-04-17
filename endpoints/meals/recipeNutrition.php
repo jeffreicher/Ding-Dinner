@@ -10,7 +10,6 @@ header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Si
 
 require('../mysqli_connect.php');
 $recipeID = $request_data['recipe_id'];
-// $recipeID = 558826;
 
 if (!($stmt = $myconn->prepare("SELECT n.calories, n.protein, n.sugar, n.carbs, n.fat, n.sodium, n.recipe_id FROM nutrition AS n WHERE n.recipe_id = ?"))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
@@ -36,7 +35,6 @@ while($row = mysqli_fetch_assoc($nutritionResult)){
         print 'Invalid recipe ID from database';
         exit();
     };
-    // print_r($row['recipe_id']);
     $nutrition[]=$row;
 }
 $encodedNutrition = json_encode($nutrition);

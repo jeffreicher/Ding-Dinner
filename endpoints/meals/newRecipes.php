@@ -12,7 +12,6 @@ header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 $userID=$_SESSION['user_id'];
-// $userID=13;
 
 /**Get the allergy and dietary restrictions for the user */
 
@@ -37,7 +36,6 @@ $allergens = ['dairy' => '0', 'egg'=>'0', 'gluten'=>'0',
             'shellfish'=>'0', 'soy'=>'0', 'tree_nut'=>'0', 'wheat'=>'0' ];
 
 $count=count($restrictions);
-// print_r($restrictions);
 $hasAllergy = false;
 for($i=0;$i<$count;$i++){
     $allergy=$restrictions[$i]['allergy_name'];
@@ -48,8 +46,6 @@ for($i=0;$i<$count;$i++){
 }
 $offset = $restrictions[0]['offset'];
 $diet = $restrictions[0]['diet'];
-// echo $offset;
-// echo $diet;
 
 /**Get recipes from database that meet the dietary restrictions found in the previous section*/
 if($hasAllergy){
@@ -71,10 +67,7 @@ if($hasAllergy){
     }
 }
 
-
-
 $recipeQuery .= " LIMIT 21 OFFSET $offset";
-// print($recipeQuery);
 $recipeOutput=[];
 $result = mysqli_query($myconn, $recipeQuery);
 while($row = mysqli_fetch_assoc($result)){
@@ -88,7 +81,6 @@ while($row = mysqli_fetch_assoc($result)){
         print 'Invalid recipe ID from database';
         exit();
     };
-    
     $recipeOutput[]=$row;
 }
 
@@ -96,7 +88,6 @@ $recipeCount = count($recipeOutput);
 if($recipeCount<21){
     $newOffset = 21 - $recipeCount;
     $changeOffsetQ = "UPDATE `users` SET offset=$newOffset WHERE ID = $userID";
-    // print($changeOffsetQ);
     mysqli_query($myconn,$changeOffsetQ);
 
     $recipeQuery = "SELECT ra.recipe_id, rd.title, rd.image, rd.readyInMinutes  FROM `recipe-allergy` AS ra JOIN `recipe-diet` AS rd ON ra.recipe_id = rd.recipe_id WHERE ";
@@ -125,11 +116,8 @@ if($recipeCount<21){
             print 'Invalid recipe ID from database';
             exit();
         };
-        
         $recipeOutput[]=$row;
     }
-
-
 };
 $incrementOffsetQ = "UPDATE `users` SET offset=offset+7 WHERE ID = $userID";
 mysqli_query($myconn, $incrementOffsetQ);

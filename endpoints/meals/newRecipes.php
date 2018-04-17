@@ -43,7 +43,6 @@ for($i=0;$i<$count;$i++){
         $allergens[$allergy] = '1';
     }
 }
-// print_r($restrictions);
 $offset = $restrictions[0]['offset'];
 $diet = $restrictions[0]['diet'];
 
@@ -98,10 +97,9 @@ if($recipeCount<21){
     if($diet !== 'none'){
         $recipeQuery .= " AND rd.$diet".'=1';
     }
+    $randomOffset = rand(0,5);
+    $recipeQuery .= " LIMIT $newOffset OFFSET $randomOffset";
     
-    $recipeQuery .= " LIMIT $newOffset OFFSET $newOffset";
-    
-    // print($recipeQuery);
     $result = mysqli_query($myconn, $recipeQuery);
     while($row = mysqli_fetch_assoc($result)){
         $row['title']=addslashes($row['title']);

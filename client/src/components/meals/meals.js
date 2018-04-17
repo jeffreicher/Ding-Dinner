@@ -234,6 +234,12 @@ class Meals extends Component {
         })
     };
 
+    componentWillUnmount(){
+        while (mealschosen.length) {
+            mealschosen.pop();
+        };
+    }
+
     render() {
 
         let mealMap = '';

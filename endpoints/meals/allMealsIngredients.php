@@ -13,7 +13,7 @@ header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 // $userID=$_SESSION['user_id'];
-$userID=13;
+$userID=27;
 if(!is_numeric($userID)){
     print 'Invalid user ID';
     exit();
@@ -69,7 +69,7 @@ $mealCount = count($meals);
     }
 
     // print_r($quantityArr);
-    // ?><br><?php
+
     // print_r($unitArr);
 
 
@@ -164,9 +164,9 @@ $quantityArrLen=count($quantityArr);
         }
     }
     // print_r($ingredientArr);
-    // ?><br><?php
+
     // print_r($quantityArr);
-    // ?><br><?php
+
     // print_r($unitArr);
 
     function addLikeUnits($ingredients, $quantities, $unitOfMeasurement){
@@ -203,14 +203,6 @@ $quantityArrLen=count($quantityArr);
             }
             
         }
-        ?><br><?php
-        print_r($sumOfTsp);
-        ?><br><?php
-        ?><br><?php
-        print_r($sumOfOz);
-        ?><br><?php
-        ?><br><?php
-        print_r($miscSums);
 
         $ingredientsObj=[];
         $ingredientsOzBase=[];
@@ -218,54 +210,93 @@ $quantityArrLen=count($quantityArr);
         $ingredientsMiscBase=[];
 
 
-        // for(var x in sumOfTsp){
-        //     var numOfTsp = sumOfTsp[x]['total'];
-        //     if(numOfTsp>=768){
-        //         numOfTsp = numOfTsp / 768;
-        //         numOfTsp = Math.ceil(numOfTsp);
-        //         ingredientsTspBase[x]= numOfTsp + ' gallon(s)'
-        //     }else if(numOfTsp>=192){
-        //         numOfTsp = numOfTsp / 192;
-        //         numOfTsp = Math.ceil(numOfTsp);
-        //         ingredientsTspBase[x]= numOfTsp + ' quart(s)'
-        //     } else if(numOfTsp>=96){
-        //         numOfTsp = numOfTsp / 96;
-        //         numOfTsp = Math.ceil(numOfTsp);
-        //         ingredientsTspBase[x]= numOfTsp + ' pint(s)'
-        //     } else if(numOfTsp>=48){
-        //         numOfTsp = numOfTsp / 48;
-        //         numOfTsp = Math.ceil(numOfTsp);
-        //         ingredientsTspBase[x]= numOfTsp + ' cup(s)'
-        //     } else if(numOfTsp>=3){
-        //         numOfTsp = numOfTsp / 3;
-        //         numOfTsp = Math.ceil(numOfTsp);
-        //         ingredientsTspBase[x]= numOfTsp + ' tablespoons(s)'
-        //     }else{
-        //         ingredientsTspBase[x]= numOfTsp + ' teaspoon(s)'
-        //     }
-        // }
-        // for(var x in sumOfOz){
-        //     var numOfOz = sumOfOz[x]['total'];
-        //     if(numOfOz>=16){
-        //         numOfOz = numOfOz / 16;
-        //         numOfOz = Math.ceil(numOfOz);
-        //         ingredientsOzBase[x]= numOfOz + ' pound(s)'
-        //     }else{
-        //         ingredientsOzBase[x]= numOfOz + ' ounces'
-        //     }
-        // }
-        // for(var x in miscSums){
-        //     var total = miscSums[x]['total'];
-        //     var unit = miscSums[x]['unit'];
-        //     ingredientsMiscBase[x]= total + ' ' + unit;
-        // }
-        // ingredientsObj['ounces']=ingredientsOzBase;
-        // ingredientsObj['teaspoons']=ingredientsTspBase;
-        // ingredientsObj['misc']=ingredientsMiscBase;
+        forEach($sumOfTsp as $key => $value){
+            $numOfTsp = $value['total'];
+            if($numOfTsp>=768){
+                $numOfTsp = $numOfTsp / 768;
+                $numOfTsp = ceil($numOfTsp);
+                if($numOfTsp>1){
+                    $ingredientsTspBase[$key]= $numOfTsp . ' gallons';
+                } else {
+                    $ingredientsTspBase[$key]= $numOfTsp . ' gallon';
+                }
+            }else if($numOfTsp>=192){
+                $numOfTsp = $numOfTsp / 192;
+                $numOfTsp = ceil($numOfTsp);
+                if($numOfTsp>1){
+                    $ingredientsTspBase[$key]= $numOfTsp . ' quarts';
+                } else {
+                    $ingredientsTspBase[$key]= $numOfTsp . ' quart';
+                }
+            } else if($numOfTsp>=96){
+                $numOfTsp = $numOfTsp / 96;
+                $numOfTsp = ceil($numOfTsp);
+                if($numOfTsp>1){
+                    $ingredientsTspBase[$key]= $numOfTsp . ' pints';
+                } else {
+                    $ingredientsTspBase[$key]= $numOfTsp . ' pint';
+                }
+            } else if($numOfTsp>=48){
+                $numOfTsp = $numOfTsp / 48;
+                $numOfTsp = ceil($numOfTsp);
+                if($numOfTsp>1){
+                    $ingredientsTspBase[$key]= $numOfTsp . ' cups';
+                } else {
+                    $ingredientsTspBase[$key]= $numOfTsp . ' cup';
+                }
+            } else if($numOfTsp>=3){
+                $numOfTsp = $numOfTsp / 3;
+                $numOfTsp = ceil($numOfTsp);
+                if($numOfTsp>1){
+                    $ingredientsTspBase[$key]= $numOfTsp . ' tablespoons';
+                } else {
+                    $ingredientsTspBase[$key]= $numOfTsp . ' tablespoon';
+                }
+            }else{
+                if($numOfTsp>1){
+                    $ingredientsTspBase[$key]= $numOfTsp . ' teaspoons';
+                } else if($numOfTsp<=0){
+                    $ingredientsTspBase[$key]= '<1 teaspoon';
+                } 
+            }
+        }
+        // print_r($ingredientsTspBase);
+        forEach($sumOfOz as $key => $value){
+            $numOfOz = $value['total'];
 
-        // console.log('Ingredients: ', ingredientsObj);
+            if($numOfOz>=16){
+                $numOfOz = $numOfOz / 16;
+                $numOfOz = ceil($numOfOz);
 
-        // return ingredientsObj;
+                if($numOfOz>1){
+                    $ingredientsOzBase[$key]= $numOfOz . ' pounds';
+                } else{
+                    $ingredientsOzBase[$key]= $numOfOz . ' pound';
+                }
+                
+            }else{
+                if($numOfOz>1){
+                    $ingredientsOzBase[$key]= $numOfOz . ' ounces';
+                } else if($numOfOz<=0){
+                    $ingredientsOzBase[$key]= '<1 ounce';
+                }
+            }
+        }
+                // print_r($ingredientsOzBase);
+
+        forEach($miscSums as $key => $value){
+            $total = $value['total'];
+            $unit = $value['unit'];
+            $ingredientsMiscBase[$key]= $total . ' ' . $unit;
+        }
+        // print_r($ingredientsMiscBase);
+        $ingredientsObj['ounces']=$ingredientsOzBase;
+        $ingredientsObj['teaspoons']=$ingredientsTspBase;
+        $ingredientsObj['misc']=$ingredientsMiscBase;
+        $encodedIngredients = json_encode($ingredientsObj);
+        print_r($encodedIngredients);
+
+
     }
     return addLikeUnits($ingredientArr, $quantityArr, $unitArr);
 }

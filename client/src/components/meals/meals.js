@@ -10,6 +10,7 @@ import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
 import axios from 'axios';
+import ErrorModal from '../general/error-modal';
 
 class Meals extends Component {
     constructor(props) {

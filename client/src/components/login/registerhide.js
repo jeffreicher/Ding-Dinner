@@ -163,7 +163,7 @@ class RegisterHide extends Component {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then((resp) => {
+        }).then( resp => {
             console.log('Email verify: ', resp);
 
             this.setState({
@@ -182,7 +182,7 @@ class RegisterHide extends Component {
                     message: "Server Error. Please try again later."
                 });
             };  
-        }).catch((err) => {
+        }).catch( err => {
             console.log('Error: ', err);
 
             this.setState({

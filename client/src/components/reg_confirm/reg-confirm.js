@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 
 class RegisterConfirm extends Component {
     constructor(props) {
@@ -99,6 +100,7 @@ class RegisterConfirm extends Component {
     render() {
         return (
             <div className='regConfirmContainer container'>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <h3 className='center regConfirmHeader'>Confirm Choices</h3>

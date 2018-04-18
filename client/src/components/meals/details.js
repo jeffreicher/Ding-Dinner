@@ -4,6 +4,7 @@ import axios from 'axios';
 import Footer from '../general/footer';
 import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 
 class Details extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Details extends Component {
         this.generateIngredients = this.generateIngredients.bind(this);
         this.generateInstructions = this.generateInstructions.bind(this);
         this.generateNutrition = this.generateNutrition.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
             recipeComplete: false,
@@ -160,6 +162,12 @@ class Details extends Component {
         });
     }
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     render() {
 
         console.log('Detail props: ', this.props);
@@ -192,6 +200,7 @@ class Details extends Component {
 
         return(
             <div className="detailsContainer">
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader onClick={hide} back={true} style={{position: 'fixed'}}/>
                 <main className="detailsMainArea">

@@ -9,15 +9,20 @@ import mealdb from '../info_storage/meal-db';
 import mealschosen from '../info_storage/meals-chosen';
 import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 
 class MealNumberSettings extends Component {
     constructor(props) {
         super(props);
 
+        this.modalClose = this.modalClose.bind(this);
+
         this.state = {
             confirmingMeals: false,
             numOfMeals: 0,
-            showLoader: false
+            showLoader: false,
+            modalStatus: false,
+            message: ''
         };
     };
 
@@ -76,11 +81,15 @@ class MealNumberSettings extends Component {
             };
 
         }).catch((err) => {
-            console.log('Meal gen error: ', err);
-
             this.setState({
                 showLoader: false
             });
+        });
+    };
+
+    modalClose() {
+        this.setState({
+            modalStatus: false
         });
     };
 
@@ -88,6 +97,7 @@ class MealNumberSettings extends Component {
 
         return (
             <div className='mealNumContainer'>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <div className="container">

@@ -16,6 +16,7 @@ class AllergySettings extends Component {
         super(props); 
 
         this.handleSelected = this.handleSelected.bind(this);
+        this.modalClose = this.modalClose.bind(this);
         
         this.state = {
             selected: [],
@@ -73,7 +74,6 @@ class AllergySettings extends Component {
             this.setState({
                 showLoader: false
             });
-            console.log(resp.data);
             if (typeof resp.data === undefined) {
                 this.setState({
                     modalStatus: true,

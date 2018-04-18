@@ -12,10 +12,13 @@ class RegisterConfirm extends Component {
         super(props);
 
         this.loginOnSuccess =  this.loginOnSuccess.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
-            showLoader: false
-        }
+            showLoader: false,
+            modalStatus: false,
+            message: ''
+        };
     };
 
     sendAcctToServer() {
@@ -29,7 +32,8 @@ class RegisterConfirm extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/create_user.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -45,17 +49,25 @@ class RegisterConfirm extends Component {
                 this.loginOnSuccess();
             } else {
                 this.setState({
-                    showLoader: false
+                    showLoader: false,
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
                 });
             };
         });
     };
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     loginOnSuccess(){
         axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -66,9 +78,14 @@ class RegisterConfirm extends Component {
                 showLoader: false
             });
 
-            if(resp.data.success){
+            if(resp.data.success) {
                 localStorage.ding_sessionID = resp.data.session_id;
                 this.props.history.push('/meal-number');
+            } else {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
             }
         }).catch((err) => {
             console.log(err);

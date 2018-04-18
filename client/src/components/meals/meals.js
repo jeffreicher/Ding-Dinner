@@ -9,6 +9,7 @@ import MealConfirm from './mealconfirm';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
+import auth from '../general/auth';
 import axios from 'axios';
 import ErrorModal from '../general/error-modal';
 
@@ -336,4 +337,4 @@ class Meals extends Component {
     };
 };
 
-export default Meals;
+export default auth(Meals);

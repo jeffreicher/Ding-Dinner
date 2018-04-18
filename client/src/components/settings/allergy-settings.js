@@ -8,8 +8,12 @@ import '../../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
+<<<<<<< HEAD
 import ErrorModal from '../general/error-modal';
 
+=======
+import auth from '../general/auth';
+>>>>>>> 26e7adf192cd1bd1650498122d9258e22c7a436b
 
 class AllergySettings extends Component {
     constructor(props) {
@@ -125,4 +129,4 @@ class AllergySettings extends Component {
     };
 };
 
-export default AllergySettings;
+export default auth(AllergySettings);

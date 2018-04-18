@@ -9,16 +9,21 @@ import mealdb from '../info_storage/meal-db';
 import mealschosen from '../info_storage/meals-chosen';
 import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 import auth from '../general/auth';
 
 class MealNumberSettings extends Component {
     constructor(props) {
         super(props);
 
+        this.modalClose = this.modalClose.bind(this);
+
         this.state = {
             confirmingMeals: false,
             numOfMeals: 0,
-            showLoader: false
+            showLoader: false,
+            modalStatus: false,
+            message: ''
         };
     };
 
@@ -49,14 +54,14 @@ class MealNumberSettings extends Component {
         });
 
         axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/mealGen.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/NewRecipes.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
             method: 'post',
             data: {
                 session_ID: localStorage.ding_sessionID
             }
-        }).then((resp) => {
+        }).then( resp => {
             this.setState({
                 showLoader: false
             });
@@ -64,13 +69,28 @@ class MealNumberSettings extends Component {
             for (var i=0; i<resp.data.length; i++){
                 mealdb.push(resp.data[i]);
             }
-            this.setNumberOfMeals(this.state.numOfMeals);
-        }).catch((err) => {
-            console.log('Meal gen error: ', err);
 
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
+            };
+
+            if (!this.state.modalStatus) {
+                this.setNumberOfMeals(this.state.numOfMeals);                
+            };
+
+        }).catch((err) => {
             this.setState({
                 showLoader: false
             });
+        });
+    };
+
+    modalClose() {
+        this.setState({
+            modalStatus: false
         });
     };
 
@@ -78,6 +98,7 @@ class MealNumberSettings extends Component {
 
         return (
             <div className='mealNumContainer'>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <div className="container">

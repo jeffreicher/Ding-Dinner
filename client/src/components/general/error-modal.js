@@ -33,7 +33,7 @@ class ErrorModal extends Component {
             position: 'absolute',
             bottom: '0',
             fontSize: '1.5rem',
-            padding: '12%',
+            paddingBottom: '12%',
             width: '100%',
             textShadow: '2px 3px 2px black'
         }
@@ -52,7 +52,7 @@ class ErrorModal extends Component {
                     <div><i className="material-icons" style={{fontSize: `3.5rem`}}>error_outline</i></div>
                     <div style={errorText}>{this.props.message}</div>                    
                 </div>
-                <div style={closeMessage}>Click anywhere to close</div>
+                <div className="center-align" style={closeMessage}>Click anywhere to close</div>
             </div>
         );
     };

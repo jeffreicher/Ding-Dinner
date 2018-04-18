@@ -153,8 +153,8 @@ class RegisterHide extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/email_check.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -163,7 +163,7 @@ class RegisterHide extends Component {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then((resp) => {
+        }).then( resp => {
             console.log('Email verify: ', resp);
 
             this.setState({
@@ -177,8 +177,17 @@ class RegisterHide extends Component {
                     modalStatus: true,
                     message: "Your email or password is invalid"
                 });
-            };      
-        }).catch((err) => {
+            }  else if (resp.data === 'Invalid user') {
+                this.setState({
+                    modalStatus: true,
+                    message: "Your email or password is invalid"
+                });
+            } else {
+                this.setState({
+                    message: "Server Error. Please try again later."
+                });
+            };  
+        }).catch( err => {
             console.log('Error: ', err);
 
             this.setState({

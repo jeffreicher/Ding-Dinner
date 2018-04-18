@@ -6,7 +6,7 @@ import newFilter from '../info_storage/new-filter-storage';
 import '../../assets/css/diet-selection.css';
 import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
-
+import auth from '../general/auth';
 
 class DietSettings extends Component {   
     constructor(props) {
@@ -55,4 +55,4 @@ class DietSettings extends Component {
     };
 };
 
-export default DietSettings;
+export default auth(DietSettings);

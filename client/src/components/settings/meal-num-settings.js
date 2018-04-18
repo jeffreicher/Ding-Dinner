@@ -9,6 +9,7 @@ import mealdb from '../info_storage/meal-db';
 import mealschosen from '../info_storage/meals-chosen';
 import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
+import auth from '../general/auth';
 
 class MealNumberSettings extends Component {
     constructor(props) {
@@ -97,4 +98,4 @@ class MealNumberSettings extends Component {
     };
 };
 
-export default MealNumberSettings;
+export default auth(MealNumberSettings);

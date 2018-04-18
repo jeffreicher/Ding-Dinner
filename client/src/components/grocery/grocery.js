@@ -6,6 +6,7 @@ import Settings from '../settings/settings';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
+import auth from '../general/auth';
 import '../../assets/css/grocery.css';
 
 class Grocery extends Component {
@@ -100,4 +101,4 @@ class Grocery extends Component {
     };
 };
 
-export default Grocery;
+export default auth(Grocery);

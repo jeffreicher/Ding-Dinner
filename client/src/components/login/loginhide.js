@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import mealschosen from '../info_storage/meals-chosen';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 
 
 class LoginHide extends Component {
@@ -14,6 +15,7 @@ class LoginHide extends Component {
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.goBack = this.goBack.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         //store session in local storage
 
@@ -23,6 +25,8 @@ class LoginHide extends Component {
             passwordValue: 'jeffrocks',
             emailFocused: false,
             passwordFocused: false,
+            modalStatus: false,
+            message: '',
             emailCheck: {
                 textDecoration: 'none'
             },
@@ -44,9 +48,9 @@ class LoginHide extends Component {
             showLoader: true
         });
         axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: this.state.emailValue,
@@ -59,10 +63,15 @@ class LoginHide extends Component {
                 showLoader: false
             });
 
-            if(resp.data.success){
+            if(resp.data.success) {
                 localStorage.ding_sessionID = resp.data.session_id;
                 this.props.history.push('/mymeals');
-            }
+            } else if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
+                this.setState({
+                    modalStatus: true,
+                    message: "Your email or password is invalid"
+                });
+            }; 
         }).catch((err) => {
             console.log(err);
 
@@ -163,11 +172,18 @@ class LoginHide extends Component {
         }
     };
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     render() {
         const strikeThrough = {textDecoration: 'line-through'}; 
 
         return (
             <div>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <form onSubmit={this.goBack} className='row'>
                     <div className='col s8 offset-s2 inputField'>

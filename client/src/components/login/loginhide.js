@@ -71,13 +71,18 @@ class LoginHide extends Component {
                     this.props.history.push('/diet-selection');
                 };
             };
-              
+
             if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
                 this.setState({
                     modalStatus: true,
                     message: "Your email or password is invalid"
                 });
-            }; 
+            } else {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later"
+                });
+            };
         }).catch((err) => {
             console.log(err);
 

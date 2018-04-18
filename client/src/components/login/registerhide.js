@@ -154,7 +154,7 @@ class RegisterHide extends Component {
 
         axios({
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/email_check.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -173,6 +173,11 @@ class RegisterHide extends Component {
             if (resp.data === 'email available') {
                 this.props.history.push('/diet-selection');
             } else if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
+                this.setState({
+                    modalStatus: true,
+                    message: "Your email or password is invalid"
+                });
+            }  else if (resp.data === 'Invalid user') {
                 this.setState({
                     modalStatus: true,
                     message: "Your email or password is invalid"

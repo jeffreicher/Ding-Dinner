@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../general/footer';
 import LogoHeader from '../general/logo-header';
+import Loader from '../general/loader';
 
 class Details extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class Details extends Component {
 
         this.state = {
             recipeComplete: false,
+            showLoader: false,
             ingrTarget: 'detailsSelectedList',
             instrTarget: '',
             nutrTarget: '',
@@ -39,6 +41,10 @@ class Details extends Component {
     };
 
     headerClicked(target) {
+        this.setState({
+            showLoader: true
+        });
+
         let selectedSection= {};
         let axiosTarget = '';
         switch (target) {
@@ -106,10 +112,17 @@ class Details extends Component {
             }
         }).then( resp => {
             console.log('Details list area: ', resp);
+
+            this.setState({
+                showLoader: false
+            });
+
             if (axiosTarget === 'recipeIngredients'){
                 this.generateIngredients(resp, selectedSection);
+
             } else if (axiosTarget === 'recipeInstructions'){
                 this.generateInstructions(resp, selectedSection);
+                
             } else if (axiosTarget === 'recipeNutrition'){
                 this.generateNutrition(resp, selectedSection);
             };
@@ -170,6 +183,7 @@ class Details extends Component {
 
         return(
             <div className="detailsContainer">
+                {this.state.showLoader && <Loader />}
                 <LogoHeader onClick={hide} back={true} style={{position: 'fixed'}}/>
                 <main className="detailsMainArea">
                     <img src={mealInfo.image} alt="" className="detailsImg" />

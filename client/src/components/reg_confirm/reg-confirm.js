@@ -5,6 +5,7 @@ import '../../assets/css/reg-confirm.css'
 import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
+import Loader from '../general/loader';
 
 class RegisterConfirm extends Component {
     constructor(props) {
@@ -12,6 +13,9 @@ class RegisterConfirm extends Component {
 
         this.loginOnSuccess =  this.loginOnSuccess.bind(this);
 
+        this.state = {
+            showLoader: false
+        }
     };
 
     sendAcctToServer() {
@@ -19,6 +23,11 @@ class RegisterConfirm extends Component {
         for (let i=0; i<registerstorage.allergy.length; i++) {
             registerstorage.allergy[i] = registerstorage.allergy[i].toLowerCase();
         };
+
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
             method: 'post',
@@ -32,9 +41,12 @@ class RegisterConfirm extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            console.log('We did it famalam', resp);
             if(resp.data.success === true) {
                 this.loginOnSuccess();
+            } else {
+                this.setState({
+                    showLoader: false
+                });
             };
         });
     };
@@ -50,7 +62,9 @@ class RegisterConfirm extends Component {
                     password: registerstorage.password
                 }
         }).then((resp) => {
-            console.log('WE GOT USER AUTH', resp);
+            this.setState({
+                showLoader: false
+            });
 
             if(resp.data.success){
                 localStorage.ding_sessionID = resp.data.session_id;
@@ -58,12 +72,17 @@ class RegisterConfirm extends Component {
             }
         }).catch((err) => {
             console.log(err);
+
+            this.setState({
+                showLoader: false
+            });
         });     
     }
 
     render() {
         return (
             <div className='regConfirmContainer container'>
+                {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <h3 className='center regConfirmHeader'>Confirm Choices</h3>
                 <div className='regConfirmSelectionArea center'>

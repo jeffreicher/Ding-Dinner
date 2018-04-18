@@ -7,6 +7,7 @@ import newFilter from '../info_storage/new-filter-storage';
 import '../../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
+import Loader from '../general/loader';
 
 
 class AllergySettings extends Component {
@@ -16,7 +17,8 @@ class AllergySettings extends Component {
         this.handleSelected = this.handleSelected.bind(this);
         
         this.state = {
-            selected: []
+            selected: [],
+            showLoader: false
         };
     };
 
@@ -47,7 +49,11 @@ class AllergySettings extends Component {
         for (let i=0; i<newFilter.allergy.length; i++){
             newFilter.allergy[i] = newFilter.allergy[i].toLowerCase();
         };
-        console.log(newFilter);
+
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
             method: 'post',
@@ -60,7 +66,10 @@ class AllergySettings extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then((resp)=>{
-            console.log('We did it famalam', resp);
+            this.setState({
+                showLoader: false
+            });
+
             this.props.history.push('/settings');
         });
     };
@@ -70,8 +79,9 @@ class AllergySettings extends Component {
         const { selected } = this.state;
 
         return (  
-         <div className='allergySettingsContainer'>            
-             <LogoHeader back={true} location={'/diet-settings'}/>
+         <div className='allergySettingsContainer'>     
+            {this.state.showLoader && <Loader />}
+            <LogoHeader back={true} location={'/diet-settings'}/>
             <div className="container">
                 <Header title={'Any Allergies?'} />
                 <div className="row">

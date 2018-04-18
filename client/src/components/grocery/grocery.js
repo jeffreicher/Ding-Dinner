@@ -5,6 +5,7 @@ import grocerystorage from '../info_storage/grocery-storage';
 import Settings from '../settings/settings';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
+import Loader from '../general/loader';
 import '../../assets/css/grocery.css';
 
 class Grocery extends Component {
@@ -14,11 +15,16 @@ class Grocery extends Component {
         this.renderGroceryList = this.renderGroceryList.bind(this);
 
         this.state = {
-                listOfIngredients: []
+                listOfIngredients: [],
+                showLoader: false
         };
     };
 
     componentDidMount() {
+        this.setState({
+            showLoader: true
+        });
+
         axios({
                 url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
                 method: 'post',
@@ -60,7 +66,8 @@ class Grocery extends Component {
         };
 
         this.setState({
-            listOfIngredients: grocerystorage
+            listOfIngredients: grocerystorage,
+            showLoader: false
         });
     };
     
@@ -79,9 +86,10 @@ class Grocery extends Component {
 
         return (
             <div className="groceryContainer Oxygen">
+                {this.state.showLoader && <Loader />}
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
-                        <h4 className="head card-panel lobsterFont z-depth-2 grey darken-3"> List</h4>
+                        <h4 className="head card-panel lobsterFont z-depth-2 grey darken-2"> List</h4>
                         <div className="list">
                             {listMap}
                         </div>

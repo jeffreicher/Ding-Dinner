@@ -8,6 +8,7 @@ import {Link, Redirect} from 'react-router-dom';
 import mealdb from '../info_storage/meal-db';
 import mealschosen from '../info_storage/meals-chosen';
 import LogoHeader from '../general/logo-header';
+import Loader from '../general/loader';
 
 class MealNumber extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class MealNumber extends Component {
 
         this.state = {
             confirmingMeals: false,
-            numOfMeals: 0
+            numOfMeals: 0,
+            showLoader: false
         };
     };
 
@@ -40,7 +42,11 @@ class MealNumber extends Component {
     }
     
     getRecipes() {
-        console.log('Session ID: ', localStorage.ding_sessionID);
+        
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/mealGen.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
@@ -51,12 +57,21 @@ class MealNumber extends Component {
             }
         }).then( resp => {
             console.log('Meal gen response: ', resp);
+
+            this.setState({
+                showLoader: false
+            });
+
             for (var i=0; i < resp.data.length; i++){
                 mealdb.push(resp.data[i]);
             }
             this.setNumberOfMeals(this.state.numOfMeals);
         }).catch( err => {
             console.log('Meal gen error: ', err);
+
+            this.setState({
+                showLoader: false
+            });
         });
     };
 
@@ -64,6 +79,7 @@ class MealNumber extends Component {
 
         return (
             <div className='mealNumContainer'>
+                {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <div className="container">
                     <Header title={'How Many Recipes?'} />

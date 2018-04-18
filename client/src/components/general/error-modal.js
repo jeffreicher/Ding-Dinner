@@ -18,23 +18,41 @@ class ErrorModal extends Component {
             position: 'absolute',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'flex-end',            
+            justifyContent: 'center',            
             backgroundColor: '#f75211e7',            
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             width: '70%',
-            height: '23%',
-            borderRadius: '5%'
+            height: '38%',
+            borderRadius: '50%',
+            border: '2px solid white'
         };
 
+        const closeMessage = {
+            position: 'absolute',
+            bottom: '0',
+            fontSize: '1.5rem',
+            padding: '12%',
+            width: '100%',
+            textShadow: '2px 3px 2px black'
+        }
+
+        const errorText = {
+            marginBottom: '4vh',
+            marginTop: '3vh',
+            fontSize: '1.5rem',
+            padding: '0 7%'
+        }
+        
 
         return (
             <div style={modalBackground} onClick={this.props.onClick} >
                 <div className="center-align valign-wrapper" style={modalContent} >
-                    <h1 style={{marginBottom: `7vh`}}>{this.props.message}</h1>
-                    <h6>Click anywhere to close</h6>
+                    <div><i className="material-icons" style={{fontSize: `3.5rem`}}>error_outline</i></div>
+                    <div style={errorText}>{this.props.message}</div>                    
                 </div>
+                <div style={closeMessage}>Click anywhere to close</div>
             </div>
         );
     };

@@ -163,7 +163,7 @@ class RegisterHide extends Component {
             } else if (resp.data === 'Password is not corect' || resp.data === "Your email is invalid") {
                 this.setState({
                     modalStatus: true,
-                    message: "Your email or password is incorrect"
+                    message: "Your email or password is invalid"
                 });
             };      
         }).catch((err) => {

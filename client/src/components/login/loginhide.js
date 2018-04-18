@@ -40,9 +40,9 @@ class LoginHide extends Component {
     confirmUserInfo() {
             console.log('confirmation initiated');
             axios({
-                // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+                url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
                 // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+                // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
                 method: 'post',
                 data: {
                         email: this.state.emailValue,
@@ -50,11 +50,15 @@ class LoginHide extends Component {
                     }
             }).then((resp) => {
                 console.log('WE GOT USER AUTH', resp);
-
                 if(resp.data.success){
                     localStorage.ding_sessionID = resp.data.session_id;
                     this.props.history.push('/mymeals');
-                }
+                } else if (resp.data === 'Password is not corect' || resp.data === "Your email is invalid") {
+                    this.setState({
+                        modalStatus: true,
+                        message: "Your email or password is invalid"
+                    });
+                };
             }).catch((err) => {
                 console.log(err);
             });     

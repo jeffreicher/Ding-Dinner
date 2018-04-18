@@ -29,31 +29,36 @@
     width: 100%;
     position: relative;
     box-sizing: border-box;
-}
-
-.mealsItem{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
+.mealsShadowArea {
+    height: 70%;
+    width: 100%;
+    position: absolute;
+    bottom: 0%;
+    background: linear-gradient(to top, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0));
+}
+
 .mealsText {
     font-size: 1.5rem;
-    position: relative;
+    position: absolute;
     white-space: pre-wrap;
-    width: 90%;
-    font-weight: bolder;
-    text-shadow: 3px 3px black;
+    width: 85%;
+    font-weight: bold;
     bottom: 0%;
+    padding: 0 0 5px 5px;
 }
 
 .mealsCancel {
-    color: #f75211;
+    color: red;
     position: absolute;
-    top: 5%;
+    bottom: 5%;
     right: 5%;
     font-weight: bolder;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .detailsContainer {

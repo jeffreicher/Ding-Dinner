@@ -208,9 +208,9 @@ class Meals extends Component {
             mealschosen.splice(index, 1);
             this.setState({
                 showLoader: false
-            }), () => {
+            }, () => {
                 this.addSubstituteMeal(index);
-            };
+            });
         }).catch((err) => {
             console.log('Meal gen error: ', err);
 

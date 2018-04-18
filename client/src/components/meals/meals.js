@@ -16,12 +16,15 @@ class Meals extends Component {
         super(props);
 
         this.retrieveUserMeals = this.retrieveUserMeals.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
             meals: null,
             showDetails: false,
             confirmingMeals: false,
             showLoader: false,
+            modalStatus: false,
+            message: '',
             mealDetail: {
                 name: '',
                 image: '',
@@ -49,7 +52,7 @@ class Meals extends Component {
                 this.retrieveUserMeals();
             });
             return;
-        }
+        };
         // const {confirmingMeals} = this.props.location.state;
         if (this.props.location.state.confirmingMeals === true){
             this.setState({
@@ -65,7 +68,7 @@ class Meals extends Component {
             }, () => {
                 this.retrieveUserMeals();
             });
-        }
+        };
     };
 
     componentWillMount() {
@@ -87,7 +90,7 @@ class Meals extends Component {
                 data: {
                     session_ID: localStorage.ding_sessionID
                 }
-                }).then((resp) => {
+                }).then( resp => {
                 for (let i=0; i<resp.data.length; i++){
                     mealschosen.push(resp.data[i]);
                 };
@@ -95,6 +98,12 @@ class Meals extends Component {
                     meals: mealschosen,
                     showLoader: false
                 });
+                if (typeof resp.data === undefined) {
+                    this.setState({
+                        modalStatus: true,
+                        message: "Server Error. Please try again later."
+                    });
+                };
             }).catch((err) => {
                 console.log(err);
 
@@ -269,6 +278,12 @@ class Meals extends Component {
         };
     }
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     render() {
 
         let mealMap = '';
@@ -279,6 +294,7 @@ class Meals extends Component {
 
         return(
             <div className="mealsContainer">
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader add={true}/>
                 <main className="mealsMainArea">

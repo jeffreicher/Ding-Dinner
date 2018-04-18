@@ -14,6 +14,7 @@ class Grocery extends Component {
         super(props);
 
         this.renderGroceryList = this.renderGroceryList.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
                 listOfIngredients: [],
@@ -80,6 +81,12 @@ class Grocery extends Component {
             showLoader: false
         });
     };
+
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
     
     render() {
 
@@ -96,6 +103,7 @@ class Grocery extends Component {
 
         return (
             <div className="groceryContainer Oxygen">
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >

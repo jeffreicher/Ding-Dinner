@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import registerstorage from '../info_storage/register-storage';
 import axios from 'axios';
+import ErrorModal from '../general/error-modal';
 import Loader from '../general/loader';
 
 class RegisterHide extends Component {
@@ -11,6 +12,7 @@ class RegisterHide extends Component {
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.confirmChange = this.confirmChange.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
             emailValue: '',
@@ -19,6 +21,8 @@ class RegisterHide extends Component {
             emailFocused: false,
             passwordFocused: false,
             confirmFocused: false,
+            modalStatus: false,
+            message: "",
             emailCheck: {
                 textDecoration: 'none'
             },
@@ -149,7 +153,8 @@ class RegisterHide extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -167,7 +172,12 @@ class RegisterHide extends Component {
 
             if (resp.data === 'email available') {
                 this.props.history.push('/diet-selection');
-            };
+            } else if (resp.data === 'Password is not corect' || resp.data === "Your email is invalid") {
+                this.setState({
+                    modalStatus: true,
+                    message: "Your email or password is invalid"
+                });
+            };      
         }).catch((err) => {
             console.log('Error: ', err);
 
@@ -177,9 +187,16 @@ class RegisterHide extends Component {
         });
     };
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     render() {
         return (
             <div>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <form onSubmit={this.goBack} className='row'>
                     <div className='col s8 offset-s2 inputField'>

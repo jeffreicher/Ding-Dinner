@@ -20,7 +20,6 @@ class MealNumber extends Component {
     };
 
     setNumberOfMeals(num) {
-        debugger;
         while (mealschosen.length) {
             mealschosen.pop();
         };

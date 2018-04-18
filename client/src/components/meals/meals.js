@@ -8,6 +8,7 @@ import MealCreator from './meal-creator';
 import MealConfirm from './mealconfirm';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
+import Loader from '../general/loader';
 import axios from 'axios';
 
 class Meals extends Component {
@@ -20,6 +21,7 @@ class Meals extends Component {
             meals: null,
             showDetails: false,
             confirmingMeals: false,
+            showLoader: false,
             mealDetail: {
                 name: '',
                 image: '',
@@ -72,6 +74,11 @@ class Meals extends Component {
 
     retrieveUserMeals() {
         if (!this.props.location.state) {
+
+            this.setState({
+                showLoader: true
+            });
+
             axios({
                 // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
                 // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
@@ -81,16 +88,19 @@ class Meals extends Component {
                     session_ID: localStorage.ding_sessionID
                 }
                 }).then((resp) => {
-                console.log('Login meals works: ', resp);
-                console.log('History: ',this.props.history);
                 for (let i=0; i<resp.data.length; i++){
                     mealschosen.push(resp.data[i]);
                 };
                 this.setState({
-                    meals: mealschosen
+                    meals: mealschosen,
+                    showLoader: false
                 });
             }).catch((err) => {
                 console.log(err);
+
+                this.setState({
+                    showLoader: false
+                });
             });  
         };
     };
@@ -100,6 +110,11 @@ class Meals extends Component {
         for (var i=0; i<mealschosen.length; i++) {
             selectedMeals.push(mealschosen[i].recipe_id);
         };
+
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_meal_plan.php',
             method: 'post',
@@ -113,7 +128,8 @@ class Meals extends Component {
         }).then( resp => {
             console.log('Confirming new meal plan: ', resp)
             this.setState({
-                confirmingMeals: false
+                confirmingMeals: false,
+                showLoader: false
             });
         });        
     };
@@ -128,7 +144,11 @@ class Meals extends Component {
             readyInMinutes: mealInfo.readyInMinutes,
             index: number
         };
-        const that = this;
+
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeIngredients.php',
             method: 'post',
@@ -142,9 +162,10 @@ class Meals extends Component {
         }).then( resp => {
             console.log('Ingr: ', resp);
             mealDetail.ingredients = resp.data;
-            that.setState({
+            this.setState({
                 showDetails: true,
-                mealDetail: mealDetail
+                mealDetail: mealDetail,
+                showLoader: false
             });
         });
     };
@@ -157,19 +178,20 @@ class Meals extends Component {
 
     removeMeal(event, index) {
         event.stopPropagation();
-        if (mealdb.length === 0) {
+        if (mealdb.length <= 5) {
             this.addMealsToStorage(index);
             return;
         };
-        let {meals} = this.state;
-        meals.splice(index, 1);
-        this.setState({
-            meals: meals
-        });
+        mealschosen.splice(index, 1);
         this.addSubstituteMeal(index);
     };
 
     addMealsToStorage(index) {
+
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/mealGen.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
@@ -183,19 +205,27 @@ class Meals extends Component {
             for (var i=0; i<resp.data.length; i++) {
                 mealdb.push(resp.data[i]);
             };
-            let {meals} = this.state;
-            meals.splice(index, 1);
+            mealschosen.splice(index, 1);
             this.setState({
-                meals: meals
+                showLoader: false
             }), () => {
                 this.addSubstituteMeal(index);
             };
         }).catch((err) => {
             console.log('Meal gen error: ', err);
+
+            this.setState({
+                showLoader: false
+            });
         });
     };
 
     completeMeal(index, recipe_id) {
+
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_meal_completed.php',
             method: 'post',
@@ -211,8 +241,8 @@ class Meals extends Component {
             console.log('Complete meal: ', resp);
             this.setState({
                 showDetails: false,
+                showLoader: false
             });
-            //window.location.reload();
             this.reloadMeals();
         });
     };
@@ -249,6 +279,7 @@ class Meals extends Component {
 
         return(
             <div className="mealsContainer">
+                {this.state.showLoader && <Loader />}
                 <LogoHeader add={true}/>
                 <main className="mealsMainArea">
                     {mealMap}

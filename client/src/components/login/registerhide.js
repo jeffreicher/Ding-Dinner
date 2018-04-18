@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import registerstorage from '../info_storage/register-storage';
 import axios from 'axios';
+import Loader from '../general/loader';
 
 class RegisterHide extends Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class RegisterHide extends Component {
             },
             confirmMatches: {
                 textDecoration: 'none'
-            }
+            },
+            showLoader: false
         };
     };
 
@@ -141,6 +143,11 @@ class RegisterHide extends Component {
 
     serverEmailVerify(e) {
         e.preventDefault();
+
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
             method: 'post',
@@ -153,17 +160,27 @@ class RegisterHide extends Component {
             }
         }).then((resp) => {
             console.log('Email verify: ', resp);
+
+            this.setState({
+                showLoader: false
+            });
+
             if (resp.data === 'email available') {
                 this.props.history.push('/diet-selection');
             };
         }).catch((err) => {
             console.log('Error: ', err);
+
+            this.setState({
+                showLoader: false
+            });
         });
     };
 
     render() {
         return (
             <div>
+                {this.state.showLoader && <Loader />}
                 <form onSubmit={this.goBack} className='row'>
                     <div className='col s8 offset-s2 inputField'>
                         <label className='white-text'>Email</label>

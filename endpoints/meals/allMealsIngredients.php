@@ -13,13 +13,11 @@ header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 $userID=$_SESSION['user_id'];
-// $userID=27;
 if(!is_numeric($userID)){
     print 'Invalid user ID';
     exit();
 };
 
-// $recipeIDList=[];
 $allIngredientsOutput=[];
 
 if (!($stmt = $myconn->prepare("SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id FROM `user_choices` AS uc JOIN `ingredients` AS ing ON uc.recipe_id = ing.recipe_id WHERE `user_id`= ? "))) {
@@ -43,7 +41,6 @@ while($row = mysqli_fetch_assoc($allIngredientsResult)){
     $allIngredientsOutput[]=$row;
 }
 $allIngredientsEncoded = json_encode($allIngredientsOutput);
-// print_r($allIngredientsOutput);
 
 convertUnit($allIngredientsOutput);
 
@@ -53,25 +50,12 @@ function convertUnit($meals){
     $quantityArr=[];
     $unitArr=[];
     
-//     // for(var i=0; i<meals.length; i++){
-//     //     for(var x = 0; x<meals[i]['mealIngr'].length; x++){
-//     //         // console.log(meals)
-//     //         ingredientArr.push(meals[i]['mealIngr'][x]['ingredient']);
-//     //         quantityArr.push(meals[i]['mealIngr'][x]['amount']);
-//     //         unitArr.push(meals[i]['mealIngr'][x]['unit_type']);
-//     //     }
-//     // }
 $mealCount = count($meals);
     for($i=0; $i<$mealCount; $i++){
         $ingredientArr[]=$meals[$i]['ingredient'];
         $quantityArr[]=floatval($meals[$i]['amount']);
         $unitArr[]=$meals[$i]['unit_type'];
     }
-
-    // print_r($quantityArr);
-
-    // print_r($unitArr);
-
 
 $quantityArrLen=count($quantityArr);
     for($i = 0; $i<$quantityArrLen; $i++){
@@ -163,11 +147,6 @@ $quantityArrLen=count($quantityArr);
                 break;
         }
     }
-    // print_r($ingredientArr);
-
-    // print_r($quantityArr);
-
-    // print_r($unitArr);
 
     function addLikeUnits($ingredients, $quantities, $unitOfMeasurement){
         $sumOfTsp = [];
@@ -208,7 +187,6 @@ $quantityArrLen=count($quantityArr);
         $ingredientsOzBase=[];
         $ingredientsTspBase=[];
         $ingredientsMiscBase=[];
-
 
         forEach($sumOfTsp as $key => $value){
             $numOfTsp = $value['total'];
@@ -260,7 +238,6 @@ $quantityArrLen=count($quantityArr);
                 } 
             }
         }
-        // print_r($ingredientsTspBase);
         forEach($sumOfOz as $key => $value){
             $numOfOz = $value['total'];
 
@@ -282,21 +259,17 @@ $quantityArrLen=count($quantityArr);
                 }
             }
         }
-                // print_r($ingredientsOzBase);
 
         forEach($miscSums as $key => $value){
             $total = $value['total'];
             $unit = $value['unit'];
             $ingredientsMiscBase[$key]= $total . ' ' . $unit;
         }
-        // print_r($ingredientsMiscBase);
         $ingredientsObj['ounces']=$ingredientsOzBase;
         $ingredientsObj['teaspoons']=$ingredientsTspBase;
         $ingredientsObj['misc']=$ingredientsMiscBase;
         $encodedIngredients = json_encode($ingredientsObj);
         print_r($encodedIngredients);
-
-
     }
     return addLikeUnits($ingredientArr, $quantityArr, $unitArr);
 }

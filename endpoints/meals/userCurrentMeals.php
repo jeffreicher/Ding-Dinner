@@ -12,8 +12,7 @@ header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
-// $userID=$_SESSION['user_id'];
-$userID=13;
+$userID=$_SESSION['user_id'];
 if(!is_numeric($userID)){
     print 'Invalid user ID';
     exit();
@@ -32,6 +31,7 @@ if (!$stmt->execute()) {
     echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 }
 $currentMealsResult = $stmt -> get_result();
+
 while($row = mysqli_fetch_assoc($currentMealsResult)){
     $row['title']=addslashes($row['title']);
     $row['image']=addslashes($row['image']);

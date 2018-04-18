@@ -16,10 +16,6 @@ $response = Unirest\Request::get("https://spoonacular-recipe-food-nutrition-v1.p
 $id = json_decode($response->raw_body)->results[0]->id;
 ?>
 
-
-
-
-
 <?php
 //lookup recipes by ID
 require __DIR__ . '/vendor/autoload.php';

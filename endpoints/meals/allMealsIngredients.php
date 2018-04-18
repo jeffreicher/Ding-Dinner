@@ -1,5 +1,5 @@
 <?php
-
+/**Make PHP understand Axios Calls*/
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
@@ -7,30 +7,37 @@ session_id($request_data['session_ID']);
 session_start();
 require('../mysqli_connect.php');
 
+/**Header files for local development*/
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 $userID=$_SESSION['user_id'];
-// $userID=27;
 if(!is_numeric($userID)){
     print 'Invalid user ID';
     exit();
 };
 
-// $recipeIDList=[];
+/**creates array for storing the ingredients*/
 $allIngredientsOutput=[];
 
+/**query for gathering all the ingredients for a the logged in user*/
 if (!($stmt = $myconn->prepare("SELECT ing.ingredient, ing.amount, ing.unit_type, ing.recipe_id FROM `user_choices` AS uc JOIN `ingredients` AS ing ON uc.recipe_id = ing.recipe_id WHERE `user_id`= ? "))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
+
+/**binds the paramater for the SELECT query*/
 if (!$stmt->bind_param("i", $userID)) {
     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
 }
+
+/**executes the query for the ingredients*/
 if (!$stmt->execute()) {
     echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 }
+
+/**store the results of the query*/
 $allIngredientsResult = $stmt -> get_result();
 while($row = mysqli_fetch_assoc($allIngredientsResult)){
     $row['ingredient']=addslashes($row['ingredient']);
@@ -42,25 +49,17 @@ while($row = mysqli_fetch_assoc($allIngredientsResult)){
     };
     $allIngredientsOutput[]=$row;
 }
-$allIngredientsEncoded = json_encode($allIngredientsOutput);
-// print_r($allIngredientsOutput);
+// $allIngredientsEncoded = json_encode($allIngredientsOutput);
 
 convertUnit($allIngredientsOutput);
 
-//unit conversion area
+/**convert units to create an object that represents a sum total of ingredients for a grocery list*/
 function convertUnit($meals){
     $ingredientArr=[];
     $quantityArr=[];
     $unitArr=[];
-    
-//     // for(var i=0; i<meals.length; i++){
-//     //     for(var x = 0; x<meals[i]['mealIngr'].length; x++){
-//     //         // console.log(meals)
-//     //         ingredientArr.push(meals[i]['mealIngr'][x]['ingredient']);
-//     //         quantityArr.push(meals[i]['mealIngr'][x]['amount']);
-//     //         unitArr.push(meals[i]['mealIngr'][x]['unit_type']);
-//     //     }
-//     // }
+
+/**seperate the ingredient, unit, and amount of each in separate arrays*/
 $mealCount = count($meals);
     for($i=0; $i<$mealCount; $i++){
         $ingredientArr[]=$meals[$i]['ingredient'];
@@ -68,11 +67,7 @@ $mealCount = count($meals);
         $unitArr[]=$meals[$i]['unit_type'];
     }
 
-    // print_r($quantityArr);
-
-    // print_r($unitArr);
-
-
+/**converts all regular units into either teaspoons or ounces*/
 $quantityArrLen=count($quantityArr);
     for($i = 0; $i<$quantityArrLen; $i++){
         $currentQuantity=$quantityArr[$i];
@@ -156,19 +151,15 @@ $quantityArrLen=count($quantityArr);
             case 'pounds':
             case 'Pounds':
             case 'POUNDS':
-                $quantityArr[$i]=convertToLbs($currentQuantity);
+                $quantityArr[$i]=convertToOz($currentQuantity);
                 $unitArr[$i]='oz';
                 break;
             default:
                 break;
         }
     }
-    // print_r($ingredientArr);
 
-    // print_r($quantityArr);
-
-    // print_r($unitArr);
-
+    /**combine all similar ingredient-quantities so that each ingredient has its own, singular total*/
     function addLikeUnits($ingredients, $quantities, $unitOfMeasurement){
         $sumOfTsp = [];
         $sumOfOz = [];
@@ -203,13 +194,13 @@ $quantityArrLen=count($quantityArr);
             }
             
         }
-
+        /**creating arrays to store the ingredients by unit measurement type*/
         $ingredientsObj=[];
         $ingredientsOzBase=[];
         $ingredientsTspBase=[];
         $ingredientsMiscBase=[];
 
-
+        /**converting teaspoon-based ingredient totals into their highest common unit*/
         forEach($sumOfTsp as $key => $value){
             $numOfTsp = $value['total'];
             if($numOfTsp>=768){
@@ -260,7 +251,8 @@ $quantityArrLen=count($quantityArr);
                 } 
             }
         }
-        // print_r($ingredientsTspBase);
+
+        /**converting ounce-based ingredient totals into their highest common unit*/
         forEach($sumOfOz as $key => $value){
             $numOfOz = $value['total'];
 
@@ -282,24 +274,23 @@ $quantityArrLen=count($quantityArr);
                 }
             }
         }
-                // print_r($ingredientsOzBase);
 
+        /**formating misc ingredient totals*/
         forEach($miscSums as $key => $value){
             $total = $value['total'];
             $unit = $value['unit'];
             $ingredientsMiscBase[$key]= $total . ' ' . $unit;
         }
-        // print_r($ingredientsMiscBase);
         $ingredientsObj['ounces']=$ingredientsOzBase;
         $ingredientsObj['teaspoons']=$ingredientsTspBase;
         $ingredientsObj['misc']=$ingredientsMiscBase;
         $encodedIngredients = json_encode($ingredientsObj);
         print_r($encodedIngredients);
-
-
     }
     return addLikeUnits($ingredientArr, $quantityArr, $unitArr);
 }
+
+/**helper function to convert inputed unit into teaspoons*/
 function convertToTsp($num, $unit){
     switch ($unit){
         case 'tablespoon':
@@ -315,7 +306,8 @@ function convertToTsp($num, $unit){
     }
 }
 
-function convertToLbs($num){
+/**helper function to convert inputed unit into ounces*/
+function convertToOz($num){
     return $num * 16; 
 }
 ?>

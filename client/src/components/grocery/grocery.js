@@ -40,7 +40,11 @@ class Grocery extends Component {
         const teaspoonKeys = Object.keys(teaspoons);
         const miscKeys = Object.keys(misc);
 
-        for (let i=0; i < ounceKeys.length; i++) {
+        while(grocerystorage.length){
+            grocerystorage.pop();
+        }
+
+        for (let i=0; i< ounceKeys.length; i++){
             const key = ounceKeys[i];
             grocerystorage.push(`${ounces[key]} ${key}`);
         };
@@ -66,8 +70,8 @@ class Grocery extends Component {
 
         const listMap = (this.state.listOfIngredients).map((item, index) => {
             return (
-                <div className='item'>
-                    <input type='checkbox' className='check filled-in' id={index} key={index} />
+                <div className='item' key={index} >
+                    <input type='checkbox' className='check filled-in' id={index} />
                     <label className='name oxygenFont' htmlFor={index}>{item}</label>
                 </div>
             );
@@ -77,7 +81,7 @@ class Grocery extends Component {
             <div className="groceryContainer Oxygen">
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
-                        <h4 className="head card-panel lobsterFont z-depth-2">List</h4>
+                        <h4 className="head card-panel lobsterFont z-depth-2 grey darken-3"> List</h4>
                         <div className="list">
                             {listMap}
                         </div>

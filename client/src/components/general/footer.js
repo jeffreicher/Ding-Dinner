@@ -5,10 +5,10 @@ import '../../assets/css/general.css';
 class Footer extends Component {
     render() {
         return (
-            <footer className="footer orange darken-4">
-                <Link to='/mymeals'><i className={`far fa-list-alt ${this.props.currentPage === 'meals' ? 'teal-text' : 'white-text'}`}></i></Link>
-                <Link to='/grocery'><i className={`fas fa-shopping-cart ${this.props.currentPage === 'grocery' ? 'teal-text' : 'white-text'}`}></i></Link>
-                <Link to='/settings'><i className={`fas fa-cogs ${this.props.currentPage === 'settings' ? 'teal-text' : 'white-text'}`}></i></Link>
+            <footer className="footer">
+                <Link to='/mymeals'><i className={`far fa-list-alt ${this.props.currentPage === 'meals' ? 'footerSelected' : 'footerDefault'}`}></i></Link>
+                <Link to='/grocery'><i className={`fas fa-shopping-cart ${this.props.currentPage === 'grocery' ? 'footerSelected' : 'footerDefault'}`}></i></Link>
+                <Link to='/settings'><i className={`fas fa-cogs ${this.props.currentPage === 'settings' ? 'footerSelected' : 'footerDefault'}`}></i></Link>
             </footer>
         );
     };

@@ -5,7 +5,7 @@ class Button extends Component {
         super(props);
 
         this.state = {
-            color: 'grey darken-3'
+            color: 'grey darken-1'
         };
     };
 
@@ -16,7 +16,7 @@ class Button extends Component {
             });
         } else {
             this.setState({
-                color: 'grey darken-3',
+                color: 'grey darken-1',
             });
         };   
     };
@@ -24,7 +24,7 @@ class Button extends Component {
     render() {
 
         const buttonStyle = {
-            boxShadow: '6px 6px 4px 0 rgba(255, 255, 255, 0.14), 0 1px 10px 0 rgba(255, 255, 255, 0.12), 0 2px 4px -1px rgba(255, 255, 255, .5)',
+            // boxShadow: '6px 6px 4px 0 rgba(50, 50, 50, 0.14), 0 1px 10px 0 rgba(50, 50, 50, 0.12), 0 2px 4px -1px rgba(50, 50, 50, .5)',
             backgroundColor: this.state.color
         }
 

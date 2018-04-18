@@ -8,10 +8,6 @@
     margin: 5%;
 }
 
-.grey {
-    background-color: grey;
-}
-
 .collection {
     margin-top: 10vh;
 }
@@ -23,9 +19,8 @@
 
 .mealNumContainer {
     height: 100vh;
-    background-image: url('../../assets/images/dingBackground.jpg');
+    background-image: url('../../assets/images/dingDarkBlur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
     color: white;
 }

@@ -148,22 +148,22 @@ class Details extends Component {
 
         let instrMap = '';
         
-        this.state.instrInfo !== '' ? instrMap = this.state.instrInfo.map((item, index) => {return <li className='collection-item' key={index}> {index+1}. {item.step}</li>}) : instrMap = '';
+        this.state.instrInfo !== '' ? instrMap = this.state.instrInfo.map((item, index) => {return <li className='collection-item detailsListItem' key={index}> {index+1}. {item.step}</li>}) : instrMap = '';
 
         let ingrMap = '';
 
-        this.state.ingrInfo !== '' ? ingrMap = mealInfo.ingredients.map((item, index) => {return <li className='collection-item' key={index}> {`${mealInfo.ingredients[index].amount} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>}) : ingrMap = '';
+        this.state.ingrInfo !== '' ? ingrMap = mealInfo.ingredients.map((item, index) => {return <li className='collection-item detailsListItem' key={index}> {`${mealInfo.ingredients[index].amount} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>}) : ingrMap = '';
         
         let nutrMap = '';
 
         this.state.nutrInfo !== '' ? nutrMap = 
         <ul className='collection'>
-            <li className='collection-item'>Calories: {this.state.nutrInfo.calories}</li>
-            <li className='collection-item'>Protein: {this.state.nutrInfo.protein}</li>
-            <li className='collection-item'>Sugar: {this.state.nutrInfo.sugar}</li>
-            <li className='collection-item'>Carbohydrates: {this.state.nutrInfo.carbs}</li>
-            <li className='collection-item'>Fat: {this.state.nutrInfo.fat}</li>
-            <li className='collection-item'>Sodium: {this.state.nutrInfo.sodium}</li>
+            <li className='collection-item detailsListItem'>Calories: {this.state.nutrInfo.calories}</li>
+            <li className='collection-item detailsListItem'>Protein: {this.state.nutrInfo.protein}</li>
+            <li className='collection-item detailsListItem'>Sugar: {this.state.nutrInfo.sugar}</li>
+            <li className='collection-item detailsListItem'>Carbohydrates: {this.state.nutrInfo.carbs}</li>
+            <li className='collection-item detailsListItem'>Fat: {this.state.nutrInfo.fat}</li>
+            <li className='collection-item detailsListItem'>Sodium: {this.state.nutrInfo.sodium}</li>
         </ul>
         :
         nutrMap = '';
@@ -174,7 +174,7 @@ class Details extends Component {
                 <main className="detailsMainArea">
                     <img src={mealInfo.image} alt="" className="detailsImg" />
                     <h3 className='detailsName'>{mealInfo.name}</h3>
-                    <h5 className='detailsTime'>Time Commitment: 30 minutes</h5>
+                    <h5 className='detailsTime'>Time to Complete: {mealInfo.readyInMinutes} minutes</h5>
                     <div className={"detailsIngredientsHead " + this.state.ingrTarget} onClick={()=>this.headerClicked('ingr')} >Ingredients</div>
                     <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>
                     <div className={"detailsNutritionHead " + this.state.nutrTarget} onClick={()=>this.headerClicked('nutr')} >Nutrition</div>
@@ -193,7 +193,7 @@ class Details extends Component {
                         {nutrMap}
                     </div>
                 </main>
-                <Footer />
+                <Footer currentPage='meals' />
             </div>
         );
     };

@@ -7,22 +7,7 @@
     background-image: url('../../assets/images/dingDarkBlur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
     color: white;
-}
-
-.mealsHeader {
-    height: 10%;
-    width: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: lightblue;
-}
-
-.mealsHeader * {
-    font-size: 2rem;
 }
 
 .mealsMainArea {
@@ -43,7 +28,7 @@
     box-sizing: border-box;
 }
 
-.mealsItem, .mealConfirmContainer {
+.mealsItem {
     height: 40%;
     width: 100%;
     position: relative;
@@ -67,25 +52,12 @@
 }
 
 .mealsCancel {
-    color: rgb(187, 3, 3);
+    color: #f75211;
     position: absolute;
     top: 5%;
     right: 5%;
     font-weight: bolder;
     font-size: 1.5rem;
-}
-
-.mealsFooter {
-    position: fixed;
-    height: 10%;
-    width: 100%;
-    margin: 0;
-    background-color: lightblue;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 2rem;
-    box-shadow: 0 -4px 5px 0 rgba(0,0,0,0.14), 0 -1px 10px 0 rgba(0,0,0,0.12), 0 -2px 4px -1px rgba(0,0,0,0.3);
 }
 
 .detailsContainer {
@@ -102,23 +74,7 @@
     background-image: url('../../assets/images/dingDarkBlur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
     color: white;
-}
-
-.detailsHeader {
-    height: 10%;
-    width: 100%;
-    margin: 0;
-    padding-right: 26px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: lightblue;
-}
-
-.detailsHeader * {
-    font-size: 2rem;
 }
 
 .detailsTime {
@@ -146,11 +102,11 @@
     box-sizing: border-box;
     border: 1px solid #e0e0e0;
     padding: 2% 0;
-    background-color: rgba(40, 40, 40, .9);
+    background-color: #757575e7;
 }
 
 .detailsSelectedList {
-    background-color: rgba(230, 81, 0, .9);
+    background-color: #F75211;
 }
 
 .detailsIngredientsList, .detailsInstructionsList, .detailsNutritionList {
@@ -163,18 +119,7 @@
 }
 
 .collection > .detailsListItem.collection-item {
-    background-color: rgba(40, 40, 40, .9);
-}
-
-.detailsFooter {
-    height: 10%;
-    width: 100%;
-    margin: 0;
-    background-color: lightblue;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 2rem;
+    background-color: #757575e7;
 }
 
 .mealsFooter {
@@ -202,5 +147,5 @@
 }
 
 .confirmCheck {
-    margin-top: 12%;
+    margin-top: 21%;
 }

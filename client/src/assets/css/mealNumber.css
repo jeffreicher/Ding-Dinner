@@ -8,10 +8,6 @@
     margin: 5%;
 }
 
-.grey {
-    background-color: grey;
-}
-
 .collection {
     margin-top: 10vh;
 }
@@ -26,6 +22,5 @@
     background-image: url('../../assets/images/dingDarkBlur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
     color: white;
 }

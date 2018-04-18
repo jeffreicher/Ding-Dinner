@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import mealschosen from '../info_storage/meals-chosen';
+import Loader from '../general/loader';
 
 
 class LoginHide extends Component {
@@ -30,7 +31,8 @@ class LoginHide extends Component {
             },
             passwordCharacters: {
                 textDecoration: 'none'
-            }
+            },
+            showLoader: false
         };
     };
 
@@ -38,30 +40,36 @@ class LoginHide extends Component {
     //use componentdidmount to call axios request to load the correct user meal 
 
     confirmUserInfo() {
-            console.log('confirmation initiated');
-            axios({
-                url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
-                // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-                // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
-                method: 'post',
-                data: {
-                        email: this.state.emailValue,
-                        password: this.state.passwordValue
-                    }
-            }).then((resp) => {
-                console.log('WE GOT USER AUTH', resp);
-                if(resp.data.success){
-                    localStorage.ding_sessionID = resp.data.session_id;
-                    this.props.history.push('/mymeals');
-                } else if (resp.data === 'Password is not corect' || resp.data === "Your email is invalid") {
-                    this.setState({
-                        modalStatus: true,
-                        message: "Your email or password is invalid"
-                    });
-                };
-            }).catch((err) => {
-                console.log(err);
-            });     
+        this.setState({
+            showLoader: true
+        });
+        axios({
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+            // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            method: 'post',
+            data: {
+                    email: this.state.emailValue,
+                    password: this.state.passwordValue
+                }
+        }).then((resp) => {
+            console.log('WE GOT USER AUTH', resp);
+
+            this.setState({
+                showLoader: false
+            });
+
+            if(resp.data.success){
+                localStorage.ding_sessionID = resp.data.session_id;
+                this.props.history.push('/mymeals');
+            }
+        }).catch((err) => {
+            console.log(err);
+
+            this.setState({
+                showLoader: false
+            });
+        });     
     };
 
     emailChange(e) {
@@ -160,6 +168,7 @@ class LoginHide extends Component {
 
         return (
             <div>
+                {this.state.showLoader && <Loader />}
                 <form onSubmit={this.goBack} className='row'>
                     <div className='col s8 offset-s2 inputField'>
                         <label className='white-text'>Email</label>

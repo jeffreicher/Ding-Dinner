@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 import registerstorage from '../info_storage/register-storage';
 import axios from 'axios';
 import ErrorModal from '../general/error-modal';
+import Loader from '../general/loader';
 
 class RegisterHide extends Component {
     constructor(props) {
@@ -33,7 +34,8 @@ class RegisterHide extends Component {
             },
             confirmMatches: {
                 textDecoration: 'none'
-            }
+            },
+            showLoader: false
         };
     };
 
@@ -145,6 +147,11 @@ class RegisterHide extends Component {
 
     serverEmailVerify(e) {
         e.preventDefault();
+
+        this.setState({
+            showLoader: true
+        });
+
         axios({
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
             url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
@@ -157,7 +164,12 @@ class RegisterHide extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then((resp) => {
-            console.log('Email verify: ', resp);            
+            console.log('Email verify: ', resp);
+
+            this.setState({
+                showLoader: false
+            });
+
             if (resp.data === 'email available') {
                 this.props.history.push('/diet-selection');
             } else if (resp.data === 'Password is not corect' || resp.data === "Your email is invalid") {
@@ -168,6 +180,10 @@ class RegisterHide extends Component {
             };      
         }).catch((err) => {
             console.log('Error: ', err);
+
+            this.setState({
+                showLoader: false
+            });
         });
     };
 
@@ -181,6 +197,7 @@ class RegisterHide extends Component {
         return (
             <div>
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
+                {this.state.showLoader && <Loader />}
                 <form onSubmit={this.goBack} className='row'>
                     <div className='col s8 offset-s2 inputField'>
                         <label className='white-text'>Email</label>

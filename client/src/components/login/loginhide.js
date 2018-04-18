@@ -65,8 +65,14 @@ class LoginHide extends Component {
 
             if(resp.data.success) {
                 localStorage.ding_sessionID = resp.data.session_id;
-                this.props.history.push('/mymeals');
-            } else if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
+                if (resp.data.meal_plan === 1) {
+                    this.props.history.push('/mymeals');                    
+                } else {
+                    this.props.history.push('/diet-selection');
+                };
+            };
+              
+            if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
                 this.setState({
                     modalStatus: true,
                     message: "Your email or password is invalid"

@@ -20,7 +20,7 @@ class ErrorModal extends Component {
             flexDirection: 'column',
             justifyContent: 'center',            
             backgroundColor: '#f75211e7',            
-            top: '50%',
+            top: '47%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             width: '70%',

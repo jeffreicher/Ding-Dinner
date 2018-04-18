@@ -172,7 +172,7 @@ class RegisterHide extends Component {
 
             if (resp.data === 'email available') {
                 this.props.history.push('/diet-selection');
-            } else if (resp.data === 'Password is not corect' || resp.data === "Your email is invalid") {
+            } else if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
                 this.setState({
                     modalStatus: true,
                     message: "Your email or password is invalid"

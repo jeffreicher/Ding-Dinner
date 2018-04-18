@@ -232,16 +232,16 @@ class Meals extends Component {
             mealschosen.splice(index, 1);
             this.setState({
                 showLoader: false
-            }), () => {
+            }, () => {
                 this.addSubstituteMeal(index);
-            };
+            });
             if (typeof resp.data === undefined) {
                 this.setState({
                     modalStatus: true,
                     message: "Server Error. Please try again later."
                 });
             };
-        }).catch((err) => {
+        }).catch( err => {
             console.log('Meal gen error: ', err);
 
             this.setState({

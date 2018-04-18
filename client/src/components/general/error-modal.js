@@ -19,20 +19,20 @@ class ErrorModal extends Component {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',            
-            backgroundColor: 'rgb(128, 128, 128)',
+            backgroundColor: '#f75211e7',            
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '80%',
-            height: '30%',
-            borderRadius: '10%'
+            width: '70%',
+            height: '23%',
+            borderRadius: '5%'
         };
 
 
         return (
             <div style={modalBackground} onClick={this.props.onClick} >
                 <div className="center-align valign-wrapper" style={modalContent} >
-                    <h1 style={{marginBottom: `8.5vh`}}>{this.props.message}</h1>
+                    <h1 style={{marginBottom: `7vh`}}>{this.props.message}</h1>
                     <h6>Click anywhere to close</h6>
                 </div>
             </div>

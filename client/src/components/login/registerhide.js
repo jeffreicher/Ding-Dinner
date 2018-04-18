@@ -157,15 +157,15 @@ class RegisterHide extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then((resp) => {
-            console.log('Email verify: ', resp);
+            console.log('Email verify: ', resp);            
             if (resp.data === 'email available') {
                 this.props.history.push('/diet-selection');
-            } else if (resp.data === 'Password is not corect') {
+            } else if (resp.data === 'Password is not corect' || resp.data === "Your email is invalid") {
                 this.setState({
-                    modalStatus: !this.state.modalStatus,
-                    message: "Invalid Password"
+                    modalStatus: true,
+                    message: "Your email or password is incorrect"
                 });
-            }            
+            };      
         }).catch((err) => {
             console.log('Error: ', err);
         });
@@ -173,7 +173,7 @@ class RegisterHide extends Component {
 
     modalClose() {
         this.setState({
-            modalStatus: !this.state.modalStatus
+            modalStatus: false
         });
     };
 

@@ -73,8 +73,8 @@ class AllergySettings extends Component {
             this.setState({
                 showLoader: false
             });
-
-            if (typeof resp.data !== undefined) {
+            console.log(resp.data);
+            if (typeof resp.data === undefined) {
                 this.setState({
                     modalStatus: true,
                     message: "Server Error. Please try again later."

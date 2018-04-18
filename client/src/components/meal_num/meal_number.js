@@ -53,7 +53,7 @@ class MealNumber extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints//meals/newRecipes.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/newRecipes.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
             method: 'post',
@@ -73,7 +73,7 @@ class MealNumber extends Component {
                 mealdb.push(resp.data[i]);
             };
 
-            if (typeof resp.data !== undefined) {
+            if (typeof resp.data === undefined) {
                 this.setState({
                     modalStatus: true,
                     message: "Server Error. Please try again later."

@@ -1,6 +1,7 @@
 
 /endpoints/mysqli_connect.php
 /endpoints/mysql_connect.php
+/endpoints/passwordHelper.php
 
 .idea
 .DS_Store

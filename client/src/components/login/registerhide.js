@@ -11,6 +11,7 @@ class RegisterHide extends Component {
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.confirmChange = this.confirmChange.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
             emailValue: '',
@@ -170,10 +171,16 @@ class RegisterHide extends Component {
         });
     };
 
+    modalClose() {
+        this.setState({
+            modalStatus: !this.state.modalStatus
+        });
+    };
+
     render() {
         return (
             <div>
-                {this.state.modalStatus && <ErrorModal message={this.state.message} />}
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 <form onSubmit={this.goBack} className='row'>
                     <div className='col s8 offset-s2 inputField'>
                         <label className='white-text'>Email</label>

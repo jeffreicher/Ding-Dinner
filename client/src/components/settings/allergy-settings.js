@@ -8,6 +8,7 @@ import '../../assets/css/allergy-selection.css';
 import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 
 
 class AllergySettings extends Component {
@@ -18,7 +19,9 @@ class AllergySettings extends Component {
         
         this.state = {
             selected: [],
-            showLoader: false
+            showLoader: false,
+            modalStatus: false,
+            message: ''
         };
     };
 
@@ -55,7 +58,8 @@ class AllergySettings extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/update_diet.php',
             method: 'post',
             data: {
                     diet: newFilter.diet,
@@ -65,12 +69,27 @@ class AllergySettings extends Component {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then((resp)=>{
+        }).then( resp => {
             this.setState({
                 showLoader: false
             });
 
-            this.props.history.push('/settings');
+            if (typeof resp.data !== undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
+            };
+
+            if (!this.state.modalStatus) {
+                this.props.history.push('/settings');               
+            };            
+        });
+    };
+
+    modalClose() {
+        this.setState({
+            modalStatus: false
         });
     };
 
@@ -79,7 +98,8 @@ class AllergySettings extends Component {
         const { selected } = this.state;
 
         return (  
-         <div className='allergySettingsContainer'>     
+         <div className='allergySettingsContainer'>   
+            {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
             {this.state.showLoader && <Loader />}
             <LogoHeader back={true} location={'/diet-settings'}/>
             <div className="container">

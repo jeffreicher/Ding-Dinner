@@ -80,9 +80,9 @@ class Meals extends Component {
             });
 
             axios({
-                // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
+                url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/userCurrentMeals.php',
                 // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
-                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
+                // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
                 method: 'post',
                 data: {
                     session_ID: localStorage.ding_sessionID

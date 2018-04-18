@@ -177,7 +177,11 @@ class RegisterHide extends Component {
                     modalStatus: true,
                     message: "Your email or password is invalid"
                 });
-            };      
+            } else {
+                this.setState({
+                    message: "Server Error. Please try again later."
+                });
+            };  
         }).catch((err) => {
             console.log('Error: ', err);
 

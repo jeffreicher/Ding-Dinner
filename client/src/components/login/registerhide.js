@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import registerstorage from '../info_storage/register-storage';
 import axios from 'axios';
+import ErrorModal from '../general/error-modal';
 
 class RegisterHide extends Component {
     constructor(props) {
@@ -18,6 +19,8 @@ class RegisterHide extends Component {
             emailFocused: false,
             passwordFocused: false,
             confirmFocused: false,
+            modalStatus: false,
+            message: "",
             emailCheck: {
                 textDecoration: 'none'
             },
@@ -142,7 +145,8 @@ class RegisterHide extends Component {
     serverEmailVerify(e) {
         e.preventDefault();
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -155,7 +159,12 @@ class RegisterHide extends Component {
             console.log('Email verify: ', resp);
             if (resp.data === 'email available') {
                 this.props.history.push('/diet-selection');
-            };
+            } else if (resp.data === 'Password is not corect') {
+                this.setState({
+                    modalStatus: !this.state.modalStatus,
+                    message: "Invalid Password"
+                });
+            }            
         }).catch((err) => {
             console.log('Error: ', err);
         });
@@ -164,6 +173,7 @@ class RegisterHide extends Component {
     render() {
         return (
             <div>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} />}
                 <form onSubmit={this.goBack} className='row'>
                     <div className='col s8 offset-s2 inputField'>
                         <label className='white-text'>Email</label>

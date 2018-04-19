@@ -13,13 +13,8 @@
 }
 
 .settingsButton{
-    margin: 8%;
     font-size: 1.5em;
     color: white;
-}
-
-.settingsButton:first-of-type {
-    margin-top: 8vh;
 }
 
 .dietSettingsContainer {
@@ -34,4 +29,11 @@
     background-image: url('../../assets/images/dingDarkBlur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.settingsOptionArea {
+    height: 80%;
+    display: inline-flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
 }

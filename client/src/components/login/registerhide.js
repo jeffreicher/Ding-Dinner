@@ -255,8 +255,8 @@ class RegisterHide extends Component {
                     </div>
                     <div className='col s2' />
                     <div className='registerButtonHolder'>
-                        <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light registerSubmit'>Return</button>
-                        <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large dingOrange waves-effect waves-light registerSubmit'>Register</button>
+                        <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light registerSubmit' type='button'>Return</button>
+                        <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large dingOrange waves-effect waves-light registerSubmit' type='submit'>Register</button>
                     </div>
                 </form>
             </div>

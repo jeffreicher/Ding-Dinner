@@ -9,6 +9,7 @@ import Loader from '../general/loader';
 import auth from '../general/auth';
 import '../../assets/css/grocery.css';
 import ModalError from '../general/error-modal';
+import Header from '../general/header';
 
 class Grocery extends Component {
     constructor(props) {
@@ -108,7 +109,7 @@ class Grocery extends Component {
                 {this.state.showLoader && <Loader />}
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
-                        <h4 className="head card-panel ubuntuFont z-depth-2 grey darken-2"> List</h4>
+                    <Header title={'Grocery List'} />
                         <div className="list" >
                             {listMap}
                         </div>

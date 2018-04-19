@@ -62,7 +62,7 @@ class AllergySelection extends Component {
                     <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
                 </div>  
                 <div className="right" style={{marginTop: `4vh`}}><Link to='/register-confirm'>
-                <Next style={'bottom'}/>
+                <Next />
                 </Link></div>  
             </div>             
          </div>

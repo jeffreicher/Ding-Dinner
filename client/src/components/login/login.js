@@ -49,13 +49,13 @@ class Login extends Component {
         return (
             <div className="loginContainer">
                 <img className='loginLogo' src={dingLogo} />
-                <h4 className='loginSlogan'>dinner is served</h4>
+                <h4 className='loginSlogan center-align'>dinner is served</h4>
                 <div className='loginButtons'>
                     {this.state.loginHide && <LoginHide history={this.props.history} returnFX={this.goBackLogin}/>}
                     {this.state.registerHide && <RegisterHide history={this.props.history} returnFX={this.goBackRegister}/>}
-                    {!this.state.loginHide && !this.state.registerHide && <button className="loginButton btn-large orange darken-4" onClick={this.loginClicked}>Login</button>}
+                    {!this.state.loginHide && !this.state.registerHide && <button className="loginButton btn-large dingOrange z-depth-2" onClick={this.loginClicked}>Login</button>}
                     <br />
-                    {!this.state.loginHide && !this.state.registerHide && <button className="registerButton btn-large orange darken-4" onClick={this.registerClicked}>Register</button>}
+                    {!this.state.loginHide && !this.state.registerHide && <button className="registerButton btn-large dingOrange z-depth-2" onClick={this.registerClicked}>Register</button>}
                 </div>
             </div>
         );

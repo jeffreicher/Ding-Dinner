@@ -47,7 +47,7 @@ class DietSelection extends Component {
                         <Button title={'Vegan'} descrip={'Veggie Fanatic'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegan')} />   
                         <Button title={'Ketogenic'} descrip={'Coachella Bod Meal Plan'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />                   
                     </div>  
-                    <div className="right" style={{marginTop: `3vh`}}>
+                    <div className="right" style={{marginTop: `7vh`}}>
                         {this.state.value && <Link to='/allergy-selection'><Next /></Link>}
                     </div>     
                 </div>                

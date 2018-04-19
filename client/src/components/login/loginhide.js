@@ -40,14 +40,15 @@ class LoginHide extends Component {
     //use thisprops.history.push to redirect user to the meals page inside then promise
     //use componentdidmount to call axios request to load the correct user meal 
 
-    confirmUserInfo() {
+    confirmUserInfo(event) {
+        event.preventDefault();
         this.setState({
             showLoader: true
         });
         axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: this.state.emailValue,

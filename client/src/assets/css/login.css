@@ -23,6 +23,7 @@
     padding-top: 35%;
     display: block;
     margin: 0 auto;
+    height: 40%;
 }
 
 .loginSlogan {
@@ -99,6 +100,16 @@
     background-color: #f75211;
 }
 
+.dingTeal {
+    background-color: #26a69a;
+}
+
 .loginSubmit, .registerSubmit {
     text-shadow: 1px 1px black, 2px 2px black;
+}
+
+.registerButtonHolder, .loginButtonHolder {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
 }

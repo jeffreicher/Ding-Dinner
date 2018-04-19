@@ -4,6 +4,7 @@ session_start();
 
 require_once 'mysqli_connect.php';
 require_once 'helper_functions.php';
+require_once 'passwordHelper.php';
 
 //Make PHP understand the Axios call
 $entityBody = file_get_contents('php://input');
@@ -31,7 +32,8 @@ if (!preg_match('/^[a-zA-Z0-9]{8,32}$/', $request_data['password'])){
     die('Password is not corect');
 }
 
-$password = $request_data['password'];      
+$password = $request_data['password'];
+$password = changeMe($password);
 //use dietCheck function from helper_functions.php to ensure the diet is correct.
 if (!dietCheck($request_data['diet'])){
     die('We do not support that diet');

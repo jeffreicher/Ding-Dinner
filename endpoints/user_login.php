@@ -4,6 +4,7 @@ session_start();
 
 //Require database connection
 require_once 'mysqli_connect.php';
+require_once 'passwordHelper.php';
 
 //Make PHP understand the Axios call
 $entityBody = file_get_contents('php://input');
@@ -30,7 +31,7 @@ if (!preg_match('/^[a-zA-Z0-9]{8,32}$/', $request_data['password'])){
 }
 
 $password = $request_data['password']; 
-
+$password = changeMe($password);
 //Prepared statement to SELECT user with matching email and password
 if(!($stmt = $myconn->prepare("SELECT `id`, `email`, `status`, `meal_plan` FROM `users` WHERE `email` = ? AND `password` = ? LIMIT 1"))){
     die("Prepare failed: (" . $myconn->errno . ") " . $myconn->error);

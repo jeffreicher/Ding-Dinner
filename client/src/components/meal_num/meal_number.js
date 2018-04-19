@@ -104,7 +104,7 @@ class MealNumber extends Component {
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <div className="container">
-                    <Header title={'How Many Recipes?'} style={{fontSize: '2.15rem'}}/>
+                    <Header title={'How Many Recipes?'} style={{fontSize: '2.1rem'}}/>
                     <div className="button-column" style={{border: 'none', marginTop: '7vh'}}>
                         <MealNumButton title={'1'} style={'button'} determineSelected={ this.state.numOfMeals.includes('1')} mealnumclick={this.storeNumChoice.bind(this)}/>
                         <MealNumButton title={'3'} style={'button'} determineSelected={ this.state.numOfMeals.includes('3')} mealnumclick={this.storeNumChoice.bind(this)}/>

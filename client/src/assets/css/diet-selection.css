@@ -34,12 +34,12 @@
 } 
 
 @media screen and (max-height: 568px) {
-    div.mealNumContainer > div.container > div.button-column > a.button {
+    /* div.mealNumContainer > div.container > div.button-column > a.button {
         height: 47px;
-    }
+    } */
 
     div.mealNumContainer > div.container > div.button-column {
-        margin-top: 3vh !important;
+        margin-top: 5vh !important;
     }
 
     div.mealNumContainer > div.container > div.right {

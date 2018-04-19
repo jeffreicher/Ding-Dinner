@@ -8,14 +8,11 @@
     background-size: cover;
 }
 
-.settingsHeader, .groceryHead{
-    margin: 1.14rem 0 .912rem 0;
-}
-
 .settingsButton{
     margin: 8%;
     font-size: 1.5em;
     color: white;
+    text-shadow: 2px 2px 2px black;
 }
 
 .settingsButton:first-of-type {

@@ -208,8 +208,8 @@ class LoginHide extends Component {
                     </div>
                     <div className='col s2' />
                     <div className='loginButtonHolder'>
-                        <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light loginSubmit'>Return</button>
-                        <button className='btn btn-large center-align dingOrange waves-effect waves-light loginSubmit' onClick={this.confirmUserInfo.bind(this)}>Login</button>
+                        <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light loginSubmit' type='button'>Return</button>
+                        <button className='btn btn-large center-align dingOrange waves-effect waves-light loginSubmit' onClick={this.confirmUserInfo.bind(this)} type='submit'>Login</button>
                     </div>
                 </form>
             </div>

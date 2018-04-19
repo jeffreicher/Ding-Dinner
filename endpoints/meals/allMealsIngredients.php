@@ -247,7 +247,7 @@ $quantityArrLen=count($quantityArr);
                 if($numOfTsp>1){
                     $ingredientsTspBase[$key]= $numOfTsp . ' teaspoons';
                 } else if($numOfTsp<=0){
-                    $ingredientsTspBase[$key]= '<1 teaspoon';
+                    $ingredientsTspBase[$key]= '< 1 teaspoon';
                 } 
             }
         }
@@ -270,7 +270,7 @@ $quantityArrLen=count($quantityArr);
                 if($numOfOz>1){
                     $ingredientsOzBase[$key]= $numOfOz . ' ounces';
                 } else if($numOfOz<=0){
-                    $ingredientsOzBase[$key]= '<1 ounce';
+                    $ingredientsOzBase[$key]= '< 1 ounce';
                 }
             }
         }

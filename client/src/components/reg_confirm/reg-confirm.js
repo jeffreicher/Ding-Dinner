@@ -56,6 +56,12 @@ class RegisterConfirm extends Component {
                     message: "Server Error. Please try again later."
                 });
             };
+        }).catch( err => {
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 
@@ -93,7 +99,9 @@ class RegisterConfirm extends Component {
             console.log(err);
 
             this.setState({
-                showLoader: false
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
             });
         });     
     }

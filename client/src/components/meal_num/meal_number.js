@@ -85,7 +85,9 @@ class MealNumber extends Component {
             console.log('Meal gen error: ', err);
 
             this.setState({
-                showLoader: false
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
             });
         });
     };

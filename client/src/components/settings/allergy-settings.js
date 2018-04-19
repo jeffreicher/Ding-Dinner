@@ -84,6 +84,12 @@ class AllergySettings extends Component {
             if (!this.state.modalStatus) {
                 this.props.history.push('/settings');               
             };            
+        }).catch( err => {
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 

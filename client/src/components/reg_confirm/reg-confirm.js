@@ -7,6 +7,7 @@ import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
 import ErrorModal from '../general/error-modal';
+import Header from '../general/header';
 
 class RegisterConfirm extends Component {
     constructor(props) {
@@ -103,7 +104,8 @@ class RegisterConfirm extends Component {
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
-                <h3 className='center regConfirmHeader'>Confirm Choices</h3>
+                <Header title="Confirm Choices"/>
+                {/* <h3 className='center regConfirmHeader'>Confirm Choices</h3> */}
                 <div className='regConfirmSelectionArea center'>
                     <div className='regConfirmLabel'>Email Address</div>
                     <div>{registerstorage.email}</div>

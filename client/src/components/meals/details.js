@@ -104,7 +104,7 @@ class Details extends Component {
         };
         axios({
             // url: `http://localhost:8080/C1.18_FoodTinder/endpoints/meals/${axiosTarget}.php`,
-            url: `http://localhost:8080/frontend/Ding-Final/endpoints/meals/${axiosTarget}.php`,
+            url: `../../endpoints/meals/${axiosTarget}.php`,
 
             method: 'post',
             data: {

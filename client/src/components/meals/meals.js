@@ -85,7 +85,7 @@ class Meals extends Component {
             });
 
             axios({
-                url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/userCurrentMeals.php',
+                url: '../../endpoints/meals/userCurrentMeals.php',
                 // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
                 // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
                 method: 'post',
@@ -128,7 +128,7 @@ class Meals extends Component {
 
         axios({
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_meal_plan.php',
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/create_meal_plan.php',
+            url: '../../endpoints/create_meal_plan.php',
             method: 'post',
             data: {
                 'recipe_ids': selectedMeals,
@@ -169,7 +169,7 @@ class Meals extends Component {
 
         axios({
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeIngredients.php',
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/recipeIngredients.php',
+            url: '../../endpoints/meals/recipeIngredients.php',
             method: 'post',
             data: {
                 'recipe_id': mealInfo.recipe_id,
@@ -218,7 +218,7 @@ class Meals extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/newRecipes.php',
+            url: '../../endpoints/meals/newRecipes.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
             method: 'post',
@@ -258,7 +258,7 @@ class Meals extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/update_meal_completed.php',
+            url: '../../endpoints/update_meal_completed.php',
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_meal_completed.php',
             method: 'post',
             data: {

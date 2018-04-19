@@ -10,15 +10,20 @@ import mealschosen from '../info_storage/meals-chosen';
 import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
 import auth from '../general/auth';
+import ErrorModal from '../general/error-modal';
 
 class MealNumber extends Component {
     constructor(props) {
         super(props);
 
+        this.modalClose = this.modalClose.bind(this);
+
         this.state = {
             confirmingMeals: false,
-            numOfMeals: 0,
-            showLoader: false
+            numOfMeals: [],
+            showLoader: false,
+            modalStatus: false,
+            message: ''
         };
     };
 
@@ -42,16 +47,15 @@ class MealNumber extends Component {
         });
     }
     
-    getRecipes() {
-        
+    getRecipes() {        
         this.setState({
             showLoader: true
         });
 
         axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/mealGen.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/newRecipes.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
             method: 'post',
             data: {
                 session_ID: localStorage.ding_sessionID
@@ -63,10 +67,20 @@ class MealNumber extends Component {
                 showLoader: false
             });
 
-            for (var i=0; i < resp.data.length; i++){
+            for (var i=0; i < resp.data.length; i++) {
                 mealdb.push(resp.data[i]);
-            }
-            this.setNumberOfMeals(this.state.numOfMeals);
+            };
+
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
+            };
+
+            if (!this.state.modalStatus) {
+                this.setNumberOfMeals(this.state.numOfMeals);                
+            };
         }).catch( err => {
             console.log('Meal gen error: ', err);
 
@@ -76,19 +90,26 @@ class MealNumber extends Component {
         });
     };
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     render() {
 
         return (
             <div className='mealNumContainer'>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <div className="container">
                     <Header title={'How Many Recipes?'} />
                     <div className="button-column collection" style={{border: 'none'}}>
-                        <MealNumButton title={'1'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>  
-                        <MealNumButton title={'3'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>
-                        <MealNumButton title={'5'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>   
-                        <MealNumButton title={'7'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>   
+                        <MealNumButton title={'1'} style={'button'} determineSelected={ this.state.numOfMeals.includes('1')} mealnumclick={this.storeNumChoice.bind(this)}/>  
+                        <MealNumButton title={'3'} style={'button'} determineSelected={ this.state.numOfMeals.includes('3')} mealnumclick={this.storeNumChoice.bind(this)}/>
+                        <MealNumButton title={'5'} style={'button'} determineSelected={ this.state.numOfMeals.includes('5')} mealnumclick={this.storeNumChoice.bind(this)}/>   
+                        <MealNumButton title={'7'} style={'button'} determineSelected={ this.state.numOfMeals.includes('7')} mealnumclick={this.storeNumChoice.bind(this)}/>   
                     </div>  
                     <div className="right" style={{marginTop: `2.2vh`}}>
                         <Next onclick={this.getRecipes.bind(this)} />          

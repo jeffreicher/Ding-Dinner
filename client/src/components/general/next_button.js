@@ -1,7 +1,7 @@
 import React from 'react';
 
 const buttonStyle = {
-    boxShadow: '6px 6px 4px 0 rgba(255, 255, 255, 0.14), 0 1px 10px 0 rgba(255, 255, 255, 0.12), 0 2px 4px -1px rgba(255, 255, 255, .5)'
+    textShadow: '1px 2px 2px black'
 }
 
 export default (props) => (

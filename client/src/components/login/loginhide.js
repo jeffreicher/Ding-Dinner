@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import mealschosen from '../info_storage/meals-chosen';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 
 
 class LoginHide extends Component {
@@ -13,16 +14,16 @@ class LoginHide extends Component {
         this.fieldBlurred = this.fieldBlurred.bind(this);
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
-        this.goBack = this.goBack.bind(this);
-
-        //store session in local storage
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
             dataValue: '',
-            emailValue: 'jeff@jeff.jeff',
-            passwordValue: 'jeffrocks',
+            emailValue: '',
+            passwordValue: '',
             emailFocused: false,
             passwordFocused: false,
+            modalStatus: false,
+            message: '',
             emailCheck: {
                 textDecoration: 'none'
             },
@@ -39,14 +40,15 @@ class LoginHide extends Component {
     //use thisprops.history.push to redirect user to the meals page inside then promise
     //use componentdidmount to call axios request to load the correct user meal 
 
-    confirmUserInfo() {
+    confirmUserInfo(e) {
+        e.preventDefault();
         this.setState({
             showLoader: true
         });
         axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: this.state.emailValue,
@@ -59,10 +61,26 @@ class LoginHide extends Component {
                 showLoader: false
             });
 
-            if(resp.data.success){
+            if(resp.data.success) {
                 localStorage.ding_sessionID = resp.data.session_id;
-                this.props.history.push('/mymeals');
-            }
+                if (resp.data.meal_plan === 1) {
+                    this.props.history.push('/mymeals');                    
+                } else {
+                    this.props.history.push('/diet-selection');
+                };
+            };
+
+            if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
+                this.setState({
+                    modalStatus: true,
+                    message: "Your email or password is invalid"
+                });
+            } else {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later"
+                });
+            };
         }).catch((err) => {
             console.log(err);
 
@@ -130,15 +148,6 @@ class LoginHide extends Component {
         }
     };
 
-    goBack(e) {
-        e.preventDefault();
-        // if(this.state.emailValue.length === 0 || this.state.passwordValue.length === 0){
-        //     alert('put stuff in the dang fields');
-        //     return;
-        // }
-        // this.props.returnFX();
-    };
-
     fieldFocused(targetField) {
         if (targetField === 'email'){
             this.setState({
@@ -163,13 +172,20 @@ class LoginHide extends Component {
         }
     };
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     render() {
         const strikeThrough = {textDecoration: 'line-through'}; 
 
         return (
             <div>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
-                <form onSubmit={this.goBack} className='row'>
+                <form className='row'>
                     <div className='col s8 offset-s2 inputField'>
                         <label className='white-text'>Email</label>
                         <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
@@ -191,7 +207,7 @@ class LoginHide extends Component {
                         </div>}
                     </div>
                     <div className='col s2' />
-                    <button to='/mymeals' className='btn center-align blue darken-2 waves-effect waves-light' onClick={this.confirmUserInfo.bind(this)}>Login</button>
+                    <button className='btn center-align blue darken-2 waves-effect waves-light' onClick={this.confirmUserInfo.bind(this)}>Login</button>
                 </form>
             </div>
         );

@@ -27,7 +27,7 @@ if (!($email = filter_var($request_data['email'], FILTER_VALIDATE_EMAIL))){
 
 //Validate Password
 if (!preg_match('/^[a-zA-Z0-9]{8,32}$/', $request_data['password'])){
-    die('Password is not corect');
+    die('Password is not correct');
 }
 
 $password = $request_data['password']; 

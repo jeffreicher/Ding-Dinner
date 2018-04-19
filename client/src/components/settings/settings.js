@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import '../../assets/css/settings.css';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
+import auth from '../general/auth';
 
 class Settings extends Component {
     constructor(props) {
@@ -33,4 +34,4 @@ class Settings extends Component {
     };
 };
 
-export default Settings;
+export default auth(Settings);

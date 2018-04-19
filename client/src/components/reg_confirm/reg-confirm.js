@@ -6,16 +6,20 @@ import {Link} from 'react-router-dom';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 
 class RegisterConfirm extends Component {
     constructor(props) {
         super(props);
 
         this.loginOnSuccess =  this.loginOnSuccess.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
-            showLoader: false
-        }
+            showLoader: false,
+            modalStatus: false,
+            message: ''
+        };
     };
 
     sendAcctToServer() {
@@ -29,7 +33,8 @@ class RegisterConfirm extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/create_user.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -45,17 +50,25 @@ class RegisterConfirm extends Component {
                 this.loginOnSuccess();
             } else {
                 this.setState({
-                    showLoader: false
+                    showLoader: false,
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
                 });
             };
         });
     };
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     loginOnSuccess(){
         axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -66,9 +79,14 @@ class RegisterConfirm extends Component {
                 showLoader: false
             });
 
-            if(resp.data.success){
+            if(resp.data.success) {
                 localStorage.ding_sessionID = resp.data.session_id;
                 this.props.history.push('/meal-number');
+            } else {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
             }
         }).catch((err) => {
             console.log(err);
@@ -82,6 +100,7 @@ class RegisterConfirm extends Component {
     render() {
         return (
             <div className='regConfirmContainer container'>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <h3 className='center regConfirmHeader'>Confirm Choices</h3>

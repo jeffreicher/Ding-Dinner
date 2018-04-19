@@ -6,17 +6,22 @@ import Settings from '../settings/settings';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
+import auth from '../general/auth';
 import '../../assets/css/grocery.css';
+import ModalError from '../general/error-modal';
 
 class Grocery extends Component {
     constructor(props) {
         super(props);
 
         this.renderGroceryList = this.renderGroceryList.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
                 listOfIngredients: [],
-                showLoader: false
+                showLoader: false,
+                modalStatus: false,
+                message: ""
         };
     };
 
@@ -26,17 +31,24 @@ class Grocery extends Component {
         });
 
         axios({
-                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
-                method: 'post',
-                data: {
-                    'session_ID': localStorage.ding_sessionID
-                },
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).then( resp => {
-                this.renderGroceryList(resp);
-            });
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/allMealsIngredients.php',
+            method: 'post',
+            data: {
+                'session_ID': localStorage.ding_sessionID
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then( resp => {
+            this.renderGroceryList(resp);
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
+            };
+        });
     };
 
     renderGroceryList(resp) {
@@ -70,6 +82,12 @@ class Grocery extends Component {
             showLoader: false
         });
     };
+
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
     
     render() {
 
@@ -86,6 +104,7 @@ class Grocery extends Component {
 
         return (
             <div className="groceryContainer Oxygen">
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
@@ -100,4 +119,4 @@ class Grocery extends Component {
     };
 };
 
-export default Grocery;
+export default auth(Grocery);

@@ -9,19 +9,24 @@ import MealConfirm from './mealconfirm';
 import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
+import auth from '../general/auth';
 import axios from 'axios';
+import ErrorModal from '../general/error-modal';
 
 class Meals extends Component {
     constructor(props) {
         super(props);
 
         this.retrieveUserMeals = this.retrieveUserMeals.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
             meals: null,
             showDetails: false,
             confirmingMeals: false,
             showLoader: false,
+            modalStatus: false,
+            message: '',
             mealDetail: {
                 name: '',
                 image: '',
@@ -49,7 +54,7 @@ class Meals extends Component {
                 this.retrieveUserMeals();
             });
             return;
-        }
+        };
         // const {confirmingMeals} = this.props.location.state;
         if (this.props.location.state.confirmingMeals === true){
             this.setState({
@@ -65,7 +70,7 @@ class Meals extends Component {
             }, () => {
                 this.retrieveUserMeals();
             });
-        }
+        };
     };
 
     componentWillMount() {
@@ -80,14 +85,14 @@ class Meals extends Component {
             });
 
             axios({
-                // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/loginMealGrab.php',
+                url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/userCurrentMeals.php',
                 // url: 'http://localhost:8888/dingLFZ/endpoints/loginMealGrab.php',
-                url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
+                // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/userCurrentMeals.php',
                 method: 'post',
                 data: {
                     session_ID: localStorage.ding_sessionID
                 }
-                }).then((resp) => {
+                }).then( resp => {
                 for (let i=0; i<resp.data.length; i++){
                     mealschosen.push(resp.data[i]);
                 };
@@ -95,6 +100,12 @@ class Meals extends Component {
                     meals: mealschosen,
                     showLoader: false
                 });
+                if (typeof resp.data === undefined) {
+                    this.setState({
+                        modalStatus: true,
+                        message: "Server Error. Please try again later."
+                    });
+                };
             }).catch((err) => {
                 console.log(err);
 
@@ -116,7 +127,8 @@ class Meals extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_meal_plan.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_meal_plan.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/create_meal_plan.php',
             method: 'post',
             data: {
                 'recipe_ids': selectedMeals,
@@ -131,6 +143,12 @@ class Meals extends Component {
                 confirmingMeals: false,
                 showLoader: false
             });
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
+            };
         });        
     };
 
@@ -150,7 +168,8 @@ class Meals extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeIngredients.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/recipeIngredients.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/recipeIngredients.php',
             method: 'post',
             data: {
                 'recipe_id': mealInfo.recipe_id,
@@ -167,6 +186,12 @@ class Meals extends Component {
                 mealDetail: mealDetail,
                 showLoader: false
             });
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
+            };
         });
     };
 
@@ -193,9 +218,9 @@ class Meals extends Component {
         });
 
         axios({
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/mealGen.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/newRecipes.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
             method: 'post',
             data: {
                 session_ID: localStorage.ding_sessionID
@@ -208,10 +233,16 @@ class Meals extends Component {
             mealschosen.splice(index, 1);
             this.setState({
                 showLoader: false
-            }), () => {
+            }, () => {
                 this.addSubstituteMeal(index);
+            });
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
             };
-        }).catch((err) => {
+        }).catch( err => {
             console.log('Meal gen error: ', err);
 
             this.setState({
@@ -227,7 +258,8 @@ class Meals extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_meal_completed.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/update_meal_completed.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_meal_completed.php',
             method: 'post',
             data: {
                 'recipe_id': recipe_id,
@@ -245,6 +277,12 @@ class Meals extends Component {
             });
             this.reloadMeals();
         });
+        if (typeof resp.data === undefined) {
+            this.setState({
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
+        };
     };
 
     reloadMeals() {
@@ -269,6 +307,12 @@ class Meals extends Component {
         };
     }
 
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
+
     render() {
 
         let mealMap = '';
@@ -279,6 +323,7 @@ class Meals extends Component {
 
         return(
             <div className="mealsContainer">
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader add={true}/>
                 <main className="mealsMainArea">
@@ -292,4 +337,4 @@ class Meals extends Component {
     };
 };
 
-export default Meals;
+export default auth(Meals);

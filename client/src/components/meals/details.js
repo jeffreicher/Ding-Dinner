@@ -4,6 +4,7 @@ import axios from 'axios';
 import Footer from '../general/footer';
 import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
+import ErrorModal from '../general/error-modal';
 
 class Details extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Details extends Component {
         this.generateIngredients = this.generateIngredients.bind(this);
         this.generateInstructions = this.generateInstructions.bind(this);
         this.generateNutrition = this.generateNutrition.bind(this);
+        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
             recipeComplete: false,
@@ -101,7 +103,9 @@ class Details extends Component {
                 break;
         };
         axios({
-            url: `http://localhost:8080/C1.18_FoodTinder/endpoints/meals/${axiosTarget}.php`,
+            // url: `http://localhost:8080/C1.18_FoodTinder/endpoints/meals/${axiosTarget}.php`,
+            url: `http://localhost:8080/frontend/Ding-Final/endpoints/meals/${axiosTarget}.php`,
+
             method: 'post',
             data: {
                 'recipe_id': this.props.mealInfo.recipe_id,
@@ -117,14 +121,21 @@ class Details extends Component {
                 showLoader: false
             });
 
-            if (axiosTarget === 'recipeIngredients'){
+            if (axiosTarget === 'recipeIngredients') {
                 this.generateIngredients(resp, selectedSection);
 
-            } else if (axiosTarget === 'recipeInstructions'){
+            } else if (axiosTarget === 'recipeInstructions') {
                 this.generateInstructions(resp, selectedSection);
                 
-            } else if (axiosTarget === 'recipeNutrition'){
+            } else if (axiosTarget === 'recipeNutrition') {
                 this.generateNutrition(resp, selectedSection);
+            };
+
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
             };
         });
     };
@@ -150,6 +161,12 @@ class Details extends Component {
             ...selectedSection
         });
     }
+
+    modalClose() {
+        this.setState({
+            modalStatus: false
+        });
+    };
 
     render() {
 
@@ -183,6 +200,7 @@ class Details extends Component {
 
         return(
             <div className="detailsContainer">
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader onClick={hide} back={true} style={{position: 'fixed'}}/>
                 <main className="detailsMainArea">

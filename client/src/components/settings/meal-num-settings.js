@@ -83,7 +83,9 @@ class MealNumberSettings extends Component {
 
         }).catch((err) => {
             this.setState({
-                showLoader: false
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
             });
         });
     };

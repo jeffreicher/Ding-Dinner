@@ -137,6 +137,13 @@ class Details extends Component {
                     message: "Server Error. Please try again later."
                 });
             };
+        }).catch( err => {
+            console.log('Error: ', err);
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 

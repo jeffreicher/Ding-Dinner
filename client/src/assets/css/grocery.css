@@ -57,3 +57,7 @@ label::after {
 [type="checkbox"].filled-in:checked+label::before  {
     margin-top: 2.5%;
 }
+
+.card-content {
+    text-shadow: 2px 2px 2px black;
+}

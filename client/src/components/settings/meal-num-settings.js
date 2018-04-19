@@ -20,7 +20,7 @@ class MealNumberSettings extends Component {
 
         this.state = {
             confirmingMeals: false,
-            numOfMeals: 0,
+            numOfMeals: [],
             showLoader: false,
             modalStatus: false,
             message: ''
@@ -104,10 +104,10 @@ class MealNumberSettings extends Component {
                 <div className="container">
                     <Header title={'How Many Recipes?'} />
                     <div className="button-column collection" style={{border: 'none'}}>
-                        <MealNumButton title={'1'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>  
-                        <MealNumButton title={'3'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>
-                        <MealNumButton title={'5'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>   
-                        <MealNumButton title={'7'} style={'button'} mealnumclick={this.storeNumChoice.bind(this)}/>   
+                        <MealNumButton title={'1'} style={'button'} determineSelected={ this.state.numOfMeals.includes('1')} mealnumclick={this.storeNumChoice.bind(this)}/>  
+                        <MealNumButton title={'3'} style={'button'} determineSelected={ this.state.numOfMeals.includes('3')} mealnumclick={this.storeNumChoice.bind(this)}/>
+                        <MealNumButton title={'5'} style={'button'} determineSelected={ this.state.numOfMeals.includes('5')} mealnumclick={this.storeNumChoice.bind(this)}/>   
+                        <MealNumButton title={'7'} style={'button'} determineSelected={ this.state.numOfMeals.includes('7')} mealnumclick={this.storeNumChoice.bind(this)}/>   
                     </div>  
                     <div className="right" style={{marginTop: `2.2vh`}}>
                         <Next onclick={this.getRecipes.bind(this)} />          

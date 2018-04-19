@@ -40,8 +40,8 @@ class LoginHide extends Component {
     //use thisprops.history.push to redirect user to the meals page inside then promise
     //use componentdidmount to call axios request to load the correct user meal 
 
-    confirmUserInfo(event) {
-        event.preventDefault();
+    confirmUserInfo(e) {
+        e.preventDefault();
         this.setState({
             showLoader: true
         });

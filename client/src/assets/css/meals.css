@@ -135,6 +135,10 @@
     margin-top: 8%;
 }
 
+.confirmTextArea > div {
+    text-shadow: 2px 2px 2px black;
+}
+
 .confirmHead {
     font-size: 1.4rem;
     font-weight: bolder;

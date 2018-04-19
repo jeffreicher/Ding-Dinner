@@ -1,5 +1,5 @@
 .footer {
-    background-color: #f75211e7;
+    background-color: #ff5e1fe7;
     position: fixed;
     height: 10%;
     width: 100%;
@@ -13,7 +13,7 @@
 }
 
 .headerBar {
-    background-color: #f75211e7;
+    background-color: #ff5e1fe7;
     top: 0;
     z-index: 1; 
     height: 10%;

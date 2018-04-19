@@ -108,7 +108,7 @@ class Grocery extends Component {
                 {this.state.showLoader && <Loader />}
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
-                        <h4 className="head card-panel ubuntuFont z-depth-2 grey darken-2"> List</h4>
+                        <h4 className="groceryHead card-panel ubuntuFont z-depth-2 grey darken-2">Grocery List</h4>
                         <div className="list" >
                             {listMap}
                         </div>

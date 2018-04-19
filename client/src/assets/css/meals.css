@@ -40,6 +40,7 @@
     position: absolute;
     bottom: 0%;
     background: linear-gradient(to top, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0));
+    text-shadow: 2px 2px 2px black;
 }
 
 .mealsText {
@@ -89,6 +90,10 @@
     position: absolute;
     top: 10%;
     overflow-y: scroll;
+}
+
+.detailsMainArea > h3, h5 {
+    text-shadow: 2px 2px 2px black;
 }
 
 .detailsImg {

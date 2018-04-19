@@ -24,8 +24,8 @@ class Button extends Component {
     render() {
 
         const buttonStyle = {
-            // boxShadow: '6px 6px 4px 0 rgba(50, 50, 50, 0.14), 0 1px 10px 0 rgba(50, 50, 50, 0.12), 0 2px 4px -1px rgba(50, 50, 50, .5)',
-            backgroundColor: this.state.color
+            backgroundColor: this.state.color,
+            textShadow: '1px 2px 2px black'
         }
 
         return (

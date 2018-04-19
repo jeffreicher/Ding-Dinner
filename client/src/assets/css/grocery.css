@@ -27,6 +27,8 @@
 
 .item {
     margin: 5%;
+    border-bottom: 2px solid #757575;
+    padding-bottom: 2%;
 }
 
 .check, .name {

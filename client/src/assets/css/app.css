@@ -8,7 +8,6 @@ body {
 }
 
 .btn-large {
-    text-transform: lowercase;
     border-radius: 10px;
 }
 
@@ -31,8 +30,8 @@ body {
     overflow: visible;
 }
 
-.lobsterFont {
-    font-family: 'Lobster', cursive;
+.ubuntuFont {
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .oxygenFont {

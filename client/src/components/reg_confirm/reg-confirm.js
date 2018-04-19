@@ -7,6 +7,7 @@ import LogoHeader from '../general/logo-header';
 import Footer from '../general/footer';
 import Loader from '../general/loader';
 import ErrorModal from '../general/error-modal';
+import Header from '../general/header';
 
 class RegisterConfirm extends Component {
     constructor(props) {
@@ -99,22 +100,24 @@ class RegisterConfirm extends Component {
 
     render() {
         return (
-            <div className='regConfirmContainer container'>
+            <div className='regConfirmContainer'>
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
-                <h3 className='center regConfirmHeader'>Confirm Choices</h3>
-                <div className='regConfirmSelectionArea center'>
-                    <div className='regConfirmLabel'>Email Address</div>
-                    <div>{registerstorage.email}</div>
-                    <div className='regConfirmLabel'>Diet Selection</div>
-                    <div>{registerstorage.diet}</div>
-                    <div className='regConfirmLabel'>Allergies</div>
-                    <div>{registerstorage.allergy.join(', ') || 'None'}</div>
-                </div>
-                <div className='regConfirmButtonContainer'>
-                    <Link to='/' className='btn btn-large teal'>Back to start</Link>
-                    <button className='btn btn-large orange darken-4' onClick={this.sendAcctToServer.bind(this)}>All set!</button>
+                <div className='container'>
+                    <Header title={'Confirm Choices'}/>
+                    <div className='regConfirmSelectionArea center'>
+                        <div className='regConfirmLabel'>Email Address</div>
+                        <div>{registerstorage.email}</div>
+                        <div className='regConfirmLabel'>Diet Selection</div>
+                        <div>{registerstorage.diet}</div>
+                        <div className='regConfirmLabel'>Allergies</div>
+                        <div>{registerstorage.allergy.join(', ') || 'None'}</div>
+                    </div>
+                    <div className='regConfirmButtonContainer'>
+                        <Link to='/' className='btn btn-large teal'>Back to start</Link>
+                        <button className='btn btn-large orange darken-4' onClick={this.sendAcctToServer.bind(this)}>All set!</button>
+                    </div>
                 </div>
             </div>
         );

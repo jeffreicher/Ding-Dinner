@@ -106,7 +106,6 @@ class RegisterConfirm extends Component {
                 <LogoHeader />
                 <div className='container'>
                     <Header title={'Confirm Choices'}/>
-                    {/* <h3 className='center regConfirmHeader'>Confirm Choices</h3> */}
                     <div className='regConfirmSelectionArea center'>
                         <div className='regConfirmLabel'>Email Address</div>
                         <div>{registerstorage.email}</div>

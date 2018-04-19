@@ -49,6 +49,12 @@ class Grocery extends Component {
                     message: "Server Error. Please try again later."
                 });
             };
+        }).catch( err => {
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 

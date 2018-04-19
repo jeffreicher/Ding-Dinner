@@ -33,16 +33,7 @@ class Meals extends Component {
                 ingredients: '',
                 recipe_id: '',
                 index: ''
-            },
-            completeMeals: [
-                {filter: 'grayscale(0%)'},
-                {filter: 'grayscale(0%)'},
-                {filter: 'grayscale(0%)'},
-                {filter: 'grayscale(0%)'},
-                {filter: 'grayscale(0%)'},
-                {filter: 'grayscale(0%)'},
-                {filter: 'grayscale(0%)'}
-            ]
+            }
         };
     };
 
@@ -109,7 +100,9 @@ class Meals extends Component {
                 console.log(err);
 
                 this.setState({
-                    showLoader: false
+                    showLoader: false,
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
                 });
             });  
         };
@@ -148,6 +141,14 @@ class Meals extends Component {
                     message: "Server Error. Please try again later."
                 });
             };
+        }).catch( err => {
+            console.log(err);
+
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });        
     };
 
@@ -191,6 +192,12 @@ class Meals extends Component {
                     message: "Server Error. Please try again later."
                 });
             };
+        }).catch( err => {
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 
@@ -244,7 +251,9 @@ class Meals extends Component {
             console.log('Meal gen error: ', err);
 
             this.setState({
-                showLoader: false
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
             });
         });
     };
@@ -269,18 +278,29 @@ class Meals extends Component {
             }
         }).then( resp => {
             console.log('Complete meal: ', resp);
+
             this.setState({
                 showDetails: false,
                 showLoader: false
             });
+
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
+                return;
+            };
+
             this.reloadMeals();
-        });
-        if (typeof resp.data === undefined) {
+        }).catch( err => {
             this.setState({
+                showLoader: false,
                 modalStatus: true,
                 message: "Server Error. Please try again later."
             });
-        };
+        });
+        
     };
 
     reloadMeals() {
@@ -315,7 +335,7 @@ class Meals extends Component {
 
         let mealMap = '';
 
-        this.state.meals ? mealMap = this.state.meals.map((meal, index) => {return <MealCreator mealInfo={meal} key={index} number={index} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} completion={this.state.completeMeals[index]} deleteable={this.state.confirmingMeals}/>}) : '';
+        this.state.meals ? mealMap = this.state.meals.map((meal, index) => {return <MealCreator mealInfo={meal} key={index} number={index} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} deleteable={this.state.confirmingMeals}/>}) : '';
         
         const {mealDetail} = this.state;
 

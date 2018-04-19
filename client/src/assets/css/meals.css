@@ -54,7 +54,7 @@
 }
 
 .mealsCancel {
-    color: red;
+    color: #26a69a;
     position: absolute;
     bottom: 5%;
     right: 5%;
@@ -134,6 +134,7 @@
 
 .mealsMainArea .mealConfirmContainer {
     margin: 0;
+    background: #191717a8;
 }
 
 .confirmTextArea {

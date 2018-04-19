@@ -103,8 +103,12 @@ class Details extends Component {
                 break;
         };
         axios({
+
+            //url: `http://localhost:8080/C1.18_FoodTinder/endpoints/meals/${axiosTarget}.php`,
+            // url: `http://localhost:8080/frontend/Ding-Final/endpoints/meals/${axiosTarget}.php`,
             // url: `http://localhost:8080/C1.18_FoodTinder/endpoints/meals/${axiosTarget}.php`,
             url: `../../endpoints/meals/${axiosTarget}.php`,
+
 
             method: 'post',
             data: {
@@ -137,6 +141,13 @@ class Details extends Component {
                     message: "Server Error. Please try again later."
                 });
             };
+        }).catch( err => {
+            console.log('Error: ', err);
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 
@@ -182,7 +193,7 @@ class Details extends Component {
 
         let ingrMap = '';
 
-        this.state.ingrInfo !== '' ? ingrMap = mealInfo.ingredients.map((item, index) => {return <li className='collection-item detailsListItem' key={index}> {`${mealInfo.ingredients[index].amount} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>}) : ingrMap = '';
+        this.state.ingrInfo !== '' ? ingrMap = mealInfo.ingredients.map((item, index) => {return <li className='collection-item detailsListItem' key={index}> {`${mealInfo.ingredients[index].amount != 0 ? mealInfo.ingredients[index].amount : '< 1'} ${mealInfo.ingredients[index].unit_type} ${mealInfo.ingredients[index].ingredient}`}</li>}) : ingrMap = '';
         
         let nutrMap = '';
 

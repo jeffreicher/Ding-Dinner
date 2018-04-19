@@ -59,6 +59,9 @@ class AllergySettings extends Component {
         });
 
         axios({
+
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/update_diet.php',
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
             url: '../../endpoints/update_diet.php',
             method: 'post',
@@ -84,6 +87,12 @@ class AllergySettings extends Component {
             if (!this.state.modalStatus) {
                 this.props.history.push('/settings');               
             };            
+        }).catch( err => {
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 
@@ -117,7 +126,7 @@ class AllergySettings extends Component {
                     <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
                 </div>  
                 <div className="right" style={{marginTop: `4vh`}}>
-                    <Next style={'bottom'} onclick={this.sendFiltersToServer.bind(this)}/>
+                    <Next onclick={this.sendFiltersToServer.bind(this)}/>
                 </div>
             </div>             
          </div>

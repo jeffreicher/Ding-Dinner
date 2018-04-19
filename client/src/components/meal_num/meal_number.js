@@ -53,9 +53,11 @@ class MealNumber extends Component {
         });
 
         axios({
+
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/newRecipes.php',
             url: '../../endpoints/meals/newRecipes.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/mealGen.php',
-            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
+            //url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
             method: 'post',
             data: {
                 session_ID: localStorage.ding_sessionID
@@ -85,7 +87,9 @@ class MealNumber extends Component {
             console.log('Meal gen error: ', err);
 
             this.setState({
-                showLoader: false
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
             });
         });
     };
@@ -104,9 +108,9 @@ class MealNumber extends Component {
                 {this.state.showLoader && <Loader />}
                 <LogoHeader />
                 <div className="container">
-                    <Header title={'How Many Recipes?'} style={{fontSize: '2.15rem'}}/>
+                    <Header title={'How Many Recipes?'} style={{fontSize: '2.1rem'}}/>
                     <div className="button-column" style={{border: 'none', marginTop: '7vh'}}>
-                        <MealNumButton title={'1'} style={'button'} determineSelected={ this.state.numOfMeals.includes('1')} mealnumclick={this.storeNumChoice.bind(this)}/>  
+                        <MealNumButton title={'1'} style={'button'} determineSelected={ this.state.numOfMeals.includes('1')} mealnumclick={this.storeNumChoice.bind(this)}/>
                         <MealNumButton title={'3'} style={'button'} determineSelected={ this.state.numOfMeals.includes('3')} mealnumclick={this.storeNumChoice.bind(this)}/>
                         <MealNumButton title={'5'} style={'button'} determineSelected={ this.state.numOfMeals.includes('5')} mealnumclick={this.storeNumChoice.bind(this)}/>   
                         <MealNumButton title={'7'} style={'button'} determineSelected={ this.state.numOfMeals.includes('7')} mealnumclick={this.storeNumChoice.bind(this)}/>   

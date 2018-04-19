@@ -172,7 +172,7 @@ class RegisterHide extends Component {
             const passwordChars = /^[a-z0-9]+$/i;            
             if (resp.data === 'email available' && passwordChars.test(this.state.passwordValue) && this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32) {
                 this.props.history.push('/diet-selection');
-            } else if (this.state.passwordValue.length <= 8 || this.state.passwordValue.length >= 32 || !passwordChars.test(this.state.passwordValue)) {
+            } else if (this.state.passwordValue.length < 8 || this.state.passwordValue.length > 32 || !passwordChars.test(this.state.passwordValue)) {
                 this.setState({
                     modalStatus: true,
                     message: "Please complete the password checklist."
@@ -199,6 +199,7 @@ class RegisterHide extends Component {
                 });
             } else {
                 this.setState({
+                    modalStatus: true,
                     message: "Server Error. Please try again later."
                 });
             };  
@@ -206,7 +207,9 @@ class RegisterHide extends Component {
             console.log('Error: ', err);
 
             this.setState({
-                showLoader: false
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
             });
         });
     };
@@ -254,7 +257,10 @@ class RegisterHide extends Component {
                         </div>}
                     </div>
                     <div className='col s2' />
-                    <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large center-align dingOrange waves-effect waves-light registerSubmit'>Register</button>
+                    <div className='registerButtonHolder'>
+                        <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light registerSubmit' type='button'>Return</button>
+                        <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large dingOrange waves-effect waves-light registerSubmit' type='submit'>Register</button>
+                    </div>
                 </form>
             </div>
         );

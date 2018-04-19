@@ -9,6 +9,7 @@ import Loader from '../general/loader';
 import auth from '../general/auth';
 import '../../assets/css/grocery.css';
 import ModalError from '../general/error-modal';
+import Header from '../general/header';
 
 class Grocery extends Component {
     constructor(props) {
@@ -31,6 +32,9 @@ class Grocery extends Component {
         });
 
         axios({
+
+            //url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/allMealsIngredients.php',
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
             url: '../../endpoints/meals/allMealsIngredients.php',
             method: 'post',
@@ -48,6 +52,12 @@ class Grocery extends Component {
                     message: "Server Error. Please try again later."
                 });
             };
+        }).catch( err => {
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 
@@ -96,8 +106,8 @@ class Grocery extends Component {
         const listMap = (this.state.listOfIngredients).map((item, index) => {
             return (
                 <div className='item' key={index} >
-                    <input type='checkbox' className='check filled-in' id={index} />
-                    <label className='name oxygenFont' htmlFor={index}>{item}</label>
+                    <input type='checkbox' className='check filled-in' style={{borderColor: 'white'}} id={index} />
+                    <label className='name oxygenFont' style={{fontSize: `1.2rem`}} htmlFor={index}>{item}</label>
                 </div>
             );
 		});
@@ -108,8 +118,8 @@ class Grocery extends Component {
                 {this.state.showLoader && <Loader />}
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
-                        <h4 className="head card-panel ubuntuFont z-depth-2 grey darken-2"> List</h4>
-                        <div className="list">
+                    <Header title={'Grocery List'} />
+                        <div className="list" >
                             {listMap}
                         </div>
                 </main>

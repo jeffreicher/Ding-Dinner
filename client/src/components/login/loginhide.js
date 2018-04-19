@@ -85,7 +85,9 @@ class LoginHide extends Component {
             console.log(err);
 
             this.setState({
-                showLoader: false
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later"
             });
         });     
     };
@@ -207,7 +209,10 @@ class LoginHide extends Component {
                         </div>}
                     </div>
                     <div className='col s2' />
-                    <button className='btn btn-large center-align dingOrange waves-effect waves-light loginSubmit' onClick={this.confirmUserInfo.bind(this)}>Login</button>
+                    <div className='loginButtonHolder'>
+                        <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light loginSubmit' type='button'>Return</button>
+                        <button className='btn btn-large center-align dingOrange waves-effect waves-light loginSubmit' onClick={this.confirmUserInfo.bind(this)} type='submit'>Login</button>
+                    </div>
                 </form>
             </div>
         );

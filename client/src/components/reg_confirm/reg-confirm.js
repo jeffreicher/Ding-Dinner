@@ -34,6 +34,10 @@ class RegisterConfirm extends Component {
         });
 
         axios({
+
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/create_user.php',
+
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
             url: '../../endpoints/create_user.php',
             method: 'post',
@@ -56,6 +60,12 @@ class RegisterConfirm extends Component {
                     message: "Server Error. Please try again later."
                 });
             };
+        }).catch( err => {
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
         });
     };
 
@@ -93,7 +103,9 @@ class RegisterConfirm extends Component {
             console.log(err);
 
             this.setState({
-                showLoader: false
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
             });
         });     
     }

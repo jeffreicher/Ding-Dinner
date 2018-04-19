@@ -169,18 +169,33 @@ class RegisterHide extends Component {
             this.setState({
                 showLoader: false
             });
-
-            if (resp.data === 'email available') {
+            const passwordChars = /^[a-z0-9]+$/i;            
+            if (resp.data === 'email available' && passwordChars.test(this.state.passwordValue) && this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32) {
                 this.props.history.push('/diet-selection');
-            } else if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
+            } else if (this.state.passwordValue.length <= 8 || this.state.passwordValue.length >= 32 || !passwordChars.test(this.state.passwordValue)) {
                 this.setState({
                     modalStatus: true,
-                    message: "Your email or password is invalid"
+                    message: "Please complete the password checklist."
                 });
-            }  else if (resp.data === 'Invalid user') {
+            } else if (resp.data === 'email taken') {
                 this.setState({
                     modalStatus: true,
-                    message: "Your email or password is invalid"
+                    message: "That email is already in use."
+                });
+            } else if (resp.data === 'Your email is invalid') {
+                this.setState({
+                    modalStatus: true,
+                    message: "Invalid Email."
+                });
+            } else if (this.state.passwordValue === '') {
+                this.setState({
+                    modalStatus: true,
+                    message: "Please enter a password."
+                });
+            } else if (this.state.passwordValue !== this.state.confirmValue) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Your passwords do not match."
                 });
             } else {
                 this.setState({
@@ -224,7 +239,7 @@ class RegisterHide extends Component {
                                 {this.state.passwordLength.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
                             </div>
                             <div style={this.state.passwordCharacters} >
-                                {this.state.passwordCharacters.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers and letters
+                                {this.state.passwordCharacters.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers or letters
                             </div>
                         </div>}
                     </div>

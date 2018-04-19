@@ -254,7 +254,7 @@ class RegisterHide extends Component {
                         </div>}
                     </div>
                     <div className='col s2' />
-                    <button onClick={(e) => this.serverEmailVerify(e)} className='btn center-align blue darken-2 waves-effect waves-light'>Register</button>
+                    <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large center-align dingOrange waves-effect waves-light registerSubmit'>Register</button>
                 </form>
             </div>
         );

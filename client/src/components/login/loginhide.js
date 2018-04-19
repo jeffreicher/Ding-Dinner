@@ -207,7 +207,7 @@ class LoginHide extends Component {
                         </div>}
                     </div>
                     <div className='col s2' />
-                    <button className='btn center-align blue darken-2 waves-effect waves-light' onClick={this.confirmUserInfo.bind(this)}>Login</button>
+                    <button className='btn btn-large center-align dingOrange waves-effect waves-light loginSubmit' onClick={this.confirmUserInfo.bind(this)}>Login</button>
                 </form>
             </div>
         );

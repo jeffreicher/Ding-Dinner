@@ -96,8 +96,8 @@ class Grocery extends Component {
         const listMap = (this.state.listOfIngredients).map((item, index) => {
             return (
                 <div className='item' key={index} >
-                    <input type='checkbox' className='check filled-in' id={index} />
-                    <label className='name oxygenFont' htmlFor={index}>{item}</label>
+                    <input type='checkbox' className='check filled-in' style={{borderColor: 'white'}} id={index} />
+                    <label className='name oxygenFont' style={{fontSize: `1.2rem`}} htmlFor={index}>{item}</label>
                 </div>
             );
 		});
@@ -109,7 +109,7 @@ class Grocery extends Component {
                 <LogoHeader style={{position: 'fixed'}}/>
                 <main className="mainArea" >
                         <h4 className="head card-panel ubuntuFont z-depth-2 grey darken-2"> List</h4>
-                        <div className="list">
+                        <div className="list" >
                             {listMap}
                         </div>
                 </main>

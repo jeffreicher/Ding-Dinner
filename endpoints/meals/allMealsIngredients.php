@@ -246,7 +246,7 @@ $quantityArrLen=count($quantityArr);
             }else{
                 if($numOfTsp>1){
                     $ingredientsTspBase[$key]= $numOfTsp . ' teaspoons';
-                } else if($numOfTsp<=0){
+                } else if($numOfTsp==0){
                     $ingredientsTspBase[$key]= '< 1 teaspoon';
                 } 
             }
@@ -269,7 +269,7 @@ $quantityArrLen=count($quantityArr);
             }else{
                 if($numOfOz>1){
                     $ingredientsOzBase[$key]= $numOfOz . ' ounces';
-                } else if($numOfOz<=0){
+                } else if($numOfOz==0){
                     $ingredientsOzBase[$key]= '< 1 ounce';
                 }
             }
@@ -279,7 +279,12 @@ $quantityArrLen=count($quantityArr);
         forEach($miscSums as $key => $value){
             $total = $value['total'];
             $unit = $value['unit'];
-            $ingredientsMiscBase[$key]= $total . ' ' . $unit;
+            if(!$total==0){
+                $ingredientsMiscBase[$key]= $total . ' ' . $unit;
+            } else {
+                $ingredientsMiscBase[$key]= '<1 ' . $unit;
+            }
+            
         }
         $ingredientsObj['ounces']=$ingredientsOzBase;
         $ingredientsObj['teaspoons']=$ingredientsTspBase;

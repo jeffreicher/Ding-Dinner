@@ -1,7 +1,5 @@
 <?php
 /**Make PHP understand Axios Calls*/
-
-
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 

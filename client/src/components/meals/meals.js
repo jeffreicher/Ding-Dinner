@@ -96,8 +96,8 @@ class Meals extends Component {
                         message: "Server Error. Please try again later."
                     });
                 };
-            }).catch((err) => {
-                console.log(err);
+            }).catch( err => {
+                console.log('User current meals error: ', err);
 
                 this.setState({
                     showLoader: false,
@@ -130,7 +130,6 @@ class Meals extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            console.log('Confirming new meal plan: ', resp)
             this.setState({
                 confirmingMeals: false,
                 showLoader: false
@@ -142,7 +141,7 @@ class Meals extends Component {
                 });
             };
         }).catch( err => {
-            console.log(err);
+            console.log('Create meal plan error: ', err);
 
             this.setState({
                 showLoader: false,
@@ -153,7 +152,6 @@ class Meals extends Component {
     };
 
     mealClicked(number, mealInfo) {
-        console.log('Clicked meal: ', mealInfo);
         const mealDetail = {
             name: mealInfo.title,
             image: mealInfo.image,
@@ -179,7 +177,6 @@ class Meals extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            console.log('Ingr: ', resp);
             mealDetail.ingredients = resp.data;
             this.setState({
                 showDetails: true,
@@ -193,6 +190,7 @@ class Meals extends Component {
                 });
             };
         }).catch( err => {
+            console.log('Recipe ingredients error: ', err);
             this.setState({
                 showLoader: false,
                 modalStatus: true,
@@ -231,7 +229,6 @@ class Meals extends Component {
                 session_ID: localStorage.ding_sessionID
             }
         }).then( resp => {
-            console.log('Meal gen response: ', resp);
             for (var i=0; i<resp.data.length; i++) {
                 mealdb.push(resp.data[i]);
             };
@@ -248,7 +245,7 @@ class Meals extends Component {
                 });
             };
         }).catch( err => {
-            console.log('Meal gen error: ', err);
+            console.log('New Recipes error: ', err);
 
             this.setState({
                 showLoader: false,
@@ -277,8 +274,6 @@ class Meals extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            console.log('Complete meal: ', resp);
-
             this.setState({
                 showDetails: false,
                 showLoader: false

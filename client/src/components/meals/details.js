@@ -198,7 +198,7 @@ class Details extends Component {
         let nutrMap = '';
 
         this.state.nutrInfo !== '' ? nutrMap = 
-        <ul className='collection'>
+        <ul className='collection' style={{marginTop: '11vh'}}>
             <li className='collection-item detailsListItem'>Calories: {this.state.nutrInfo.calories}</li>
             <li className='collection-item detailsListItem'>Protein: {this.state.nutrInfo.protein}</li>
             <li className='collection-item detailsListItem'>Sugar: {this.state.nutrInfo.sugar}</li>

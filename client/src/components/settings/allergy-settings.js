@@ -59,8 +59,8 @@ class AllergySettings extends Component {
         });
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/update_diet.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/update_diet.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/update_diet.php',
             method: 'post',
             data: {
                     diet: newFilter.diet,

@@ -7,9 +7,20 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
-.bottom {
-    margin-top: 6vh;
+.allergyContainer {
+    height: 100vh;
+    background-image: url('../../assets/images/dingDarkBlur.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media screen and (max-height: 568px) {
+    div.allergyContainer > div.container > div.row > div > a.btn-large,
+    div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
+        height: 46px;
+        line-height: 46px;
+    }
 }

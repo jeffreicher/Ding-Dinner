@@ -2,6 +2,13 @@
     margin-top: 2%;
 }
 
+.dietContainer {
+    height: 100vh;
+    background-image: url('../../assets/images/dingDarkBlur.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 @media only screen and (min-width: 992px) {
     .collection {
         display: flex;
@@ -25,3 +32,13 @@
         margin-bottom: 2vh;
     }
 } 
+
+@media screen and (max-height: 568px) {
+    div.mealNumContainer > div.container > div.button-column {
+        margin-top: 5vh !important;
+    }
+
+    div.mealNumContainer > div.container > div.right {
+        margin-top: 4.5vh !important;
+    }
+}

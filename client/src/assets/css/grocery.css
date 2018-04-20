@@ -1,0 +1,63 @@
+.groceryContainer {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+    background-image: url('../../assets/images/dingDarkBlur.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.mainArea {
+    position: absolute;
+    top: 10vh;
+    height: 80%;
+    width: 100%;
+    margin: 0;
+    overflow-y: scroll;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+
+.list {
+    text-align: left;
+}
+
+.item {
+    margin: 5%;
+    border-bottom: 2px solid #757575;
+    padding-bottom: 2%;
+}
+
+.check, .name {
+    color: white;
+    text-shadow: 2px 2px 2px black;
+}
+
+label::before {
+    border-color: white;
+}
+
+label::after {
+    border-color: white;
+}
+
+[type="checkbox"].filled-in:not(:checked)+label::after {
+    border-color: white;
+    box-shadow: 1px 1px 1px black;
+    margin-top: 1.5%;
+}
+
+[type="checkbox"].filled-in:checked+label::after  {
+    margin-top: 1.5%;
+}
+
+[type="checkbox"].filled-in:checked+label::before  {
+    margin-top: 2.5%;
+}
+
+.card-content {
+    text-shadow: 2px 2px 2px black;
+}

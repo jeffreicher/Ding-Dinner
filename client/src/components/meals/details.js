@@ -103,9 +103,9 @@ class Details extends Component {
         };
         axios({
 
-            url: `http://localhost:8080/C1.18_FoodTinder/endpoints/meals/${axiosTarget}.php`,
+            // url: `http://localhost:8080/C1.18_FoodTinder/endpoints/meals/${axiosTarget}.php`,
             // url: `http://localhost:8080/frontend/Ding-Final/endpoints/meals/${axiosTarget}.php`,
-            // url: `../../endpoints/meals/${axiosTarget}.php`,
+            url: `../../endpoints/meals/${axiosTarget}.php`,
 
 
             method: 'post',
@@ -221,7 +221,7 @@ class Details extends Component {
                         <ul className='collection'>
                             {instrMap}
                         </ul>
-                        {!this.props.hidecomplete && <button className="completeButton btn green darken-2" onClick={()=>complete(index, mealInfo.recipe_id)}>Complete</button>}
+                        {!this.props.hidecomplete && <button className="completeButton btn btn-large green darken-2" onClick={()=>complete(index, mealInfo.recipe_id)}>Complete</button>}
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>
                         {nutrMap}

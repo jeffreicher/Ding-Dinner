@@ -39,7 +39,7 @@ class DietSettings extends Component {
             <div className='dietSettingsContainer'>
                 <LogoHeader back={true} location={'/settings'}/>
                 <div className="container">
-                    <Header title={'What\'s Your Type?'}/>
+                    <Header title={'What\'s Your Type?'} style={{fontSize: `2.25rem`}}/>
                     <div className="center-align" style={{marginTop: `2vh`}}>
                         <Button title={'None'} descrip={'Send It'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('None')} />  
                         <Button title={'Vegetarian'} descrip={'Lover Of Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegetarian')} />   

@@ -165,3 +165,11 @@ div.detailsInstructionsList > ul.collection {
 .confirmCheck {
     margin-top: 11%;
 }
+
+.mealCompleteGrey {
+    filter: grayscale(100%);
+}
+
+.mealIncomplete {
+    filter: grayscale(0%);
+}

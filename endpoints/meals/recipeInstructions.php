@@ -36,6 +36,7 @@ $instructions = [];
 while($row = mysqli_fetch_assoc($instructionsResult)){
     $row['step_num']=addslashes($row['step_num']);
     $row['step']=addslashes($row['step']);
+    $row['step'] = html_entity_decode($row['step']);
     if(!is_numeric($row['recipe_id'])){
         print 'Invalid recipe ID from database';
         exit();

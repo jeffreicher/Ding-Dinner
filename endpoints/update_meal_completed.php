@@ -33,7 +33,7 @@ $flag = $request_data['completed'];
 $recipe_id = $request_data['recipe_id'];
 
 //Prepare statement for the UPDATE query
-if(!($stmt = $myconn->prepare("UPDATE `user_choices` SET `completed` = ? WHERE `recipe_id` = ?"))){
+if(!($stmt = $myconn->prepare("UPDATE `user_choices` SET `complete` = ? WHERE `recipe_id` = ?"))){
     die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
 }
 

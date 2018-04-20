@@ -221,7 +221,7 @@ class Details extends Component {
                         <ul className='collection'>
                             {instrMap}
                         </ul>
-                        {!this.props.hidecomplete && <button className="completeButton btn btn-large green darken-2" onClick={()=>complete(index, mealInfo.recipe_id)}>Complete</button>}
+                        {!this.props.hidecomplete && !mealInfo.complete && <button className="completeButton btn btn-large green darken-2" onClick={()=>complete(index, mealInfo.recipe_id)}>Complete</button>}
                     </div>
                     <div className="detailsNutritionList" style={this.state.nutrList}>
                         {nutrMap}

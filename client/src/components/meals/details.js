@@ -38,7 +38,6 @@ class Details extends Component {
     };
 
     componentWillMount() {
-        console.log('Detail side mounting: ', this.props.mealInfo);
         this.generateIngredients(this.props.mealInfo.ingredients);
     };
 
@@ -119,8 +118,6 @@ class Details extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            console.log('Details list area: ', resp);
-
             this.setState({
                 showLoader: false
             });
@@ -142,7 +139,7 @@ class Details extends Component {
                 });
             };
         }).catch( err => {
-            console.log('Error: ', err);
+            console.log('Ingr/Instr/Nutr error: ', err);
             this.setState({
                 showLoader: false,
                 modalStatus: true,
@@ -159,7 +156,6 @@ class Details extends Component {
     }
 
     generateInstructions(info, selectedSection){
-        console.log(info.data);
         this.setState({
             instrInfo: info.data,
             ...selectedSection
@@ -181,11 +177,7 @@ class Details extends Component {
 
     render() {
 
-        console.log('Detail props: ', this.props);
-
         const {mealInfo, hide, index, complete} = this.props;
-
-        console.log('Meal info is: ', mealInfo.ingredients);
 
         let instrMap = '';
         

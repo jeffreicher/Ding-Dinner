@@ -164,8 +164,6 @@ class RegisterHide extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            console.log('Email verify: ', resp);
-
             this.setState({
                 showLoader: false
             });
@@ -204,7 +202,7 @@ class RegisterHide extends Component {
                 });
             };  
         }).catch( err => {
-            console.log('Error: ', err);
+            console.log('Email verification error: ', err);
 
             this.setState({
                 showLoader: false,

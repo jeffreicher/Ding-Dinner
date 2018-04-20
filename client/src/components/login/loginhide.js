@@ -55,7 +55,6 @@ class LoginHide extends Component {
                     password: this.state.passwordValue
                 }
         }).then((resp) => {
-            console.log('WE GOT USER AUTH', resp);
 
             this.setState({
                 showLoader: false
@@ -70,7 +69,7 @@ class LoginHide extends Component {
                 };
             };
 
-            if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid") {
+            if (resp.data === 'Password is not correct' || resp.data === "Your email is invalid" || resp.data === 'Invalid username/password combination') {
                 this.setState({
                     modalStatus: true,
                     message: "Your email or password is invalid"
@@ -81,8 +80,8 @@ class LoginHide extends Component {
                     message: "Server Error. Please try again later"
                 });
             };
-        }).catch((err) => {
-            console.log(err);
+        }).catch( err => {
+            console.log('User login error: ', err);
 
             this.setState({
                 showLoader: false,

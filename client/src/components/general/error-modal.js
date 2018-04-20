@@ -26,7 +26,8 @@ class ErrorModal extends Component {
             width: '70%',
             height: '38%',
             borderRadius: '50%',
-            border: '2px solid white'
+            border: '2px solid white',
+            color: 'white'
         };
 
         const closeMessage = {
@@ -35,14 +36,16 @@ class ErrorModal extends Component {
             fontSize: '1.5rem',
             paddingBottom: '12%',
             width: '100%',
-            textShadow: '2px 3px 2px black'
+            textShadow: '2px 3px 2px black',
+            color: 'white'
         }
 
         const errorText = {
             marginBottom: '4vh',
             marginTop: '3vh',
             fontSize: '1.5rem',
-            padding: '0 7%'
+            padding: '0 7%',
+            color: 'white'
         }
         
 

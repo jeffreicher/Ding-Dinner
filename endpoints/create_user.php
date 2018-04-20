@@ -1,4 +1,10 @@
 <?php
+//Headers for local development
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true ");
+header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
+header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
+
 //Start the sessions
 session_start();
 
@@ -9,12 +15,6 @@ require_once 'passwordHelper.php';
 //Make PHP understand the Axios call
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
-
-//Headers for local development
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Credentials: true ");
-header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
-header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 //Test Data
 // $request_data['email'] = 'mjk@email.com';

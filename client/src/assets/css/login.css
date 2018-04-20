@@ -67,10 +67,12 @@
     left: 0%;
     z-index: 10;
     color: black;
+    text-shadow: none;
 }
 
 .validationText1 div {
     color: black;
+    text-shadow: none;
 }
 
 .validationText2 {
@@ -79,6 +81,7 @@
 
 .validationText2 * {
     color: black;
+    text-shadow: none;
 }
 
 .inputField {

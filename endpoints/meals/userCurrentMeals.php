@@ -6,7 +6,6 @@ $request_data = json_decode($entityBody, true);
 session_id($request_data['session_ID']);
 session_start();
 require('../mysqli_connect.php');
-echo 'test';
 
 /**Header files for local development*/
 header("Access-Control-Allow-Origin: *");

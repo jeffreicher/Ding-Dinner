@@ -63,8 +63,6 @@ class MealNumber extends Component {
                 session_ID: localStorage.ding_sessionID
             }
         }).then( resp => {
-            console.log('Meal gen response: ', resp);
-
             this.setState({
                 showLoader: false
             });
@@ -84,7 +82,7 @@ class MealNumber extends Component {
                 this.setNumberOfMeals(this.state.numOfMeals);                
             };
         }).catch( err => {
-            console.log('Meal gen error: ', err);
+            console.log('New Recipes error: ', err);
 
             this.setState({
                 showLoader: false,

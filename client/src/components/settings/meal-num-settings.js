@@ -83,7 +83,8 @@ class MealNumberSettings extends Component {
                 this.setNumberOfMeals(this.state.numOfMeals);                
             };
 
-        }).catch((err) => {
+        }).catch( err => {
+            console.log('New Recipes error: ', err);
             this.setState({
                 showLoader: false,
                 modalStatus: true,

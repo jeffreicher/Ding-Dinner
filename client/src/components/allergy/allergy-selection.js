@@ -43,7 +43,6 @@ class AllergySelection extends Component {
     render() {
         const { handleSelected } = this;
         const { selected } = this.state;
-        console.log('Selected', this.state.selected);
         return (  
          <div className='allergyContainer'>            
              <LogoHeader back={true} location={'/diet-selection'} />

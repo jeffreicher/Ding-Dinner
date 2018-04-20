@@ -92,8 +92,13 @@
     overflow-y: scroll;
 }
 
-.detailsMainArea > h3, h5 {
-    text-shadow: 2px 2px 2px black;
+.detailsMainArea > h3, h5, div {
+    text-shadow: 1px 2px 2px black;
+}
+
+div.detailsIngredientsList > ul.collection,
+div.detailsInstructionsList > ul.collection {
+    margin-top: 11vh;
 }
 
 .detailsImg {
@@ -158,5 +163,5 @@
 }
 
 .confirmCheck {
-    margin-top: 21%;
+    margin-top: 11%;
 }

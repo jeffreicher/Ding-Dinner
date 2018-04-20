@@ -1,6 +1,6 @@
 <?php
 /**Make PHP understand Axios Calls*/
-echo "test";
+
 
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
@@ -8,6 +8,7 @@ $request_data = json_decode($entityBody, true);
 session_id($request_data['session_ID']);
 session_start();
 require('../mysqli_connect.php');
+echo 'test';
 
 /**Header files for local development*/
 header("Access-Control-Allow-Origin: *");
@@ -16,6 +17,7 @@ header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 $userID=$_SESSION['user_id'];
+// $userID=3;
 
 if(!is_numeric($userID)){
     print 'Invalid user ID';
@@ -29,7 +31,7 @@ $currentMealsOutput=[];
 if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, rd.readyInMinutes, uc.complete FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
-exit();
+
 /**Bind parameter for SELECT query */
 if (!$stmt->bind_param("i", $userID)) {
     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;

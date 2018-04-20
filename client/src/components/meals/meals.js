@@ -46,7 +46,6 @@ class Meals extends Component {
             });
             return;
         };
-        // const {confirmingMeals} = this.props.location.state;
         if (this.props.location.state.confirmingMeals === true){
             this.setState({
                 confirmingMeals: true,
@@ -65,7 +64,6 @@ class Meals extends Component {
     };
 
     componentWillMount() {
-        console.log('Mounting props', this.props);
         this.determineMealConfirmation();
     };
 
@@ -86,7 +84,6 @@ class Meals extends Component {
                     session_ID: localStorage.ding_sessionID
                 }
                 }).then( resp => {
-                    console.log('User current meals: ', resp);
 
                 for (let i=0; i<resp.data.length; i++){
                     mealschosen.push(resp.data[i]);
@@ -166,7 +163,8 @@ class Meals extends Component {
             ingredients: '',
             recipe_id: mealInfo.recipe_id,
             readyInMinutes: mealInfo.readyInMinutes,
-            index: number
+            index: number,
+            complete: mealInfo.complete
         };
 
         this.setState({
@@ -335,7 +333,6 @@ class Meals extends Component {
                 session_ID: localStorage.ding_sessionID
             }
             }).then( resp => {
-                console.log('User current meals: ', resp);
 
             for (let i=0; i<resp.data.length; i++){
                 mealschosen.push(resp.data[i]);

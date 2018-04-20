@@ -27,7 +27,7 @@ class Settings extends Component {
                     <Header title={'Settings'} />
                     <div className='settingsOptionArea'>
                         <Link to='/diet-settings'className='settingsButton oxygenFont btn-large btn  grey darken-1'>Reset Filters</Link>
-                        <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large btn  grey darken-1'>Add Meals</Link>
+                        <Link to='meal-num-settings' className='settingsButton oxygenFont btn-large btn  grey darken-1'>New Meals</Link>
                         <div className='settingsButton oxygenFont btn btn-large grey darken-1' onClick={this.logoutClicked}>Logout</div>
                     </div>
                 </div>

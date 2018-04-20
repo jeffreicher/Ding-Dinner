@@ -1,6 +1,5 @@
 <?php
 /**Make PHP understand Axios Calls*/
-echo "test";
 
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
@@ -29,7 +28,7 @@ $currentMealsOutput=[];
 if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, rd.readyInMinutes, uc.complete FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
-exit();
+
 /**Bind parameter for SELECT query */
 if (!$stmt->bind_param("i", $userID)) {
     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;

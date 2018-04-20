@@ -66,7 +66,7 @@ class LoginHide extends Component {
                 if (resp.data.meal_plan === 1) {
                     this.props.history.push('/mymeals');                    
                 } else {
-                    this.props.history.push('/diet-selection');
+                    this.props.history.push('/meal-number');
                 };
             };
 

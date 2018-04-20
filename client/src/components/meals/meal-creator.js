@@ -12,12 +12,12 @@ class MealCreator extends Component {
 
         let completeStyle = '';
 
-        this.props.mealInfo.completed ?  completeStyle = {'filter': 'grayscale(100%)'} :  completeStyle = {'filter': 'grayscale(0%)'};
+        this.props.mealInfo.complete ?  completeStyle = 'mealCompleteGrey' :  completeStyle = 'mealIncomplete';
 
         const bgImage = {backgroundImage: 'url('+mealInfo.image+')'};
 
         return (
-            <div className="mealsItem" onClick={()=>onclick(number, mealInfo)} style={bgImage} >
+            <div className={`mealsItem ${completeStyle}`} onClick={()=>onclick(number, mealInfo)} style={bgImage}  >
                 <div className='mealsShadowArea'>
                     <div className="mealsText oxygenFont left-align">{mealInfo.title}</div>
                     {this.props.deleteable && <div className="mealsCancel" onClick={(e)=>deleteItem(e, number)}><i className="fas fa-trash-alt"></i></div>}

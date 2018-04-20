@@ -39,12 +39,12 @@ class DietSettings extends Component {
             <div className='dietSettingsContainer'>
                 <LogoHeader back={true} location={'/settings'}/>
                 <div className="container">
-                    <Header title={'What\'s Your Type?'} style={{fontSize: `2.25rem`}}/>
+                    <Header title={'Dietary Preferences'} style={{fontSize: `2.25rem`}}/>
                     <div className="center-align" style={{marginTop: `2vh`}}>
-                        <Button title={'None'} descrip={'Send It'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('None')} />  
-                        <Button title={'Vegetarian'} descrip={'Lover Of Greens'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegetarian')} />   
-                        <Button title={'Vegan'} descrip={'Veggie Fanatic'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegan')} />
-                        <Button title={'Ketogenic'} descrip={'Coachella Bod Meal Plan'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />        
+                        <Button title={'None'} descrip={'No restrictions'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('None')} />  
+                        <Button title={'Vegetarian'} descrip={'Avoid meat'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegetarian')} />   
+                        <Button title={'Vegan'} descrip={'Avoid animal products'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegan')} />
+                        <Button title={'Ketogenic'} descrip={'Low carb, high fat'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />        
                     </div>  
                     <div className="right" style={{marginTop: `7vh`}}>
                         {(this.state.value) && <Link to='/allergy-settings'><Next /></Link>}                   

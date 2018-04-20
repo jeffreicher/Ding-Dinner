@@ -46,15 +46,16 @@ class LoginHide extends Component {
             showLoader: true
         });
         axios({
-            url: '../../endpoints/user_login.php',
+            // url: '../../endpoints/user_login.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: this.state.emailValue,
                     password: this.state.passwordValue
                 }
         }).then((resp) => {
+            console.log(resp);
 
             this.setState({
                 showLoader: false

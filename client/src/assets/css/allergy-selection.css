@@ -18,7 +18,8 @@
 }
 
 @media screen and (max-height: 568px) {
-    div.allergyContainer > div.container > div.row > div > a.btn-large {
+    div.allergyContainer > div.container > div.row > div > a.btn-large,
+    div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
         height: 46px;
         line-height: 46px;
     }

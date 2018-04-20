@@ -61,6 +61,7 @@ class RegisterConfirm extends Component {
                 });
             };
         }).catch( err => {
+            console.log('Create user error:', err);
             this.setState({
                 showLoader: false,
                 modalStatus: true,
@@ -99,8 +100,8 @@ class RegisterConfirm extends Component {
                     message: "Server Error. Please try again later."
                 });
             }
-        }).catch((err) => {
-            console.log(err);
+        }).catch( err => {
+            console.log('User login error: ', err);
 
             this.setState({
                 showLoader: false,

@@ -53,6 +53,7 @@ class Grocery extends Component {
                 });
             };
         }).catch( err => {
+            console.log('All Meals Ingredients error: ', err);
             this.setState({
                 showLoader: false,
                 modalStatus: true,
@@ -100,9 +101,6 @@ class Grocery extends Component {
     };
     
     render() {
-
-        console.log(this.state.listOfIngredients);
-
         const listMap = (this.state.listOfIngredients).map((item, index) => {
             return (
                 <div className='item' key={index} >

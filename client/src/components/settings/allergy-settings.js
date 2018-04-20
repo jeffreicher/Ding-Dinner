@@ -88,6 +88,7 @@ class AllergySettings extends Component {
                 this.props.history.push('/settings');               
             };            
         }).catch( err => {
+            console.log('Update diet error: ', err);
             this.setState({
                 showLoader: false,
                 modalStatus: true,

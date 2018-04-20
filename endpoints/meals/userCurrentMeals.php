@@ -1,7 +1,7 @@
 <?php
 /**Make PHP understand Axios Calls*/
 echo "test";
-exit();
+
 $entityBody = file_get_contents('php://input');
 $request_data = json_decode($entityBody, true);
 
@@ -26,10 +26,10 @@ $recipeIDList=[];
 $currentMealsOutput=[];
 
 /**query for gathering all the current, active meals of the logged in user*/
-if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, rd.readyInMinutes, uc.completed FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
+if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, rd.readyInMinutes, uc.complete FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
-
+exit();
 /**Bind parameter for SELECT query */
 if (!$stmt->bind_param("i", $userID)) {
     echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -47,7 +47,7 @@ $currentMealsResult = $stmt -> get_result();
 while($row = mysqli_fetch_assoc($currentMealsResult)){
     $row['title']=addslashes($row['title']);
     $row['image']=addslashes($row['image']);
-    if(!is_numeric($row['completed'])){
+    if(!is_numeric($row['complete'])){
         print 'Invalid completed flag from database';
         exit();
     };

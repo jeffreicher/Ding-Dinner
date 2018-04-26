@@ -24,3 +24,22 @@
         line-height: 46px;
     }
 }
+
+@media all and (max-height: 480px) {
+    div.allergyContainer > div.container > div.row > div > a.btn-large,
+    div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
+        height: 41px;
+        line-height: 42px;
+    }
+
+    div.allergyContainer > div.container > div.right > a > div.container > button,
+    div.allergySettingsContainer > div.container > div.right > div.container > button {
+        height: 8vh;
+        line-height: 2vh;
+    }
+
+    div.allergyContainer > div.container > div.right,
+    div.allergySettingsContainer > div.container > div.right {
+        margin-top: 0vh !important;
+    } 
+}

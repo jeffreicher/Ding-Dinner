@@ -17,13 +17,16 @@
 .loginContainer *  {
     font-size: 1rem;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .loginLogo {
     padding-top: 35%;
-    display: block;
     margin: 0 auto;
-    height: 40%;
+    width: 80%;
 }
 
 .loginSlogan {
@@ -115,4 +118,10 @@
     display: flex;
     width: 100%;
     justify-content: space-around;
+}
+
+@media screen and (max-height: 480px) {
+    .loginContainer > .loginLogo {
+        padding-top: 5%;
+    }
 }

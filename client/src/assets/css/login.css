@@ -119,3 +119,9 @@
     width: 100%;
     justify-content: space-around;
 }
+
+@media screen and (max-height: 480px) {
+    .loginContainer > .loginLogo {
+        padding-top: 5%;
+    }
+}

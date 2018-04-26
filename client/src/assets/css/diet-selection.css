@@ -44,6 +44,7 @@
 }
 
 @media all and (max-height: 480px) {
+    div.container > div.center-align > div,
     div.container > div.center-align > div {
         height: 12vh;
     }

@@ -43,3 +43,19 @@
         margin-top: 0vh !important;
     } 
 }
+
+@media all and (min-width: 600px) {
+    div.allergyContainer > div.container > div.row > div > a.btn-large,
+    div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
+        height: 6.9vh;        
+    }
+    
+    .allergyContainer > .container > .row > div > .btn-desk > div > div.title-container {
+        line-height: 5.5vh;
+    }
+
+    .allergyContainer > .container > .right > a > .container > button {
+        height: 8.5vh;
+        margin-right: 5vh;
+    }
+}

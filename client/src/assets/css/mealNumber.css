@@ -35,3 +35,34 @@
         margin: 2% auto;
     }
 }
+
+@media all and (min-width: 600px) {
+    .mealNumContainer > .container > .button-column {
+        align-items: center;
+        flex-direction: row;
+        margin-top: 15vh !important;
+    }
+
+    .button {
+        height: 10vh;
+        margin: 3vh .5vw;
+    }
+
+    .mealNumContainer {
+        width: 60%;
+    }
+
+    .mealNumContainer > .container > .center > .card-content {
+        font-size: 1.6rem !important;
+    }
+
+    .mealNumContainer > .container > .right > .container {
+        margin-top: 10vh;
+    }
+
+    .mealNumContainer > .container > .right > .container > button {
+        height: 85px;
+        margin-right: 5vh;
+    }
+    
+} 

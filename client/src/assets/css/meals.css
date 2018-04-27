@@ -173,3 +173,20 @@ div.detailsInstructionsList > ul.collection {
 .mealIncomplete {
     filter: grayscale(0%);
 }
+
+@media all and (min-width: 600px) {
+    .mealsContainer > .headerBar {
+        height: 10%;
+    }
+
+    .mealsContainer > .footer {
+        height: 10%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
+        margin-top: 1%;
+    }
+
+}

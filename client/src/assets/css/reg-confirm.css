@@ -36,3 +36,13 @@
 .regConfirmFooter {
     height: 10%;
 }
+
+@media all and (min-width: 600px) {
+    .regConfirmContainer > .container > .center > .card-content {
+        font-size: 1.8rem;
+    }
+
+    .regConfirmContainer > .container > .regConfirmSelectionArea  {
+        font-size: .7rem;
+    }
+}

@@ -47,11 +47,16 @@
 @media all and (min-width: 600px) {
     div.allergyContainer > div.container > div.row > div > a.btn-large,
     div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
-        height: 6.9vh;        
+        height: 6.9vh;  
+        margin: 1vh .5vh;      
     }
     
     .allergyContainer > .container > .row > div > .btn-desk > div > div.title-container {
         line-height: 5.5vh;
+    }
+
+    .allergyContainer > .container > .center > .card-content {
+        font-size: 1.8rem;
     }
 
     .allergyContainer > .container > .right > a > .container > button {

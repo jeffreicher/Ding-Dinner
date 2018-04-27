@@ -41,11 +41,13 @@
         align-items: center;
         flex-direction: row;
         margin-top: 15vh !important;
+        justify-content: center;
     }
 
-    .button {
+    .mealNumContainer > .container > .button-column > .button {
         height: 10vh;
         margin: 3vh .5vw;
+        padding: 0 1.3rem;
     }
 
     .mealNumContainer {
@@ -53,11 +55,11 @@
     }
 
     .mealNumContainer > .container > .center > .card-content {
-        font-size: 1.6rem !important;
+        font-size: 1.5rem !important;
     }
 
     .mealNumContainer > .container > .right > .container {
-        margin-top: 10vh;
+        margin-top: 14vh;
     }
 
     .mealNumContainer > .container > .right > .container > button {

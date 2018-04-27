@@ -36,8 +36,8 @@ class RegisterConfirm extends Component {
         axios({
 
             // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/create_user.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
-            // url: '../../endpoints/create_user.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_user.php',
+            url: '../../endpoints/create_user.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -76,9 +76,9 @@ class RegisterConfirm extends Component {
 
     loginOnSuccess(){
         axios({
-            // url: '../../endpoints/user_login.php',
+            url: '../../endpoints/user_login.php',
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: registerstorage.email,

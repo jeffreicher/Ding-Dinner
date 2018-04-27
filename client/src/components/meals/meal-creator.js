@@ -20,7 +20,7 @@ class MealCreator extends Component {
             <div className={`mealsItem ${completeStyle}`} onClick={()=>onclick(number, mealInfo)} style={bgImage}  >
                 <div className='mealsShadowArea'>
                     <div className="mealsText oxygenFont left-align">{mealInfo.title}</div>
-                    {this.props.deleteable && <div className="mealsCancel" onClick={(e)=>deleteItem(e, number)}><i className="fas fa-trash-alt"></i></div>}
+                    {this.props.deleteable && <div className="mealsCancel" onClick={(e)=>deleteItem(e, number)}><i className="fas fa-sync-alt"></i></div>}
                 </div>
             </div>
         );

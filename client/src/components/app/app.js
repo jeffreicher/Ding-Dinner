@@ -29,7 +29,8 @@ class App extends Component {
         return (
             <Router>
                 <div className='mainContentContainer'>
-                    <div className='hide-on-small-only phonePls valign-wrapper'><div>This content best viewed on mobile</div></div>
+                <div className='desktop-gutter'></div>
+                    {/* <div className='hide-on-small-only phonePls valign-wrapper'><div>This content best viewed on mobile</div></div> */}
                     <Route exact path='/' component={Login} />
                     <Route path='/mymeals' component={Meals} />
                     <Route path='/details' component={Details} />
@@ -42,6 +43,7 @@ class App extends Component {
                     <Route path="/allergy-settings" component={AllergySettings} />
                     <Route path="/meal-num-settings" component={MealNumberSettings} />
                     <Route path='/register-confirm' component={RegisterConfirm} />
+                <div className='desktop-gutter'></div>                    
                 </div>
             </Router>
         );

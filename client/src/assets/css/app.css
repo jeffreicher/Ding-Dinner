@@ -67,3 +67,58 @@ body {
 .completeButton {
     margin-bottom: 2vh;
 }
+
+@media all and (min-width: 600px) {
+
+    .headerBar {
+        height: 15%;
+    }
+    
+    .mainContentContainer {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        overflow: auto;
+    }
+
+    .desktop-gutter {
+        width: 20%;
+    }
+
+    .mainContentContainer > .loginContainer > .loginLogo {
+        padding-top: 1%;
+    }
+
+    .mainContentContainer > .loginContainer > .loginButtons > button {
+        height: 10vh;
+        width: 25%;
+        margin: 0;
+        font-size: 1.6rem;
+    }
+    
+    .mainContentContainer > .loginContainer > .loginButtons {
+        height: 50%;
+        margin-top: 0;
+    }
+
+    .mainContentContainer > .loginContainer > .loginLogo {
+        width: 40%;
+        margin-top: 1%;
+    }
+
+    .mainContentContainer > .loginContainer > .loginSlogan {
+        margin: 0;
+    }
+
+    .mainContentContainer > .loginContainer > .loginButtons > input {
+        height: 1.5rem;
+    }
+
+    .loginButtons > div > .row {
+        margin-top: 1% !important;
+    }
+
+    .row > div.inputField > input {
+        height: 1.8rem;
+    }     
+}

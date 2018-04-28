@@ -20,7 +20,7 @@ class MealNumber extends Component {
 
         this.state = {
             confirmingMeals: false,
-            numOfMeals: [],
+            numOfMeals: '',
             showLoader: false,
             modalStatus: false,
             message: ''
@@ -47,7 +47,10 @@ class MealNumber extends Component {
         });
     }
     
-    getRecipes() {        
+    getRecipes() {
+        if(!this.state.numOfMeals){
+            return;
+        }        
         this.setState({
             showLoader: true
         });

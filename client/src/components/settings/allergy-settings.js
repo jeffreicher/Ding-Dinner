@@ -10,6 +10,7 @@ import LogoHeader from '../general/logo-header';
 import Loader from '../general/loader';
 import ErrorModal from '../general/error-modal';
 import auth from '../general/auth';
+import FilterModal from './filter-reset-modal';
 
 class AllergySettings extends Component {
     constructor(props) {
@@ -22,7 +23,8 @@ class AllergySettings extends Component {
             selected: [],
             showLoader: false,
             modalStatus: false,
-            message: ''
+            message: '',
+            resetModal: false
         };
     };
 
@@ -84,7 +86,9 @@ class AllergySettings extends Component {
             };
 
             if (!this.state.modalStatus) {
-                this.props.history.push('/settings');               
+                this.setState({
+                    resetModal: true
+                });
             };            
         }).catch( err => {
             console.log('Update diet error: ', err);
@@ -102,12 +106,21 @@ class AllergySettings extends Component {
         });
     };
 
+    goToMeals(){
+        this.props.history.push('/meal-num-settings');
+    }
+
+    goToSettings(){
+        this.props.history.push('/settings');
+    }
+
     render() {   
         const { handleSelected } = this;
         const { selected } = this.state;
 
         return (  
-         <div className='allergySettingsContainer'>   
+         <div className='allergySettingsContainer'>  
+            {this.state.resetModal && <FilterModal yes={this.goToMeals.bind(this)} no={this.goToSettings.bind(this)} />} 
             {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
             {this.state.showLoader && <Loader />}
             <LogoHeader back={true} location={'/diet-settings'}/>

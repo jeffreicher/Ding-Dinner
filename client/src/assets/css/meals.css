@@ -177,6 +177,10 @@ div.detailsInstructionsList > ul.collection {
 }
 
 @media all and (min-width: 600px) {
+    .mealsContainer {
+        width: 60%;
+    }
+    
     .mealsContainer > .headerBar,
     .mealsContainer > .mealsMainArea > .detailsContainer > .headerBar {
         height: 10%;

@@ -8,7 +8,7 @@ import Footer from '../general/footer';
 import Loader from '../general/loader';
 import auth from '../general/auth';
 import '../../assets/css/grocery.css';
-import ModalError from '../general/error-modal';
+import ErrorModal from '../general/error-modal';
 import Header from '../general/header';
 
 class Grocery extends Component {
@@ -34,8 +34,8 @@ class Grocery extends Component {
         axios({
 
             //url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/allMealsIngredients.php',
-            url: '../../endpoints/meals/allMealsIngredients.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/allMealsIngredients.php',
+            // url: '../../endpoints/meals/allMealsIngredients.php',
             method: 'post',
             data: {
                 'session_ID': localStorage.ding_sessionID

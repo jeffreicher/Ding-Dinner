@@ -123,8 +123,8 @@ class Meals extends Component {
         axios({
 
             // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/create_meal_plan.php',
-            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/create_meal_plan.php',
-            url: '../../endpoints/create_meal_plan.php',
+            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/create_meal_plan.php',
+            // url: '../../endpoints/create_meal_plan.php',
 
             method: 'post',
             data: {

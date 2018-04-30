@@ -61,3 +61,32 @@ label::after {
 .card-content {
     text-shadow: 2px 2px 2px black;
 }
+
+@media all and (min-width: 600px) {
+    .groceryContainer {
+        width: 60%;
+    
+    }
+
+    .groceryContainer > .headerBar {
+        height: 10%;
+    }
+
+    .groceryContainer > .headerBar,
+    .groceryContainer > .footer {
+        width: 60%;
+    }
+
+    .groceryContainer > .mainArea {
+        width: 60%;
+    }
+
+    .groceryContainer > .mainArea > .center > .card-content {
+        font-size: 1.6rem;
+        margin: 5%;
+    }
+
+    .mainArea > .list > .item > label {
+        font-size: 1rem !important;
+    }
+}

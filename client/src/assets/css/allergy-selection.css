@@ -45,6 +45,10 @@
 }
 
 @media all and (min-width: 600px) {
+    .allergyContainer {
+        width: 60%;
+    }
+    
     div.allergyContainer > div.container > div.row > div > a.btn-large,
     div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
         height: 6.9vh;  

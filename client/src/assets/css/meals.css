@@ -256,6 +256,7 @@ div.detailsInstructionsList > ul.collection {
     .detailsMainArea > img {
         width: 60%;
         margin-top: 5vh;
+        border-radius: 2%;
     }
 
     .detailsName {
@@ -275,6 +276,10 @@ div.detailsInstructionsList > ul.collection {
     .detailsContainer > .headerBar,
     .detailsContainer > .footer {
         width: 56%;
+    }
+
+    .detailsContainer > .loaderModal {
+        left: -40%;
     }
     
 }

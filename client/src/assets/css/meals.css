@@ -187,6 +187,62 @@ div.detailsInstructionsList > ul.collection {
 
     .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
         margin-top: 1%;
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+        right: 0;
     }
 
+    .mealsContainer > .mealsMainArea {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .mealsContainer > .mealsMainArea > div {
+        width: 32.3%;
+        border: 1px solid black;
+        margin: .5% .5%;       
+    }
+
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer {
+        height: 50%;
+        align-items: center;
+    }
+
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea > div {
+        font-size: .7rem;
+    }
+
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .col.s3 {
+        width: 0;
+        margin-right: 3.5vw;
+        margin-left: 0;
+        left: 0;
+        right: 0;
+    } 
+
+    .confirmButton {
+        width: 100vw;
+        height: 5.5vh;
+        display: flex;
+    }
+
+    .confirmButton > .confirmCheck {
+        margin-top: 0;
+        font-size: 1.5rem !important;
+    }
+
+    .mealsText {
+        font-size: .7rem;
+    }
+
+    .mealsItem {
+        height: 50%;
+    }
+
+    .mealsCancel {
+        font-size: 1rem;
+        bottom: 0%;
+        right: 3%;
+    }
 }

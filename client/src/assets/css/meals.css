@@ -175,7 +175,8 @@ div.detailsInstructionsList > ul.collection {
 }
 
 @media all and (min-width: 600px) {
-    .mealsContainer > .headerBar {
+    .mealsContainer > .headerBar,
+    .mealsContainer > .mealsMainArea > .detailsContainer > .headerBar {
         height: 10%;
     }
 
@@ -198,7 +199,8 @@ div.detailsInstructionsList > ul.collection {
         flex-wrap: wrap;
     }
 
-    .mealsContainer > .mealsMainArea > div {
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer,
+    .mealsContainer > .mealsMainArea > .mealsItem {
         width: 32.3%;
         border: 1px solid black;
         margin: .5% .5%;       
@@ -245,4 +247,39 @@ div.detailsInstructionsList > ul.collection {
         bottom: 0%;
         right: 3%;
     }
+
+    .detailsContainer {
+        width: 56%;
+        left: 22%;
+    }
+
+    .detailsMainArea > img {
+        width: 60%;
+        margin-top: 5vh;
+        border-radius: 2%;
+    }
+
+    .detailsName {
+        font-size: 1.92rem;
+    }
+
+    .detailsTime {
+        font-size: 1.2rem;
+    }
+
+    .detailsIngredientsList > .collection,
+    .detailsInstructionsList > .collection,
+    .detailsNutritionList > .collection {
+        flex-direction: column;
+    }
+
+    .detailsContainer > .headerBar,
+    .detailsContainer > .footer {
+        width: 56%;
+    }
+
+    .detailsContainer > .loaderModal {
+        left: -40%;
+    }
+    
 }

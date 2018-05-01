@@ -388,18 +388,20 @@ class Meals extends Component {
 
         const singleMeal = {
             width: '50%',
-            height: '50%'
+            height: '98%'
         }
 
         const tripleMeal = {
-            width: '70%'
+            width: '100%',
+            height: '47%'
         }
 
         let mealStyle = null;
+        let confirmStyle = null;
         if(meals.length === 1) {
             mealStyle = singleMeal;
         } else if (meals.length === 3) {
-            mealStyle = tripleMeal;
+            confirmStyle = tripleMeal;
         }
 
         let mealMap = '';
@@ -412,7 +414,7 @@ class Meals extends Component {
                 {this.state.showLoader && <Loader />}
                 <LogoHeader add={true} />
                 <main className="mealsMainArea">
-                    {this.state.confirmingMeals && <MealConfirm style={mealStyle} confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
+                    {this.state.confirmingMeals && <MealConfirm style={(meals.length === 1) ? mealStyle : confirmStyle} confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                     {mealMap}
                     {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
                 </main>

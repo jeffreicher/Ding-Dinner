@@ -39,7 +39,8 @@
 }
 
 .loginLogo {
-    padding-top: 35%;
+    /* padding-top: 35%; */
+    padding-top: 6%;
     margin: 0 auto;
     width: 80%;
 }
@@ -135,8 +136,46 @@
     justify-content: space-around;
 }
 
+@media all and (min-width: 600px) {
+    .loginContainer {
+        width: 60%;
+    }
+}
+
+@media all and (max-height: 568px) {
+    .registerButtonHolder > button,
+    .loginButtonHolder > button {
+        height: 7vh;
+    }
+
+    .loginButtons > button {
+        height: 8.5vh;
+    }
+}
+
 @media screen and (max-height: 480px) {
     .loginContainer > .loginLogo {
         padding-top: 5%;
     }
+
+    .loginButtons {
+        margin-top: 0%;
+    }
+
+    .loginButtons > div > .row {
+        margin-top: 1%;
+        margin-bottom: 0;
+    }
+
+    .row > div.inputField > input {
+        margin-bottom: 0;
+    }
+    
+    .registerButtonHolder,
+    .loginButtonHolder {
+        margin-top: 7%;
+    }
 }
+
+
+

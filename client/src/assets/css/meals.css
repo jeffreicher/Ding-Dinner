@@ -214,7 +214,7 @@ div.detailsInstructionsList > ul.collection {
     }
 
     .mealsContainer > .mealsMainArea > .mealConfirmContainer {
-        height: 50%;
+        height: 48%;
         align-items: center;
     }
 
@@ -241,12 +241,16 @@ div.detailsInstructionsList > ul.collection {
         font-size: 1.5rem !important;
     }
 
+    .confirmHead {
+        margin-bottom: 5vh;
+    }
+
     .mealsText {
         font-size: .7rem;
     }
 
     .mealsItem {
-        height: 50%;
+        height: 48%;
     }
 
     .mealsCancel {

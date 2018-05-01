@@ -147,11 +147,33 @@
     .loginButtonHolder > button {
         height: 7vh;
     }
+
+    .loginButtons > button {
+        height: 8.5vh;
+    }
 }
 
 @media screen and (max-height: 480px) {
     .loginContainer > .loginLogo {
         padding-top: 5%;
+    }
+
+    .loginButtons {
+        margin-top: 0%;
+    }
+
+    .loginButtons > div > .row {
+        margin-top: 1%;
+        margin-bottom: 0;
+    }
+
+    .row > div.inputField > input {
+        margin-bottom: 0;
+    }
+    
+    .registerButtonHolder,
+    .loginButtonHolder {
+        margin-top: 7%;
     }
 }
 

@@ -1,4 +1,4 @@
-.settingsContainer{
+.settingsContainer {
     font-size: 4vmin;
     height: 100%;
     width: 100%;
@@ -117,7 +117,7 @@
     }
 }
 
-@media all and (min-height: 600px) {
+@media all and (min-width: 600px) {
     .dietSettingsContainer {
         width: 60%;
     }

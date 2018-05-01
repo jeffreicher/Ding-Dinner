@@ -387,7 +387,7 @@ class Meals extends Component {
         console.log(meals);
 
         const singleMeal = {
-            width: '50%',
+            width: '49%',
             height: '98%'
         }
 

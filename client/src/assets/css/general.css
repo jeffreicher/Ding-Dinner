@@ -93,10 +93,6 @@
 }
 
 @media all and (min-width: 600px) {
-    .headerBar {
-        height: 15%;
-    }
-
     .errorModalContent {
         top: 42%;
         width: 27%;

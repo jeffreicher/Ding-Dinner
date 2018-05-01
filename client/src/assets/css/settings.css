@@ -145,6 +145,24 @@
         height: 8.5vh;
         margin-right: 5vh;
     }
+
+    .settingsContainer {
+        width: 60%;
+    }
+
+    .settingsOptionArea > .settingsButton {
+        font-size: 1.2rem;
+        height: 7vh;
+        line-height: 7vh;
+    }
+
+    .settingsContainer > .mainContainer > .center > .card-content {
+        font-size: 1.4rem;
+    }
+
+    .settingsContainer > .footer {
+        width: 60%;
+    }
 }
 
 @media screen and (max-height: 568px) {

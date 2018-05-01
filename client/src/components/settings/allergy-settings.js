@@ -138,7 +138,7 @@ class AllergySettings extends Component {
                     <Button title={'Sesame'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sesame')} />
                     <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
                 </div>  
-                <div className="right" style={{marginTop: `4vh`}}>
+                <div className="right" style={{marginTop: `3vh`}}>
                     <Next onclick={this.sendFiltersToServer.bind(this)}/>
                 </div>
             </div>             

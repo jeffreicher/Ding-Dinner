@@ -13,8 +13,7 @@ header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
-// $userID=$_SESSION['user_id'];
-$userID='23';
+$userID=$_SESSION['user_id'];
 
 if(!is_numeric($userID)){
     print 'Invalid user ID';
@@ -292,8 +291,7 @@ $quantityArrLen=count($quantityArr);
         $ingredientsObj['teaspoons']=$ingredientsTspBase;
         $ingredientsObj['misc']=$ingredientsMiscBase;
         $encodedIngredients = json_encode($ingredientsObj);
-        // print_r($encodedIngredients);
-        // print_r($ingredientsObj);
+
         addToGroceryTable($ingredientsObj);
     }
     addLikeUnits($ingredientArr, $quantityArr, $unitArr);
@@ -325,6 +323,7 @@ function addToGroceryTable($ingredients){
     global $userID;
     require('../mysqli_connect.php');
     $parsedIngredients = [];
+    /**adding all the parsed ingredients into one array */
     if(isset($ingredients['ounces'])){
         forEach($ingredients['ounces'] as $key => $value){
             $parsedIngredients[] = $value . ' ' . $key;
@@ -342,18 +341,18 @@ function addToGroceryTable($ingredients){
     }
     
     $ingrCount = count($parsedIngredients);
-// print_r ($parsedIngredients);
 
+    /**query for adding all the ingredients into the table as individual rows */
     if (!($stmt = $myconn->prepare("INSERT INTO `grocery_list` (`ingredient`, `user_id`) VALUES (?, ?)"))) {
         echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
     }
     
-    /**binds the paramater for the SELECT query*/
+    /**binds the paramater for the INSERT INTO query*/
     if (!$stmt->bind_param("si", $currentIngredient, $userID)) {
         echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
     }
     
-    /**executes the query for the ingredients*/
+    /**executes the query for the ingredients in a loop to create a new row for each*/
     for($ingrIndex=0; $ingrIndex < $ingrCount; $ingrIndex++ ){
         $currentIngredient = $parsedIngredients[$ingrIndex];
         if (!$stmt->execute()) {

@@ -382,20 +382,37 @@ class Meals extends Component {
     };
 
     render() {
+        const {mealDetail, meals} = this.state;
+
+        console.log(meals);
+
+        const singleMeal = {
+            width: '50%',
+            height: '50%'
+        }
+
+        const tripleMeal = {
+            width: '70%'
+        }
+
+        let mealStyle = null;
+        if(meals.length === 1) {
+            mealStyle = singleMeal;
+        } else if (meals.length === 3) {
+            mealStyle = tripleMeal;
+        }
 
         let mealMap = '';
 
-        this.state.meals ? mealMap = this.state.meals.map((meal, index) => {return <MealCreator mealInfo={meal} key={index} number={index} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} deleteable={this.state.confirmingMeals}/>}) : '';
-        
-        const {mealDetail} = this.state;
-
+        this.state.meals ? mealMap = this.state.meals.map((meal, index) => {return <MealCreator mealInfo={meal} style={mealStyle} key={index} number={index} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} deleteable={this.state.confirmingMeals}/>}) : '';
+      
         return(
             <div className="mealsContainer">
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <LogoHeader add={true} />
                 <main className="mealsMainArea">
-                    {this.state.confirmingMeals && <MealConfirm confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
+                    {this.state.confirmingMeals && <MealConfirm style={mealStyle} confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                     {mealMap}
                     {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
                 </main>

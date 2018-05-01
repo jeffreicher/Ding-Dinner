@@ -4,7 +4,8 @@
 
 .dietContainer {
     height: 100vh;
-    background-image: url('../../assets/images/dingDarkBlur.jpg');
+    background-image: url('../../assets/images/dingHDBack_Dark.jpg');
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -23,7 +24,7 @@
     }
 
     .button {
-        height: 20vh;
+        height: 10vh;
         width: 20vh;
         margin: 3vh 1vw;
     }
@@ -50,7 +51,7 @@
     }
 }
 
-@media all and (min-height: 600px) {
+@media all and (min-width: 600px) {
     .dietContainer {
         width: 60%;
     }

@@ -12,7 +12,8 @@
 
 .allergyContainer {
     height: 100vh;
-    background-image: url('../../assets/images/dingDarkBlur.jpg');
+    background-image: url('../../assets/images/dingHDBack_Dark.jpg');
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -45,6 +46,10 @@
 }
 
 @media all and (min-width: 600px) {
+    .allergyContainer {
+        width: 60%;
+    }
+    
     div.allergyContainer > div.container > div.row > div > a.btn-large,
     div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
         height: 6.9vh;  

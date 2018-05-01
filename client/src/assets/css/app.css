@@ -17,6 +17,28 @@ body {
     margin: 0;
     min-height: 100vh;
     max-height: 100vh;
+    background-color: #757575;
+}
+
+.mainContentContainer > * {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.desktop-gutter {
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .6;
+}
+
+.gutter-left {
+    background-image: url('../../assets/images/dingHDLeft.jpg');
+    background-position: 95% 50%;
+}
+
+.gutter-right {
+    background-image: url('../../assets/images/dingHDRight.jpg');
+    background-position: 60% 50%;
 }
 
 .iconcolor {
@@ -70,10 +92,6 @@ body {
 }
 
 @media all and (min-width: 600px) {
-
-    .headerBar {
-        height: 15%;
-    }
     
     .mainContentContainer {
         display: flex;
@@ -83,7 +101,7 @@ body {
     }
 
     .desktop-gutter {
-        width: 40%;
+        width: 20%;
     }
 
     .mainContentContainer > .loginContainer > .loginLogo {

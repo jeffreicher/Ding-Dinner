@@ -57,6 +57,7 @@ class Login extends Component {
                     <br />
                     {!this.state.loginHide && !this.state.registerHide && <button className="registerButton btn-large dingOrange z-depth-2" onClick={this.registerClicked}>Register</button>}
                 </div>
+                <div className="loginDarken"></div>
             </div>
         );
     };

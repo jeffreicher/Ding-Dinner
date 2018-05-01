@@ -4,7 +4,8 @@
     margin: 0;
     text-align: center;
     font-size: 1rem;
-    background-image: url('../../assets/images/dingDarkBlur.jpg');
+    background-image: url('../../assets/images/dingHDBack_Dark.jpg');
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
@@ -73,7 +74,8 @@
     top: 0;
     left: 0;
     font-family: 'Oxygen', cursive;
-    background-image: url('../../assets/images/dingDarkBlur.jpg');
+    background-image: url('../../assets/images/dingHDBack_Dark.jpg');
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
@@ -175,7 +177,12 @@ div.detailsInstructionsList > ul.collection {
 }
 
 @media all and (min-width: 600px) {
-    .mealsContainer > .headerBar {
+    .mealsContainer {
+        width: 60%;
+    }
+    
+    .mealsContainer > .headerBar,
+    .mealsContainer > .mealsMainArea > .detailsContainer > .headerBar {
         height: 10%;
     }
 
@@ -187,6 +194,99 @@ div.detailsInstructionsList > ul.collection {
 
     .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
         margin-top: 1%;
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+        right: 0;
     }
 
+    .mealsContainer > .mealsMainArea {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer,
+    .mealsContainer > .mealsMainArea > .mealsItem {
+        width: 32.3%;
+        border: 1px solid black;
+        margin: .5% .5%;       
+    }
+
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer {
+        height: 50%;
+        align-items: center;
+    }
+
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea > div {
+        font-size: .7rem;
+    }
+
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .col.s3 {
+        width: 0;
+        margin-right: 3.5vw;
+        margin-left: 0;
+        left: 0;
+        right: 0;
+    } 
+
+    .confirmButton {
+        width: 100vw;
+        height: 5.5vh;
+        display: flex;
+    }
+
+    .confirmButton > .confirmCheck {
+        margin-top: 0;
+        font-size: 1.5rem !important;
+    }
+
+    .mealsText {
+        font-size: .7rem;
+    }
+
+    .mealsItem {
+        height: 50%;
+    }
+
+    .mealsCancel {
+        font-size: 1rem;
+        bottom: 0%;
+        right: 3%;
+    }
+
+    .detailsContainer {
+        width: 60%;
+        left: 20%;
+    }
+
+    .detailsMainArea > img {
+        width: 60%;
+        margin-top: 5vh;
+        border-radius: 2%;
+    }
+
+    .detailsName {
+        font-size: 1.92rem;
+    }
+
+    .detailsTime {
+        font-size: 1.2rem;
+    }
+
+    .detailsIngredientsList > .collection,
+    .detailsInstructionsList > .collection,
+    .detailsNutritionList > .collection {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .detailsContainer > .headerBar,
+    .detailsContainer > .footer {
+        width: 60%;
+    }
+
+    .detailsContainer > .loaderModal {
+        left: -34%;
+    }
+    
 }

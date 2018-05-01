@@ -136,14 +136,24 @@
     justify-content: space-around;
 }
 
+@media all and (min-width: 600px) {
+    .loginContainer {
+        width: 60%;
+    }
+}
+
+@media all and (max-height: 568px) {
+    .registerButtonHolder > button,
+    .loginButtonHolder > button {
+        height: 7vh;
+    }
+}
+
 @media screen and (max-height: 480px) {
     .loginContainer > .loginLogo {
         padding-top: 5%;
     }
 }
 
-@media all and (min-width: 600px) {
-    .loginContainer {
-        width: 60%;
-    }
-}
+
+

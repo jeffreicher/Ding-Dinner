@@ -122,7 +122,7 @@ body {
 
     .mainContentContainer > .loginContainer > .loginLogo {
         width: 40%;
-        margin-top: 1%;
+        /* margin-top: 1%; */
     }
 
     .mainContentContainer > .loginContainer > .loginSlogan {

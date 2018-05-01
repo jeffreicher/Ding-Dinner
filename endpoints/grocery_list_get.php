@@ -26,7 +26,7 @@ if(!is_int($_SESSION['user_id'])){
 $user_id = $_SESSION['user_id'];
 
 //Prepared statement to SELECT user with matching email and password
-if(!($stmt = $myconn->prepare("SELECT `ingredient`, `complete` FROM `grocery_list` WHERE `user_id` = ?"))){
+if(!($stmt = $myconn->prepare("SELECT `ingredient`, `id`, `complete` FROM `grocery_list` WHERE `user_id` = ?"))){
     die("Prepare failed: (" . $myconn->errno . ") " . $myconn->error);
 }
 

@@ -39,7 +39,8 @@
 }
 
 .loginLogo {
-    padding-top: 35%;
+    /* padding-top: 35%; */
+    padding-top: 6%;
     margin: 0 auto;
     width: 80%;
 }

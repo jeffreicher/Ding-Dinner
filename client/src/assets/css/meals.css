@@ -176,6 +176,7 @@ div.detailsInstructionsList > ul.collection {
     filter: grayscale(0%);
 }
 
+
 @media all and (min-width: 600px) {
     .mealsContainer {
         width: 60%;
@@ -287,6 +288,16 @@ div.detailsInstructionsList > ul.collection {
 
     .detailsContainer > .loaderModal {
         left: -34%;
+    }
+
+    .mealsContainer > .mealsMainArea > .singleMeal {
+        width: 49%;
+        height: 98%;
+    }
+    
+    .mealsContainer > .mealsMainArea > .tripleMeal {
+        width: 100%;
+        height: 47%;
     }
     
 }

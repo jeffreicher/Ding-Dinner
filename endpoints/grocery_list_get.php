@@ -17,7 +17,7 @@ header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 //Test variables for diet update
- $_SESSION['user_id'] = 23;
+// $_SESSION['user_id'] = 23;
 
 //Check if user ID is a valid integer. This might be a $_SESSION['user_id'] later
 if(!is_int($_SESSION['user_id'])){

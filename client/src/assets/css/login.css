@@ -140,3 +140,9 @@
         padding-top: 5%;
     }
 }
+
+@media all and (min-width: 600px) {
+    .loginContainer {
+        width: 60%;
+    }
+}

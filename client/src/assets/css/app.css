@@ -17,24 +17,28 @@ body {
     margin: 0;
     min-height: 100vh;
     max-height: 100vh;
-    /* background-image: url('../../assets/images/dingHDBack.jpg'); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color: #757575;
+}
+
+.mainContentContainer > * {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
 
 .desktop-gutter {
-    /* background-image: url('../../assets/images/dingHDBack.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
+    opacity: .6;
 }
 
 .gutter-left {
-    background-position: left;
+    background-image: url('../../assets/images/dingHDLeft.jpg');
+    background-position: 95% 50%;
 }
 
 .gutter-right {
-    background-position: right;
+    background-image: url('../../assets/images/dingHDRight.jpg');
+    background-position: 60% 50%;
 }
 
 .iconcolor {

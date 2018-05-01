@@ -48,7 +48,7 @@
     .mealNumContainer > .container > .button-column > .button {
         height: 10vh;
         margin: 3vh .5vw;
-        padding: 0 1.3rem;
+        /* padding: 0 1.3rem; */
     }
 
     .mealNumContainer {

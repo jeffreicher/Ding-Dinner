@@ -51,7 +51,7 @@
     }
 }
 
-@media all and (min-height: 600px) {
+@media all and (min-width: 600px) {
     .dietContainer {
         width: 60%;
     }

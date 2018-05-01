@@ -88,10 +88,6 @@ body {
 }
 
 @media all and (min-width: 600px) {
-
-    .headerBar {
-        height: 15%;
-    }
     
     .mainContentContainer {
         display: flex;

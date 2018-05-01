@@ -93,10 +93,6 @@
 }
 
 @media all and (min-width: 600px) {
-    .headerBar {
-        height: 15%;
-    }
-
     .errorModalContent {
         top: 42%;
         width: 27%;
@@ -109,6 +105,16 @@
 
     .errorCloseContent {
         padding-bottom: 7%;
+    }
+
+    .headerBar * {
+        font-size: 1.5rem;
+    }
+
+    .footer > a,
+    .groceryAdd > a > svg,
+    .groceryBack > a > svg {
+        font-size: 1.5rem !important;
     }
 
 }

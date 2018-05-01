@@ -349,12 +349,13 @@ function addToGroceryTable($ingredients){
     }
     
     /**binds the paramater for the SELECT query*/
-    if (!$stmt->bind_param("si", $parsedIngredients, $userID)) {
+    if (!$stmt->bind_param("si", $currentIngredient, $userID)) {
         echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
     }
     
     /**executes the query for the ingredients*/
     for($ingrIndex=0; $ingrIndex < $ingrCount; $ingrIndex++ ){
+        $currentIngredient = $parsedIngredients[$ingrIndex];
         if (!$stmt->execute()) {
             echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
         }

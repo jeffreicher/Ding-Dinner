@@ -109,9 +109,9 @@ body {
 
     .mainContentContainer > .loginContainer > .loginButtons > button {
         height: 10vh;
-        width: 25%;
+        width: 40%;
         margin: 0;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
     
     .mainContentContainer > .loginContainer > .loginButtons {

@@ -60,10 +60,6 @@
         line-height: 5.5vh;
     }
 
-    .allergyContainer > .container > .center > .card-content {
-        font-size: 1.8rem;
-    }
-
     .allergyContainer > .container > .right > a > .container > button {
         height: 8.5vh;
         margin-right: 5vh;

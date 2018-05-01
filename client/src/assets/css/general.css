@@ -107,4 +107,14 @@
         padding-bottom: 7%;
     }
 
+    .headerBar * {
+        font-size: 1.5rem;
+    }
+
+    .footer > a,
+    .groceryAdd > a > svg,
+    .groceryBack > a > svg {
+        font-size: 1.5rem !important;
+    }
+
 }

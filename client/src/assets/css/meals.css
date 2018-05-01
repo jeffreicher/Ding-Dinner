@@ -255,8 +255,8 @@ div.detailsInstructionsList > ul.collection {
     }
 
     .detailsContainer {
-        width: 56%;
-        left: 22%;
+        width: 60%;
+        left: 20%;
     }
 
     .detailsMainArea > img {
@@ -277,15 +277,16 @@ div.detailsInstructionsList > ul.collection {
     .detailsInstructionsList > .collection,
     .detailsNutritionList > .collection {
         flex-direction: column;
+        text-align: center;
     }
 
     .detailsContainer > .headerBar,
     .detailsContainer > .footer {
-        width: 56%;
+        width: 60%;
     }
 
     .detailsContainer > .loaderModal {
-        left: -40%;
+        left: -34%;
     }
     
 }

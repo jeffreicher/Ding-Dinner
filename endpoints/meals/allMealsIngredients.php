@@ -13,7 +13,9 @@ header("Access-Control-Allow-Credentials: true ");
 header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
-$userID=$_SESSION['user_id'];
+// $userID=$_SESSION['user_id'];
+$userID='23';
+
 if(!is_numeric($userID)){
     print 'Invalid user ID';
     exit();
@@ -290,7 +292,8 @@ $quantityArrLen=count($quantityArr);
         $ingredientsObj['teaspoons']=$ingredientsTspBase;
         $ingredientsObj['misc']=$ingredientsMiscBase;
         $encodedIngredients = json_encode($ingredientsObj);
-        print_r($encodedIngredients);
+        // print_r($encodedIngredients);
+        print_r($ingredientsObj);
     }
     return addLikeUnits($ingredientArr, $quantityArr, $unitArr);
 }

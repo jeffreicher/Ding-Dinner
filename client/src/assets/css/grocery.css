@@ -75,11 +75,11 @@ label::after {
 
     .groceryContainer > .headerBar,
     .groceryContainer > .footer {
-        width: 60%;
+        width: 59.8%;
     }
 
     .groceryContainer > .mainArea {
-        width: 60%;
+        width: 59.8%;
     }
 
     .groceryContainer > .mainArea > .center > .card-content {

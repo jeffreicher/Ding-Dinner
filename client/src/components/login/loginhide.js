@@ -47,9 +47,9 @@ class LoginHide extends Component {
         });
         axios({
             // url: '../../endpoints/user_login.php',
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',            
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',            
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: this.state.emailValue,

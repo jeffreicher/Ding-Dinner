@@ -53,19 +53,89 @@
     div.allergyContainer > div.container > div.row > div > a.btn-large,
     div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
         height: 6.9vh;  
-        margin: 1vh .5vh;      
+        margin: 1vh .5vh; 
+        padding: 0 1rem;      
     }
     
     .allergyContainer > .container > .row > div > .btn-desk > div > div.title-container {
         line-height: 5.5vh;
     }
 
-    .allergyContainer > .container > .center > .card-content {
-        font-size: 1.8rem;
-    }
-
     .allergyContainer > .container > .right > a > .container > button {
         height: 8.5vh;
         margin-right: 5vh;
     }
+
+    div.regConfirmContainer > div.container > div.regConfirmButtonContainer > a.btn-large,
+    div.regConfirmContainer > div.container > div.regConfirmButtonContainer > button.btn-large{
+        padding: 0 5%;
+        font-size:.9rem;
+    } 
 }
+
+@media all and (min-width: 768px) {
+    .allergyContainer {
+        width: 60%;
+    }
+    
+    div.allergyContainer > div.container > div.row > div > a.btn-large,
+    div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
+        height: 6.9vh;  
+        margin: 1vh .5vh; 
+        padding: 0 1rem;     
+    }
+
+}
+
+@media all and (min-width:1024px) {
+    .allergyContainer {
+        width: 60%;
+    }
+    
+    div.allergyContainer > div.container > div.row > div > a.btn-large,
+    div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
+        height: 5.9vh;  
+        margin: 1vh .5vh; 
+        padding: 0 .5rem;     
+    }
+    .allergyContainer > .container > .right > a > .container > button{
+        height:7.5vh;
+    }
+
+    div.regConfirmContainer > div.container > div.regConfirmButtonContainer > a.btn-large,
+    div.regConfirmContainer > div.container > div.regConfirmButtonContainer > button.btn-large{
+        padding: 0 5%;
+        font-size:.8rem;
+    } 
+
+    .settingsOptionArea > .settingsButton{
+        padding: 0 25px;
+        font-size: 1rem;
+        line-height: 7vh;
+    }
+}
+
+@media all and (min-width:1355px) {
+    .allergyContainer {
+        width: 60%;
+    }
+    
+    div.allergyContainer > div.container > div.row > div > a.btn-large,
+    div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
+        height: 5.9vh;  
+        margin: 1vh .5vh; 
+        padding: 0 .5rem;     
+    }
+    .allergyContainer > .container > .right > a > .container > button{
+        height:7.5vh;
+    }
+
+    div.regConfirmContainer > div.container > div.regConfirmButtonContainer > a.btn-large,
+    div.regConfirmContainer > div.container > div.regConfirmButtonContainer > button.btn-large{
+        padding: 0 5%;
+        font-size:.8rem;
+    } 
+}
+/* @media all and (min-width:768px) {
+    
+} */

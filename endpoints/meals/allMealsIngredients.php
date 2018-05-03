@@ -14,6 +14,7 @@ header("Access-Control-Allow-Methods: OPTIONS, GET, POST");
 header("Access-Control-Allow-Headers: Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control");
 
 $userID=$_SESSION['user_id'];
+
 if(!is_numeric($userID)){
     print 'Invalid user ID';
     exit();
@@ -290,9 +291,10 @@ $quantityArrLen=count($quantityArr);
         $ingredientsObj['teaspoons']=$ingredientsTspBase;
         $ingredientsObj['misc']=$ingredientsMiscBase;
         $encodedIngredients = json_encode($ingredientsObj);
-        print_r($encodedIngredients);
+
+        addToGroceryTable($ingredientsObj);
     }
-    return addLikeUnits($ingredientArr, $quantityArr, $unitArr);
+    addLikeUnits($ingredientArr, $quantityArr, $unitArr);
 }
 
 /**helper function to convert inputed unit into teaspoons*/
@@ -315,4 +317,49 @@ function convertToTsp($num, $unit){
 function convertToOz($num){
     return $num * 16; 
 }
+
+/**Fills the grocery list table with the ingredients of the users' meals */
+function addToGroceryTable($ingredients){
+    global $userID;
+    require('../mysqli_connect.php');
+    $parsedIngredients = [];
+    /**adding all the parsed ingredients into one array */
+    if(isset($ingredients['ounces'])){
+        forEach($ingredients['ounces'] as $key => $value){
+            $parsedIngredients[] = $value . ' ' . $key;
+        }
+    }
+    if(isset($ingredients['teaspoons'])){
+        forEach($ingredients['teaspoons'] as $key => $value){
+            $parsedIngredients[] = $value . ' ' . $key;
+        }
+    }
+    if(isset($ingredients['misc'])){
+        forEach($ingredients['misc'] as $key => $value){
+            $parsedIngredients[] = $value . ' ' . $key;
+        }
+    }
+    
+    $ingrCount = count($parsedIngredients);
+
+    /**query for adding all the ingredients into the table as individual rows */
+    if (!($stmt = $myconn->prepare("INSERT INTO `grocery_list` (`ingredient`, `user_id`) VALUES (?, ?)"))) {
+        echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
+    }
+    
+    /**binds the paramater for the INSERT INTO query*/
+    if (!$stmt->bind_param("si", $currentIngredient, $userID)) {
+        echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+    }
+    
+    /**executes the query for the ingredients in a loop to create a new row for each*/
+    for($ingrIndex=0; $ingrIndex < $ingrCount; $ingrIndex++ ){
+        $currentIngredient = $parsedIngredients[$ingrIndex];
+        if (!$stmt->execute()) {
+            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+    }
+    
+}
+
 ?>

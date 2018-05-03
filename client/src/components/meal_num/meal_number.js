@@ -57,9 +57,9 @@ class MealNumber extends Component {
 
         axios({
 
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/newRecipes.php',
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/newRecipes.php',
             // url: '../../endpoints/meals/newRecipes.php',
-            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
             method: 'post',
             data: {
                 session_ID: localStorage.ding_sessionID

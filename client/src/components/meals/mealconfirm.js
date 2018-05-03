@@ -4,7 +4,7 @@ class MealConfirm extends Component {
 
     render() {
         return (
-            <div className='mealConfirmContainer row'>
+            <div className={`mealConfirmContainer row ${this.props.style}`}>
                 <div className='col s9 confirmTextArea'>
                     <div className='confirmHead'>Confirm Meal Choices</div>
                     <div>Press to finalize your selections!</div>

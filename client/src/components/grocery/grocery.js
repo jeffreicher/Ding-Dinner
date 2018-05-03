@@ -10,6 +10,7 @@ import auth from '../general/auth';
 import '../../assets/css/grocery.css';
 import ErrorModal from '../general/error-modal';
 import Header from '../general/header';
+import ListMaker from './list_maker';
 
 class Grocery extends Component {
     constructor(props) {
@@ -33,9 +34,9 @@ class Grocery extends Component {
 
         axios({
 
-            //url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/allMealsIngredients.php',
-            url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/allMealsIngredients.php',
-            // url: '../../endpoints/meals/allMealsIngredients.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_get.php',
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/grocery_list_get.php',
+            // url: '../../endpoints/grocery_list_get.php',
             method: 'post',
             data: {
                 'session_ID': localStorage.ding_sessionID
@@ -45,6 +46,7 @@ class Grocery extends Component {
             }
         }).then( resp => {
             this.renderGroceryList(resp);
+
             if (typeof resp.data === undefined) {
                 this.setState({
                     modalStatus: true,
@@ -62,36 +64,66 @@ class Grocery extends Component {
     };
 
     renderGroceryList(resp) {
-        const {ounces, teaspoons, misc} = resp.data;
-
-        const ounceKeys = Object.keys(ounces);
-        const teaspoonKeys = Object.keys(teaspoons);
-        const miscKeys = Object.keys(misc);
-
         while(grocerystorage.length){
             grocerystorage.pop();
-        }
-
-        for (let i=0; i< ounceKeys.length; i++){
-            const key = ounceKeys[i];
-            grocerystorage.push(`${ounces[key]} ${key}`);
         };
 
-        for (let i=0; i < teaspoonKeys.length; i++) {
-            const key = teaspoonKeys[i];
-            grocerystorage.push(`${teaspoons[key]} ${key}`);
-        };
-        
-        for (let i=0; i < miscKeys.length; i++) {
-            const key = miscKeys[i];
-            grocerystorage.push(`${misc[key]} ${key}`);
+        for (let i = 0; i < resp.data.length; i++){
+            grocerystorage.push(resp.data);
         };
 
         this.setState({
             listOfIngredients: grocerystorage,
             showLoader: false
-        });
+        })
     };
+
+    completeItem(id, complete) {
+
+        this.setState({
+            showLoader: true
+        });
+
+        axios({
+
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_toggle.php',
+            // url: 'http://localhost:8080/frontend/Ding-FINAL/grocery_list_toggle.php',
+            // url: '../../endpoints/grocery_list_toggle.php',
+            method: 'post',
+            data: {
+                'session_ID': localStorage.ding_sessionID,
+                'complete': complete,
+                'id': id
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then( resp => {
+            console.log('Toggle response: ', resp);
+
+            this.setState({
+                showLoader: false
+            });
+
+            if (typeof resp.data === undefined) {
+                this.setState({
+                    modalStatus: true,
+                    message: "Server Error. Please try again later."
+                });
+            };
+
+            this.componentDidMount();
+
+        }).catch( err => {
+            console.log('All Meals Ingredients error: ', err);
+            this.setState({
+                showLoader: false,
+                modalStatus: true,
+                message: "Server Error. Please try again later."
+            });
+        });
+
+    }
 
     modalClose() {
         this.setState({
@@ -100,12 +132,12 @@ class Grocery extends Component {
     };
     
     render() {
+
+
+
         const listMap = (this.state.listOfIngredients).map((item, index) => {
             return (
-                <div className='item' key={index} >
-                    <input type='checkbox' className='check filled-in' style={{borderColor: 'white'}} id={index} />
-                    <label className='name oxygenFont' style={{fontSize: `1.2rem`}} htmlFor={index}>{item}</label>
-                </div>
+                <ListMaker key={index} id={index} item={item[index]} completeItem={this.completeItem.bind(this)} />
             );
 		});
 

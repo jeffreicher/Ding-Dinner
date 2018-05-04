@@ -1,5 +1,4 @@
 .groceryContainer {
-    height: 100%;
     width: 100%;
     margin: 0;
     text-align: center;
@@ -9,16 +8,18 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    background-attachment: fixed;
 }
 
 .mainArea {
-    position: absolute;
-    top: 10vh;
-    height: 80%;
+    position: relative;
+    min-height: 80%;
+    max-height: 80%;
     width: 100%;
     margin: 0;
-    overflow-y: scroll;
     padding: 0 5%;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
     box-sizing: border-box;
 }
 
@@ -75,10 +76,6 @@ label::after {
 
     .groceryContainer > .headerBar,
     .groceryContainer > .footer {
-        width: 59.8%;
-    }
-
-    .groceryContainer > .mainArea {
         width: 59.8%;
     }
 

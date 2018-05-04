@@ -1,5 +1,4 @@
 .mealsContainer {
-    height: 100%;
     width: 100%;
     margin: 0;
     text-align: center;
@@ -8,6 +7,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     color: white;
 }
 
@@ -15,7 +15,7 @@
     height: 80%;
     width: 100%;
     margin: 0;
-    overflow-y: scroll;
+    padding: 10vh 0;
 }
 
 .mealConfirmContainer {
@@ -91,7 +91,6 @@
     margin: 0;
     position: absolute;
     top: 10%;
-    overflow-y: scroll;
 }
 
 .detailsMainArea > h3, h5, div {
@@ -189,8 +188,7 @@ div.detailsInstructionsList > ul.collection {
 
     .mealsContainer > .footer {
         height: 10%;
-        position: relative;
-        overflow: hidden;
+        width: 59.8%;
     }
 
     .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
@@ -250,7 +248,7 @@ div.detailsInstructionsList > ul.collection {
     }
 
     .mealsItem {
-        height: 48%;
+        height: 31vh;
     }
 
     .mealsCancel {
@@ -301,7 +299,7 @@ div.detailsInstructionsList > ul.collection {
     
     .mealsContainer > .mealsMainArea > .tripleMeal {
         width: 100%;
-        height: 47%;
+        height: 31vh;
     }
     
 }

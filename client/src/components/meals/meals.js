@@ -425,7 +425,7 @@ class Meals extends Component {
     render() {
         const {mealDetail, meals} = this.state;
 
-        console.log(meals);
+        console.log('Meals props', this.props);
 
         // const singleMeal = {
         //     width: '49%',
@@ -457,7 +457,7 @@ class Meals extends Component {
                 <main className="mealsMainArea">
                     {this.state.confirmingMeals && <MealConfirm style={mealStyle} confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                     {mealMap}
-                    {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
+                    {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} toggleScroll={this.props.toggleScroll} />}
                 </main>
                 <Footer currentPage='meals'/>
             </div>

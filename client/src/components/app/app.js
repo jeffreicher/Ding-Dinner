@@ -21,17 +21,43 @@ import {
 class App extends Component {
     constructor(props) {
         super(props);
+
+        this.toggleScroll = this.toggleScroll.bind(this);
         
-        
+        this.state = {
+            scrollStyle: 'visible'
+        }
     };
 
+    toggleScroll(){
+        if(this.state.scrollStyle === 'visibile'){
+            this.setState({
+                scrollStyle: 'hidden'
+            });
+        } else {
+            this.setState({
+                scrollStyle: 'visible'
+            });
+        }
+    }
+
     render() {
+
+        const MyMealsPage = (props) => {
+            return (
+              <Meals 
+                toggleScroll={this.toggleScroll.bind(this)}
+                {...props}
+              />
+            );
+          }
+
         return (
             <Router>
-                <div className='mainContentContainer'>
+                <div className='mainContentContainer' style={{overflowY: this.state.scrollStyle}}>
                     <div className='desktop-gutter gutter-left'></div>
                     <Route exact path='/' component={Login} />
-                    <Route path='/mymeals' component={Meals} />
+                    <Route path='/mymeals' component={MyMealsPage} />
                     <Route path='/details' component={Details} />
                     <Route path='/grocery' component={Grocery} />
                     <Route path='/settings' component={Settings} />

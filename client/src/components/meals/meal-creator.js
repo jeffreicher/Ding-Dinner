@@ -9,8 +9,7 @@ class MealCreator extends Component {
 
     render() {
         const {mealInfo, number, deleteItem, onclick, style} = this.props;
-        console.log(number)
-
+        
         let completeStyle = '';
 
         this.props.mealInfo.complete ?  completeStyle = 'mealCompleteGrey' :  completeStyle = 'mealIncomplete';

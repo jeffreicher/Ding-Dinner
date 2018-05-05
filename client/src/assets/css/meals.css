@@ -85,13 +85,16 @@
 .detailsMainArea {
     width: 100%;
     margin: 0;
-    position: absolute;
-    top: 10%;
+    padding: 10vh 0;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
+
+.detailsContainer .detailsMainArea .collection {
+    margin-bottom: 0;
 }
 
 .detailsMainArea > h3, h5, div {

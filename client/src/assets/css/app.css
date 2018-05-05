@@ -83,6 +83,12 @@ body {
         display: flex;
     }
 
+    .mainContentContainer > * {
+        box-sizing: border-box;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+    }
+
     .desktop-gutter {
         width: 20%;
     }

@@ -39,7 +39,7 @@ class Details extends Component {
 
     componentWillMount() {
         this.generateIngredients(this.props.mealInfo.ingredients);
-        this.props.toggleScroll();
+        // this.props.toggleScroll();
     };
 
     componentWillUnmount() {
@@ -181,7 +181,6 @@ class Details extends Component {
 
     render() {
 
-        console.log('Meal props', this.props);
 
         const {mealInfo, hide, index, complete} = this.props;
 

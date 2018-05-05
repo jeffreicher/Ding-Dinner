@@ -1,13 +1,14 @@
 .mealsContainer {
-    height: 100%;
     width: 100%;
-    margin: 0;
+    min-height: 100vh;
+    margin: 0 auto;
     text-align: center;
     font-size: 1rem;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     color: white;
 }
 
@@ -15,18 +16,18 @@
     height: 80%;
     width: 100%;
     margin: 0;
-    overflow-y: scroll;
+    padding: 10vh 0;
 }
 
 .mealConfirmContainer {
-    height: 20%;
+    height: 13vh;
     width: 100%;
     position: relative;
     box-sizing: border-box;
 }
 
 .mealsItem {
-    height: 40%;
+    height: 30vh;
     width: 100%;
     position: relative;
     box-sizing: border-box;
@@ -66,7 +67,7 @@
 .detailsContainer {
     height: 100%;
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
     text-align: center;
     font-size: 1rem;
     position: absolute;
@@ -74,10 +75,6 @@
     top: 0;
     left: 0;
     font-family: 'Oxygen', cursive;
-    background-image: url('../../assets/images/dingHDBack_Dark.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     color: white;
 }
 
@@ -86,12 +83,18 @@
 }
 
 .detailsMainArea {
-    height: 80%;
     width: 100%;
     margin: 0;
-    position: absolute;
-    top: 10%;
-    overflow-y: scroll;
+    padding: 10vh 0;
+    background-image: url('../../assets/images/dingHDBack_Dark.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.detailsContainer .detailsMainArea .collection {
+    margin-bottom: 0;
 }
 
 .detailsMainArea > h3, h5, div {
@@ -189,8 +192,7 @@ div.detailsInstructionsList > ul.collection {
 
     .mealsContainer > .footer {
         height: 10%;
-        position: relative;
-        overflow: hidden;
+        width: 59.8%;
     }
 
     .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
@@ -214,7 +216,7 @@ div.detailsInstructionsList > ul.collection {
     }
 
     .mealsContainer > .mealsMainArea > .mealConfirmContainer {
-        height: 48%;
+        height: 35vh;
         align-items: center;
     }
 
@@ -250,7 +252,7 @@ div.detailsInstructionsList > ul.collection {
     }
 
     .mealsItem {
-        height: 48%;
+        height: 35vh;
     }
 
     .mealsCancel {
@@ -301,7 +303,7 @@ div.detailsInstructionsList > ul.collection {
     
     .mealsContainer > .mealsMainArea > .tripleMeal {
         width: 100%;
-        height: 47%;
+        height: 35vh;
     }
     
 }

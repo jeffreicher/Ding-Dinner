@@ -1,5 +1,5 @@
 .footer {
-    background-color: #ff5e1fe7;
+    background-color: #ff5e1ff5;
     position: fixed;
     height: 10%;
     width: 100%;
@@ -10,19 +10,20 @@
     font-size: 2rem;
     bottom: 0;
     box-shadow: 0 -4px 5px 0 rgba(0,0,0,0.14), 0 -1px 10px 0 rgba(0,0,0,0.12), 0 -2px 4px -1px rgba(0,0,0,0.3);
+    z-index: 2;
 }
 
 .headerBar {
-    background-color: #ff5e1fe7;
+    background-color: #ff5f1ff5;
     top: 0;
-    z-index: 1; 
     height: 10%;
     width: 100%;
     margin: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    position: relative;
+    position: fixed;
+    z-index: 2;
 }
 
 .headerBar * {
@@ -117,4 +118,7 @@
         font-size: 1.5rem !important;
     }
 
+    .headerBar {
+        width: 60%;
+    }
 }

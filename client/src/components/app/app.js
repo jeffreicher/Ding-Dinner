@@ -21,15 +21,17 @@ import {
 class App extends Component {
     constructor(props) {
         super(props);
-        
-        
+
     };
 
     render() {
+
         return (
             <Router>
                 <div className='mainContentContainer'>
-                    <div className='desktop-gutter gutter-left'></div>
+                    <div className='desktop-gutter gutter-left'>
+                        <div className='left-gutter-img' />
+                    </div>
                     <Route exact path='/' component={Login} />
                     <Route path='/mymeals' component={Meals} />
                     <Route path='/details' component={Details} />
@@ -42,7 +44,9 @@ class App extends Component {
                     <Route path="/allergy-settings" component={AllergySettings} />
                     <Route path="/meal-num-settings" component={MealNumberSettings} />
                     <Route path='/register-confirm' component={RegisterConfirm} />
-                    <div className='desktop-gutter gutter-right'></div>                    
+                    <div className='desktop-gutter gutter-right'>
+                        <div className='right-gutter-img' />    
+                    </div>                    
                 </div>
             </Router>
         );

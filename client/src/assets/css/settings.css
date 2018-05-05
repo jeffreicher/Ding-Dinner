@@ -1,6 +1,8 @@
 .settingsContainer {
+    margin: 0 auto;
     font-size: 4vmin;
-    height: 100%;
+    height: 100vh;
+    padding-top: 10vh;
     width: 100%;
     text-align: center;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
@@ -16,6 +18,8 @@
 }
 
 .dietSettingsContainer {
+    margin: 0 auto;
+    padding-top: 10vh;
     height: 100vh;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
     background-position: center;
@@ -24,6 +28,8 @@
 }
 
 .allergySettingsContainer {
+    margin: 0 auto;
+    padding-top: 10vh;
     height: 100vh;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
     background-position: center;

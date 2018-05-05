@@ -22,42 +22,18 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.toggleScroll = this.toggleScroll.bind(this);
-        
-        this.state = {
-            scrollStyle: 'visible'
-        }
     };
-
-    toggleScroll(){
-        if(this.state.scrollStyle === 'visibile'){
-            this.setState({
-                scrollStyle: 'hidden'
-            });
-        } else {
-            this.setState({
-                scrollStyle: 'visible'
-            });
-        }
-    }
 
     render() {
 
-        const MyMealsPage = (props) => {
-            return (
-              <Meals 
-                toggleScroll={this.toggleScroll.bind(this)}
-                {...props}
-              />
-            );
-          }
-
         return (
             <Router>
-                <div className='mainContentContainer' style={{overflowY: this.state.scrollStyle}}>
-                    <div className='desktop-gutter gutter-left'></div>
+                <div className='mainContentContainer'>
+                    <div className='desktop-gutter gutter-left'>
+                        <div className='left-gutter-img' />
+                    </div>
                     <Route exact path='/' component={Login} />
-                    <Route path='/mymeals' component={MyMealsPage} />
+                    <Route path='/mymeals' component={Meals} />
                     <Route path='/details' component={Details} />
                     <Route path='/grocery' component={Grocery} />
                     <Route path='/settings' component={Settings} />
@@ -68,7 +44,9 @@ class App extends Component {
                     <Route path="/allergy-settings" component={AllergySettings} />
                     <Route path="/meal-num-settings" component={MealNumberSettings} />
                     <Route path='/register-confirm' component={RegisterConfirm} />
-                    <div className='desktop-gutter gutter-right'></div>                    
+                    <div className='desktop-gutter gutter-right'>
+                        <div className='right-gutter-img' />    
+                    </div>                    
                 </div>
             </Router>
         );

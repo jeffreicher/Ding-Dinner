@@ -1,6 +1,6 @@
 .mealsContainer {
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
     text-align: center;
     font-size: 1rem;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
@@ -66,7 +66,7 @@
 .detailsContainer {
     height: 100%;
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
     text-align: center;
     font-size: 1rem;
     position: absolute;
@@ -74,11 +74,6 @@
     top: 0;
     left: 0;
     font-family: 'Oxygen', cursive;
-    background-image: url('../../assets/images/dingHDBack_Dark.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
     color: white;
 }
 
@@ -87,11 +82,15 @@
 }
 
 .detailsMainArea {
-    height: 80%;
     width: 100%;
     margin: 0;
     position: absolute;
     top: 10%;
+    background-image: url('../../assets/images/dingHDBack_Dark.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .detailsMainArea > h3, h5, div {

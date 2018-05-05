@@ -425,7 +425,6 @@ class Meals extends Component {
     render() {
         const {mealDetail, meals} = this.state;
 
-        console.log('Meals props', this.props);
 
         // const singleMeal = {
         //     width: '49%',

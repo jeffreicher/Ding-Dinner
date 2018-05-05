@@ -13,8 +13,7 @@ body {
 
 .mainContentContainer {
     margin: 0;
-    background-color: #757575;
-    min-height: 100vh;
+    /* background-color: #757575; */
 }
 
 .mainContentContainer > * {
@@ -23,20 +22,39 @@ body {
 }
 
 .desktop-gutter {
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: .6;
-    background-attachment: fixed;
+    background-color: #757575;
+    position: fixed;
+    height: 100%;
+    filter: brightness(50%);
 }
 
 .gutter-left {
+    left: 0;
+}
+
+.left-gutter-img {
+    height: 100%;
+    width: 100%;
     background-image: url('../../assets/images/dingHDLeft.jpg');
-    background-position: 95% 50%;
+    background-position: 45% 50%;
+    opacity: .6;
 }
 
 .gutter-right {
-    background-image: url('../../assets/images/dingHDRight.jpg');
-    background-position: 60% 50%;
+    right: 0;
+}
+
+.right-gutter-img {
+    height: 100%;
+    width: 100%;
+    background-image: url('../../assets/images/dingHDLeft.jpg');
+    background-position: 35% 50%;
+    opacity: .6;
+}
+
+.left-gutter-img, .right-gutter-img {
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .iconcolor {

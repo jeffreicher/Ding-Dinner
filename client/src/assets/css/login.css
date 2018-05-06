@@ -82,27 +82,25 @@
     border: 1px solid lightgrey;
     box-sizing: border-box;
     box-shadow: 2px 2px 3px gray;
-    position: absolute;
-    bottom: -10%;
+    position: relative;
+    bottom: -5%;
     left: 0%;
-    z-index: 10;
     color: black;
     text-shadow: none;
-}
-
-.validationText1 div {
-    color: black;
-    text-shadow: none;
-    z-index: 10;
 }
 
 .validationText2 {
     bottom: -35%;
 }
 
-.validationText2 * {
+.validationText1 *, .validationText2 * {
+    display: inline;
     color: black;
     text-shadow: none;
+}
+
+.row > .inputField > input {
+    margin-bottom: 0;
 }
 
 .inputField {
@@ -143,8 +141,12 @@
         width: 60%;
     }
 
-    .validationText1, .validationText2 div {
-        font-size: 3vmin;
+    .validationText1, .validationText2 {
+        width: 80%;
+    }
+
+    .validationText1, .validationText1 div, .validationText2 div {
+        font-size: 2.5vmin;
     }
 }
 

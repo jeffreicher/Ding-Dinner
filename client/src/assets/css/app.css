@@ -13,19 +13,11 @@ body {
 
 .mainContentContainer {
     margin: 0;
-    /* background-color: #757575; */
-}
-
-.mainContentContainer > * {
-    border-left: 2px solid black;
-    border-right: 2px solid black;
 }
 
 .desktop-gutter {
-    background-color: #757575;
     position: fixed;
     height: 100%;
-    filter: brightness(50%);
 }
 
 .gutter-left {
@@ -35,9 +27,8 @@ body {
 .left-gutter-img {
     height: 100%;
     width: 100%;
-    background-image: url('../../assets/images/dingHDLeft.jpg');
+    background-image: url('../../assets/images/dingHDGutter_Dark.jpg');
     background-position: 45% 50%;
-    opacity: .6;
 }
 
 .gutter-right {
@@ -47,18 +38,13 @@ body {
 .right-gutter-img {
     height: 100%;
     width: 100%;
-    background-image: url('../../assets/images/dingHDLeft.jpg');
+    background-image: url('../../assets/images/dingHDGutter_Dark.jpg');
     background-position: 35% 50%;
-    opacity: .6;
 }
 
 .left-gutter-img, .right-gutter-img {
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-.iconcolor {
-    color: rgb(38, 155, 233);
 }
 
 .mainContainer {
@@ -88,11 +74,6 @@ body {
     width: 5vw;
 }
 
-.phonePls > * {
-    text-align: center;
-    width: 100%;
-}
-
 .completeButton {
     margin-bottom: 2vh;
 }
@@ -100,6 +81,12 @@ body {
 @media all and (min-width: 600px) {    
     .mainContentContainer {
         display: flex;
+    }
+
+    .mainContentContainer > * {
+        box-sizing: border-box;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
     }
 
     .desktop-gutter {

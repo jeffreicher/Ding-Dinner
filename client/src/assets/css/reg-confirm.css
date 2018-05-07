@@ -39,7 +39,7 @@
     height: 10%;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 600px) and (orientation: landscape) {
 
     .regConfirmContainer {
         width: 60%;

@@ -53,7 +53,7 @@
     }
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 600px) and (orientation: landscape) {
     .dietContainer {
         width: 60%;
     }

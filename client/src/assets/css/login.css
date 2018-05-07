@@ -136,7 +136,7 @@
     justify-content: space-around;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 600px) and (orientation: landscape) {
     .loginContainer {
         width: 60%;
     }

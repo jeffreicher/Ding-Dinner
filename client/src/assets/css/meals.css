@@ -179,8 +179,14 @@ div.detailsInstructionsList > ul.collection {
     filter: grayscale(0%);
 }
 
+@media all and (min-width: 600px) and (orientation: portrait) {
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
+        margin-top: 1%;
+    }
+}
 
-@media all and (min-width: 600px) {
+
+@media all and (min-width: 600px) and (orientation: landscape) {
     .mealsContainer {
         width: 60%;
     }

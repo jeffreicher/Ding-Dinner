@@ -84,6 +84,7 @@ class Meals extends Component {
                     session_ID: localStorage.ding_sessionID
                 }
                 }).then( resp => {
+                    console.log('All user meals resp: ', resp);
 
                 for (let i=0; i<resp.data.length; i++){
                     mealschosen.push(resp.data[i]);
@@ -330,6 +331,8 @@ class Meals extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
+            console.log('Completed meal resp: ', resp);
+
             this.setState({
                 showDetails: false,
                 showLoader: false

@@ -72,8 +72,8 @@
 
 .filterModal h4 {
     color: white;
-    text-shadow: 0;
     text-align: center;
+    font-size: 4vmin;
 }
 
 .filterModalButtons {
@@ -124,6 +124,11 @@
 }
 
 @media all and (min-width: 600px) {
+    .allergySettingsContainer > .filterModalBackdrop > .filterModal {
+        height: 500px;
+        width: 500px;
+    }
+
     .dietSettingsContainer {
         width: 60%;
     }
@@ -168,6 +173,34 @@
 
     .settingsContainer > .footer {
         width: 60%;
+    }
+}
+
+@media all and (min-width: 600px) and (max-height: 600px) {
+    .allergySettingsContainer > .filterModalBackdrop > .filterModal {
+        height: 300px;
+        width: 300px;
+    }
+}
+
+@media all and (min-width: 1000px){
+    .allergySettingsContainer > .filterModalBackdrop > .filterModal {
+        height: 750px;
+        width: 750px;
+    }
+}
+
+@media all and (min-width: 1000px) and (max-height: 900px) {
+    .allergySettingsContainer > .filterModalBackdrop > .filterModal {
+        height: 500px;
+        width: 500px;
+    }
+}
+
+@media all and (max-width: 320px){
+    .allergySettingsContainer > .filterModalBackdrop > .filterModal {
+        height: 200px;
+        width: 200px;
     }
 }
 

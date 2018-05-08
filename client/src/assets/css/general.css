@@ -79,17 +79,23 @@
 .loaderModal, .errorModal {
     position: absolute;
     z-index: 1000;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     top: 0;
     left: 0;
+}
+
+.loaderFixed, .errorFixed {
+    position: fixed;
+    height: 100%;
+    width: 100%;
     background-color: rgba(0, 0, 0, .7);
 }
 
 .loaderSpinner {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50vh;
+    left: 50vw;
     transform: translate(-50%, -50%);
 }
 

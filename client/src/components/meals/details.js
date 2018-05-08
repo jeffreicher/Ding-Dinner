@@ -39,12 +39,7 @@ class Details extends Component {
 
     componentWillMount() {
         this.generateIngredients(this.props.mealInfo.ingredients);
-        // this.props.toggleScroll();
     };
-
-    componentWillUnmount() {
-        // this.props.toggleScroll();
-    }
 
     headerClicked(target) {
         this.setState({
@@ -207,34 +202,36 @@ class Details extends Component {
         nutrMap = '';
 
         return(
-            <div className="detailsContainer">
+            <React.Fragment>
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
-                <LogoHeader onClick={hide} back={true} style={{position: 'fixed'}}/>
-                <main className="detailsMainArea">
-                    <img src={mealInfo.image} alt="" className="detailsImg" />
-                    <h3 className='detailsName'>{mealInfo.name}</h3>
-                    <h5 className='detailsTime'>Time to Complete: {mealInfo.readyInMinutes} minutes</h5>
-                    <div className={"detailsIngredientsHead " + this.state.ingrTarget} onClick={()=>this.headerClicked('ingr')} >Ingredients</div>
-                    <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>
-                    <div className={"detailsNutritionHead " + this.state.nutrTarget} onClick={()=>this.headerClicked('nutr')} >Nutrition</div>
-                    <div className="detailsIngredientsList" style={this.state.ingrList}>
-                        <ul className='collection'>
-                            {ingrMap}
-                        </ul>
-                    </div>
-                    <div className="detailsInstructionsList" style={this.state.instrList}>
-                        <ul className='collection'>
-                            {instrMap}
-                        </ul>
-                        {!this.props.hidecomplete && !mealInfo.complete && <button className="completeButton btn btn-large green darken-2" onClick={()=>complete(index, mealInfo.recipe_id)}>Complete</button>}
-                    </div>
-                    <div className="detailsNutritionList" style={this.state.nutrList}>
-                        {nutrMap}
-                    </div>
-                </main>
-                <Footer currentPage='meals' />
-            </div>
+                <div className="detailsContainer">
+                    <LogoHeader onClick={hide} back={true} style={{position: 'fixed'}}/>
+                    <main className="detailsMainArea">
+                        <img src={mealInfo.image} alt="" className="detailsImg" />
+                        <h3 className='detailsName'>{mealInfo.name}</h3>
+                        <h5 className='detailsTime'>Time to Complete: {mealInfo.readyInMinutes} minutes</h5>
+                        <div className={"detailsIngredientsHead " + this.state.ingrTarget} onClick={()=>this.headerClicked('ingr')} >Ingredients</div>
+                        <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>
+                        <div className={"detailsNutritionHead " + this.state.nutrTarget} onClick={()=>this.headerClicked('nutr')} >Nutrition</div>
+                        <div className="detailsIngredientsList" style={this.state.ingrList}>
+                            <ul className='collection'>
+                                {ingrMap}
+                            </ul>
+                        </div>
+                        <div className="detailsInstructionsList" style={this.state.instrList}>
+                            <ul className='collection'>
+                                {instrMap}
+                            </ul>
+                            {!this.props.hidecomplete && !mealInfo.complete && <button className="completeButton btn btn-large green darken-2" onClick={()=>complete(index, mealInfo.recipe_id)}>Complete</button>}
+                        </div>
+                        <div className="detailsNutritionList" style={this.state.nutrList}>
+                            {nutrMap}
+                        </div>
+                    </main>
+                    <Footer currentPage='meals' />
+                </div>
+            </React.Fragment>
         );
     };
 };

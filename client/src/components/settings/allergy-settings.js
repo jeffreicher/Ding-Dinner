@@ -119,30 +119,32 @@ class AllergySettings extends Component {
         const { selected } = this.state;
 
         return (  
-         <div className='allergySettingsContainer'>  
-            {this.state.resetModal && <FilterModal yes={this.goToMeals.bind(this)} no={this.goToSettings.bind(this)} />} 
-            {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
-            {this.state.showLoader && <Loader />}
-            <LogoHeader back={true} location={'/diet-settings'}/>
-            <div className="container">
-                <Header title={'Any Allergies?'} />
-                <div className="row">
-                    <Button title={'Gluten'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Gluten')} />  
-                    <Button title={'Dairy'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Dairy')} />     
-                    <Button title={'Tree Nut'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Tree Nut')} />   
-                    <Button title={'Peanuts'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Peanuts')} />   
-                    <Button title={'Shellfish'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Shellfish')} />
-                    <Button title={'Soy'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Soy')} />
-                    <Button title={'Egg'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Egg')} />
-                    <Button title={'Wheat'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Wheat')} />
-                    <Button title={'Sesame'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sesame')} />
-                    <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
-                </div>  
-                <div className="right" style={{marginTop: `3vh`}}>
-                    <Next onclick={this.sendFiltersToServer.bind(this)}/>
+            <React.Fragment>
+                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
+                {this.state.showLoader && <Loader />}
+                <div className='allergySettingsContainer'>  
+                    {this.state.resetModal && <FilterModal yes={this.goToMeals.bind(this)} no={this.goToSettings.bind(this)} />} 
+                    <LogoHeader back={true} location={'/diet-settings'}/>
+                    <div className="container">
+                        <Header title={'Any Allergies?'} />
+                        <div className="row">
+                            <Button title={'Gluten'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Gluten')} />  
+                            <Button title={'Dairy'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Dairy')} />     
+                            <Button title={'Tree Nut'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Tree Nut')} />   
+                            <Button title={'Peanuts'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Peanuts')} />   
+                            <Button title={'Shellfish'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Shellfish')} />
+                            <Button title={'Soy'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Soy')} />
+                            <Button title={'Egg'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Egg')} />
+                            <Button title={'Wheat'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Wheat')} />
+                            <Button title={'Sesame'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Sesame')} />
+                            <Button title={'Seafood'} selectedCheck={ handleSelected } determineSelected={ selected.includes('Seafood')} />
+                        </div>  
+                        <div className="right" style={{marginTop: `3vh`}}>
+                            <Next onclick={this.sendFiltersToServer.bind(this)}/>
+                        </div>
+                    </div>             
                 </div>
-            </div>             
-         </div>
+            </React.Fragment>
         );
     };
 };

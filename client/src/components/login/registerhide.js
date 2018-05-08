@@ -220,7 +220,7 @@ class RegisterHide extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <form onSubmit={this.goBack} className='row'>
@@ -260,7 +260,7 @@ class RegisterHide extends Component {
                         <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large dingOrange waves-effect waves-light registerSubmit' type='submit'>Register</button>
                     </div>
                 </form>
-            </div>
+            </React.Fragment>
         );
     };
 };

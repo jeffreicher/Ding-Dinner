@@ -188,7 +188,7 @@ class LoginHide extends Component {
         const strikeThrough = {textDecoration: 'line-through'}; 
 
         return (
-            <div>
+            <React.Fragment>
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
                 <form className='row'>
@@ -218,7 +218,7 @@ class LoginHide extends Component {
                         <button className='btn btn-large center-align dingOrange waves-effect waves-light loginSubmit' onClick={this.confirmUserInfo.bind(this)} type='submit'>Login</button>
                     </div>
                 </form>
-            </div>
+            </React.Fragment>
         );
     };
 };

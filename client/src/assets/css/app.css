@@ -13,6 +13,7 @@ body {
 
 .mainContentContainer {
     margin: 0;
+    position: relative;
 }
 
 .desktop-gutter {

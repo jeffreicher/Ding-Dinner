@@ -142,18 +142,20 @@ class Grocery extends Component {
 		});
 
         return (
-            <div className="groceryContainer Oxygen">
+            <React.Fragment>
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
-                <LogoHeader style={{position: 'fixed'}}/>
-                <main className="mainArea" >
-                    <Header title={'Grocery List'} />
-                        <div className="list" >
-                            {listMap}
-                        </div>
-                </main>
-                <Footer currentPage='grocery' />
-            </div>
+                <div className="groceryContainer Oxygen">
+                    <LogoHeader style={{position: 'fixed'}}/>
+                    <main className="mainArea" >
+                        <Header title={'Grocery List'} />
+                            <div className="list" >
+                                {listMap}
+                            </div>
+                    </main>
+                    <Footer currentPage='grocery' />
+                </div>
+            </React.Fragment>
         );
     };
 };

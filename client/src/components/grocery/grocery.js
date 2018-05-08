@@ -32,6 +32,10 @@ class Grocery extends Component {
             showLoader: true
         });
 
+        this.pullGroceryList();
+    };
+
+    pullGroceryList(resetStyling) {
         axios({
 
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_get.php',
@@ -45,7 +49,8 @@ class Grocery extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            this.renderGroceryList(resp);
+            console.log('All groceries: ', resp);
+            this.renderGroceryList(resp, resetStyling);
 
             if (typeof resp.data === undefined) {
                 this.setState({
@@ -61,9 +66,9 @@ class Grocery extends Component {
                 message: "Server Error. Please try again later."
             });
         });
-    };
+    }
 
-    renderGroceryList(resp) {
+    renderGroceryList(resp, resetStyling) {
         while(grocerystorage.length){
             grocerystorage.pop();
         };
@@ -72,17 +77,20 @@ class Grocery extends Component {
             grocerystorage.push(resp.data);
         };
 
+        if(resetStyling !== undefined){
+            resetStyling();
+        }
         this.setState({
             listOfIngredients: grocerystorage,
             showLoader: false
         })
     };
 
-    completeItem(id, complete) {
+    completeItem(id, complete, resetStyling) {
 
-        this.setState({
-            showLoader: true
-        });
+        // this.setState({
+        //     showLoader: true
+        // });
 
         axios({
 
@@ -112,7 +120,7 @@ class Grocery extends Component {
                 });
             };
 
-            this.componentDidMount();
+            this.pullGroceryList(resetStyling);
 
         }).catch( err => {
             console.log('All Meals Ingredients error: ', err);

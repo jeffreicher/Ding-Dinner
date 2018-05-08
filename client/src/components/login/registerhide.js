@@ -12,7 +12,6 @@ class RegisterHide extends Component {
         this.emailChange = this.emailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.confirmChange = this.confirmChange.bind(this);
-        this.modalClose = this.modalClose.bind(this);
 
         this.state = {
             emailValue: '',
@@ -21,8 +20,6 @@ class RegisterHide extends Component {
             emailFocused: false,
             passwordFocused: false,
             confirmFocused: false,
-            modalStatus: false,
-            message: "",
             emailCheck: {
                 textDecoration: 'none'
             },
@@ -35,7 +32,6 @@ class RegisterHide extends Component {
             confirmMatches: {
                 textDecoration: 'none'
             },
-            showLoader: false
         };
     };
 
@@ -148,9 +144,7 @@ class RegisterHide extends Component {
     serverEmailVerify(e) {
         e.preventDefault();
 
-        this.setState({
-            showLoader: true
-        });
+        this.props.toggleLoader();
 
         axios({
             url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
@@ -164,103 +158,78 @@ class RegisterHide extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
-            this.setState({
-                showLoader: false
-            });
+            this.props.toggleLoader();
+
             const passwordChars = /^[a-z0-9]+$/i;            
-            if (resp.data === 'email available' && passwordChars.test(this.state.passwordValue) && this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32) {
+            if (resp.data === 'email available' && passwordChars.test(this.state.passwordValue) && this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32 && this.state.passwordValue === this.state.confirmValue) {
                 this.props.history.push('/diet-selection');
+
             } else if (this.state.passwordValue.length < 8 || this.state.passwordValue.length > 32 || !passwordChars.test(this.state.passwordValue)) {
-                this.setState({
-                    modalStatus: true,
-                    message: "Please complete the password checklist."
-                });
+                this.props.showModal('Please complete the password checklist.');
+
             } else if (resp.data === 'email taken') {
-                this.setState({
-                    modalStatus: true,
-                    message: "That email is already in use."
-                });
+                this.props.showModal('That email is already in use.');
+
             } else if (resp.data === 'Your email is invalid') {
-                this.setState({
-                    modalStatus: true,
-                    message: "Invalid Email."
-                });
+                this.props.showModal('Invalid email address.');
+
             } else if (this.state.passwordValue === '') {
-                this.setState({
-                    modalStatus: true,
-                    message: "Please enter a password."
-                });
+                this.props.showModal('Please enter a password.');
+
             } else if (this.state.passwordValue !== this.state.confirmValue) {
-                this.setState({
-                    modalStatus: true,
-                    message: "Your passwords do not match."
-                });
+                this.props.showModal('Your passwords do not match.');
+
             } else {
-                this.setState({
-                    modalStatus: true,
-                    message: "Server Error. Please try again later."
-                });
+                this.props.showModal('Server error. Please try again later.');
+
             };  
         }).catch( err => {
             console.log('Email verification error: ', err);
 
-            this.setState({
-                showLoader: false,
-                modalStatus: true,
-                message: "Server Error. Please try again later."
-            });
-        });
-    };
-
-    modalClose() {
-        this.setState({
-            modalStatus: false
+            this.props.toggleLoader();
+            this.props.showModal('Server error. Please try again later.');
         });
     };
 
     render() {
         return (
-            <React.Fragment>
-                {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
-                {this.state.showLoader && <Loader />}
-                <form onSubmit={this.goBack} className='row'>
-                    <div className='col s8 offset-s2 inputField'>
-                        <label className='white-text'>Email</label>
-                        <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
-                        {this.state.emailFocused && <div style={this.state.emailCheck} className='validationText1'>
-                            {this.state.emailCheck.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address
-                        </div>}
-                    </div>
-                    <div className='col s2' />
-                    <div className='col s8 offset-s2 inputField'>
-                        <label className='white-text'>Password</label>
-                        <input type='password' className='white-text' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
-                        {this.state.passwordFocused && <div className='validationText2'>
-                            <div style={this.state.passwordLength} >
-                                {this.state.passwordLength.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
-                            </div>
-                            <div style={this.state.passwordCharacters} >
-                                {this.state.passwordCharacters.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers or letters
-                            </div>
-                        </div>}
-                    </div>
-                    <div className='col s2' />
-                    <div className='col s8 offset-s2 inputField'>
-                        <label className='white-text'>Confirm Password</label>
-                        <input type='password' className='white-text' value={this.state.confirmValue} onChange={this.confirmChange} onFocus={()=>this.fieldFocused('confirm')} onBlur={()=>this.fieldBlurred('confirm')}/>
-                        {this.state.confirmFocused && <div className='validationText1'>
-                            <div style={this.state.confirmMatches} >
-                                {this.state.confirmMatches.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must match current password
-                            </div>
-                        </div>}
-                    </div>
-                    <div className='col s2' />
-                    <div className='registerButtonHolder'>
-                        <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light registerSubmit' type='button'>Return</button>
-                        <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large dingOrange waves-effect waves-light registerSubmit' type='submit'>Register</button>
-                    </div>
-                </form>
-            </React.Fragment>
+            <form onSubmit={this.goBack} className='row'>
+                <div className='col s8 offset-s2 inputField'>
+                    <label className='white-text'>Email</label>
+                    <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
+                    {this.state.emailFocused && <div style={this.state.emailCheck} className='validationText1'>
+                        {this.state.emailCheck.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address
+                    </div>}
+                </div>
+                <div className='col s2' />
+                <div className='col s8 offset-s2 inputField'>
+                    <label className='white-text'>Password</label>
+                    <input type='password' className='white-text' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
+                    {this.state.passwordFocused && <div className='validationText2'>
+                        <div style={this.state.passwordLength} >
+                            {this.state.passwordLength.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
+                        </div>
+                        <div style={this.state.passwordCharacters} >
+                            {this.state.passwordCharacters.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers or letters
+                        </div>
+                    </div>}
+                </div>
+                <div className='col s2' />
+                <div className='col s8 offset-s2 inputField'>
+                    <label className='white-text'>Confirm Password</label>
+                    <input type='password' className='white-text' value={this.state.confirmValue} onChange={this.confirmChange} onFocus={()=>this.fieldFocused('confirm')} onBlur={()=>this.fieldBlurred('confirm')}/>
+                    {this.state.confirmFocused && <div className='validationText1'>
+                        <div style={this.state.confirmMatches} >
+                            {this.state.confirmMatches.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must match current password
+                        </div>
+                    </div>}
+                </div>
+                <div className='col s2' />
+                <div className='registerButtonHolder'>
+                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light registerSubmit' type='button'>Return</button>
+                    <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large dingOrange waves-effect waves-light registerSubmit' type='submit'>Register</button>
+                </div>
+            </form>
         );
     };
 };

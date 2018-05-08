@@ -19,7 +19,7 @@ class Meals extends Component {
 
         this.retrieveUserMeals = this.retrieveUserMeals.bind(this);
         this.modalClose = this.modalClose.bind(this);
-
+        
         this.state = {
             meals: 0,
             showDetails: false,
@@ -428,17 +428,6 @@ class Meals extends Component {
     render() {
         const {mealDetail, meals} = this.state;
 
-
-        // const singleMeal = {
-        //     width: '49%',
-        //     height: '98%'
-        // }
-
-        // const tripleMeal = {
-        //     width: '100%',
-        //     height: '47%'
-        // }
-
         let mealStyle = null;
         let confirmStyle = null;
         if(meals.length === 1) {
@@ -460,7 +449,7 @@ class Meals extends Component {
                     <main className="mealsMainArea">
                         {this.state.confirmingMeals && <MealConfirm style={mealStyle} confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
                         {!this.state.showDetails && mealMap}
-                        {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} toggleScroll={this.props.toggleScroll} />}
+                        {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
                     </main>
                     <Footer currentPage='meals'/>
                 </div>

@@ -39,12 +39,7 @@ class Details extends Component {
 
     componentWillMount() {
         this.generateIngredients(this.props.mealInfo.ingredients);
-        // this.props.toggleScroll();
     };
-
-    componentWillUnmount() {
-        // this.props.toggleScroll();
-    }
 
     headerClicked(target) {
         this.setState({

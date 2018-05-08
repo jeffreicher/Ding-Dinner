@@ -38,9 +38,9 @@ class Grocery extends Component {
     pullGroceryList(resetStyling) {
         axios({
 
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_get.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_get.php',
             // url: 'http://localhost:8080/frontend/Ding-FINAL/grocery_list_get.php',
-            // url: '../../endpoints/grocery_list_get.php',
+            url: '../../endpoints/grocery_list_get.php',
             method: 'post',
             data: {
                 'session_ID': localStorage.ding_sessionID
@@ -94,9 +94,9 @@ class Grocery extends Component {
 
         axios({
 
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_toggle.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_toggle.php',
             // url: 'http://localhost:8080/frontend/Ding-FINAL/grocery_list_toggle.php',
-            // url: '../../endpoints/grocery_list_toggle.php',
+            url: '../../endpoints/grocery_list_toggle.php',
             method: 'post',
             data: {
                 'session_ID': localStorage.ding_sessionID,

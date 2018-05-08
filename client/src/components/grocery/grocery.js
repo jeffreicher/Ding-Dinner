@@ -45,6 +45,7 @@ class Grocery extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
+            console.log('All groceries: ', resp);
             this.renderGroceryList(resp);
 
             if (typeof resp.data === undefined) {

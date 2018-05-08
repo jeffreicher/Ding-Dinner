@@ -73,6 +73,22 @@ if($stmt->num_rows > 0) {
         
         $stmt->close();
 
+        if(!($stmt = $myconn->prepare("DELETE FROM `grocery_list` WHERE `user_id` = ?"))){
+            die("Prepared failed: (" . $myconn->errno . ") " . $myconn->error);
+        }
+
+        //Bind statement for the DELETE query
+        if(!$stmt->bind_param('i', $user_id)){
+            die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
+        }
+
+        //Execute the delete statement
+        if(!$stmt->execute()){
+            die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+        } 
+        
+        $stmt->close();
+
         //Test the recipes to be added to see if they exist in our database, if they do add them to the meal plan.
         //Prepare statement for the SELECT statement that will happen in the loop.
         if(!($stmt = $myconn->prepare("SELECT `recipe_id` FROM `recipe-allergy` WHERE `recipe_id` = ?"))){

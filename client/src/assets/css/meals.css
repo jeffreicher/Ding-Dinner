@@ -112,6 +112,7 @@ div.detailsInstructionsList > ul.collection {
 }
 
 .detailsIngredientsHead, .detailsInstructionsHead, .detailsNutritionHead {
+    cursor: pointer;
     width: 33.3%;
     font-size: 1.5rem;
     float: left;
@@ -179,8 +180,55 @@ div.detailsInstructionsList > ul.collection {
     filter: grayscale(0%);
 }
 
+@media all and (min-width: 600px) and (orientation: portrait) {
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
+        margin-top: 1%;
+    }
+}
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 540px) and (max-width: 990px) {
+    .detailsContainer .detailsMainArea .collection {
+        margin-top: 18vh;
+    }
+}
+
+@media all and (min-width: 490px) and (max-width: 540px) {
+    .detailsContainer .detailsMainArea .collection {
+        margin-top: 16vh;
+    }
+}
+
+@media all and (min-width: 430px) and (max-width: 490px) {
+    .detailsContainer .detailsMainArea .collection {
+        margin-top: 14vh;
+    }
+}
+
+@media all and (min-width: 320px) and (max-width: 340px) {
+    .detailsContainer .detailsMainArea .collection {
+        margin-top: 13vh;
+    }
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
+        margin-top: 3%;
+    }
+    .confirmButton {
+        height: 70%;
+    }
+}
+
+@media all and (min-width: 480px) and (max-width: 480px) {
+    .detailsContainer .detailsMainArea .collection {
+        margin-top: 24vh;
+    }
+    .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
+        margin-top: -.5%;
+    }
+    .confirmButton {
+        height: 125%;
+    }
+}
+
+@media all and (min-width: 600px) and (orientation: landscape) {
     .mealsContainer {
         width: 60%;
     }
@@ -251,6 +299,7 @@ div.detailsInstructionsList > ul.collection {
     }
 
     .mealsCancel {
+        cursor: pointer;
         font-size: 1rem;
         bottom: 0%;
         right: 3%;

@@ -65,7 +65,7 @@ label::after {
     text-shadow: 2px 2px 2px black;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 600px) and (orientation: landscape) {
     .groceryContainer {
         width: 60%;
     

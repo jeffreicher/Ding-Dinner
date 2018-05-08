@@ -39,7 +39,13 @@
     height: 10%;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-height: 590px) and (max-height: 590px) {
+    .regConfirmContainer {
+        height: 105vh;
+    }
+}
+
+@media all and (min-width: 600px) and (orientation: landscape) {
 
     .regConfirmContainer {
         width: 60%;

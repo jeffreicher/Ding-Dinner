@@ -39,7 +39,7 @@
     }
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 600px) and (orientation: landscape) {
     .mealNumContainer > .container > .button-column {
         align-items: center;
         flex-direction: row;

@@ -25,7 +25,7 @@ $recipeIDList=[];
 $currentMealsOutput=[];
 
 /**query for gathering all the current, active meals of the logged in user*/
-if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, rd.readyInMinutes, uc.complete FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? "))) {
+if (!($stmt = $myconn->prepare("SELECT uc.recipe_id, rd.title, rd.image, rd.readyInMinutes, uc.complete FROM `user_choices` AS uc JOIN `recipe-diet` AS rd ON uc.recipe_id = rd.recipe_id WHERE `user_id`= ? ORDER BY uc.complete"))) {
     echo "Prepare failed: (" . $myconn->errno . ") " . $myconn->error;
 }
 

@@ -19,7 +19,7 @@ class Meals extends Component {
 
         this.retrieveUserMeals = this.retrieveUserMeals.bind(this);
         this.modalClose = this.modalClose.bind(this);
-
+        
         this.state = {
             meals: 0,
             showDetails: false,
@@ -84,6 +84,7 @@ class Meals extends Component {
                     session_ID: localStorage.ding_sessionID
                 }
                 }).then( resp => {
+                    console.log('All user meals resp: ', resp);
 
                 for (let i=0; i<resp.data.length; i++){
                     mealschosen.push(resp.data[i]);
@@ -330,6 +331,8 @@ class Meals extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then( resp => {
+            console.log('Completed meal resp: ', resp);
+
             this.setState({
                 showDetails: false,
                 showLoader: false
@@ -425,17 +428,6 @@ class Meals extends Component {
     render() {
         const {mealDetail, meals} = this.state;
 
-
-        // const singleMeal = {
-        //     width: '49%',
-        //     height: '98%'
-        // }
-
-        // const tripleMeal = {
-        //     width: '100%',
-        //     height: '47%'
-        // }
-
         let mealStyle = null;
         let confirmStyle = null;
         if(meals.length === 1) {
@@ -449,17 +441,19 @@ class Meals extends Component {
         this.state.meals ? mealMap = this.state.meals.map((meal, index) => {return <MealCreator mealInfo={meal} style={mealStyle} key={index} number={index} onclick={this.mealClicked.bind(this)} deleteItem={this.removeMeal.bind(this)} deleteable={this.state.confirmingMeals}/>}) : '';
       
         return(
-            <div className="mealsContainer">
+            <React.Fragment>
                 {this.state.modalStatus && <ErrorModal message={this.state.message} onClick={this.modalClose} />}
                 {this.state.showLoader && <Loader />}
-                <LogoHeader add={true} />
-                <main className="mealsMainArea">
-                    {this.state.confirmingMeals && <MealConfirm style={mealStyle} confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
-                    {!this.state.showDetails && mealMap}
-                    {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} toggleScroll={this.props.toggleScroll} />}
-                </main>
-                <Footer currentPage='meals'/>
-            </div>
+                <div className="mealsContainer">
+                    <LogoHeader add={true} />
+                    <main className="mealsMainArea">
+                        {this.state.confirmingMeals && <MealConfirm style={mealStyle} confirming={this.state.confirmingMeals} closeconfirm={this.closeMealConfirm.bind(this)} />}
+                        {!this.state.showDetails && mealMap}
+                        {this.state.showDetails && <Details mealInfo={mealDetail} hide={this.hideDetails.bind(this)} complete={this.completeMeal.bind(this)} index={this.state.mealDetail.index} hidecomplete={this.state.confirmingMeals} />}
+                    </main>
+                    <Footer currentPage='meals'/>
+                </div>
+            </React.Fragment>
         );
     };
 };

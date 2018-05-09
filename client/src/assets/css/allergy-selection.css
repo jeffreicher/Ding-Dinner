@@ -56,7 +56,8 @@
     div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
         height: 6.9vh;  
         margin: 1vh .5vh; 
-        padding: 0 1rem;      
+        padding: 0 1rem;
+        line-height: 36px;      
     }
     
     .allergyContainer > .container > .row > div > .btn-desk > div > div.title-container {
@@ -87,6 +88,12 @@
         padding: 0 1rem;     
     }
 
+}
+
+@media all and (min-width: 1024px) and (orientation: landscape) {
+    .allergyContainer > .container > .row > div > .btn-desk > div > div.title-container {
+        line-height: 5vh;
+    }
 }
 
 @media all and (min-width:1024px) {

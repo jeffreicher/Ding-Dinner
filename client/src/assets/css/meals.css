@@ -296,6 +296,7 @@ div.detailsInstructionsList > ul.collection {
 
     .mealsItem {
         height: 35vh;
+        cursor: pointer;
     }
 
     .mealsCancel {

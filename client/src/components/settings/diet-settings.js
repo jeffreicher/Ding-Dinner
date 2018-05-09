@@ -46,7 +46,8 @@ class DietSettings extends Component {
                         <Button title={'Vegan'} descrip={'Avoid animal products'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Vegan')} />
                         <Button title={'Ketogenic'} descrip={'Low carb, high fat'} style={'button'} selectedCheck={ handleSelected } determineSelected={ this.state.selected.includes('Ketogenic')} />        
                     </div>  
-                    <div className="right" style={{marginTop: `7vh`}}>
+                    <div className="nextHolder" style={{marginTop: `7vh`}}>
+                        <div />
                         {(this.state.value) && <Link to='/allergy-settings'><Next /></Link>}                   
                     </div>     
                 </div>                

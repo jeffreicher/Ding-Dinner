@@ -12,6 +12,11 @@
     background-size: cover;
 }
 
+.nextHolder {
+    display: flex;
+    justify-content: space-between;
+}
+
 @media all and (min-height: 590px) and (max-height: 590px) {
     .dietContainer {
         height: 106vh;

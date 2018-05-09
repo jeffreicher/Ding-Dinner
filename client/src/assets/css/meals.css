@@ -171,6 +171,10 @@ div.detailsInstructionsList > ul.collection {
     margin-top: 11%;
 }
 
+.completeButton {
+    margin-top: 3vh;
+}
+
 .mealCompleteGrey {
     filter: grayscale(100%);
 }

@@ -109,6 +109,10 @@
     align-items: center;
 }
 
+.nextButton {
+    padding-bottom: 50px;
+}
+
 @media all and (min-width: 600px) and (orientation: landscape) {
     .errorModalContent {
         top: 42%;

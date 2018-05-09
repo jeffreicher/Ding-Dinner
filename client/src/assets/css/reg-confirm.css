@@ -18,6 +18,10 @@
     margin-top: 10%;
 }
 
+.regConfirmButtonContainer > * {
+    white-space: nowrap;
+}
+
 .regConfirmHeader {
     margin: 10% 0;
 }

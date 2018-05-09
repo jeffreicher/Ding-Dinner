@@ -136,6 +136,13 @@
     justify-content: space-around;
 }
 
+.loginContainer .loginButtonHolder .btn {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    height: 8vh;
+}
+
 @media all and (min-width: 600px) and (orientation: landscape) {
     .loginContainer {
         width: 60%;

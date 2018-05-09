@@ -40,10 +40,10 @@ class LoginHide extends Component {
         e.preventDefault();
         this.props.toggleLoader();
         axios({
-            url: '../../endpoints/user_login.php',
+            // url: '../../endpoints/user_login.php',
             // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/user_login.php',            
             // url: 'http://localhost:8888/dingLFZ/endpoints/user_login.php',
-            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/user_login.php',
             method: 'post',
             data: {
                     email: this.state.emailValue,
@@ -136,8 +136,8 @@ class LoginHide extends Component {
                 </div>
                 <div className='col s2' />
                 <div className='loginButtonHolder'>
-                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light loginSubmit' type='button'>Return</button>
                     <button className='btn btn-large center-align dingOrange waves-effect waves-light loginSubmit' onClick={this.confirmUserInfo.bind(this)} type='submit'>Login</button>
+                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light loginSubmit' type='button'>Return</button>
                 </div>
             </form>
         );

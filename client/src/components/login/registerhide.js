@@ -147,8 +147,8 @@ class RegisterHide extends Component {
         this.props.toggleLoader();
 
         axios({
-            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
-            url: '../../endpoints/email_check.php',
+            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
+            // url: '../../endpoints/email_check.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -226,8 +226,8 @@ class RegisterHide extends Component {
                 </div>
                 <div className='col s2' />
                 <div className='registerButtonHolder'>
-                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light registerSubmit' type='button'>Return</button>
                     <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large dingOrange waves-effect waves-light registerSubmit' type='submit'>Register</button>
+                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light registerSubmit' type='button'>Return</button>
                 </div>
             </form>
         );

@@ -99,6 +99,16 @@
     transform: translate(-50%, -50%);
 }
 
+.buttonContainer > a > div {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
 @media all and (min-width: 600px) and (orientation: landscape) {
     .errorModalContent {
         top: 42%;

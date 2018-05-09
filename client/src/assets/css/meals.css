@@ -56,7 +56,6 @@
 }
 
 .mealsCancel {
-    color: #26a69a;
     position: absolute;
     bottom: 5%;
     right: 5%;
@@ -296,6 +295,7 @@ div.detailsInstructionsList > ul.collection {
 
     .mealsItem {
         height: 35vh;
+        cursor: pointer;
     }
 
     .mealsCancel {
@@ -304,6 +304,12 @@ div.detailsInstructionsList > ul.collection {
         bottom: 0%;
         right: 3%;
     }
+
+    /* .mealsCancel > *  {
+        border-radius: 50%;
+        box-shadow: 5px 5px 10px red, -5px 5px 10px red, 5px -5px 10px red, -5px -5px 10px red;
+        background-color: rgba(255, 0, 0, .8);
+    } */
 
     .detailsContainer {
         width: 60%;

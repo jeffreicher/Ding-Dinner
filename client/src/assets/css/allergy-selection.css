@@ -13,11 +13,16 @@
 .allergyContainer {
     margin: 0 auto;
     padding-top: 10vh;
-    height: 100vh;
+    min-height: 100vh;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.nextHolder {
+    display: flex;
+    justify-content: space-between;
 }
 
 @media screen and (max-height: 568px) {
@@ -56,7 +61,8 @@
     div.allergySettingsContainer > div.container > div.row > div > a.btn-large {
         height: 6.9vh;  
         margin: 1vh .5vh; 
-        padding: 0 1rem;      
+        padding: 0 1rem;
+        line-height: 36px;      
     }
     
     .allergyContainer > .container > .row > div > .btn-desk > div > div.title-container {
@@ -87,6 +93,12 @@
         padding: 0 1rem;     
     }
 
+}
+
+@media all and (min-width: 1024px) and (orientation: landscape) {
+    .allergyContainer > .container > .row > div > .btn-desk > div > div.title-container {
+        line-height: 5vh;
+    }
 }
 
 @media all and (min-width:1024px) {

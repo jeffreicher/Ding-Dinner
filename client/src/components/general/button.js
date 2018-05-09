@@ -29,8 +29,8 @@ class Button extends Component {
         }
 
         return (
-            <div>
-                <a onClick={this.props.selectedCheck.bind(null, this)} style={buttonStyle} className={`btn-desk btn-large waves-effect waves-light btn ${this.state.color} ${this.props.style}`}>
+            <div className='buttonContainer'>
+                <a onClick={this.props.selectedCheck.bind(null, this)} style={{height: 'auto', buttonStyle}} className={`btn-desk btn-large waves-effect waves-light btn ${this.state.color} ${this.props.style}`}>
                 <div>
                     <div className="title-container oxygenFont">
                        {this.props.title} 

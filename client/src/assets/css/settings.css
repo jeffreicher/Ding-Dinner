@@ -20,7 +20,7 @@
 .dietSettingsContainer {
     margin: 0 auto;
     padding-top: 10vh;
-    height: 100vh;
+    min-height: 100vh;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
     background-position: center;
     background-repeat: no-repeat;
@@ -30,7 +30,7 @@
 .allergySettingsContainer {
     margin: 0 auto;
     padding-top: 10vh;
-    height: 100vh;
+    min-height: 100vh;
     background-image: url('../../assets/images/dingHDBack_Dark.jpg');
     background-position: center;
     background-repeat: no-repeat;

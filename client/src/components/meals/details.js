@@ -190,7 +190,7 @@ class Details extends Component {
         let nutrMap = '';
 
         this.state.nutrInfo !== '' ? nutrMap = 
-        <ul className='collection' style={{marginTop: '11vh'}}>
+        <ul className='collection'>
             <li className='collection-item detailsListItem'>Calories: {this.state.nutrInfo.calories}</li>
             <li className='collection-item detailsListItem'>Protein: {this.state.nutrInfo.protein}</li>
             <li className='collection-item detailsListItem'>Sugar: {this.state.nutrInfo.sugar}</li>
@@ -211,9 +211,11 @@ class Details extends Component {
                         <img src={mealInfo.image} alt="" className="detailsImg" />
                         <h3 className='detailsName'>{mealInfo.name}</h3>
                         <h5 className='detailsTime'>Time to Complete: {mealInfo.readyInMinutes} minutes</h5>
-                        <div className={"detailsIngredientsHead " + this.state.ingrTarget} onClick={()=>this.headerClicked('ingr')} >Ingredients</div>
-                        <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>
-                        <div className={"detailsNutritionHead " + this.state.nutrTarget} onClick={()=>this.headerClicked('nutr')} >Nutrition</div>
+                        <div>
+                            <div className={"detailsIngredientsHead " + this.state.ingrTarget} onClick={()=>this.headerClicked('ingr')} >Ingredients</div>
+                            <div className={"detailsInstructionsHead " + this.state.instrTarget} onClick={()=>this.headerClicked('instr')} >Instructions</div>
+                            <div className={"detailsNutritionHead " + this.state.nutrTarget} onClick={()=>this.headerClicked('nutr')} >Nutrition</div>
+                        </div>
                         <div className="detailsIngredientsList" style={this.state.ingrList}>
                             <ul className='collection'>
                                 {ingrMap}

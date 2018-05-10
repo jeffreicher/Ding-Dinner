@@ -141,7 +141,9 @@ class AllergySettings extends Component {
                         </div>  
                         <div className="nextHolder" style={{marginTop: `3vh`}}>
                             <div />
-                            <Next onclick={this.sendFiltersToServer.bind(this)}/>
+                            <a>
+                                <Next onclick={this.sendFiltersToServer.bind(this)}/>
+                            </a>
                         </div>
                     </div>             
                 </div>

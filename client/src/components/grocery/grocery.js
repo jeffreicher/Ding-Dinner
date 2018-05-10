@@ -50,6 +50,13 @@ class Grocery extends Component {
             }
         }).then( resp => {
             console.log('All groceries: ', resp);
+
+            if(resp.data === 'No ingredients'){
+                this.setState({
+                    showLoader: false
+                });
+                return;
+            }
             this.renderGroceryList(resp, resetStyling);
 
             if (typeof resp.data === undefined) {

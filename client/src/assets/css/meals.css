@@ -113,8 +113,8 @@ div.detailsInstructionsList > ul.collection {
 .detailsIngredientsHead, .detailsInstructionsHead, .detailsNutritionHead {
     cursor: pointer;
     width: 33.3%;
-    font-size: 1.5rem;
-    float: left;
+    font-size: 1rem;
+    display: inline-block;
     box-sizing: border-box;
     border: 1px solid #e0e0e0;
     padding: 2% 0;
@@ -127,7 +127,11 @@ div.detailsInstructionsList > ul.collection {
 
 .detailsIngredientsList, .detailsInstructionsList, .detailsNutritionList {
     text-align: left;
-    font-size: 1.2rem;
+    font-size: 1rem;
+}
+
+.detailsIngredientsList > .collection, .detailsInstructionsList > .collection, .detailsNutritionList > .collection {
+    margin-top: 0 !important;
 }
 
 .detailsInstructionsList, .detailsNutritionList {
@@ -148,7 +152,7 @@ div.detailsInstructionsList > ul.collection {
 }
 
 .confirmTextArea {
-    margin-top: 8%;
+    padding: 0 .25rem !important;
 }
 
 .confirmTextArea > div {
@@ -214,6 +218,33 @@ div.detailsInstructionsList > ul.collection {
     .mealsContainer > .mealsMainArea > .mealConfirmContainer > .confirmTextArea {
         margin-top: 3%;
     }
+    .confirmButton {
+        height: 70%;
+    }
+}
+
+@media all and (max-width: 320px) {
+    .confirmTextArea {
+        margin-top: 4%;
+    }
+    .confirmButton {
+        height: 60%;
+    }
+}
+
+@media all and (max-width: 320px) and (max-height: 400px) {
+    .confirmTextArea {
+        margin-top: 0;
+    }
+    .confirmButton {
+        height: 90%;
+    }
+    .confirmCheck {
+        margin-top: 0;
+    }
+}
+
+@media all and (max-width: 600px) and (min-width: 340px) {
     .confirmButton {
         height: 70%;
     }

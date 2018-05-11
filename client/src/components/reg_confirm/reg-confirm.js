@@ -120,11 +120,11 @@ class RegisterConfirm extends Component {
                         <Header title={'Confirm Choices'}/>
                         <div className='regConfirmSelectionArea center'>
                             <div className='regConfirmLabel'>Email Address</div>
-                            <div>{registerstorage.email}</div>
+                            <div className='regConfirmEmail'>{registerstorage.email}</div>
                             <div className='regConfirmLabel'>Diet Selection</div>
-                            <div>{registerstorage.diet}</div>
+                            <div className='regConfirmDiet'>{registerstorage.diet}</div>
                             <div className='regConfirmLabel'>Allergies</div>
-                            <div>{registerstorage.allergy.join(', ') || 'None'}</div>
+                            <div className='regConfirmAllergy'>{registerstorage.allergy.join(', ') || 'None'}</div>
                         </div>
                         <div className='regConfirmButtonContainer'>
                             <Link to='/' className='btn btn-large teal'>Back to start</Link>

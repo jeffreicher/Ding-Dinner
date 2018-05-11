@@ -392,3 +392,9 @@ div.detailsInstructionsList > ul.collection {
     }
     
 }
+
+@media all and (min-width: 600px) and (min-height: 525px) {
+    .detailsIngredientsHead, .detailsInstructionsHead, .detailsNutritionHead {
+        font-size: .9rem;
+    }
+}

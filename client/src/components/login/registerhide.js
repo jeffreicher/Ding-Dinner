@@ -21,16 +21,16 @@ class RegisterHide extends Component {
             passwordFocused: false,
             confirmFocused: false,
             emailCheck: {
-                textDecoration: 'none'
+                color: 'red'
             },
             passwordLength: {
-                textDecoration: 'none'
+                color: 'red'
             },
             passwordCharacters: {
-                textDecoration: 'none'
+                color: 'red'
             },
             confirmMatches: {
-                textDecoration: 'none'
+                color: 'red'
             },
         };
     };
@@ -42,12 +42,12 @@ class RegisterHide extends Component {
             emailValue: e.target.value
         }, () => {
             if(emailValidification.test(this.state.emailValue)) {
-                const strikeThrough = {textDecoration: 'line-through'};
+                const strikeThrough = {color: 'green'};
                 this.setState({
                     emailCheck: strikeThrough
                 });
             } else {
-                const noStrike = {textDecoration: 'none'};
+                const noStrike = {color: 'red'};
                 this.setState({
                     emailCheck: noStrike
                 });
@@ -68,12 +68,12 @@ class RegisterHide extends Component {
 
     checkPWLength() {
         if(this.state.passwordValue.length >= 8 && this.state.passwordValue.length <= 32) {
-            const strikeThrough = {textDecoration: 'line-through'};
+            const strikeThrough = {color: 'green'};
             this.setState({
                 passwordLength: strikeThrough
             });
         } else {
-            const noStrike = {textDecoration: 'none'};
+            const noStrike = {color: 'red'};
             this.setState({
                 passwordLength: noStrike
             });
@@ -83,12 +83,12 @@ class RegisterHide extends Component {
     checkPWChars() {
         const passwordChars = /^[a-z0-9]+$/i;
         if (passwordChars.test(this.state.passwordValue)) {
-            const strikeThrough = {textDecoration: 'line-through'};
+            const strikeThrough = {color: 'green'};
             this.setState({
                 passwordCharacters: strikeThrough
             });
         } else {
-            const noStrike = {textDecoration: 'none'};
+            const noStrike = {color: 'red'};
             this.setState({
                 passwordCharacters: noStrike
             });
@@ -99,12 +99,12 @@ class RegisterHide extends Component {
         if (e.target.value === this.state.passwordValue) {
             this.setState({
                 confirmValue: e.target.value,
-                confirmMatches: {textDecoration: 'line-through'}
+                confirmMatches: {color: 'green'}
             });
         } else {
             this.setState({
                 confirmValue: e.target.value,
-                confirmMatches: {textDecoration: 'none'}
+                confirmMatches: {color: 'red'}
             });
         };
     };
@@ -147,8 +147,8 @@ class RegisterHide extends Component {
         this.props.toggleLoader();
 
         axios({
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
-            // url: '../../endpoints/email_check.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/email_check.php',
+            url: '../../endpoints/email_check.php',
             method: 'post',
             data: {
                     email: registerstorage.email,
@@ -198,7 +198,7 @@ class RegisterHide extends Component {
                     <label className='white-text'>Email</label>
                     <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
                     {this.state.emailFocused && <div style={this.state.emailCheck} className='validationText1'>
-                        {this.state.emailCheck.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address
+                        {this.state.emailCheck.color === 'green' && <div className='checkmark'>✓</div>}Must be valid email address
                     </div>}
                 </div>
                 <div className='col s2' />
@@ -207,10 +207,10 @@ class RegisterHide extends Component {
                     <input type='password' className='white-text' value={this.state.passwordValue} onChange={this.passwordChange} onFocus={()=>this.fieldFocused('password')} onBlur={()=>this.fieldBlurred('password')}/>
                     {this.state.passwordFocused && <div className='validationText2'>
                         <div style={this.state.passwordLength} >
-                            {this.state.passwordLength.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
+                            {this.state.passwordLength.color === 'green' && <div className='checkmark'>✓</div>}Must be 8-32 characters long
                         </div>
                         <div style={this.state.passwordCharacters} >
-                            {this.state.passwordCharacters.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Only contains numbers or letters
+                            {this.state.passwordCharacters.color === 'green' && <div className='checkmark'>✓</div>}Only contains numbers or letters
                         </div>
                     </div>}
                 </div>
@@ -220,14 +220,14 @@ class RegisterHide extends Component {
                     <input type='password' className='white-text' value={this.state.confirmValue} onChange={this.confirmChange} onFocus={()=>this.fieldFocused('confirm')} onBlur={()=>this.fieldBlurred('confirm')}/>
                     {this.state.confirmFocused && <div className='validationText1'>
                         <div style={this.state.confirmMatches} >
-                            {this.state.confirmMatches.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must match current password
+                            {this.state.confirmMatches.color === 'green' && <div className='checkmark'>✓</div>}Must match current password
                         </div>
                     </div>}
                 </div>
                 <div className='col s2' />
                 <div className='registerButtonHolder'>
                     <button onClick={(e) => this.serverEmailVerify(e)} className='btn btn-large dingOrange waves-effect waves-light registerSubmit' type='submit'>Register</button>
-                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light registerSubmit' type='button'>Return</button>
+                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light grey darken-1 registerSubmit' type='button'>Return</button>
                 </div>
             </form>
         );

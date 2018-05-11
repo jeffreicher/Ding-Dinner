@@ -55,8 +55,8 @@ class MealNumberSettings extends Component {
 
         axios({
             // url: 'http://localhost:8080/frontend/Ding-FINAL/endpoints/meals/newRecipes.php',
-            // url: '../../endpoints/meals/newRecipes.php',
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
+            url: '../../endpoints/meals/newRecipes.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/meals/newRecipes.php',
             method: 'post',
             data: {
                 session_ID: localStorage.ding_sessionID
@@ -113,8 +113,11 @@ class MealNumberSettings extends Component {
                             <MealNumButton title={'5'} style={'button'} determineSelected={ this.state.numOfMeals.includes('5')} mealnumclick={this.storeNumChoice.bind(this)}/>   
                             <MealNumButton title={'7'} style={'button'} determineSelected={ this.state.numOfMeals.includes('7')} mealnumclick={this.storeNumChoice.bind(this)}/>   
                         </div>  
-                        <div className="right" style={{marginTop: `5vh`}}>
-                            <Next onclick={this.getRecipes.bind(this)} />          
+                        <div className="nextHolder" style={{marginTop: `5vh`}}>
+                            <div />
+                            <a>
+                                <Next onclick={this.getRecipes.bind(this)} />
+                            </a>
                         </div>
                         {this.state.confirmingMeals && <Redirect path to={{pathname: '/mymeals', state: {confirmingMeals: true}}} />}
                     </div>                

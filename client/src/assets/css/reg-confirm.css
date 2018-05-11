@@ -21,6 +21,9 @@
 
 .regConfirmButtonContainer > * {
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    text-shadow: 1px 2px 2px black;
 }
 
 .regConfirmHeader {
@@ -38,6 +41,10 @@
 .regConfirmLabel {
     font-weight: bold;
     font-size: 1.5em;
+}
+
+.regConfirmEmail {
+    overflow-wrap: break-word;
 }
 
 .regConfirmFooter {

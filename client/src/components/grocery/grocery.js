@@ -38,9 +38,9 @@ class Grocery extends Component {
     pullGroceryList(resetStyling) {
         axios({
 
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_get.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_get.php',
             // url: 'http://localhost:8080/frontend/Ding-FINAL/grocery_list_get.php',
-            // url: '../../endpoints/grocery_list_get.php',
+            url: '../../endpoints/grocery_list_get.php',
             method: 'post',
             data: {
                 'session_ID': localStorage.ding_sessionID
@@ -50,6 +50,13 @@ class Grocery extends Component {
             }
         }).then( resp => {
             console.log('All groceries: ', resp);
+
+            if(resp.data === 'No ingredients'){
+                this.setState({
+                    showLoader: false
+                });
+                return;
+            }
             this.renderGroceryList(resp, resetStyling);
 
             if (typeof resp.data === undefined) {
@@ -94,9 +101,9 @@ class Grocery extends Component {
 
         axios({
 
-            url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_toggle.php',
+            // url: 'http://localhost:8080/C1.18_FoodTinder/endpoints/grocery_list_toggle.php',
             // url: 'http://localhost:8080/frontend/Ding-FINAL/grocery_list_toggle.php',
-            // url: '../../endpoints/grocery_list_toggle.php',
+            url: '../../endpoints/grocery_list_toggle.php',
             method: 'post',
             data: {
                 'session_ID': localStorage.ding_sessionID,

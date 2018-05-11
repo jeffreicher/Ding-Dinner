@@ -21,13 +21,13 @@ class LoginHide extends Component {
             modalStatus: false,
             message: '',
             emailCheck: {
-                textDecoration: 'none'
+                color: 'red'
             },
             passwordLength: {
-                textDecoration: 'none'
+                color: 'red'
             },
             passwordCharacters: {
-                textDecoration: 'none'
+                color: 'red'
             },
             showLoader: false
         };
@@ -82,12 +82,12 @@ class LoginHide extends Component {
             emailValue: e.target.value
         }, () => {
             if(emailValidification.test(this.state.emailValue)){
-                const strikeThrough = {textDecoration: 'line-through'};
+                const strikeThrough = {color: 'green'};
                 this.setState({
                     emailCheck: strikeThrough
                 });
             } else {
-                const noStrike = {textDecoration: 'none'};
+                const noStrike = {color: 'red'};
                 this.setState({
                     emailCheck: noStrike
                 });
@@ -118,7 +118,7 @@ class LoginHide extends Component {
     };
 
     render() {
-        const strikeThrough = {textDecoration: 'line-through'}; 
+        const strikeThrough = {color: 'green'}; 
 
         return (
             <form className='row'>
@@ -126,7 +126,7 @@ class LoginHide extends Component {
                     <label className='white-text'>Email</label>
                     <input type='text' className='white-text' value={this.state.emailValue} onChange={this.emailChange} onFocus={()=>this.fieldFocused('email')} onBlur={()=>this.fieldBlurred('email')}/>
                     {this.state.emailFocused && <div style={this.state.emailCheck} className='validationText1'>
-                        {this.state.emailCheck.textDecoration === 'line-through' && <div className='checkmark'>✓</div>}Must be valid email address
+                        {this.state.emailCheck.color === 'green' && <div className='checkmark'>✓</div>}Must be valid email address
                     </div>}
                 </div>
                 <div className='col s2' />
@@ -137,7 +137,7 @@ class LoginHide extends Component {
                 <div className='col s2' />
                 <div className='loginButtonHolder'>
                     <button className='btn btn-large center-align dingOrange waves-effect waves-light loginSubmit' onClick={this.confirmUserInfo.bind(this)} type='submit'>Login</button>
-                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light loginSubmit' type='button'>Return</button>
+                    <button onClick={this.props.returnFX} className='btn btn-large dingTeal waves-effect waves-light loginSubmit grey darken-1' type='button'>Return</button>
                 </div>
             </form>
         );

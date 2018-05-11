@@ -75,6 +75,10 @@
     color: black;
 }
 
+.checkmark {
+    color: green !important;
+}
+
 .validationText1, .validationText2 {
     width: 100%;
     background-color: white;

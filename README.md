@@ -1,6 +1,14 @@
 # Ding
 A meal planner for the indecisive! Ding is an application that requests user-specific preferences and provides the user with delicious recipes.
 
+## Usage
+
+All it takes is a few simple steps: register your account, select your diet and allergy restrictions, choose the number of meals you plan to make. Thats it! At your fingertips you have access to ingredients, nutrition and step-by-step instructions to make your delicious meals!
+
+## Project
+
+View this project live [HERE](https://dingdinner.com)
+
 ## Features
 
 * Mobile-first design for the 21st century.

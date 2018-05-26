@@ -46,7 +46,7 @@ Ding is a full web-based meal planning application created by a team of four dev
 
 ### Authors 
 
-* Matthew Kane [GitHub](https://github.com/kaneMJ)
-* Parker Rebensdorf [GitHub](https://github.com/PDRX91)
-* Nolan Emerson [GitHub](https://github.com/nolanemerson)
-* Jeffrei Cher [GitHub](https://github.com/jeffreicher)
+* Matthew Kane [GitHub](https://github.com/kaneMJ) | [Portfolio](https://matthewjkane.com/)
+* Parker Rebensdorf [GitHub](https://github.com/PDRX91) | [Portfolio](https://parkerrebensdorf.com/)
+* Nolan Emerson [GitHub](https://github.com/nolanemerson) | [Portfolio](https://nolanemerson.com/)
+* Jeffrei Cher [GitHub](https://github.com/jeffreicher) | [Portfolio](https://jeffreicher.com/)

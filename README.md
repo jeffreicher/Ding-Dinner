@@ -42,7 +42,7 @@ A meal planner for the indecisive! Ding is an application that requests user-spe
 
 ## About
 
-Ding is a full web-based meal planning application created by a team of four developers over a period of six weeks.
+Ding is a mobile-first meal planning application created by a team of four developers over a period of six weeks.
 
 ### Authors 
 

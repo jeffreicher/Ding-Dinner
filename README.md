@@ -48,10 +48,6 @@ View this project live [HERE](https://dingdinner.com)
 * Github
 * MeisterTask
 
-## About
-
-Ding is a mobile-first meal planning application created by a team of four developers over a period of six weeks.
-
 ### Authors 
 
 * Matthew Kane [GitHub](https://github.com/kaneMJ) | [Portfolio](http://matthewjkane.com/)
